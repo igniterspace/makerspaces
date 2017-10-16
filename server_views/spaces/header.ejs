@@ -1,0 +1,56 @@
+<header class="header white-bg">
+    <div class="sidebar-toggle-box">
+        <i class="fa fa-bars"></i>
+    </div>
+    <!--logo start-->
+    <a href="index.html" class="logo">Igniter<span> global</span></a>
+    <!--logo end-->
+    <div class="top-nav ">
+
+        <ul class="nav pull-left top-menu">
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle location-select" href="#">
+                    <span><%= currentLocation.locationName %></span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right extended locations">
+                    <div class="log-arrow-up"></div>
+                    <% for (var org in organizations){%>
+                        <h6 class="dropdown-header"><%= organizations[org].name %></h6> 
+                        <% 
+                        var locations = organizations[org].locations;
+                        for (var location in locations){ %>
+                            <li><a href="/location/<%= locations[location].id%>"><i class="fa fa-gears" aria-hidden="true"></i> <%= locations[location].name %></a></li>
+                        <% } %>   
+                    <% }%>
+                </ul>
+            </li>
+        </ul>
+        <!--search & user info start-->
+        <ul class="nav pull-right top-menu">
+            <li>
+                <input type="text" class="form-control search" placeholder="Search">
+            </li>
+            <!-- user login dropdown start-->
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle logout" href="#">
+                <img alt="" src="<%= user.profile_image %>">
+                <span class="username"><%= user.given_name %></span>
+                <b class="caret"></b>
+            </a>
+                <ul class="dropdown-menu extended logout">
+                    <div class="log-arrow-up"></div>
+                    <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                    <li><a href="#"><i class="fa fa-bell-o"></i> Notification</a></li>
+                    <li><a href="<%= logout %>"><i class="fa fa-key"></i> Log Out</a></li>
+                </ul>
+            </li>
+            <li class="sb-toggle-right">
+                <i class="fa  fa-align-right"></i>
+            </li>
+            <!-- user login dropdown end -->
+        </ul>
+        <!--search & user info end-->
+    </div>
+</header>

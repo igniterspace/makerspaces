@@ -1,0 +1,80 @@
+<aside>
+        <div id="sidebar"  class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+                <li>
+                    <a class="active" [routerLink]="['dashboard']">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="sub-menu" [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.orders }" >
+                        <a href="javascript:;" >
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Orders</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a [routerLink]="['orders']" queryParamsHandling="merge">Order History</a></li>
+                            <li><a [routerLink]="['orders/create']" queryParamsHandling="merge">Create Order</a></li>
+                        </ul>
+                </li>
+                <li class="sub-menu" [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.students }" >
+                    <a href="javascript:;" >
+                        <i class="fa fa-users"></i>
+                        <span>Students</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="">List Students</a></li>
+                        <li><a  href="">Add Student</a></li>
+                    </ul>
+                </li>
+    
+                <li class="sub-menu"  [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.attendance }" >
+                    <a href="javascript:;" >
+                        <i class="fa fa-hand-o-up"></i>
+                        <span>Attendance</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="">Reports</a></li>
+                        <li><a  href="">Mark Attendance</a></li>
+                    </ul>
+                </li>
+    
+                <li class="sub-menu"  [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.classes }" >
+                    <a href="javascript:;" >
+                        <i class="fa fa-calendar-o"></i>
+                        <span>Classes</span>
+                    </a>
+                    <ul class="sub">
+                    </ul>
+                </li>
+                <!--multi level menu start-->
+                <li class="sub-menu"  [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.administration }" >
+                    <a href="javascript:;" >
+                        <i class="fa fa-sitemap"></i>
+                        <span>Administration</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="javascript:;">Menu Item 1</a></li>
+                        <li class="sub-menu">
+                            <a  href="boxed_page.html">Menu Item 2</a>
+                            <ul class="sub">
+                                <li><a  href="javascript:;">Menu Item 2.1</a></li>
+                                <li class="sub-menu">
+                                    <a  href="javascript:;">Menu Item 3</a>
+                                    <ul class="sub">
+                                        <li><a  href="javascript:;">Menu Item 3.1</a></li>
+                                        <li><a  href="javascript:;">Menu Item 3.2</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <!--multi level menu end-->
+    
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>

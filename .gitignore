@@ -54,6 +54,38 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
+config.json
+
+# compiled output
+/client_dist
+/tmp
+
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# IDE - VSCode
+.vscode/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+/client_e2e/*.js
+/client_e2ee2e/*.map
+
+#System Files
+.DS_Store
+Thumbs.db
 
