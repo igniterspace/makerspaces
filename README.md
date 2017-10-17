@@ -13,14 +13,16 @@
         gcloud --version
         mysql --version
 
-# Download the code from IgniterSpace Git repository
-        * Clone the latest code from 
+# Clone IgniterSpace Git repository
 
-                git clone https://github.com/igniterspace/makerspaces.git
+* Clone the latest code from 
 
-        * Change into the 'makerspaces' directory and install node dependencies
+        git clone https://github.com/igniterspace/makerspaces.git
 
-                cd makerspaces
+* Change into the 'makerspaces' directory and install node dependencies
+
+        cd makerspaces
+        npm install
 
 # Connecting to cloud database - production
 
