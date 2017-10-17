@@ -35,6 +35,10 @@
                 cd /Library/LaunchDaemons
                 sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
 
+        * On Windows
+
+                <TBD>
+
     * Use command line tools to connect to the server and verify
 
                 mysql -u root -p --host 127.0.0.1
@@ -42,12 +46,15 @@
 
 1. Create a local database
         
-    * Ensure the mysql username and password are correct in your code
-              
+    * Ensure the mysql username and password are correct in ./server-config.js
+
+        ./server-config.js
+                ...          
                 HOST: '127.0.0.1', //local development setting
                 DATABASE: 'makerspaces',
                 MYSQL_USER: 'root',
                 MYSQL_PASSWORD: '< your local user password >', 
+                ...
 
     * Run the scripts to create and insert sample data
 
