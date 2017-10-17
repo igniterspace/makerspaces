@@ -24,6 +24,17 @@
         cd makerspaces
         npm install
 
+# Connecting to local database - development
+
+Start the local MySql server
+* On OS X:
+        cd /Library/LaunchDaemons
+        sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
+* Use command line tools to connect to the server
+        mysql -u root -p --host 127.0.0.1
+
+
+
 # Connecting to cloud database - production
 
 Download and install the Cloud SQL Proxy. The Cloud SQL Proxy is used to connect to your Cloud SQL instance when running locally. See https://cloud.google.com/nodejs/getting-started/using-cloud-sql for steps
@@ -38,12 +49,7 @@ mysql -u root -p --host 127.0.0.1
 1. npm install
 2. npm run init-cloudsql
 
-# Connecting to local database - development
-Install mysql locally and start the local MySql server
-On OS X:
-cd /Library/LaunchDaemons
-sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
-mysql -u root -p --host 127.0.0.1
+
 
 # Creating the database and inserting sample data
 Move to the folder where the project files are
