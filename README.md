@@ -28,15 +28,31 @@
 
 1. Start the local MySql server
 
-        * On OS X:
+    * On OS X:
 
-                cd /Library/LaunchDaemons
-                sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
+        cd /Library/LaunchDaemons
+        sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
 
-        * Use command line tools to connect to the server
+    * Use command line tools to connect to the server and verify
 
-                mysql -u root -p --host 127.0.0.1
+        mysql -u root -p --host 127.0.0.1
+        mysql> show databases
 
+    * Use our code scripts to create the database and insert sample data
+        
+        1. Ensure the mysql username and password are correct in your code
+              
+                HOST: '127.0.0.1', //local development setting
+                DATABASE: 'makerspaces',
+                MYSQL_USER: 'root',
+                MYSQL_PASSWORD: '< your local user password >', 
+
+
+1.  Install the [Google Cloud SDK](https://cloud.google.com/sdk/).
+
+    * After downloading the SDK, initialize it:
+
+            gcloud init
 
 
 # Connecting to cloud database - production

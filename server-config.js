@@ -49,10 +49,11 @@ nconf
     MEMCACHE_URL: 'memcached-17156.c1.us-central1-2.gce.cloud.redislabs.com:17156',
 
     INSTANCE_CONNECTION_NAME: 'makerspace-management-system:us-central1:ig-dev', //production setting
+    
     HOST: '127.0.0.1', //local development setting
     DATABASE: 'makerspaces',
     MYSQL_USER: 'root',
-    MYSQL_PASSWORD: 'r00t', //?CWKtYTwP3e;
+    MYSQL_PASSWORD: 'r00t', 
 
     OAUTH2_CLIENT_ID: '1066178941676-5vmds16v7est58pstn2gdfna56542eve.apps.googleusercontent.com',
     OAUTH2_CLIENT_SECRET: 'Gbc33FRodnhcBSZU8glFC8I8',
