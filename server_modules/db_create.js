@@ -13,7 +13,6 @@ const database = require('../server_lib/database');
 
 const makerspaces_model = require('./locations/model');
 const users_model = require('./users/model');
-const books_model = require('./books/model');
 const orders_model = require('./orders/model');
 
 if (module === require.main) {

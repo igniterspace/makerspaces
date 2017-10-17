@@ -44,7 +44,7 @@
     * Use command line tools to connect to the server and verify
 
                 mysql -u root -p --host 127.0.0.1
-                mysql> show databases
+                mysql> show databases;
 
 1. Create a local database
         
@@ -67,11 +67,11 @@
 
         * You will see a new database named 'makerspaces' now
 
-                mysql> show databases
+                mysql> show databases;
 
         * View sample data
 
-                mysql> use makerspaces
+                mysql> use makerspaces;
                 mysql> select * from users;
 
         * You can add sample data to the script ./server-modules/db_sample.js as required. Once sample data added, you will need to run 'npm run db-create' and 'npm run db-sample' commands to recreate the databases.
