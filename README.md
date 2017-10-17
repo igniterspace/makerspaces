@@ -1,3 +1,26 @@
+# Prerequisites
+        * nodejs latest runtime
+        * npm package manager
+        * git commandline tools
+        * google cloud CLI
+        * local mysql server and command line tools
+        * verify the installations through calling --version. You may need to add the executables in your system path.
+
+                node --version
+                npm --version
+                git --version
+                gcloud --version
+                mysql --version
+
+# Download the code from IgniterSpace Git repository
+        * Clone the latest code from 
+
+                git clone https://github.com/igniterspace/makerspaces.git
+
+        * Change into the 'makerspaces' directory and install node dependencies
+
+                cd makerspaces
+
 # Connecting to cloud database - production
 
 Download and install the Cloud SQL Proxy. The Cloud SQL Proxy is used to connect to your Cloud SQL instance when running locally. See https://cloud.google.com/nodejs/getting-started/using-cloud-sql for steps
