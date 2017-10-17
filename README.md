@@ -38,14 +38,20 @@
                 mysql -u root -p --host 127.0.0.1
                 mysql> show databases
 
-    * Use our code scripts to create the database and insert sample data
+1. Create local database
         
-        1. Ensure the mysql username and password are correct in your code
+    * Ensure the mysql username and password are correct in your code
               
                 HOST: '127.0.0.1', //local development setting
                 DATABASE: 'makerspaces',
                 MYSQL_USER: 'root',
                 MYSQL_PASSWORD: '< your local user password >', 
+
+    * Run the scripts to create and insert sample data
+
+                cd makerspaces
+                npm run db-create
+                npm run db-sample
 
 
 1.  Install the [Google Cloud SDK](https://cloud.google.com/sdk/).
