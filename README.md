@@ -1,16 +1,17 @@
 # Prerequisites
-        * nodejs latest runtime
-        * npm package manager
-        * git commandline tools
-        * google cloud CLI
-        * local mysql server and command line tools
-        * verify the installations through calling --version. You may need to add the executables in your system path.
 
-                node --version
-                npm --version
-                git --version
-                gcloud --version
-                mysql --version
+* nodejs latest runtime
+* npm package manager
+* git commandline tools
+* google cloud CLI
+* local mysql server and command line tools
+* verify the installations through calling --version. You may need to add the executables in your system path.
+
+        node --version
+        npm --version
+        git --version
+        gcloud --version
+        mysql --version
 
 # Download the code from IgniterSpace Git repository
         * Clone the latest code from 
