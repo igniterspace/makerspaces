@@ -64,7 +64,7 @@ nconf
 
     PORT: '8080',
 
-    NODE_ENV: 'production',
+    NODE_ENV: 'development',
 
     //set this only for the production deployment
     //NODE_ENV: 'production',

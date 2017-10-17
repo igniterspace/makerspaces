@@ -16,7 +16,6 @@
 const async = require('async');
 const express = require('express');
 const images = require('../server_lib/images');
-const makerspaceLogic = require('../server_modules/locations/logic');
 const path = require('path');
 
 const router = express.Router();

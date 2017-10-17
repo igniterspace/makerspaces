@@ -4,6 +4,7 @@
 * npm package manager
 * git commandline tools
 * google cloud CLI
+* Angular 4+ CLI
 * local mysql server and command line tools
 * verify the installations through calling --version. You may need to add the executables in your system path.
 
@@ -11,6 +12,7 @@
         npm --version
         git --version
         gcloud --version
+        ng --version
         mysql --version
 
 # Clone IgniterSpace Git repository
@@ -55,13 +57,13 @@
                 MYSQL_PASSWORD: '< your local user password >', 
                 ...
 
-    * Run the scripts to create and insert sample data
+    * Run the scripts to create and insert sample data. It will prompt you for the database credentials which is given as above.
 
                 cd makerspaces
                 npm run db-create
                 npm run db-sample
 
-    * Now on sql client you can veryfy the database exists
+    * Now on mysql client you can veryfy if the database exists
 
         * You will see a new database named 'makerspaces' now
 
@@ -73,6 +75,30 @@
                 mysql> select * from users;
 
         * You can add sample data to the script ./server-modules/db_sample.js as required. Once sample data added, you will need to run 'npm run db-create' and 'npm run db-sample' commands to recreate the databases.
+
+# Run the web application
+
+1. Build the angular app
+
+        ng build
+
+1. Run rest api server using nodejs
+
+        cd makerspaces
+        npm start
+
+1. Open the application in browser. Location query parameter is the location (makerspace) database id 
+
+        (http://localhost:8080/home?location=1)
+        Login to the application using Login button at right-top corner
+        You will not be able to access any data because your user may not been granted rights. You can see the access denied messages to your API calls on the chrome console
+
+3. Grant access to the user at https://manage.auth0.com/login. On the Auth0 console menu, users->select user-> app-metadata and insert the following configuration. Note that below configuration gives user the global admin rights.
+
+        { "access": { "*": {"*": "write"} } }
+
+
+
 
 
 # Connecting to cloud database - production

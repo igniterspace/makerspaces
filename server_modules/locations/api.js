@@ -14,10 +14,6 @@ const auth = require('../../server_lib/auth');
 const logging = require('../../server_lib/logging');
 const model = require('./model');
 
-function getLogic() {
-  return require(`./logic`);
-}
-
 const router = express.Router();
 
 // Automatically parse request body as JSON
@@ -25,10 +21,19 @@ router.use(bodyParser.json());
 
 router.get('/permitted', auth.jwtCheck, (req, res, next) => {
   let user = auth.currentUser(req);
+
+  if (!user.appMetadata) {
+    res.status(403).send('Access denied. User app-metadata not found. Grant user access to resources in Auth0 user management console.');
+    return;
+  }
+
   if (user.appMetadata['access']['*']) {
     // get all locations
 
     model.listAllLocations((err, results) => {
+      if (err) {
+        throw err;
+      }
       res.json({
         items: structureLocations(results)
       });
@@ -44,6 +49,9 @@ router.get('/permitted', auth.jwtCheck, (req, res, next) => {
     // get specific locations
 
     model.listLocationsByIds((err, results) => {
+      if (err) {
+        throw err;
+      }
       res.json({
         items: structureLocations(results)
       });
@@ -78,6 +86,11 @@ function structureLocations(results) {
 
 router.get('/current', auth.jwtCheck, (req, res, next) => {
   let user = auth.currentUser(req);
+
+  if (!user.appMetadata) {
+    res.status(403).send('Access denied. User app-metadata not found. Grant user access to resources in Auth0 user management console.');
+    return;
+  }
 
   model.getLocation(user.currentLocation, (err, results) => {
     if (results && results.length) {
