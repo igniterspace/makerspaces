@@ -24,14 +24,18 @@
         cd makerspaces
         npm install
 
-# Connecting to local database - development
+# Setup database locally
 
-Start the local MySql server
-* On OS X:
-        cd /Library/LaunchDaemons
-        sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
-* Use command line tools to connect to the server
-        mysql -u root -p --host 127.0.0.1
+1. Start the local MySql server
+
+        * On OS X:
+
+                cd /Library/LaunchDaemons
+                sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
+
+        * Use command line tools to connect to the server
+
+                mysql -u root -p --host 127.0.0.1
 
 
 
