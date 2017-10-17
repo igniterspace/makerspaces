@@ -47,8 +47,7 @@
 1. Create a local database
         
     * Ensure the mysql username and password are correct in ./server-config.js
-
-        ./server-config.js
+    
                 ...          
                 HOST: '127.0.0.1', //local development setting
                 DATABASE: 'makerspaces',
