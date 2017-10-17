@@ -47,7 +47,7 @@
 1. Create a local database
         
     * Ensure the mysql username and password are correct in ./server-config.js
-    
+
                 ...          
                 HOST: '127.0.0.1', //local development setting
                 DATABASE: 'makerspaces',
@@ -61,12 +61,18 @@
                 npm run db-create
                 npm run db-sample
 
+    * Now on sql client you can veryfy the database exists
 
-1.  Install the [Google Cloud SDK](https://cloud.google.com/sdk/).
+        * You will see a new database named 'makerspaces' now
 
-    * After downloading the SDK, initialize it:
+                mysql> show databases
 
-            gcloud init
+        * View sample data
+
+                mysql> use makerspaces
+                mysql> select * from users;
+
+        * You can add sample data to the script ./server-modules/db_sample.js as required. Once sample data added, you will need to run 'npm run db-create' and 'npm run db-sample' commands to recreate the databases.
 
 
 # Connecting to cloud database - production
