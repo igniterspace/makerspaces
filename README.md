@@ -26,9 +26,11 @@
 
 # Setup database locally
 
-1. Start the local MySql server
+1. Setup local MySql server
 
-    * On OS X:
+    * Start the server 
+    
+        * On OS X
 
                 cd /Library/LaunchDaemons
                 sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
@@ -38,7 +40,7 @@
                 mysql -u root -p --host 127.0.0.1
                 mysql> show databases
 
-1. Create local database
+1. Create a local database
         
     * Ensure the mysql username and password are correct in your code
               
