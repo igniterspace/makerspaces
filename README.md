@@ -30,13 +30,13 @@
 
     * On OS X:
 
-        cd /Library/LaunchDaemons
-        sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
+                cd /Library/LaunchDaemons
+                sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
 
     * Use command line tools to connect to the server and verify
 
-        mysql -u root -p --host 127.0.0.1
-        mysql> show databases
+                mysql -u root -p --host 127.0.0.1
+                mysql> show databases
 
     * Use our code scripts to create the database and insert sample data
         
