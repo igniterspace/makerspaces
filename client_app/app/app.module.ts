@@ -1,5 +1,5 @@
 import { BrowserModule }            from '@angular/platform-browser';
-import { NgModule, ErrorHandler }                 from '@angular/core';
+import { NgModule, ErrorHandler }   from '@angular/core';
 
 import { AppRoutingModule }         from './app.routes';
 import { MiscRoutingModule }        from './misc/misc.routes';
@@ -31,7 +31,7 @@ import { BrowserAnimationsModule }    from '@angular/platform-browser/animations
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
     tokenGetter: (() => localStorage.getItem('access_token')),
-    globalHeaders: [{'ig_location':'' + window['locationId']}],
+    globalHeaders: [{'ig_location': '' + window['locationId']}],
   }), http, options);
 }
 
@@ -56,7 +56,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ReactiveFormsModule
   ],
   providers: [
-    ContextService, 
+    ContextService,
     AuthService,
     {
       provide: AuthHttp,
@@ -69,7 +69,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       multi: true,
     },
     {
-      provide: ErrorHandler, 
+      provide: ErrorHandler,
       useClass: AuthErrorHandler
     }
   ],
