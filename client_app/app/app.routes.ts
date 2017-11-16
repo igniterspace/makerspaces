@@ -1,9 +1,9 @@
-import { NgModule }                 from '@angular/core';
-import { RouterModule, Routes }     from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { DashboardPage }       from './dashboard/dashboard.page';
-import { CallbackPage }       from './misc/callback/callback.page';
-import { LogoutPage }       from './misc/logout.page';
+import { DashboardPage } from './dashboard/dashboard.page';
+import { CallbackPage } from './misc/callback/callback.page';
+import { LogoutPage } from './misc/logout.page';
 
 const appRoutes: Routes = [
   {

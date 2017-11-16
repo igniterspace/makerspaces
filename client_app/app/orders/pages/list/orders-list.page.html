@@ -2,47 +2,56 @@
     <div class="col-sm-12">
         <section class="panel">
             <header class="panel-heading">
-                DataTables hidden row details example
+                Order History
             </header>
             <div class="panel-body">
                 <div class="adv-table">
                     <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
                         <table class="display table table-bordered dataTable" id="hidden-table-info" aria-describedby="hidden-table-info_info">
                             <thead>
                                 <tr role="row">
-                                    <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 11px;"></th>
+
                                     <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
                                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                        style="width: 187px;">Rendering engine</th>
+                                        style="width: 187px;"><i class="fa fa-shopping-bag"></i>  Order Items</th>
+
                                     <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                                        rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;">Browser</th>
+                                        rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;"><i class="fa fa-newspaper-o"></i>  Description</th>
+
                                     <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">Platform(s)</th>
+                                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;"><i class="fa fa-cubes"></i>  Quantity</th>
+
                                     <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                                        rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                        style="width: 162px;">Engine version</th>
-                                    <th class="hidden-phone sorting" role="columnheader" tabindex="0"
-                                        aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                        style="width: 133px;">CSS grade</th>
+                                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;"><i class="fa fa-money" aria-hidden="true"></i>  Unit Price</th>
+
+                                    <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;"><i class="fa fa-dollar"></i>  Total Price</th>
+                                
                                 </tr>
                             </thead>
 
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                    
+                                    <tr class="odd">
+                                        <td class="  sorting_1">Order 1</td>
+                                        <td class="hidden-phone ">Small wooden cubes</td>
+                                        <td class=" ">12120.00$ </td>
+                                        <td class=" ">130</td>
+                                        <td class=" ">250</td>
+                                    </tr>
 
                                     <tr class="odd">
-                                        <td class="center "><img src="/img/details_close.png"></td>
-                                        <td class="  sorting_1"><a href="#">Aector Ltd</a></td>
-                                        <td class="hidden-phone ">Lorem Ipsum dorolo imit</td>
-                                        <td class=" ">12120.00$ </td>
-                                        <td class=" "><span class="label label-info label-mini">Due</span></td>
-                                        <td class=" ">
-                                            <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                            <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                            <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                        </td>
-                                    </tr>
+                                            <td class="  sorting_1">Order 1</td>
+                                            <td class="hidden-phone ">Small wooden cubes</td>
+                                            <td class=" ">12120.00$ </td>
+                                            <td class=" ">130</td>
+                                            <td class=" ">250</td>
+                                        </tr>
+                                    
                             </tbody>
                         </table>
+                        
                         <div class="row-fluid">
                             <div class="span6">
                                 <div class="dataTables_info" id="hidden-table-info_info">Showing 1 to 5 of 5 entries</div>
