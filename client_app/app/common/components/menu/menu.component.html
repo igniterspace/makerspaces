@@ -25,8 +25,9 @@
                         <span>Students</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="">List Students</a></li>
-                        <li><a  href="">Add Student</a></li>
+                        <li><a  [routerLink]="['students']" queryParamshandling="merge">List Students</a></li>
+                        <li><a  [routerLink]="['students/add']" queryParamsHandling="merge">Add Student</a></li>
+                        <li><a  [routerLink]="['students/guardian_add']" queryParamsHandling="merge">Add Guardian</a></li>
                     </ul>
                 </li>
     

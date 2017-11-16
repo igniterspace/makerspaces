@@ -53,7 +53,7 @@ nconf
     HOST: '127.0.0.1', //local development setting
     DATABASE: 'makerspaces',
     MYSQL_USER: 'root',
-    MYSQL_PASSWORD: 'r00t', 
+    MYSQL_PASSWORD: '19931106Fuckingshit', 
 
     OAUTH2_CLIENT_ID: '1066178941676-5vmds16v7est58pstn2gdfna56542eve.apps.googleusercontent.com',
     OAUTH2_CLIENT_SECRET: 'Gbc33FRodnhcBSZU8glFC8I8',

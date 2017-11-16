@@ -13,12 +13,15 @@ import { NotFoundPage }             from './misc/notfound.page';
 import { CallbackPage }             from './misc/callback/callback.page';
 import { LogoutPage }               from './misc/logout.page';
 
+import { StudentsModule }           from './students/students.module';
 import { OrdersModule }             from './orders/orders.module';
 import { ContextService }           from './common/services/context.service'
 import { AuthService }              from './common/services/auth.service'
 
 import { Http, HttpModule,  RequestOptions }               from '@angular/http';
 import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth } from 'angular2-jwt';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './common/services/http.interceptor';
@@ -45,10 +48,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   imports: [
     BrowserModule,
     OrdersModule,
+    StudentsModule,
     AppRoutingModule,
     MiscRoutingModule,
     BrowserAnimationsModule,
-    HttpModule
+    HttpModule,
+    ReactiveFormsModule
   ],
   providers: [
     ContextService, 
