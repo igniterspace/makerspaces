@@ -1,0 +1,31 @@
+h3{
+    font-family:   'Open Sans', sans-serif; 
+    font-size: 15pt;         
+    font-style: normal; 
+    font-weight: normal; 
+    color:rgb(0, 0, 0);
+    
+    
+  }
+  
+  input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid rgb(192, 191, 191);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: rgb(252, 252, 252);
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+  label.inner{
+    border: 0px
+  }
+  

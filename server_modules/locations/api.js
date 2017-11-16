@@ -19,6 +19,12 @@ const router = express.Router();
 // Automatically parse request body as JSON
 router.use(bodyParser.json());
 
+router.get('/public', (req, res, next) => {
+  res.json({
+    items: {"app-name": "makerspace management system"}
+  });
+});
+
 router.get('/permitted', auth.jwtCheck, (req, res, next) => {
   let user = auth.currentUser(req);
 
