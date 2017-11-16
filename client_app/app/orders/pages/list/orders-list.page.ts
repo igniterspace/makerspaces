@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+// tslint:disable-next-line:import-spacing
 import { OrdersService }      from '../../../common/services/order.service';
+// tslint:disable-next-line:import-spacing
 import { Order }      from '../../../common/models/order';
 
 @Component({
@@ -17,7 +19,7 @@ export class OrdersListPage {
   }
 
   getOrders(): void {
-    //this.ordersService.getOrders().then(orders => this.orders = orders);
+    // this.ordersService.getOrders().then(orders => this.orders = orders);
   }
 
   ngOnInit(): void {
