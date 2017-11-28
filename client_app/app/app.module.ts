@@ -1,6 +1,8 @@
 import { BrowserModule }            from '@angular/platform-browser';
 import { NgModule, ErrorHandler }   from '@angular/core';
 
+
+import { NgDatepickerModule }       from 'ng2-datepicker';
 import { AppRoutingModule }         from './app.routes';
 import { MiscRoutingModule }        from './misc/misc.routes';
 
@@ -21,12 +23,14 @@ import { AuthService }              from './common/services/auth.service'
 import { Http, HttpModule,  RequestOptions }               from '@angular/http';
 import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth } from 'angular2-jwt';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './common/services/http.interceptor';
 import { AuthErrorHandler } from './common/services/auth.errorHandler';
 import { BrowserAnimationsModule }    from '@angular/platform-browser/animations';
+import { DatePickerModule } from 'angular-io-datepicker/src/datepicker/index';
+import { OverlayModule } from 'angular-io-overlay';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -43,7 +47,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     DashboardPage,
     NotFoundPage,
     LogoutPage,
-    CallbackPage
+    CallbackPage,
+    
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MiscRoutingModule,
     BrowserAnimationsModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    OverlayModule,
+    NgDatepickerModule
+  ],
+  exports: [
+    AppComponent
   ],
   providers: [
     ContextService,
