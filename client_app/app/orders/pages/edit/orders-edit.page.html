@@ -16,7 +16,7 @@
                             style="width: 187px;"><i class="fa fa-shopping-bag"></i>  Order Items</th>
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                            rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;"><i class="fa fa-newspaper-o"></i>  Description</th>
+                            rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;"><i class="fa fa-newspaper-o"></i> Note</th>
 
                         <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
                             rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;"><i class="fa fa-cubes"></i>  Quantity</th>
@@ -34,7 +34,7 @@
                 <tbody> 
                     <tr *ngFor="let order of neworders">
                         <td>{{order.orderitem}}</td>
-                        <td>{{order.description}}</td>
+                        <td>{{order.note}}</td>
                         <td>{{order.quantity}}</td>
                         <td>{{order.unitprice}}</td>
                         <td>{{order.totalprice}}</td>
@@ -48,18 +48,29 @@
         <button class="btn btn-success" (click)="showAddOrderForm()"><i class="fa fa-plus"></i></button>
         <br><br>
         
-        <form *ngIf="orderForm">
+        <form *ngIf="orderForm" [formGroup]="addOrderForm" (ngSubmit)="getOrders(addOrderForm.value)">
                 <header class="panel-heading">Add Order Details</header>
+
            <p> <label>Order Item</label>
-                <input type ="text" name="oname" [(ngModel)]="newOrder.orderitem"/></p>
-            <p><label>Description</label>
-                <input type ="text" name="odes" [(ngModel)]="newOrder.description"/></p>
+                 <select formControlName="orderitem" [(ngModel)]="newOrder.orderitem"> 
+                    <option *ngFor="let oi of items" [value]="oi.id"> {{ oi.name }} </option>
+                  </select></p>
+
+            <p><label>Note</label>
+                <input type ="text" formControlName="note" [(ngModel)]="newOrder.note"/></p>
+                <small *ngIf="!isValid('note')" class="text-muted">Max lenth is 50 letters</small>
+
             <p><label>Quantity</label>
-                <input type ="text" name="oqua" [(ngModel)]="newOrder.quantity"/></p>
+                <input type ="text" class="form-control" formControlName="quantity" [(ngModel)]="newOrder.quantity" required/></p>
+                <small *ngIf="!isValid('quantity')" class="text-muted">Invalid number!!!</small>
+
             <p><label>Unit Price</label>
-                <input type ="text" name="uprice" [(ngModel)]="newOrder.unitprice"/></p>
+                <input type ="text" class="form-control" class="ng-dirty ng-touched ng-invalid" formControlName="unitprice" [(ngModel)]="newOrder.unitprice" required/></p>
+                <small *ngIf="!isValid('unitprice')" class="text-muted">Invalid number!!!</small>
+
             <p><label>Total Price</label>
-                <input type ="text" name="tprice" [(ngModel)]="newOrder.totalprice"/></p>
+                <input type ="text" class="form-control" formControlName="totalprice" [(ngModel)]="newOrder.totalprice" required/></p>
+                <small *ngIf="!isValid('totalprice')" class="text-muted">Invalid number!!!</small>
 
             <p><button type="button" class="btn btn-primary" (click)="saveOrder(newOrder)">Submit</button>
                 <button type="button" class="btn btn-warning" (click)="cancelNewOrder()">Cancel</button>
@@ -69,16 +80,21 @@
 
         <form *ngIf="editOrderForm">
             <header class="panel-heading">Edit Order Details</header>
+
        <p> <label>Order Item</label>
-            <input type ="text" name="oname" [(ngModel)]="editedOrder.orderitem"/></p>
-        <p> <label>Description</label>
-            <input type ="text" name="odes" [(ngModel)]="editedOrder.description"/></p>
+        <select name ="orderitem" [(ngModel)]="editedOrder.orderitem">
+            <option selected>{{ newOrder.orderitem }}</option>
+            <option *ngFor="let oi of items" [value]="oi.id"> {{ oi.name }}</option>
+          </select></p>
+
+        <p> <label>Note</label>
+            <input type ="text" name="note" [(ngModel)]="editedOrder.note"/></p>
         <p> <label>Quantity</label>
-            <input type ="text" name="oqua" [(ngModel)]="editedOrder.quantity"/></p>
+            <input type ="text" name="quantity" [(ngModel)]="editedOrder.quantity"/></p>
         <p> <label>Unit Price</label>
-            <input type ="text" name="uprice" [(ngModel)]="editedOrder.unitprice"/></p>
+            <input type ="text" name="unitprice" [(ngModel)]="editedOrder.unitprice"/></p>
         <p> <label>Total Price</label>
-            <input type ="text" name="tprice" [(ngModel)]="editedOrder.totalprice"/></p>
+            <input type ="text" name="totalprice" [(ngModel)]="editedOrder.totalprice"/></p>
 
         <p> <button type="button" class="btn btn-primary" (click)="updateOrder(editedOrder)">Submit</button>
             <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>

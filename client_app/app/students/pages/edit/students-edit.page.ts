@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { StudentsService }      from '../../../common/services/student.service';
-import { Student }      from '../../../common/models/student';
-import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
+import { StudentsService } from '../../../common/services/student.service';
+import { Student } from '../../../common/models/student';
+import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule , Validators, FormsModule } from '@angular/forms';
 
 
 
@@ -17,14 +17,14 @@ export class StudentsEditPage {
   private students: Student[];
   private addStudentForm: FormGroup;
 
-  post:any;
+  post: any;
 
   firstname: string;
-  lastname:string;
-  bday:string;
-  bmonth:string;
-  byear:string;
-  address:string;
+  lastname: string;
+  bday: string;
+  bmonth: string;
+  byear: string;
+  address: string;
 
   constructor(private os: StudentsService,
               private formBuilder: FormBuilder) {
@@ -32,11 +32,11 @@ export class StudentsEditPage {
 
     this.addStudentForm = formBuilder.group({
       firstname: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      lastname:[null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      bday:[''],
-      bmonth:[''],
-      byear:[''],
-      address:[null, Validators.compose([Validators.required, Validators.minLength(10)])],
+      lastname: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      bday: [''],
+      bmonth: [''],
+      byear: [''],
+      address: [null, Validators.compose([Validators.required, Validators.minLength(10)])],
       // gender:['']
 
 
@@ -44,7 +44,7 @@ export class StudentsEditPage {
   }
 
   getStudents(post) {
-    //this.studentsService.getStudents().then(students => this.students = students);
+     // this.studentsService.getStudents().then(students => this.students = students);
     console.log(post);
     this.firstname = post.firstname;
     this.lastname = post.lastname;
@@ -59,15 +59,15 @@ export class StudentsEditPage {
     // this.getStudents();
   }
 
-  isValid(field : string){
+  isValid(field: string) {
     let formField = this.addStudentForm.get(field);
     return formField.valid || formField.pristine;
   }
 
-  saveProduct(product:Student) {
-    if(this.isNewForm) {
+  saveProduct(product: Student) {
+    if (this.isNewForm) {
    this.studentsService.addProduct(product);
-    }else{
+    }else {
 
     }this.productForm = false;
   }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormGroup , FormControl , FormBuilder, ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { OrdersRoutingModule} from './orders.routes';
 import { OrdersListPage } from './pages/list/orders-list.page';
 import { OrdersViewPage } from './pages/view/orders-view.page';
@@ -12,7 +12,7 @@ import { OrdersService } from '../common/services/order.service';
 import { ContextService } from '../common/services/context.service';
 
 @NgModule({
-  imports:      [ CommonModule, FormsModule, OrdersRoutingModule ],
+  imports:      [ CommonModule, FormsModule, OrdersRoutingModule, ReactiveFormsModule ],
   declarations: [ OrdersListPage, OrdersViewPage, OrdersEditPage, OrdersAddPage],
   providers:    [ OrdersService, OrdersEditService]
 })

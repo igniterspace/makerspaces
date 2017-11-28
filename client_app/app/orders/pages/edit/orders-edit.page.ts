@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrdersEdit } from 'app/common/models/orderedit';
 import { OrdersEditService } from 'app/common/services/order.service';
 import { clone} from 'lodash';
-
+import { FormGroup , FormControl, FormBuilder, AbstractControl, ReactiveFormsModule , Validators, FormsModule } from '@angular/forms';
 @Component({
 
   moduleId: module.id,
@@ -17,14 +17,64 @@ neworders: OrdersEdit[];
 orderForm: boolean = false;
 isNewForm: boolean;
 newOrder: any = {};
-// tslint:disable-next-line:no-inferrable-types
 editOrderForm: boolean = false;
 editedOrder: any = {};
 
-constructor(private _orderService: OrdersEditService) {}
+private orderEditService: OrdersEditService;
+private orders: OrdersEdit[];
+addOrderForm: FormGroup;
+orderitem: string;
+note: string;
+quantity: number;
+unitprice: number;
+totalprice: number;
+
+post: any;
+
+
+items = [
+  {id: 1, name: 'Cubes'},
+  {id: 2, name: 'Wires'},
+  {id: 3, name: 'Icecream sticks'},
+  {id: 4, name: 'Motors'}
+];
+selectedValue = null;
+
+constructor(private _orderService: OrdersEditService,
+           private fb: FormBuilder) {
+
+            this.orderEditService = _orderService;
+            this.addOrderForm = new FormGroup({
+
+              orderitem : new FormControl( null, Validators.compose([Validators.required])),
+              // tslint:disable-next-line:max-line-length
+              note      : new FormControl( null, Validators.compose([Validators.minLength(3), Validators.maxLength(50), Validators.required])),
+              quantity  : new FormControl( null, Validators.compose([Validators.required])),
+              unitprice : new FormControl ( null, Validators.compose([Validators.required])),
+              totalprice: new FormControl ( null, Validators.compose([Validators.required]))
+
+            });
+
+           }
+
+           getOrders(post) {
+
+            console.log(post);
+            this.orderitem  = post.orderitem;
+            this.note       = post.note;
+            this.quantity   = post.quantity;
+            this.unitprice  = post.unitprice;
+            this.totalprice = post.totalprice;
+
+          }
 
 ngOnInit() {
 this.getnewOrders();
+}
+
+isValid(field: string) {
+  let formField = this.addOrderForm.get(field);
+  return formField.valid || formField.pristine;
 }
 
 getnewOrders() {

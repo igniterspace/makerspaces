@@ -1,6 +1,6 @@
 export interface OrdersEdit {
     orderitem: string;
-    description: string;
+    note: string;
     quantity: number;
     unitprice: number;
     totalprice: number;

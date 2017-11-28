@@ -50,33 +50,49 @@ if (module === require.main) {
       '(3, \'google\', \'00002\', \'Harshana\', \'Wijesinghe\', \'harshanax@oki.lk\', \'\'),'  +
       '(4, \'google\', \'00003\', \'Hasith\', \'Yaggahavita\', \'hasith@gmail.com\', \'\');'  +
 
-      'INSERT INTO products(id, code, name, description) VALUES ' +
-      '(1, \'C001\', \'Large Bottle Lid\', \'\'),'+
-      '(2, \'C002\', \'Gear Motor\', \'\'),'+
-      '(3, \'P001\', \'Scribble Bot\', \'\'),'+
-      '(4, \'P002\', \'Electrical Fan\', \'\'),'+
-      '(5, \'T001\', \'Soldering Iron\', \'\'),'+
-      '(6, \'T002\', \'Hot Glue Gun\', \'\');' +
+      'INSERT INTO orders(order_id, location_id, user_id, updated_date, created_date, shipped) VALUES ' +
+      '(1, 1, 1, \'2012-02-16 09:21:00\', \'2012-02-26 09:31:01\' , \'2013-02-28 08:30:00\' ),'+
+      '(2, 3, 2, \'2012-03-26 04:32:00\', \'2016-01-14 05:52:02\' , \'2014-05-25 05:30:50\' ),'+
+      '(3, 2, 3, \'2013-06-24 01:45:00\', \'2014-02-26 10:33:03\' , \'2015-02-28 08:30:00\' ),'+
+      '(4, 4, 4, \'2014-03-21 19:34:00\', \'2016-02-26 11:34:04\' , \'2016-02-28 08:30:00\' ),'+
+      '(5, 2, 1, \'2015-04-21 21:33:00\', \'2017-02-26 12:35:05\' , \'2017-02-28 08:30:00\' ),'+
+      '(6, 1, 2, \'2016-05-26 07:21:00\', \'2017-02-26 14:36:06\' , \'2017-02-28 08:30:00\' );' +
 
-      'INSERT INTO orders(id, location_id, user_id) VALUES ' +
-      '(1, 1, 1),'+
-      '(2, 1, 1),'+
-      '(3, 1, 1),'+
-      '(4, 1, 2),'+
-      '(5, 1, 2),'+
-      '(6, 1, 3),'+
-      '(7, 1, 4),'+
-      '(8, 2, 1),'+
-      '(9, 3, 1),'+
-      '(10, 4, 1);'+
+      'INSERT INTO inventory_items(item_id, note, quantity, unit_price) VALUES ' +
+      '(1,\'Small, red\', 100, 120),'+
+      '(2, \'Small, red\', 20, 70),'+
+      '(3,\'Small, red\', 35, 20),'+
+      '(4,\'Small, red\', 300, 4),'+
+      '(5,\'Small, red\', 500, 8),'+
+      '(6,\'Small, red\', 3000, 2),'+
+      '(7,\'Small, red\', 400, 8),'+
+      '(8,\'Small, red\', 900, 20),'+
+      '(9,\'Small, red\', 48, 120),'+
+      '(10,\'Small, red\', 90, 20);'+
 
-      'INSERT INTO order_items(id, order_id, product_id, note, quantity) VALUES ' +
-      '(1, 1, 1, \'Red color is prefered\', 100),'+
-      '(2, 1, 2, \'Please test the motors before shipping\', 50),'+
-      '(3, 1, 3, \'Add additional felt pen to Scribble Bot packs\', 40),'+
-      '(4, 2, 2, \'Yellow color\', 20),'+
-      '(5, 2, 5, \'Please insulate wires\', 5),'+
-      '(6, 2, 6, \'240V\', 4);'
+      'INSERT INTO products(product_id, code, name, description, has_quantity) VALUES ' +
+      '(1, \'qwer\', \'Cube\',\'Small, Wooden\', 100),'+
+      '(2, \'tyui\', \'gear motor\', \'medium size\',50),'+
+      '(3, \'iopa\', \' cube\', \'Large ,Plastic\',40),'+
+      '(4, \'sdfg\', \'ice cream stick\', \'Yellow color ,Large\',20),'+
+      '(5, \'hjkl\', \'insulate wire\',\'Red color\', 5),'+
+      '(6, \'zxcv\', \'stepper motor\', \'240V , Large\',4);' +
+
+      'INSERT INTO orders_inventory_items(o_id, i_id) VALUES ' +
+      '(1, 2),'+
+      '(1, 7),'+
+      '(2, 10),'+
+      '(2, 2),'+
+      '(3, 8),'+
+      '(3, 6);'+
+
+      'INSERT INTO product_inventory_items( i_id, p_id ) VALUES ' +
+      '(1, 2),'+
+      '(2, 3),'+
+      '(3, 4),'+
+      '(4, 1),'+
+      '(5, 6),'+
+      '(6, 5);'
       
       ,
 
