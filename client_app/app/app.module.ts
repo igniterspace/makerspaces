@@ -18,14 +18,14 @@ import { OrdersModule }             from './orders/orders.module';
 import { ContextService }           from './common/services/context.service'
 import { AuthService }              from './common/services/auth.service'
 
-import { Http, HttpModule,  RequestOptions }               from '@angular/http';
-import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth } from 'angular2-jwt';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'
+import { Http, HttpModule,  RequestOptions }                  from '@angular/http';
+import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth }  from 'angular2-jwt';
+import { FormBuilder, FormGroup, Validators }                 from '@angular/forms';
+import { ReactiveFormsModule }                                from '@angular/forms'
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpHeaderInterceptor } from './common/services/http.interceptor';
-import { AuthErrorHandler } from './common/services/auth.errorHandler';
+import { HTTP_INTERCEPTORS }          from '@angular/common/http';
+import { HttpHeaderInterceptor }      from './common/services/http.interceptor';
+import { AuthErrorHandler }           from './common/services/auth.errorHandler';
 import { BrowserAnimationsModule }    from '@angular/platform-browser/animations';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {

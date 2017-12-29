@@ -8,20 +8,21 @@
 
 'use strict';
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const logging = require('../../server_lib/logging');
+const express     = require('express');
+const bodyParser  = require('body-parser');
+const logging     = require('../../server_lib/logging');
+const model       = require('./model');
 
 const errNotFound = {
   code: 404,
   message: 'Not found'
 };
 
-function getModel () {
+function getModel() {
   return require(`./model`);
 }
 
-const router = express.Router();
+const router      = express.Router();
 
 // Automatically parse request body as JSON
 router.use(bodyParser.json());
@@ -30,9 +31,83 @@ router.use(bodyParser.json());
  * GET /api/orders
  * 
  */
-router.get('/', (req, res, next) => {
-  
+// router.get('/orderitemhistory', (req, res, next) => {
+//   var orderId = req.param("orderId");//{"orderId" : "1"}
+//   model.getOrderItemHistory(orderId,(err, results) => {
+//     if (err) {    
+//       throw err;
+//     }
+//     res.json({
+//       item: result
+//     });
+//   });
+// });
+
+//Get all orders history
+router.get('/orderhistory', (req, res, next) => {
+  model.getOrderHistory((err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
 });
+
+
+
+//Get Order Item history
+router.get('/orderitemhistory/:orderID', (req, res, next) => {
+  var orderId = req.params.orderID;
+  console.log(orderId);
+  model.getOrderItemHistory(orderId, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
+
+//get product names of the items
+router.get('/productsnames', (req, res, next) => {
+  model.getProducts((err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
+
+
+// Insert orders into database
+router.post('/submitorders', (req, res, next) => {
+  var order = req.body;
+  console.log(order);
+  console.log("WTF");
+  model.submitOrder(order, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
+
+
 
 /**
  * Errors on "/api/<module>/*" routes.

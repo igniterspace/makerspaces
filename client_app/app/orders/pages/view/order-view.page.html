@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-sm-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Order Items History
+            </header>
+            
+           
+
+            <div class="panel-body" *ngFor="let x of orderview  | slice:0:1; let i=index" class="odd">
+                    <h5>Order Number : {{x.order_id}}</h5>
+                    
+                <div class="adv-table">
+                    <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+                        <table class="display table table-bordered dataTable" id="hidden-table-info" aria-describedby="hidden-table-info_info">
+                            <thead>
+                                <tr role="row">
+
+                                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                                        aria-label="Rendering engine: activate to sort column descending" style="width: 187px; font-size: 10px">
+                                        <i class="fa fa-list" aria-hidden="true"></i> Order Items</th>
+
+                                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                                        aria-label="Rendering engine: activate to sort column descending" style="width: 187px; font-size: 10px">
+                                        <i class="fa fa-newspaper-o" aria-hidden="true"></i> Description</th>
+
+                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                        style="width: 187px; font-size: 10px">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i> Quantity</th>
+
+                                    <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1"
+                                        aria-label="Platform(s): activate to sort column ascending" style="width: 187px; font-size: 10px">
+                                        <i class="fa fa-cubes"></i> Unit Price</th>
+
+                                    <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1"
+                                        aria-label="Platform(s): activate to sort column ascending" style="width: 187px; font-size: 10px">
+                                        <i class="fa fa-money" aria-hidden="true"></i> Total Price</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                                <tr *ngFor="let i of orderview" class="odd">
+                                    <td class=" ">    {{ i.order_item  }} </td>
+                                    <td class=" ">    {{ i.description }} </td>
+                                    <td class=" ">    {{ i.quantity    }} </td>
+                                    <td class=" "> Rs.{{ i.unit_price  }} </td>
+                                    <td class=" "> Rs.{{ i.total_price }} </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

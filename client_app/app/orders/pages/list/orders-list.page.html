@@ -14,79 +14,62 @@
 
                                     <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
                                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                        style="width: 187px; font-size: 10px" ><i class="fa fa-shopping-bag"></i>  Order No:</th>
+                                        style="width: 187px; font-size: 10px" ><i class="fa fa-shopping-bag"></i>
+                                         
+                                         Order No:
+                                        </th>
 
                                     <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
                                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                        style="width: 187px; font-size: 10px"><i class="fa fa-user-circle" aria-hidden="true"></i>  Ordered By</th>
+                                        style="width: 187px; font-size: 10px"><i class="fa fa-user-circle" aria-hidden="true"></i>
 
-                                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                        style="width: 187px; font-size: 10px"><i class="fa fa-list" aria-hidden="true"></i>  Order Items</th>
-
-                                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                        style="width: 187px; font-size: 10px"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Description</th>
-
-                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                                        rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" 
-                                        style="width: 187px; font-size: 10px"><i class="fa fa-plus-square" aria-hidden="true"></i>  Quantity</th>
+                                        Ordered By
+                                    </th>
 
                                     <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
                                         rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" 
-                                        style="width: 187px; font-size: 10px"><i class="fa fa-cubes"></i>  Unit Price</th>
+                                        style="width: 187px; font-size: 10px"><i class="fa fa-money" aria-hidden="true"></i> 
+
+                                        Total Price For Order
+                                    </th>
 
                                     <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
                                         rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" 
-                                        style="width: 187px; font-size: 10px"><i class="fa fa-money" aria-hidden="true"></i>  Total Price</th>
+                                        style="width: 187px; font-size: 10px"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+
+                                        Created Date
+                                    </th>
 
                                     <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
                                         rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" 
-                                        style="width: 187px; font-size: 10px"><i class="fa fa-plus-circle" aria-hidden="true"></i> Created Date</th>
+                                        style="width: 187px; font-size: 10px"><i class="fa fa-pencil-square" aria-hidden="true"></i>
+
+                                        Updated Date
+                                    </th>
 
                                     <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
                                         rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" 
-                                        style="width: 187px; font-size: 10px"><i class="fa fa-pencil-square" aria-hidden="true"></i> Updated Date</th>
+                                        style="width: 187px; font-size: 10px"><i class="fa fa-plane" aria-hidden="true"></i> 
 
-                                    <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" 
-                                        style="width: 187px; font-size: 10px"><i class="fa fa-plane" aria-hidden="true"></i> Shipped Date</th>
+                                        Shipped Date
+                                    </th>
                                 
                                 </tr>
                             </thead>
 
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
                                     
-                                    <tr class="odd">
-                                        <td class="  sorting_1"> 1</td>
-                                        <td class="">Achintha Wijewickrama</td>
-                                        <td class=" ">Cubes</td>
-                                        <td class=" ">Small, Wooden, Red</td>
-                                        <td class=" ">250</td>
-                                        <td class=" ">20</td>
-                                        <td class=" ">5000</td>
-                                        <td class=" ">2016-12-10 14:02:05</td>
-                                        <td class=" ">2016-12-11 17:33:43</td>
-                                        <td class=" ">2016-12-15 08:07:00</td>
+                                    <tr *ngFor="let i of orderhistory" class="odd">
+                                        <td class="sorting_1" ><a [routerLink]="['./view', i.order_id]" (click) = "viewOrder(i.order_id)"> {{ i.order_id }} </a></td>
+                                        <td class=" ">      {{ i.user_name                                  }} </td>
+                                        <td class=" ">  Rs. {{ i.total_price                                }} </td>
+                                        <td class=" ">      {{ i.created_date | date: 'dd/MM/yyyy hh:mm:ss' }} </td>
+                                        <td class=" ">      {{ i.shipped  | date: 'dd/MM/yyyy hh:mm:ss'     }} </td>
                                     </tr>
                                     
                             </tbody>
                         </table>
-                        
-                        <div class="row-fluid">
-                            <div class="span6">
-                                <div class="dataTables_info" id="hidden-table-info_info">Showing 1 to 5 of 5 entries</div>
-                            </div>
-                            <div class="span6">
-                                <div class="dataTables_paginate paging_bootstrap pagination">
-                                    <ul>
-                                        <li class="prev disabled"><a href="#">← Previous</a></li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li class="next disabled"><a href="#">Next → </a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
 
                 </div>
