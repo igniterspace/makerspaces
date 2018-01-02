@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { StudentsService }      from '../../../common/services/student.service';
-import { Student }      from '../../../common/models/student';
+import { Component }            from '@angular/core';
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
-//import {MatDatepickerModule} from '@angular/material/datepicker';
 
+import { DpDatePickerModule }   from 'ng2-date-picker';
 
+import { StudentsService }      from '../../../common/services/student.service';
+import { ListStudents }         from '../../../common/models/liststudents';
+import { Student } from 'app/common/models/student';
 
 @Component({
   templateUrl: './students-edit.page.html',
@@ -14,50 +15,49 @@ import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, 
 export class StudentsEditPage {
   [x: string]: any;
 
-  private studentsService: StudentsService;
-  private students: Student[];
-  private addStudentForm: FormGroup;
-
+  private studentsService : StudentsService;
+  private addStudentForm  : FormGroup;
+  private student         : ListStudents[];
+  
   post:any;
+  newStudent: any = {} ;
 
-  firstname: string;
-  lastname:string;
-  bday:string;
-  bmonth:string;
-  byear:string;
-  address:string;
+  students_first_name    : string;
+  students_last_name     : string;
+  students_date_of_birth : string;
+  students_home_address  : string;
+  students_gender        : boolean;
 
-  constructor(private os: StudentsService,
+  editStudentForm: boolean = false;
+  isNewForm: boolean;
+
+  constructor(private ss: StudentsService,
               private formBuilder: FormBuilder) {
-    this.studentsService = os;
+    this.studentsService = ss;
 
     this.addStudentForm = formBuilder.group({
-      firstname: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      lastname:[null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      bday:[''],
-      bmonth:[''],
-      byear:[''],
-      address:[null, Validators.compose([Validators.required, Validators.minLength(10)])],
-      // gender:['']
+      students_first_name    : [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      students_last_name     : [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      students_date_of_birth : [''],
+      students_home_address  : [null, Validators.compose([Validators.required, Validators.minLength(10)])],
+      students_gender        : [''],
 
 
     });
   }
 
   getStudents(post) {
-    //this.studentsService.getStudents().then(students => this.students = students);
     console.log(post);
-    this.firstname = post.firstname;
-    this.lastname = post.lastname;
-    this.bday = post.bday;
-    this.bmonth = post.bday;
-    this.byear = post.byear;
-    this.address = post.address;
+    this.students_first_name    = post.students_first_name;
+    this.students_last_name     = post.students_last_name;
+    this.students_date_of_birth = post.students_date_of_birth;
+    this.students_home_address  = post.students_home_address;
+    this.students_gender        = post.students_gender;
 
   }
 
   ngOnInit(): void {
-    // this.getStudents();
+    
   }
 
   isValid(field : string){
@@ -65,16 +65,23 @@ export class StudentsEditPage {
     return formField.valid || formField.pristine;
   }
 
-  saveProduct(product:Student) {
-    if(this.isNewForm) {
-   this.studentsService.addProduct(product);
-    }else{
-
-    }this.productForm = false;
+  saveStudent(product:ListStudents) {
+ this.ss.saveStudent(product).subscribe(res => console.log(product));
   }
-  // nameValidator(control: FormControl): {[s: string]: boolean} {
-  //   if (!control.value.match("^[a-zA-Z '-]+$")) {
-  //     return {invalidName: true};
-  //   }
-  // }
+
+  nameValidator(control: FormControl): {[s: string]: boolean} {
+    if (!control.value.match("^[a-zA-Z '-]+$")) {
+      return {invalidName: true};
+    }
+  }
+  editStudent(student: Student){
+    if(!student){
+   this.editStudentForm = false;
+   return;
+    }
+    this.editStudentForm = true;
+    this.isNewForm = false;
+    this.newStudent = student;
+  }
+
 }

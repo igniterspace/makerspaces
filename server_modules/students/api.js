@@ -1,104 +1,109 @@
+// Copyright 2017, IgniterSpace.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License this code is made available to you.
+
 'use strict';
 
-const express = require('express');
+const express    = require('express');
 const bodyParser = require('body-parser');
-const logging = require('../../server_lib/logging');
-const model = require('./model');
+const logging    = require('../../server_lib/logging');
+const model      = require('./model');
+const router     = express.Router();
+const auth       = require('../../server_lib/auth');
+const user       = require('../users/api')
 
 const errNotFound = {
-code: 404,
-message: 'Not found'
+  code: 404,
+  message: 'Not found'
 };
 
-function getModel () {
-return require(`./model`);
-}
-
-const router = express.Router();
-
-// Automatically parse request body as JSON
 router.use(bodyParser.json());
 
-/**
- * GET /api/students
- * 
- */
-router.get('/', (req, res, next) => {
-  
+//get guardians from the database to show in the frontend..
+router.get('/getallguardians', (req, res, next) => {
+  model.listAllGuardians((err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
 });
 
-/**
-* Errors on "/api/<module>/*" routes.
-*/
-router.use((err, req, res, next) => {
-// Format error and forward to generic error handler for logging and
-// responding to the request
-err.response = {
-message: err.message,
-internalCode: err.code
-};
-next(err);
+
+//get students from the database to show in the list in the frontend..
+router.get('/getallstudents', (req, res, next) => {
+  model.listAllStudents((err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
 });
 
-function getStudent () {
-return require(`./model`);
-}
 
-function getGuardian () {
-return require(`./model`);
-}
+//Send student details to the database..
+router.post('/addStudent', (req, res, next) => {
+  var student = req.body;
+  console.log("Submited student data gets to the api");
+  console.log(student);
+  model.addStudents(student, (err, results) => {
 
-if (user.appMetadata['access']['*']) {
-// get all guardian
-
-model.listAllGuardians((err, results) => {
-if (err) {
-throw err;
-}
-res.json({
-items: structureGuardians(results)
-});
-});
-
-} else {
-var guardianIds = Object.keys(user.appMetadata['access']);
-//remove * from the ids array
-var index = guardianIds.indexOf('*');
-if (index > -1) {
-array.splice(index, 1);
-}
-// get specific guardian
-
-model.listGuardiansByIds((err, results) => {
-if (err) {
-throw err;
-}
-res.json({
-items: structureGuardians(results)
-});
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
 });
 
-function structureGuardians(results) {
-// create a composite user object
-let guardians = {};
-//add permissions if any
-for (var i = 0; i < results.length; i++) {
-let record = results[i];
-//if guardian is not existing create it
-if (!guardians[record.guardian_id]) {
-guardians[record.guardian_id] = {
-students : {},
-name: record.students_last_name,
-id: record.students_id
-};
-}
-// add the guardian record
-guardians[record.guardians_id].students[record.students_id] = {
-students_id: record.students_id,
-students_last_name: record.students_last_name,
-}
-}
-return guardians;
-}
-}
+
+//Send guardian details to the database..
+router.post('/addGuardian', (req, res, next) => {
+  var guar = req.body;
+  console.log("Submited guardian data gets to the api");
+  console.log(guar);
+  model.addGuardians(guar, (err, results) => {
+
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
+
+
+//Delete student from the list and from the database..
+router.get('/deleteStudent/:studentid', (req, res, next) => {
+  var student_id = req.params.studentid;
+  console.log('delete this student: ', student_id);
+  model.deleteStudent(student_id, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    // console.log(res);
+  });
+});
+
 module.exports = router;

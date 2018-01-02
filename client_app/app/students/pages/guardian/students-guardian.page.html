@@ -1,29 +1,32 @@
+<h3>
 
+  Assign a guardian</h3>
+<br>
+<br>
+<br>
 
-    <h3>Assign a guardian</h3>
+<body>
+  <table [formGroup]="ListallGuardians" (ngSubmit)="getStudents(addStudentForm.value)" method="post">
+    <select formControlName="listguardians" [(ngModel)]="listallguardians">
+      <option *ngFor="let g of listguardians" [value]="g_name"> {{ g.guardians_name }} </option>
+    </select>
     <br>
-     <br>
-     <br>
-    <body>
-      <table>  
-          <input type="text" name="search" placeholder="Guardian Search..">
-          <br> 
-          <br>
-          <br> 
-          <br>
-          <br> 
-          <br>
-          <br> 
-          <br>
-          <br> 
-          <br>
-          <br> 
-          <br>
-          <tr>
-              <td colspan="2" align="center">
-              <input type="submit" class="btn btn-info" value="Submit">
-              <input type="button"  class="btn btn-danger" value="Go Back" onclick="history.go(-1)">
-              </td>
-              </tr>
-        </table>
-        </body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="submit" class="btn btn-info" value="Submit" [disabled]="!ListallGuardians.valid" (click)="saveGuardian(ListallGuardians.value)" >
+        <input type="button" class="btn btn-danger" value="Go Back" onclick="history.go(-1)">
+      </td>
+    </tr>
+  </table>
+</body>

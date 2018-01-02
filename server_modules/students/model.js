@@ -1,75 +1,93 @@
+// Copyright 2017, IgniterSpace.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License this code is made available to you.
 
 'use strict';
 
 const database = require('../../server_lib/database');
 const connection = database.createConnection();
 
-function getStudent(studentId, cb) {
-connection.query(
-'select * from students where last_name LIKE ? %"' , [parseInt(studentId)], (err, results) => {
-//this querry selects the student by any attribute but has to search the exact value...
-if (err) {
-cb(err);
-return;
-}
-cb(null, results);
-});  
-}
-
-
-function getguardian(guardianId, cb) {
-connection.query(
-'select * from guardians where name LIKE ? %"', [parseInt(guardianId)], (err, results) => {
-//this querry selects the guardian by any attribute but has to search the exact value.. 
-if (err) {
-cb(err);
-return;
-}
-cb(null, results);
-});  
-}
-
+//Query to get guardians from the database to show in the frontend..
 function listAllGuardians(cb) {
-connection.query(
-'select distinct guardians.id as guardians_id, guardians.name as guardians_name, ' +
-'students.id as students_id, students.name as students_last_name, ' +
-'from students ' +
-'left outer join guardians on (students.guardians_id=students.id)', [], (err, results) => {
-if (err) {
-cb(err);
-return;
-}
-cb(null, results);
-});
+    connection.query(
+        'SELECT DISTINCT guardians.id AS guardians_id, guardians.name AS guardians_name FROM guardians', 
+        (err, results) => {
+            if (err) {
+                cb(err);
+                return;
+            }
+            cb(null, results);
+        });
 }
 
-function listGuardiansByIds(idArray, cb) {
-connection.query(
-'select distinct guardians.id as guardians_id, guardians.name as guardians_name, ' +
-'students.id as students_id, students.name as students_last_name ' +
-'from students ' +
-'left outer join guardians on (students.guardians_id=students.id) ' +
-'where students.id=?', idArray, (err, results) => {
-if (err) {
-cb(err);
-return;
-}
-cb(null, results);
-});
+
+//Query to get students from the database to show in the list in the frontend..
+function listAllStudents(cb) {
+    connection.query(
+        'SELECT DISTINCT students.id, CONCAT (students.first_name," ",students.last_name) AS students_name, students.date_of_birth AS date_of_birth,guardians.name AS g_name  FROM students LEFT OUTER JOIN guardians ON (students.g_id = guardians.id ) GROUP BY id ASC',
+        (err, results) => {
+            if (err) {
+                cb(err);
+                return;
+            }
+            cb(null, results);
+        });
 }
 
-function createSchema (config, cb) {
-const connection = database.createMultipleStatementConnection(config);
-connection.query(
 
-`CREATE TABLE IF NOT EXISTS \`guardians\` (
-\`id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-\`name\` VARCHAR(255) NULL,
-\`home_number\` VARCHAR(20) NULL,
-\`mobile_number\` VARCHAR(20) NULL,
-\`email_address\` VARCHAR(255) NULL,
-PRIMARY KEY (\`id\`))  ENGINE=INNODB;` +
-    
+//Query to Send student details to the database..
+function addStudents(student, res) {
+    connection.query('INSERT INTO `students` (first_name, last_name, date_of_birth, home_address, gender) VALUES ("'+ student.students_first_name+'", "'+ student.students_last_name+'","'+ student.students_date_of_birth+'", "'+ student.students_home_address+'", "'+ student.students_gender+'" )' , function (err, resp) {
+            if (err) throw err;
+         // console.log(results);   
+        },
+             connection.query('SELECT LAST_INSERT_id() as students_id') ,(err,result,fields)=>{
+                if(err){
+                  console.log(err);
+                }
+        }     
+        );
+         };
+
+
+//Query to Send guardian details to the database..         
+function addGuardians(guar, res) {
+    connection.query('INSERT INTO `guardians` (name, home_number, mobile_number, email_address ) VALUES ("'+ guar.gname+'", "'+ guar.mnumber+'","'+ guar.hnumber+'", "'+ guar.eaddress+'" )' , function (err, resp) {
+            if (err) throw err;
+              });
+        };
+
+//Query to Delete student from the list and from the database..    
+function deleteStudent(delid, cb) {
+    console.log('delete id in model: ' , delid);
+    connection.query(
+        'DELETE FROM students WHERE id ='+ delid ,
+        (err, results) => {
+            if (err) {
+                cb(err);
+                return;
+            }
+            cb(null, results);
+        });
+}
+
+
+//Create the database..
+function createSchema(config, cb) {
+    const connection = database.createMultipleStatementConnection(config);
+    connection.query(
+
+`CREATE TABLE IF NOT EXISTS \`guardians\` ( 
+ \`id\` INT AUTO_INCREMENT,
+ \`name\` VARCHAR(255) NULL,
+ \`home_number\` VARCHAR(20) NULL,
+ \`mobile_number\` VARCHAR(20) NULL,
+ \`email_address\` VARCHAR(255) NULL,
+ PRIMARY KEY (\`id\`))  ENGINE=INNODB;`  +
+
 `CREATE TABLE IF NOT EXISTS \`students\` (
 \`id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 \`first_name\` VARCHAR(255) NULL,
@@ -77,32 +95,33 @@ PRIMARY KEY (\`id\`))  ENGINE=INNODB;` +
 \`date_of_birth\` VARCHAR(20) NULL,
 \`home_address\` VARCHAR(255) NULL,
 \`gender\` VARCHAR(255) NULL,
-\`g_id\` INT UNSIGNED NOT NULL,
-PRIMARY KEY (\`id\`))  ENGINE=INNODB;` + 
+\`g_id\` INT ,
+PRIMARY KEY (\`id\`))  ENGINE=INNODB;` +
 
 
-`ALTER TABLE \`students\` 
-ADD FOREIGN KEY (\`g_id\`)   
-REFERENCES \`guardians\`(\`id\`) 
-ON UPDATE CASCADE
-ON DELETE CASCADE;` ,
+`ALTER TABLE \`students\`
+ADD FOREIGN KEY (\`g_id\`)
+REFERENCES guardians(\`id\`)
+ON UPDATE CASCADE ON 
+DELETE CASCADE;` ,
 
 (err) => {
-if (err) {
-throw err;
-} 
-console.log('Successfully created schemas: students, guardians');
-connection.end();
-cb(null);
-}
-);
+    if (err) {
+        throw err;
+        }
+    console.log('Successfully created schemas: students, guardians');
+    connection.end();
+    cb(null);
+        }
+    );
 }
 
 
 module.exports = {
-createSchema: createSchema,
-listAllGuardians: listAllGuardians,
-getStudent: getStudent,
-getguardian: getguardian,
-  
+    createSchema: createSchema,
+    listAllGuardians: listAllGuardians,
+    listAllStudents: listAllStudents,
+    addStudents: addStudents,
+    addGuardians: addGuardians,
+    deleteStudent: deleteStudent
 };
