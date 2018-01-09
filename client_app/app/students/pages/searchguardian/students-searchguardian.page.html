@@ -1,0 +1,80 @@
+<div class="row">
+        <div class="col-sm-12">
+          <section class="panel">
+             <header class="panel-heading">
+               Searched Results
+             </header>
+        <div class="panel-body">
+          <div class="adv-table"> 
+           <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
+            <table class="display table table-bordered dataTable" id="hidden-table-info" aria-describedby="hidden-table-info_info" >
+      
+             <thead>
+             <tr role="row">
+                                              
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+              style="width: 187px;">Guardian ID
+              </th>
+              
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;">Guardian Name
+              </th>
+      
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">Home Number
+              </th>
+      
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+              style="width: 162px;">Mobile Number
+              </th>
+      
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+              style="width: 162px;">E-mail Address
+              </th>
+
+              <th class="" role="columnheader" tabindex="0"
+              aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
+              style="width: 133px;">
+              </th>
+      
+             </tr>
+            </thead>
+          
+           <tbody role="alert" aria-live="polite" aria-relevant="all">
+          
+             <tr class="odd" *ngFor="let s of liststudents">
+                                                 
+              <td class="">{{ s.id }} </td>
+              <td class="">{{ s.students_name }}</td>
+              <td class="">{{ s.date_of_birth }}</td>
+              <td class="">{{ s.g_name }}</td>
+              <td class=""></td>
+              <td class="">
+                                    
+              <button class="btn btn-primary" ><i type="submit">Select</i></button>
+              </td> 
+      
+             </tr>
+           </tbody>
+         </table>
+      
+         <div class="row-fluid">
+           <div class="span6">
+             <div class="dataTables_info" id="hidden-table-info_info">Searched Guardians are shown here!</div>
+           </div>
+          <div class="span6">
+         <div class="dataTables_paginate paging_bootstrap pagination">
+              </div>
+             
+             </div>
+            </div>
+          </div>
+          
+        </div>
+       </div>
+      </section>
+      </div>
+      </div>

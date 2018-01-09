@@ -76,9 +76,21 @@ if (module === require.main) {
       '(3, 1, 3, \'Add additional felt pen to Scribble Bot packs\', 40),'+
       '(4, 2, 2, \'Yellow color\', 20),'+
       '(5, 2, 5, \'Please insulate wires\', 5),'+
-      '(6, 2, 6, \'240V\', 4);'
+      '(6, 2, 6, \'240V\', 4);' +
       
-      ,
+
+      'INSERT INTO guardians(id, name, home_number, mobile_number, email_address) VALUES ' +
+      '(999,\'Kumudu Rathnayake\', \'0332222958\', \'0779158987\' ,  \'kumudu@igniterspace.com\'),'+
+      '(998,\'Hasith Yaggahavita\', \'0332221819\', \'0716624132\' ,  \'hasith@igniterspace.com\'),'+
+      '(997,\'Ananda Wijewickrama\', \'0332222917\', \'0710510274\' ,  \'anandaw@yahoo.com\'),'+
+      '(996,\'Chathura Senarathne\', \'0332228008\', \'0774636898\' ,  \'chathuras@igniterspace.com\');' +
+
+      'INSERT INTO students(id, first_name, last_name, date_of_birth, home_address, gender,g_id) VALUES ' +
+      '(001,\'Hasith\',\'Yaggahavita\', \'1979-09-28\' ,  \'287,Yakkala Rd,Gampaha\', \'male\', 999),'+
+      '(002,\'Jehan\',\'Wijesinghe\',\'1996-09-05\' , \'7, charles place,colombo\', \'male\', 998),'+
+      '(003,\'Achintha\',\'Wijewickrama\',\'1993-11-06\' ,  \'287,Yakkala Rd,Gampaha\', \'male\', 997),'+
+      '(004,\'Asitha\',\'Senarathne\',\'1992-04-02\' ,  \'12/2 Bandaranayake Rd, Katubadde\', \'male\', 996),'  +
+      '(005, \'Subha\',\'Wijesinghe\', \'1972-09-08\', \'No 10, Sri Bodhi Rd, Gampaha\',\'female\',996);',
 
       (err) => {
         if (err) {

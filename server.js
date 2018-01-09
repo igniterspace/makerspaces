@@ -80,6 +80,7 @@ app.use(express.static(path.join(__dirname, 'client_dist')));
 app.use('/api/locations', require('./server_modules/locations/api'));
 app.use('/api/users', require('./server_modules/users/api'));
 app.use('/api/orders', require('./server_modules/orders/api'));
+app.use('/api/students', require('./server_modules/students/api'));
 
 app.use('/*', require('./server_views/controller'));
 
@@ -110,5 +111,9 @@ if (module === require.main) {
     console.log(`App listening on port ${port}`);
   });
 }
+
+// app.listen(3000, function() {
+//   console.log('Express started press Ctrl-c to terminate');
+// });
 
 module.exports = app;

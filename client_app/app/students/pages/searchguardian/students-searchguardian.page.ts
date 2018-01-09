@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit  } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Input }                           from '@angular/core/src/metadata/directives';
 
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
@@ -11,11 +11,11 @@ import { ListStudents }                    from 'app/common/models/liststudents'
 
 
 @Component({
-  templateUrl: './students-list.page.html',
-  styleUrls: ['./students-list.page.css']
+  templateUrl: './students-searchguardian.page.html',
+  styleUrls: ['./students-searchguardian.page.css']
 })
 
-export class StudentsListPage {
+export class SearchedGuardianPage {
   Student: any;
   
 
@@ -23,15 +23,19 @@ export class StudentsListPage {
   private students: Student[];
   private liststudents = [] ;
   //private addStudentForm  : FormGroup;
-  private updatestudents: any;
-  private student         : ListStudents[];
-  private studentID:any;
+  private updatestudents: ListStudents[];
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
   validateDelete: boolean;
-
   ListAllStudents : FormGroup ; 
+  
+
+  students_first_name    : string;
+  students_last_name     : string;
+  students_date_of_birth : string;
+  students_home_address  : string;
+  students_gender        : boolean;
   
   constructor(private ss: StudentsService,private formBuilder: FormBuilder) {
     this.studentsService = ss;
@@ -49,38 +53,9 @@ export class StudentsListPage {
     });
   }
 
-  deleteStudent(deleteid : DeleteId){
-    console.log('delete id: ',deleteid);
-    alert('Do you want to remove this student?');
-    
-    this.ss.deleteStudent(deleteid).subscribe(res=>console.log(res))
-    var i;
-    console.log(this.liststudents[0].id);
-    console.log(this.liststudents.length);
-
-    for ( i=0; i<this.liststudents.length; i++){
-      console.log(this.liststudents[i].id+' '+i+' '+deleteid);
-      if(this.liststudents[i].id == deleteid){
-        console.log("del index:",i)
-        this.liststudents.splice(i, 1);
-      }
-    }
-  } 
-
+  
   ngOnInit(): void {
-    this.listAllStudents();
-    
+this.listAllStudents();
   }
-
-  viewStudent(studentID: number) {
-      this.ss.editStudent(studentID).subscribe(res => {
-      this.updatestudents = res.item;
-      console.log(this.updatestudents);
-      this.ss.updateStudent(this.updatestudents)
-      this.ss.newitems.subscribe( updatestudents=> this.updatestudents = updatestudents)
-     
-    });
- }
-
 
 }

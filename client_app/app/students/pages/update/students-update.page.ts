@@ -1,4 +1,4 @@
-import { Component }            from '@angular/core';
+import { Component, OnInit  }            from '@angular/core';
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 
 import { DpDatePickerModule }   from 'ng2-date-picker';
@@ -8,17 +8,17 @@ import { ListStudents }         from '../../../common/models/liststudents';
 import { Student } from 'app/common/models/student';
 
 @Component({
-  templateUrl: './students-edit.page.html',
-  styleUrls: ['./students-edit.page.css']
+  templateUrl: './students-update.page.html',
+  styleUrls: ['./students-update.page.css']
 })
 
-export class StudentsEditPage {
+export class StudentsUpdatePage {
   [x: string]: any;
 
   private studentsService : StudentsService;
   private addStudentForm  : FormGroup;
-  private student         : ListStudents[];
-  
+  private student         : ListStudents;
+ 
   post:any;
   newStudent: any = {} ;
 
@@ -30,7 +30,7 @@ export class StudentsEditPage {
 
   editStudentForm: boolean = false;
   isNewForm: boolean;
-
+   
   constructor(private ss: StudentsService,
               private formBuilder: FormBuilder) {
     this.studentsService = ss;
@@ -41,14 +41,13 @@ export class StudentsEditPage {
       students_date_of_birth : [''],
       students_home_address  : [null, Validators.compose([Validators.required, Validators.minLength(10)])],
       students_gender        : [''],
-    });
+      });
   }
   
 
-  ngOnInit(): void {
 
-    this.ss.currentMessage.subscribe(guardian => this.guardian = guardian)
-    
+  ngOnInit(){
+    this.ss.newitems.subscribe(updatestudents => this.updatestudents = updatestudents)
   }
 
   isValid(field : string){
@@ -68,5 +67,12 @@ export class StudentsEditPage {
       return {invalidName: true};
     }
   }
+ 
+  viewStudent(studentID: number) {
+    this.ss.editStudent(studentID).subscribe(res => {
+    this.updatestudents = res.item;
+
+  });
+ }
 
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { OrdersEdit } from 'app/common/models/orderedit';
-import { OrdersEditService } from 'app/common/services/order.service';
-import { clone} from 'lodash';
+import { Component, OnInit }   from '@angular/core';
+import { OrdersEdit }          from 'app/common/models/orderedit';
+import { OrdersEditService }   from 'app/common/services/order.service';
+import { clone }               from 'lodash';
 
 @Component({
 

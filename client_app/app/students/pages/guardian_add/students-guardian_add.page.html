@@ -1,49 +1,54 @@
+<h3>STUDENT REGISTRATION FORM 2</h3>
+
+<br>
+
+<form [formGroup]="addGuardianForm" >
+    <table align="center" cellpadding="10">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <tr>
+            <td>GUARDIAN'S NAME :-</td>
+            <td>
+                <input type="text" class="form-control" formControlName="gname" name="City" maxlength="50" placeholder="Enter Full Name of the Guardian"
+                    required />
+                <small *ngIf="!isValid('gname')" class="text-muted">Not enough characters!</small>
 
 
-    <h3>STUDENT REGISTRATION FORM 2</h3>
-    <br>
-     <form [formGroup]="addGuardianForm" (ngSubmit)="getGuardians(addGuardianForm.value)">
-    <table align="center" cellpadding = "10">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
-    <tr>
-    <td>GUARDIAN'S NAME :-</td>
-    <td><input type="text" class="form-control" formControlName="gname" name="City" maxlength="50" required />
-        <small *ngIf="!isValid('gname')" class="text-muted">Not enough characters!</small>
-
-
-    </td>
-    </tr>
-     <br>
-    
-    <tr>
-        <td>CONTACT NUMBER :</td>
-        <td>
-        MOBILE :-
-        <input type="text" class="form-control" formControlName="mnumber" name="Mobile_No" maxlength="10" required />
-        <small *ngIf="!isValid('mnumber')" class="text-muted">Invalid Number!</small>
-    
-        HOME :- 
-        <input type="text" class="form-control" formControlName="hnumber" name="Home_No" maxlength="10" required />
-        <small *ngIf="!isValid('hnumber')" class="text-muted">Invalid Number!</small>
-        </td>
+            </td>
         </tr>
-     <br>
-     <tr>
+    <br>
+
+        <tr>
+            <td>CONTACT NUMBER :-</td>
+            <td>
+                MOBILE :-
+                <input type="number" class="form-control" formControlName="mnumber" name="Mobile_No" maxlength="10" placeholder="071-xxxxxxx"
+                    required />
+                <small *ngIf="!isValid('mnumber')" class="text-muted">Invalid Number!</small>
+                  <br> HOME :-
+                <input type="number" class="form-control" formControlName="hnumber" name="Home_No" maxlength="10" placeholder="033-xxxxxxx"
+                    required />
+                <small *ngIf="!isValid('hnumber')" class="text-muted">Invalid Number!</small>
+            </td>
+        </tr>
+    <br>
+        <tr>
             <td>EMAIL ADDRESS :-</td>
-            <td><input type="text" class="form-control" formControlName="eaddress" name="Email_Id" maxlength="100" required />
+            <td>
+                <input type="text" class="form-control" formControlName="eaddress" name="Email_Id"
+                    maxlength="100"  placeholder="example@gmail.com" required />
                 <small *ngIf="!isValid('eaddress')" class="text-muted">Invalid Address!</small>
             </td>
-            </tr>
-             <br>
-    
-    <tr>
-    <td colspan="2" align="center">
-    <input type="submit" class="btn btn-info" value="Submit" [disabled]="!addGuardianForm.valid" >
-    <input type="reset"  class="btn btn-danger" value="Reset">
-    </td>
-    </tr>
+        </tr>
+    <br>
+        <tr>
+            <td colspan="2" align="center">
+                <a [routerLink]="['../guardian']" queryParamshandling="merge">
+                <input type="submit" class="btn btn-success" value="Submit" [disabled]="!addGuardianForm.valid" (click)="saveGuardian(addGuardianForm.value)">
+                </a>
+                <input type="reset" class="btn btn-danger" value="Reset">
+            </td>
+        </tr>
     </table>
-     
-    </form>
 
+</form>

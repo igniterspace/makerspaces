@@ -1,14 +1,14 @@
-<h3>STUDENT REGISTRATION FORM</h3>
+<h3>UPDATE STUDENT FORM</h3>
 <br>
 
-<form [formGroup]="addStudentForm" method="post" *ngIf="addStudentForm">
+<form [formGroup]="addStudentForm" method="post" *ngIf="addStudentForm" action="http://localhost:8080/students/add/s.id">
     <table align="center" cellpadding="10">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <tr>
             <td>FIRST NAME :- </td>
             <td>
-            <input type="text" class="form-control" formControlName="students_first_name" name="First_Name" placeholder="First Name" required/>
+            <input type="text" class="form-control" formControlName="students_first_name" name="First_Name" placeholder="First Name" value=" s.students_name" required/>
             <small *ngIf="!isValid('students_first_name')" class="text-muted">Not enough characters</small>
 
             </td>
@@ -20,6 +20,7 @@
             <td>
             <input type="text" class="form-control" formControlName="students_last_name" name="Last_Name" placeholder="Last Name" required/>
             <small *ngIf="!isValid('students_last_name')" class="text-muted">Not enough Characters</small>
+            {{updatestudents.last_name}}
             </td>
         </tr>
         <br>
@@ -60,7 +61,7 @@
 
         <tr>
             <td colspan="2" align="center">
-                <button type="submit" class="btn btn-success" [disabled]="!addStudentForm.valid" (click)="saveStudent(addStudentForm.value)">Submit</button>
+                <button type="submit" class="btn btn-success" [disabled]="!addStudentForm.valid" (click)="saveStudent(addStudentForm.value)">Update</button>
                 <input type="reset" class="btn btn-danger" value="Reset">
             </td>
         </tr>
