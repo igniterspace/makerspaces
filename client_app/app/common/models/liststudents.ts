@@ -7,4 +7,5 @@ export class ListStudents {
     students_g_name         : string;
     students_home_address   : string;
     students_gender         : string;
+    g_id                    : any ;
 }

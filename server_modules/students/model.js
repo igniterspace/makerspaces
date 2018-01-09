@@ -10,7 +10,7 @@
 const database = require('../../server_lib/database');
 const connection = database.createConnection();
 
-//Query to get guardians from the database to show in the frontend..
+//Query to get guardians from the database to show in the frontend (dropdown)..
 function listAllGuardians(cb) {
     connection.query(
         'SELECT DISTINCT guardians.id AS guardians_id, guardians.name AS guardians_name FROM guardians', 
@@ -40,22 +40,68 @@ function listAllStudents(cb) {
 
 //Query to Send student details to the database..
 function addStudents(student, res) {
-    connection.query('INSERT INTO `students` (first_name, last_name, date_of_birth, home_address, gender) VALUES ("'+ student.students_first_name+'", "'+ student.students_last_name+'","'+ student.students_date_of_birth+'", "'+ student.students_home_address+'", "'+ student.students_gender+'" )' , function (err, resp) {
-            if (err) throw err;
-         // console.log(results);   
-        },
-             connection.query('SELECT LAST_INSERT_id() as students_id') ,(err,result,fields)=>{
+    connection.query('INSERT INTO `students` (first_name, last_name, date_of_birth, home_address, gender, g_id ) VALUES ("'+ student.students_first_name+'", "'+ student.students_last_name+'","'+ student.students_date_of_birth+'", "'+ student.students_home_address+'", "'+ student.students_gender+'", "'+ student.guardians_name+'" )' , function (err, resp) {
+            if (err) throw err; 
                 if(err){
                   console.log(err);
-                }
-        }     
-        );
+                    }
+           });
          };
+
+//Query to Edit student details in the database
+function editStudents(edstudent, res) {
+    connection.query('UPDATE `students` (first_name, last_name, date_of_birth, home_address, gender) VALUES ("'+ edstudent.students_first_name+'", "'+ edstudent.students_last_name+'","'+ edstudent.students_date_of_birth+'", "'+ edstudent.students_home_address+'", "'+ edstudent.students_gender+'" ) WHERE id = ?' , function (err, resp) {
+            if (err) throw err;
+                 // console.log(results);   
+                if(err){
+                   console.log(err);
+                    }
+            });
+        };   
+        
+//Query to get student details to update..        
+function getEditStudent(studentId, cb) {
+        connection.query('SELECT * FROM `students` WHERE id=? ', [studentId],
+              (err, results) =>  {
+                if (err) {
+                  cb(err);
+                  return;
+                }
+                cb(null, results);
+                  }
+            );
+        }       
+
+ 
+//Query to get searched guardians from the database
+// function searchGuardian(cb) {
+// //console.log(studentId + "hehe");
+//     var name = '';
+//     var hnumber = '';
+//     var mnumber = '';
+//     var eaddress = '';
+//             connection.query('SELECT * FROM `guardians` WHERE name = ? OR home_number = ? OR mobile_number = ? OR email_address = ? ' [name, hnumber, mnumber, eaddress] ,
+//         function (err, results)  {
+//             if (err) {
+//                 cb(err);
+//                 return;
+//                 }
+//                 cb(null, results);
+//                 //console.log(results);
+//                  });
+//             }
 
 
 //Query to Send guardian details to the database..         
 function addGuardians(guar, res) {
     connection.query('INSERT INTO `guardians` (name, home_number, mobile_number, email_address ) VALUES ("'+ guar.gname+'", "'+ guar.mnumber+'","'+ guar.hnumber+'", "'+ guar.eaddress+'" )' , function (err, resp) {
+            if (err) throw err;
+              });
+        };
+
+//Query to Assign a guardian with a student..
+function assignGuardians(assguar, res) {
+    connection.query('INSERT INTO `guardians` (name) VALUES ("'+ assguar.guardians_name+'")' , function (err, resp) {
             if (err) throw err;
               });
         };
@@ -118,10 +164,12 @@ DELETE CASCADE;` ,
 
 
 module.exports = {
-    createSchema: createSchema,
-    listAllGuardians: listAllGuardians,
-    listAllStudents: listAllStudents,
-    addStudents: addStudents,
-    addGuardians: addGuardians,
-    deleteStudent: deleteStudent
+    createSchema     : createSchema,
+    listAllGuardians : listAllGuardians,
+    listAllStudents  : listAllStudents,
+    addStudents      : addStudents,
+    addGuardians     : addGuardians,
+    deleteStudent    : deleteStudent,
+    getEditStudent   : getEditStudent,
+    searchGuardian   : searchGuardian
 };

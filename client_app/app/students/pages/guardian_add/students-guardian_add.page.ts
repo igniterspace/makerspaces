@@ -38,18 +38,8 @@ export class StudentsGuardian_addPage {
       mnumber :  [null, Validators.compose([Validators.required, Validators.minLength(10)])],
       hnumber :  [null, Validators.compose([Validators.required, Validators.minLength(10)])],
       eaddress:  [''],
-  
   });
-              }
-   getGuardians(post){
-     console.log(post);
-      this.gname    = post.gname;
-      this.mnumber  = post.mnumber;
-      this.hnumber  = post.hnumber;
-      this.eaddress = post.eaddress;
-    
-    
-   }
+}
    
   ngOnInit(): void {
     this.listAllGuardians();
@@ -58,7 +48,7 @@ export class StudentsGuardian_addPage {
   isValid(field : string) {
      let formField = this.addGuardianForm.get(field);
      return formField.valid || formField.pristine;
-   }
+  }
 
    listAllGuardians() {
     this.ss.listAllGuardians().subscribe(res => {
@@ -69,6 +59,7 @@ export class StudentsGuardian_addPage {
 
    saveGuardian(guardian:Guardian) {
     this.ss.saveGuardian(guardian).subscribe(res => console.log(guardian));
-     }
+    this.addGuardianForm.reset();
+  }
 
 }

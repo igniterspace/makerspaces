@@ -48,7 +48,7 @@
         <td class="">{{ s.g_name }}</td>
         <td class="">
                               
-        <button class="btn btn-primary btn-xs" ><i class="fa fa-pencil" [routerLink]="['students/edit']" queryParamshandling="merge" (click)="editStudent(addStudentForm.value)"></i></button>
+        <button class="btn btn-primary btn-xs" ><i class="fa fa-pencil" [routerLink]="['./add',s.id]" queryParamshandling="merge" (click)="viewStudent(s.id)"></i></button>
     
         <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o " (click)= "deleteStudent(s.id)"></i></button>
         </td> 
@@ -63,15 +63,8 @@
      </div>
     <div class="span6">
    <div class="dataTables_paginate paging_bootstrap pagination">
-
-  <!-- <ul>
-
-    <li class="prev disabled"><a href="#">← Previous</a></li>
-    <li class="active"><a href="#">1</a></li>
-    <li class="next disabled"><a href="#">Next → </a></li>
-
-  </ul> -->
         </div>
+       
        </div>
       </div>
     </div>
