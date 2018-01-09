@@ -13,8 +13,10 @@ import { ContextService }          from '../common/services/context.service';
 
 
 @NgModule({
-  imports:      [ CommonModule, FormsModule, StudentsRoutingModule,ReactiveFormsModule ],
+  imports:      [ CommonModule, FormsModule, StudentsRoutingModule, ReactiveFormsModule ],
   declarations: [ StudentsListPage, StudentsViewPage, StudentsEditPage, StudentsGuardianPage, StudentsGuardian_addPage ],
   providers:    [ StudentsService ]
 })
-export class StudentsModule { }
+export class StudentsModule {
+
+}

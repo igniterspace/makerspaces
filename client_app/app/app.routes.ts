@@ -14,14 +14,14 @@ const appRoutes: Routes = [
     path: 'logout',
     component: LogoutPage
   },
-  { 
-    path: 'callback', 
-    component: CallbackPage 
+  {
+    path: 'callback',
+    component: CallbackPage
   },
-  { 
-    path: '',   
-    redirectTo: 'home', 
-    pathMatch: 'full' 
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   }
 ];
 
