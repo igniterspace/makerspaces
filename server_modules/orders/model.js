@@ -33,7 +33,7 @@ function list(locationId, limit, token, cb) {
 //Get order history
 function getOrderHistory(cb) {
   connection.query(
-    'SELECT order_id,users.given_name as user_name, created_date, updated_date, shipped, SUM(inventory_items.quantity * inventory_items.unit_price) AS total_price FROM orders LEFT OUTER JOIN orders_inventory_items ON (orders.order_id = orders_inventory_items.o_id) LEFT OUTER JOIN inventory_items ON (orders_inventory_items.i_id = inventory_items.item_id) LEFT OUTER JOIN users ON (users.id = orders.user_id) GROUP BY order_id DESC',
+    'SELECT order_id,users.given_name as user_name, created_date,  shipped, SUM(inventory_items.quantity * inventory_items.unit_price) AS total_price FROM orders LEFT OUTER JOIN orders_inventory_items ON (orders.order_id = orders_inventory_items.o_id) LEFT OUTER JOIN inventory_items ON (orders_inventory_items.i_id = inventory_items.item_id) LEFT OUTER JOIN users ON (users.id = orders.user_id) GROUP BY order_id DESC',
     (err, results) => {
       if (err) {
         cb(err);
@@ -49,9 +49,8 @@ function getOrderHistory(cb) {
 function getOrderItemHistory(orderId, cb) {
   console.log(orderId);
   connection.query(
-    'SELECT order_id, products.name AS order_item, CONCAT(products.description, inventory_items.note) AS description, quantity, unit_price, (inventory_items.quantity * inventory_items.unit_price) AS total_price FROM orders LEFT OUTER JOIN orders_inventory_items ON (orders.order_id = orders_inventory_items.o_id) LEFT OUTER JOIN inventory_items ON (orders_inventory_items.i_id = inventory_items.item_id) LEFT OUTER JOIN product_inventory_items ON(orders_inventory_items.i_id = product_inventory_items.i_id) LEFT OUTER JOIN products ON (product_inventory_items.p_id = products.product_id) LEFT OUTER JOIN users ON (users.id = orders.user_id) WHERE order_id=?',[orderId],
-    function (err, results) {
-      console.log(err);
+    'SELECT order_id, products.name AS order_item, CONCAT(products.description, inventory_items.note) AS description, quantity, unit_price, (inventory_items.quantity * inventory_items.unit_price) AS total_price FROM orders LEFT OUTER JOIN orders_inventory_items ON (orders.order_id = orders_inventory_items.o_id) LEFT OUTER JOIN inventory_items ON (orders_inventory_items.i_id = inventory_items.item_id) LEFT OUTER JOIN product_inventory_items ON(orders_inventory_items.i_id = product_inventory_items.i_id) LEFT OUTER JOIN products ON (product_inventory_items.p_id = products.product_id) LEFT OUTER JOIN users ON (users.id = orders.user_id) WHERE order_id=?', [orderId],
+    (err, results) => {
       if (err) {
         cb(err);
         return;
@@ -61,7 +60,7 @@ function getOrderItemHistory(orderId, cb) {
   );
 }
 
-// Get products names
+// Get products names for dropdown
 function getProducts(cb) {
   connection.query(
     'SELECT * FROM products GROUP BY product_id ASC',
@@ -75,41 +74,74 @@ function getProducts(cb) {
   );
 }
 
-//Post orders
+
+
+/* Begin transaction */
 function submitOrder(order, cb) {
-  var mysqlTimestamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
-    connection.query(
-      'INSERT INTO  ( location_id, user_id, created_date, shipped ) VALUES (1, 1, "'+mysqlTimestamp+'", "'+mysqlTimestamp+'")',
-      (err, results) => {
-        if (err) {
-          cb(err);
-          return;
-        }
-        cb(null, results);
+  connection.beginTransaction(function (err) {
+
+    var date = new Date();
+    if (err) { throw err; }
+    connection.query('INSERT INTO orders ( location_id, user_id, created_date ) VALUES (1, 1, "' + date + '")', function (err, result) {
+      if (err) {
+        connection.rollback(function () {
+          throw err;
+        });
       }
-    );
-  }
+
+      var last_insert_order_id = result.insertId;
+      var order_length = order.length;
+      var order_item;
+
+      for (var i = 0; i < order_length; i++) {
+
+        var o = order[i];
+         console.log(i); 
+        connection.query('INSERT INTO inventory_items ( note, quantity, unit_price, total_price ) VALUES ("' + o.note + '", ' + o.quantity + ', ' + o.unitprice + ', ' + o.quantity + ' * ' + o.unitprice + ')', function (err, result) {
+          if (err) {
+            connection.rollback(function () {
+              throw err;
+            });
+          }
+          i++;
+          var j = i-order_length-1; 
+          var last_insert_item_id = result.insertId;
+          console.log(j); 
+          connection.query('INSERT INTO product_inventory_items ( i_id, p_id ) VALUES (' + last_insert_item_id + ', ' +order[j].orderitem.product_id+' )', function (err, result) {
+            if (err) {
+              connection.rollback(function () {
+                throw err;
+              });
+            }
+
+            connection.query('INSERT INTO orders_inventory_items ( o_id, i_id ) VALUES (' + last_insert_order_id + ', ' + last_insert_item_id + ')', function (err, result) {
+              if (err) {
+                connection.rollback(function () {
+                  throw err;
+                });
+              }    
+            });
+          });
+        });
+      } // for loop ending 
+    });
+  });
+  connection.commit(function (err) {
+    if (err) {
+      connection.rollback(function () {
+        throw err;
+      });
+
+      console.log("Success");
+    }
+  });
+}
+/* End transaction */
 
 
 
-// Functions For insert data to tables
-//For inventory items table
-// function insertInventory(order, cb) {
-//   var order_length = order.length ;
-//   console.log("Length is " + order_length);
-//   for (var i = 0 ; i < order_length; i++ ) {
-//   connection.query( 
-//     'INSERT INTO inventory_items ( note, quantity, unit_price ) VALUES ("'+order[i].note+'", '+order[i].quantity+', '+order[i].unitprice+')',
-//     (err, results) => {
-//       if (err) {
-//         cb(err);
-//         return;
-//       }
-//       cb(null, results);
-//     }
-//   );
-//   }
-// }
+
+
 
 
 
@@ -124,8 +156,8 @@ function createSchema(config, cb) {
       \`order_id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
       \`location_id\` INT UNSIGNED NOT NULL,
       \`user_id\` INT UNSIGNED NOT NULL,
-      \`created_date\` DATETIME DEFAULT CURRENT_TIMESTAMP,
-      \`shipped\` DATETIME NULL,
+      \`created_date\` VARCHAR(255),
+      \`shipped\` VARCHAR(255),
     PRIMARY KEY (\`order_id\`))  ENGINE=INNODB;` +
 
     //Inventory Items table //total price not needed
@@ -144,6 +176,7 @@ function createSchema(config, cb) {
       \`product_id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
       \`code\` VARCHAR(255) NOT NULL,
       \`name\` VARCHAR(255) NOT NULL,
+      \`unit\` VARCHAR(255) NOT NULL,
       \`description\` VARCHAR(255) NULL,
       \`has_quantity\` INT DEFAULT 0,
     PRIMARY KEY (\`product_id\`))  ENGINE=INNODB;` +
@@ -215,7 +248,7 @@ function createSchema(config, cb) {
 
 module.exports = {
 
-  createSchema: createSchema,
+  createSchema        : createSchema,
   list                : list,
   getOrderHistory     : getOrderHistory,
   getOrderItemHistory : getOrderItemHistory,

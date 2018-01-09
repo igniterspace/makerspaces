@@ -1,8 +1,9 @@
 export interface OrdersEdit {
 
-    orderitem   : string;
+    orderitem   : any;
     note        : string;
     quantity    : number;
+    unit        : string;
     unitprice   : number;
     totalprice  : number;
     

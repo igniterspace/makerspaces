@@ -17,14 +17,10 @@ export class OrderItemsViewPage {
 
   constructor(private os: OrdersService) {}
 
+  
+
   ngOnInit() {
     this.os.newitems.subscribe(orderview => this.orderview = orderview)
-    //var orderID : number;
-      // this.os.viewOrder(orderID).subscribe(res => {
-      //   this.orderview = res.item;
-      //   console.log(res.item);
-      // });
-
-     // this.os.newitems.subscribe(orderview => this.orderview = orderview)
+    
   }
 }

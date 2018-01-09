@@ -27,21 +27,6 @@ const router      = express.Router();
 // Automatically parse request body as JSON
 router.use(bodyParser.json());
 
-/**
- * GET /api/orders
- * 
- */
-// router.get('/orderitemhistory', (req, res, next) => {
-//   var orderId = req.param("orderId");//{"orderId" : "1"}
-//   model.getOrderItemHistory(orderId,(err, results) => {
-//     if (err) {    
-//       throw err;
-//     }
-//     res.json({
-//       item: result
-//     });
-//   });
-// });
 
 //Get all orders history
 router.get('/orderhistory', (req, res, next) => {
@@ -94,7 +79,6 @@ router.get('/productsnames', (req, res, next) => {
 router.post('/submitorders', (req, res, next) => {
   var order = req.body;
   console.log(order);
-  console.log("WTF");
   model.submitOrder(order, (err, results) => {
     if (err) {
       throw err;

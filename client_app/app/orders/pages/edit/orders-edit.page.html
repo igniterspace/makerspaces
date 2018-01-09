@@ -12,12 +12,19 @@
                         <tr role="row">
 
                             <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                            aria-label="Rendering engine: activate to sort column descending" style="width: 50px;"> # </th>
+
+                            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending" style="width: 187px;">
                                 <i class="fa fa-shopping-bag"></i> Order Items</th>
 
                             <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                                 style="width: 236px;">
                                 <i class="fa fa-newspaper-o"></i> Note</th>
+
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                style="width: 187px;">
+                                <i class="fa fa-bars"></i> Unit</th>
 
                             <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1"
                                 aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">
@@ -37,12 +44,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let order of neworders">
-                            <td>{{order.orderitem}}</td>
-                            <td>{{order.note}}</td>
+                        <tr *ngFor="let order of neworders ; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{order.orderitem.product_id}} - {{order.orderitem.name}}</td>
+                            <td> {{order.orderitem.description}} / {{order.note}}</td>
+                            <td>{{order.orderitem.unit}}</td>
                             <td>{{order.quantity}}</td>
                             <td>{{order.unitprice}}</td>
-                            <td>{{order.totalprice}}</td>
+                            <td>{{order.quantity * order.unitprice}}</td>
                             <td>
                                 <button class="btn btn-info" (click)="showEditOrderForm(order)">
                                     <i class="fa fa-edit"></i>
@@ -67,8 +76,8 @@
 
                 <p>
                     <label>Order Item</label>
-                    <select formControlName ="orderitem" [(ngModel)]="newOrder.orderitem">
-                    <option *ngFor="let oi of productNames" [value]="oi.product_id"> {{ oi.name }}</option>
+                    <select onmousedown="if(this.options.length>8){this.size=8;}"  onchange='this.size=0;' onblur="this.size=0;" formControlName ="orderitem" [(ngModel)]="newOrder.orderitem">
+                    <option *ngFor="let oi of productNames" [ngValue]="oi" > {{ oi.name }} ------------------------ {{oi.unit}}</option>
                     
                     </select>
                 </p>
@@ -102,13 +111,13 @@
             <form *ngIf="editOrderForm">
                 <header class="panel-heading">Edit Order Details</header>
 
-                <p>
+                <!-- <p>
                     <label>Order Item</label>
                     <select name="orderitem" [(ngModel)]="editedOrder.orderitem" required>
-                        <option *ngFor="let oi of productNames" [value]="oi.product_id"> {{ oi.name }}</option>
+                        <option *ngFor="let oi of productNames" [ngValue]="oi">{{ oi.name }} ------------------------ {{oi.unit}}</option>
         
                     </select>
-                </p>
+                </p> -->
 
                 <p>
                     <label>Note</label>

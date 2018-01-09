@@ -29,8 +29,8 @@ productNames : any ;
 private orderEditService: OrdersEditService;
 private orders: OrdersEdit[];
 addOrderForm  : FormGroup;
-orderitem     : string;
-note          : string;
+orderitem;
+note          : string; 
 quantity      : number;
 unitprice     : number;
 totalprice    : number;
@@ -66,6 +66,7 @@ constructor(private _orderService: OrdersEditService,
           //Submit full order to database
           submitOrder(oItems) {
             this._orderService.submitOrder(oItems).subscribe(res => console.log("Success"));
+            
           }
 
           ngOnInit() {
@@ -88,7 +89,7 @@ constructor(private _orderService: OrdersEditService,
            this.editOrderForm = true;
           this.editedOrder = clone(order);
           }
-  
+   
         showAddOrderForm() {
   
           if (this.neworders.length) {
@@ -100,6 +101,7 @@ constructor(private _orderService: OrdersEditService,
       }
   
         saveOrder(order: OrdersEdit) {
+          console.log(order);
   
          if (this.isNewForm) {
           // add new product
@@ -128,5 +130,6 @@ constructor(private _orderService: OrdersEditService,
           this.orderForm = false;
         }
 
+    
 }
 

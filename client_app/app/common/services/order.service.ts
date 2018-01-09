@@ -43,8 +43,7 @@ export class OrdersService {
 // For view order items in one order
 
   viewOrder(orderID) {
-      return this.http.get('http://localhost:8080/api/orders/orderitemhistory/'+ orderID).map(res => res.json());
-    
+      return this.http.get('http://localhost:8080/api/orders/orderitemhistory/'+ orderID).map(res => res.json());  
   }
 
   changeOrderItems(orderview) {
@@ -56,11 +55,6 @@ export class OrdersService {
     return this.http.get('http://localhost:8080/api/orders/productsnames').map(res =>res.json());
   }
 
-
-
-  
-
-   
    
 
   private handleError(error: any): Promise<any> {
@@ -84,6 +78,7 @@ export class OrdersEditService {
 
   submitOrder(oItems){
     return this.http.post('http://localhost:8080/api/orders/submitorders',this.oItems).map(res =>res.json());
+
   }
 
   getOrdersFromData(): OrdersEdit[] {
@@ -92,11 +87,13 @@ export class OrdersEditService {
   }
 
   addOrder(neworders: OrdersEdit) {
+    console.log('new order', neworders);
     this.oItems.push(neworders);
     console.log(this.oItems);
   }
-
-  updateOrder(order: OrdersEdit) {
+  
+  updateOrder(order: any) {
+    console.log(order);
     let index = findIndex(this.oItems, (p: OrdersEdit) => {
       return p.orderitem === order.orderitem;
     });
@@ -108,6 +105,10 @@ export class OrdersEditService {
     this.oItems.splice(this.oItems.indexOf(order), 1);
     console.log(this.oItems);
   }
+
+  // deleteRows(oItems : OrdersEdit[]){
+  //   this.oItems = [] ;
+  // }
 }
 
 
