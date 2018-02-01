@@ -1,41 +1,82 @@
-<h3>
-
-  Assign a Guardian for the Student</h3>
+<h3>Assign a Guardian for the Student</h3>
 <br>
 <br>
 <br>
 
 <body>
   <table [formGroup]="ListallGuardians" (ngSubmit)="assignGuardian(ListallGuardians.value)" method="post">
-    <select formControlName="guardians_name" >
+    <select formControlName="guardians_name">
       <option value="" disabled selected>Select your guardian...</option>
-      <option *ngFor="let g of listguardians" [value]="g.guardians_id" > {{ g.guardians_name }} </option>
+      <option *ngFor="let g of listguardians" [value]="g.guardians_id"> {{ g.guardians_name }} </option>
     </select>
-    <br>
-    <br>
-    <br>
-    <p>Search Guardian:</p>
-    <small>by name,phone num or email..</small>
-    <input type="text" name="search" placeholder="Search..">
-    <a [routerLink]="['../searchguardian']" queryParamshandling="merge">
-    <button type="submit" class="btn btn-info">Search</button>
-    </a>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <tr>
       <td colspan="2" align="center">
         <a [routerLink]="['../add']" queryParamshandling="merge">
-        <input type="submit" class="btn btn-success" value="Submit" (click)="saveassGuardian(ListallGuardians.value)" >
+          <input type="submit" class="btn btn-success" value="Submit" (click)="saveassGuardian(ListallGuardians.value)">
         </a>
         <input type="button" class="btn btn-danger" value="Go Back" onclick="history.go(-1)">
       </td>
     </tr>
+    <br>
+    <br>
+    <br>
   </table>
+  <div>
+    <p>Search Guardian:</p>
+    <small>by name,phone number or email..</small>
+
+    <input type="text" name="search" placeholder="Search.." [(ngModel)]="search">
+    <button type="submit" class="btn btn-info" (click)="similarGuardian(search)" (click) ="showTable()">Search</button>
+
+  </div>
+  <br><br>
+  <table class="display table table-bordered dataTable" *ngIf = "detailForm" id="hidden-table-info" aria-describedby="hidden-table-info_info">
+      
+             <thead>
+             <tr role="row">
+
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;">Guardian Name
+              </th>
+      
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">Home Number
+              </th>
+      
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+              style="width: 162px;">Mobile Number
+              </th>
+              
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+              style="width: 162px;">E- mail
+              </th>
+        
+             </tr>
+            </thead>
+          
+           <tbody role="alert" aria-live="polite" aria-relevant="all">
+          
+             <tr class="odd" *ngFor="let a of search_res">
+                                               
+              <td class="">{{ a.name }} </td>
+              <td class="">{{ a.home_number }}</td>
+              <td class="">{{ a.mobile_number }}</td>
+              <td class="">{{ a.email_address }}</td>
+              <td class="">
+                <a [routerLink]="['../add']" queryParamshandling="merge">  
+                <input class="btn btn-succsess" type="submit" value="Submit" (click)="savesearchGuardian(a.id)">
+              </a>
+              </td>                      
+              
+
+      
+             </tr>
+           </tbody>
+         </table>
+         <br>
+         <br>
+         <br>
+         <br>
 </body>

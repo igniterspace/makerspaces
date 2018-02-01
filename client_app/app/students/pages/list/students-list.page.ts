@@ -22,10 +22,10 @@ export class StudentsListPage {
   private studentsService: StudentsService;
   private students: Student[];
   private liststudents = [] ;
-  //private addStudentForm  : FormGroup;
-  private updatestudents: any;
+  private addStudentForm  : FormGroup;
+  private updatestudents  : ListStudents;
   private student         : ListStudents[];
-  private studentID:any;
+  private studentID       : number;
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
@@ -39,6 +39,11 @@ export class StudentsListPage {
       liststudents: new FormControl()
     });
   }
+
+
+  viewStudent(updatestudents) {
+    this.ss.updateStudent(updatestudents);
+}
 
 
   listAllStudents() {
@@ -66,21 +71,12 @@ export class StudentsListPage {
       }
     }
   } 
+ 
+ ngOnInit(): void {
 
-  ngOnInit(): void {
-    this.listAllStudents();
-    
-  }
-
-  viewStudent(studentID: number) {
-      this.ss.editStudent(studentID).subscribe(res => {
-      this.updatestudents = res.item;
-      console.log(this.updatestudents);
-      this.ss.updateStudent(this.updatestudents)
-      this.ss.newitems.subscribe( updatestudents=> this.updatestudents = updatestudents)
-     
-    });
- }
-
+  this.listAllStudents();
+  this.ss.newitems.subscribe( updatestudents => this.updatestudents = updatestudents)
+ 
+}
 
 }

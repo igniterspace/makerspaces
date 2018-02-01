@@ -48,7 +48,7 @@
         <td class="">{{ s.g_name }}</td>
         <td class="">
                               
-        <button class="btn btn-primary btn-xs" ><i class="fa fa-pencil" [routerLink]="['./add',s.id]" queryParamshandling="merge" (click)="viewStudent(s.id)"></i></button>
+        <button class="btn btn-primary btn-xs" ><i class="fa fa-pencil" [routerLink]="['./update',s.id]" queryParamshandling="merge" (click)="viewStudent(s)"></i></button>
     
         <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o " (click)= "deleteStudent(s.id)"></i></button>
         </td> 

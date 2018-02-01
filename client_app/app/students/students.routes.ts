@@ -17,8 +17,9 @@ import { SearchedGuardianPage }     from './pages/searchguardian/students-search
       { path: 'students/guardian' , component: StudentsGuardianPage },
       { path: 'students/guardian_add' , component: StudentsGuardian_addPage },
       { path: 'students/edit' , component: StudentsListPage },
-      { path: 'students/add/:s.id' , component: StudentsUpdatePage },
-      { path: 'students/searchguardian' , component: SearchedGuardianPage }
+      { path: 'students/update/:s.id' , component: StudentsUpdatePage },
+      { path: 'students/searchguardian' , component: SearchedGuardianPage },
+      { path: 'students/guardian/:search' , component: StudentsGuardianPage }
 
     ])],
     exports: [RouterModule]

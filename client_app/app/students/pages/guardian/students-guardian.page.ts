@@ -20,7 +20,12 @@ export class StudentsGuardianPage {
   private ListallGuardians: FormGroup;
   private listguardians : ListGuardians;
   private guardian : number ;
-  
+  search : any;
+  search_res: any;
+  detailForm :boolean;
+
+  responseDetails : any ;
+
   post: any ;
   
   guardians_id    : number ;
@@ -57,7 +62,27 @@ export class StudentsGuardianPage {
     this.ss.currentMessage.subscribe(guardian => this.guardian = guardian)
   } 
 
+  savesearchGuardian(as_guardian: number) {
+    this.guardian = as_guardian ;
+    console.log(this.guardian);
+    this.ss.newMessage(this.guardian)
+    this.ss.searchguar.subscribe(guardian => this.guardian = guardian)
+  } 
+
+  similarGuardian(search) {
+    console.log(search);
+    this.ss.similarGuardian(search).subscribe(res => {this.search_res = res.item;
+    console.log(this.search_res);
+  });  
+}
+
+showTable(){
+  this.detailForm = true ;
+}
+
+
   ngOnInit(): void {
     this.listAllGuardians();
+   
   }
 }

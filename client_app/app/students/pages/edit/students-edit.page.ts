@@ -48,7 +48,7 @@ export class StudentsEditPage {
   ngOnInit(): void {
 
     this.ss.currentMessage.subscribe(guardian => this.guardian = guardian)
-    
+    this.ss.searchguar.subscribe(guardian => this.guardian = guardian)
   }
 
   isValid(field : string){

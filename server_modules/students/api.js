@@ -27,40 +27,40 @@ router.get('/getallguardians', (req, res, next) => {
   model.listAllGuardians((err, results) => {
     if (err) {
       throw err;
-      console.log(err)
     }
     res.json({
       item: results
     });
-    console.log(res);
   });
 });
 
-//Search exisiting guardians from the database
-router.get('/searchguardians', (req, res, next) => {
-  model.searchGuardian((err, results) => {
+//Get email address to the frontend to check the validity..
+router.get('/checkIfUserExists', (req, res, next) => {
+  // console.log('isEMail',req.query.isEmail, 'value :', req.query.value);
+  // console.log('REQ : ', req.query);
+  model.getEmail(req.query.value, (err, results) => {
     if (err) {
       throw err;
-      console.log(err)
+     
     }
+    console.log('Result 1 : ', results[0].email_address);
     res.json({
-      item: results
+      item :results
     });
-    console.log(res);
+   
   });
 });
+
 
 //get students from the database to show in the list in the frontend..
 router.get('/getallstudents', (req, res, next) => {
   model.listAllStudents((err, results) => {
     if (err) {
       throw err;
-      console.log(err)
     }
     res.json({
       item: results
     });
-    console.log(res);
   });
 });
 
@@ -68,23 +68,23 @@ router.get('/getallstudents', (req, res, next) => {
 //Send student details to the database..
 router.post('/addStudent', (req, res, next) => {
   var student = req.body;
+  console.log(student);
   model.addStudents(student, (err, results) => {
 
     if (err) {
       throw err;
-      console.log(err)
     }
     res.json({
       item: results
     });
-    console.log(res);
   });
 });
 
-//Edit Student information
-router.get('/updateStudent/:studentID', (req, res, next) => {
-  var studentId = req.params.studentID;
-  model.getEditStudent(studentId, (err, results) => {
+//Edit Student information..
+router.post('/updateStudent', (req, res, next) => {
+  var edstudent = req.body;
+  console.log('updated details:', edstudent);
+  model.getEditStudent(edstudent, (err, results) => {
     if (err) {
       throw err;
       console.log(err)
@@ -94,24 +94,17 @@ router.get('/updateStudent/:studentID', (req, res, next) => {
     });
   });
 });
-
 
 //Send guardian details to the database..
 router.post('/addGuardian', (req, res, next) => {
   var guar = req.body;
-  console.log("Submited guardian data gets to the api");
-  console.log(req.body);
-  console.log(guar);
   model.addGuardians(guar, (err, results) => {
-
     if (err) {
       throw err;
-      console.log(err)
     }
     res.json({
       item: results
     });
-    console.log(res);
   });
 });
 
@@ -119,18 +112,13 @@ router.post('/addGuardian', (req, res, next) => {
 //Assign a Guardian..
 router.post('/assGuardian', (req, res, next) => {
   var assguar = req.body;
-  console.log("Assigned guardian data gets to the api");
-  console.log(assguar);
   model.assignGuardians(assguar, (err, results) => {
-
     if (err) {
       throw err;
-      console.log(err)
     }
     res.json({
       item: results
     });
-    console.log(res);
   });
 });
 
@@ -138,8 +126,21 @@ router.post('/assGuardian', (req, res, next) => {
 //Delete student from the list and from the database..
 router.get('/deleteStudent/:studentid', (req, res, next) => {
   var student_id = req.params.studentid;
-  console.log('delete this student: ', student_id);
   model.deleteStudent(student_id, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+//Search guardians..
+router.get('/search/:search', (req, res, next) => {
+  var detail = req.params.search;
+  console.log(detail);
+  model.searchGuardian(detail, (err, results) => {
     if (err) {
       throw err;
       console.log(err)
@@ -147,7 +148,7 @@ router.get('/deleteStudent/:studentid', (req, res, next) => {
     res.json({
       item: results
     });
-    // console.log(res);
+    console.log('vaalue :', res.results);
   });
 });
 

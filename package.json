@@ -96,6 +96,7 @@
     "mysql": "~2.15.0",
     "nconf": "~0.8.4",
     "ng2-date-picker": "^2.6.2",
+    "ng2-search-filter": "^0.3.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "~1.0.0",
     "prompt": "~1.0.0",

@@ -1,3 +1,4 @@
+
 // Copyright 2017, IgniterSpace.
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,17 +24,31 @@ function listAllGuardians(cb) {
         });
 }
 
+//Get email address to the frontend to check the validity..
+function getEmail(email, cb) {
+    console.log('Email : ', email);
+    connection.query(
+        `SELECT email_address FROM guardians WHERE email_address = '${email}'`,function (err, res){
+            if (err) {
+            throw err;
+            return;
+            }
+            console.log('Result : ', res);
+            cb(null ,res);
+         });
+ }
 
 //Query to get students from the database to show in the list in the frontend..
 function listAllStudents(cb) {
     connection.query(
-        'SELECT DISTINCT students.id, CONCAT (students.first_name," ",students.last_name) AS students_name, students.date_of_birth AS date_of_birth,guardians.name AS g_name  FROM students LEFT OUTER JOIN guardians ON (students.g_id = guardians.id ) GROUP BY id ASC',
+        'SELECT DISTINCT students.id, CONCAT (students.first_name," ",students.last_name) AS students_name, students.date_of_birth AS date_of_birth, guardians.name AS g_name, students.home_address AS home_address, students.gender AS gender, students.g_id AS g_id FROM students LEFT OUTER JOIN guardians ON (students.g_id = guardians.id ) GROUP BY id ASC',
         (err, results) => {
             if (err) {
                 cb(err);
                 return;
             }
             cb(null, results);
+            console.log(results);
         });
 }
 
@@ -48,48 +63,20 @@ function addStudents(student, res) {
            });
          };
 
-//Query to Edit student details in the database
-function editStudents(edstudent, res) {
-    connection.query('UPDATE `students` (first_name, last_name, date_of_birth, home_address, gender) VALUES ("'+ edstudent.students_first_name+'", "'+ edstudent.students_last_name+'","'+ edstudent.students_date_of_birth+'", "'+ edstudent.students_home_address+'", "'+ edstudent.students_gender+'" ) WHERE id = ?' , function (err, resp) {
-            if (err) throw err;
-                 // console.log(results);   
-                if(err){
-                   console.log(err);
-                    }
-            });
-        };   
         
-//Query to get student details to update..        
-function getEditStudent(studentId, cb) {
-        connection.query('SELECT * FROM `students` WHERE id=? ', [studentId],
-              (err, results) =>  {
-                if (err) {
-                  cb(err);
-                  return;
-                }
-                cb(null, results);
-                  }
-            );
-        }       
-
- 
-//Query to get searched guardians from the database
-// function searchGuardian(cb) {
-// //console.log(studentId + "hehe");
-//     var name = '';
-//     var hnumber = '';
-//     var mnumber = '';
-//     var eaddress = '';
-//             connection.query('SELECT * FROM `guardians` WHERE name = ? OR home_number = ? OR mobile_number = ? OR email_address = ? ' [name, hnumber, mnumber, eaddress] ,
-//         function (err, results)  {
-//             if (err) {
-//                 cb(err);
-//                 return;
-//                 }
-//                 cb(null, results);
-//                 //console.log(results);
-//                  });
-//             }
+//Query to update student details..        
+function getEditStudent(edstudent, res) {
+    console.log('edstudent : ', edstudent);
+        connection.query(`UPDATE students SET first_name =  '${edstudent.students_first_name}', last_name = '${edstudent.students_last_name}', date_of_birth = '${edstudent.students_date_of_birth}', home_address = '${edstudent.students_home_address}', gender = '${edstudent.students_gender}' WHERE  id = ${edstudent.students_id}`,
+        (err, res) => {
+            if (err) {
+                console.log(err); 
+                return;
+            }
+            console.log('Result : ', res);
+            // cb(null, results);
+        });
+}       
 
 
 //Query to Send guardian details to the database..         
@@ -120,6 +107,19 @@ function deleteStudent(delid, cb) {
         });
 }
 
+//Query to Search Guardians..
+function searchGuardian (detail, cb) {
+    console.log('detail: ', '%' + detail +'%'); 
+    connection.query(`SELECT * FROM guardians WHERE id LIKE '%${detail}%' OR name LIKE '%${detail}%' OR home_number LIKE '%${detail}%' OR mobile_number LIKE '%${detail}%' OR email_address LIKE '%${detail}%'`, function (err, res){
+           if (err) {
+           throw err;
+           console.log('Result : ', res);
+           return;
+           }
+           console.log('Result 1 : ',res);
+           cb(null ,res);
+        });
+}
 
 //Create the database..
 function createSchema(config, cb) {
@@ -171,5 +171,6 @@ module.exports = {
     addGuardians     : addGuardians,
     deleteStudent    : deleteStudent,
     getEditStudent   : getEditStudent,
-    searchGuardian   : searchGuardian
+    searchGuardian   : searchGuardian,
+    getEmail         : getEmail
 };
