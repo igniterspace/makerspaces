@@ -43,7 +43,7 @@ router.get('/checkIfUserExists', (req, res, next) => {
       throw err;
      
     }
-    console.log('Result 1 : ', results[0].email_address);
+    //console.log('Result 1 : ', results[0].email_address);
     res.json({
       item :results
     });
@@ -148,7 +148,7 @@ router.get('/search/:search', (req, res, next) => {
     res.json({
       item: results
     });
-    console.log('vaalue :', res.results);
+    //console.log('vaalue :', res.results);
   });
 });
 

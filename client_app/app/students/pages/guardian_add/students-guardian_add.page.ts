@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Http, Response } from '@angular/http';
+import { Http, Response }   from '@angular/http';
 import { FormGroup, FormControl, FormBuilder, ReactiveFormsModule, Validators, FormsModule, AbstractControl } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import { Observable }       from 'rxjs/Observable';
 
-import { StudentsService } from '../../../common/services/student.service';
+import { StudentsService }  from '../../../common/services/student.service';
 
-import { Guardian } from '../../../common/models/guardian';
-import { ListGuardians } from '../../../common/models/listguardians';
+import { Guardian }         from '../../../common/models/guardian';
+import { ListGuardians }    from '../../../common/models/listguardians';
 
 import 'rxjs';
 
@@ -53,15 +53,7 @@ export class StudentsGuardian_addPage {
     });
   }
 
-
-
-  // getEmails() {
-  //   this.ss.getEmail().subscribe(res => {
-  //     this.email = res.item;
-  //     console.log(res.item);
-  //   });
-  // }
-  
+//Check the validation of the inserted email..
   public checkEmailExists() {
     const email = this.addGuardianForm.controls['eaddress'].value.toLowerCase();
     this.ss.checkIfUserExists(true, false, email).takeWhile(() => this.alive).subscribe(res => {
@@ -84,27 +76,14 @@ export class StudentsGuardian_addPage {
     return formField.valid || formField.pristine;
   }
   
-
+//Send guardian details to the database..
   saveGuardian(guardian: Guardian) {
     this.ss.saveGuardian(guardian).subscribe(res => console.log(guardian));
     this.addGuardianForm.reset();
   }
   
   ngOnInit(): void {
-    
-        // this.getEmails();
-    
-        // this.addGuardianForm = this.ss.group({
-        //   name: ['', Validators.required],
-        //   email: ['',[Validators.required, Validators.email],
-        //   this.validateEmailNotTaken.bind(this)
-        //   ]
-        // });
+  
       }
 
-      // validateEmailNotTaken(control: AbstractControl) {
-      //   return this.StudentsService.checkEmailNotTaken(control.value).map(res => {
-      //     return res ? null : { emailTaken: true };
-      //   });
-      // }
 }

@@ -1,24 +1,24 @@
-import { Component }            from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 
 import { DpDatePickerModule }   from 'ng2-date-picker';
 
 import { StudentsService }      from '../../../common/services/student.service';
 import { ListStudents }         from '../../../common/models/liststudents';
-import { Student } from 'app/common/models/student';
+import { Student }              from 'app/common/models/student';
 
 @Component({
   templateUrl: './students-edit.page.html',
   styleUrls: ['./students-edit.page.css']
 })
 
-export class StudentsEditPage {
+export class StudentsEditPage implements OnInit {
   [x: string]: any;
 
   private studentsService : StudentsService;
   private addStudentForm  : FormGroup;
   private student         : ListStudents[];
-  
+  searchguardian : number;
   post:any;
   newStudent: any = {} ;
 
@@ -45,10 +45,10 @@ export class StudentsEditPage {
   }
   
 
-  ngOnInit(): void {
+  ngOnInit() {
 
+//Get guardian id from guardian page (dropdown)..
     this.ss.currentMessage.subscribe(guardian => this.guardian = guardian)
-    this.ss.searchguar.subscribe(guardian => this.guardian = guardian)
   }
 
   isValid(field : string){
@@ -56,6 +56,7 @@ export class StudentsEditPage {
     return formField.valid || formField.pristine;
   }
 
+  //Assign guardian id to new student and send all the details to the database..
   saveStudent(student : ListStudents) { 
     var full_detail = Object.assign(student , this.guardian);
     console.log(full_detail);

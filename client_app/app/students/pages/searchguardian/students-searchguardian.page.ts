@@ -1,61 +1,77 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Input }                           from '@angular/core/src/metadata/directives';
-
+import { Component, OnInit }    from '@angular/core';
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 
-import { StudentsService }                 from '../../../common/services/student.service';
+import { DpDatePickerModule }   from 'ng2-date-picker';
 
-import { Student }                         from '../../../common/models/student';
-import { DeleteId }                        from '../../../common/models/deleteid';
-import { ListStudents }                    from 'app/common/models/liststudents';
-
+import { StudentsService }      from '../../../common/services/student.service';
+import { ListStudents }         from '../../../common/models/liststudents';
+import { Student }              from 'app/common/models/student';
 
 @Component({
   templateUrl: './students-searchguardian.page.html',
   styleUrls: ['./students-searchguardian.page.css']
 })
 
-export class SearchedGuardianPage {
-  Student: any;
-  
+export class SearchedGuardianPage implements OnInit {
+  [x: string]: any;
 
-  private studentsService: StudentsService;
-  private students: Student[];
-  private liststudents = [] ;
-  //private addStudentForm  : FormGroup;
-  private updatestudents: ListStudents[];
-
-  @Output()
-  deleteUserEvent = new EventEmitter<string>();
-  validateDelete: boolean;
-  ListAllStudents : FormGroup ; 
-  
+  private studentsService : StudentsService;
+  private addStudentForm  : FormGroup;
+  private student         : ListStudents[];
+  searchguardian : number;
+  post:any;
+  newStudent: any = {} ;
 
   students_first_name    : string;
   students_last_name     : string;
   students_date_of_birth : string;
   students_home_address  : string;
-  students_gender        : boolean;
-  
-  constructor(private ss: StudentsService,private formBuilder: FormBuilder) {
+  students_gender        : string;
+
+  editStudentForm: boolean = false;
+  isNewForm: boolean;
+
+  constructor(private ss: StudentsService,
+              private formBuilder: FormBuilder) {
     this.studentsService = ss;
-    this.ListAllStudents = new FormGroup({
-      liststudents: new FormControl()
+
+    this.addStudentForm = formBuilder.group({
+      students_first_name    : [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      students_last_name     : [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      students_date_of_birth : [''],
+      students_home_address  : [null, Validators.compose([Validators.required, Validators.minLength(10)])],
+      students_gender        : [''],
     });
   }
-
-
-  listAllStudents() {
-    this.ss.listAllStudents().subscribe(res => {
-      this.liststudents  = res.item;
-      console.log(this.liststudents[0].id);
-      console.log(res.item);
-    });
-  }
-
   
-  ngOnInit(): void {
-this.listAllStudents();
+
+  ngOnInit() {
+//Get guardian id from guardian_add.page (search box)..
+    this.ss.searchguar.subscribe(searchguardian => this.searchguardian = searchguardian)
+    console.log(this.searchguardian);
+  }
+
+  isValid(field : string){
+    let formField = this.addStudentForm.get(field);
+    return formField.valid || formField.pristine;
+  }
+
+//Assign guardian id from searched list
+  savesearchStudent(student : ListStudents) { 
+    console.log(student);
+    console.log(this.searchguardian);
+    var guardians_name = this.searchguardian;
+    console.log( guardians_name );
+    var complete_detail = Object.assign( student, {guardians_name} );
+    console.log(complete_detail);
+    this.ss.savesStudent(complete_detail).subscribe(res => console.log(complete_detail));
+    this.addStudentForm.reset();
+  }
+
+  nameValidator(control: FormControl): {[s: string]: boolean} {
+    if (!control.value.match("^[a-zA-Z '-]+$")) {
+      return {invalidName: true};
+    }
   }
 
 }

@@ -43,8 +43,9 @@ export class StudentsService {
   }
 
 
-  newMessage(guardian: any) {
-    this.sGuardian.next(guardian)
+  newMessage(searchguardian: any) {
+    console.log(searchguardian);
+    this.sGuardian.next(searchguardian)
   }
 
   changeMessage(guardian: any) {
@@ -84,6 +85,10 @@ export class StudentsService {
 
   saveStudent(full_detail) {
     return this.http.post('http://localhost:8080/api/students/addStudent', full_detail).map(res => res.json());
+  }
+
+  savesStudent(complete_detail) {
+    return this.http.post('http://localhost:8080/api/students/addStudent', complete_detail).map(res => res.json());
   }
 
   saveGuardian(guardian) {

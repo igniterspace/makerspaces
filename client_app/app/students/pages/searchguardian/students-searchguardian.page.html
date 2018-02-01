@@ -1,81 +1,71 @@
-<div class="row">
-        <div class="col-sm-12">
-          <section class="panel">
-             <header class="panel-heading">
-               Searched Results
-             </header>
-        <div class="panel-body">
-          <div class="adv-table"> 
-           <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
-            <table class="display table table-bordered dataTable" id="hidden-table-info" aria-describedby="hidden-table-info_info" >
-      
-             <thead>
-             <tr role="row">
-                                              
-              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-              rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-              style="width: 187px;">Guardian ID
-              </th>
-              
-              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-              rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;">Guardian Name
-              </th>
-      
-              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-              rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">Home Number
-              </th>
-      
-              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-              rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-              style="width: 162px;">Mobile Number
-              </th>
-      
-              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-              rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-              style="width: 162px;">E-mail Address
-              </th>
+<h3>STUDENT REGISTRATION FORM</h3>
+<br>
 
-              <th class="" role="columnheader" tabindex="0"
-              aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-              style="width: 133px;">
-              </th>
-      
-             </tr>
-            </thead>
-          
-           <tbody role="alert" aria-live="polite" aria-relevant="all">
-          
-             <tr class="odd" *ngFor="let g of listguardians">
-                                                 
-              <!-- <td class="">{{ s.id }} </td>
-              <td class="">{{ s.students_name }}</td>
-              <td class="">{{ s.date_of_birth }}</td>
-              <td class="">{{ s.g_name }}</td>
-              <td class=""></td> -->
-              
-              <td class="">
-                                    
-              <button class="btn btn-primary" ><i type="submit">Select</i></button>
-              </td> 
-      
-             </tr>
-           </tbody>
-         </table>
-      
-         <div class="row-fluid">
-           <div class="span6">
-             <div class="dataTables_info" id="hidden-table-info_info">Searched Guardians are shown here!</div>
-           </div>
-          <div class="span6">
-         <div class="dataTables_paginate paging_bootstrap pagination">
-              </div>
-             
-             </div>
-            </div>
-          </div>
-          
-        </div>
-       </div>
-      </section>
-      </div>
-      </div>
+<form [formGroup]="addStudentForm" method="post" *ngIf="addStudentForm">
+    <table align="center" cellpadding="10">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <tr>
+            <td>FIRST NAME :- </td>
+            <td>
+            <input type="text" class="form-control" formControlName="students_first_name" name="First_Name" placeholder="First Name" required/>
+            <small *ngIf="!isValid('students_first_name')" class="text-muted">Not enough characters</small>
+
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>LAST NAME :-</td>
+            <td>
+            <input type="text" class="form-control" formControlName="students_last_name" name="Last_Name" placeholder="Last Name" required/>
+            <small *ngIf="!isValid('students_last_name')" class="text-muted">Not enough Characters</small>
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>DATE OF BIRTH:-</td>
+            <td>
+            <dp-date-picker [(ngModel)]="selectedDate" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="students_date_of_birth" placeholder="Click Here to Enter DOB"
+            name="Birth_Day" required></dp-date-picker>
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>HOME ADDRESS :-
+            <br />
+            <br />
+            <br />
+            </td>
+            <td>
+            <textarea name="Address" formControlName="students_home_address" class="form-control" rows="8" cols="35" placeholder="Enter Student's Home Address Here"></textarea>
+            </td>
+            <td>
+            <small *ngIf="!isValid('students_home_address')" class="text-muted">Not Valid</small>
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>GENDER :-</td>
+            <td>
+            Male : <input type="radio" ng-required="true" value="male" formControlName="students_gender" required/> 
+            Female : <input type="radio" ng-required="true" value="female" formControlName="students_gender" required/>
+            </td>
+        </tr>
+        <br>
+
+
+
+        <tr>
+            <td colspan="2" align="center">
+                <button type="submit" class="btn btn-success" [disabled]="!addStudentForm.valid" (click)="savesearchStudent(addStudentForm.value)" >Submit</button>
+                <input type="reset" class="btn btn-danger" value="Reset">
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+<!-- (click)="savesearchStudent(addStudentForm.value)" -->

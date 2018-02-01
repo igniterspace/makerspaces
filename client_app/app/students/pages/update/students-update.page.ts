@@ -1,4 +1,4 @@
-import { Component, OnInit  }            from '@angular/core';
+import { Component, OnInit  }   from '@angular/core';
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 
 import { DpDatePickerModule }   from 'ng2-date-picker';
@@ -7,7 +7,7 @@ import 'rxjs';
 import { StudentsService }      from '../../../common/services/student.service';
 import { ListStudents }         from '../../../common/models/liststudents';
 import { Student }              from 'app/common/models/student';
-import { updateLocale } from 'moment';
+import { updateLocale }         from 'moment';
 
 @Component({
   templateUrl: './students-update.page.html', 
@@ -66,7 +66,7 @@ export class StudentsUpdatePage {
       });
   }
   
-
+//Send updated (edited) student details to the database..
   updateStudent(student_data : ListStudents) { 
     var edstudents = Object.assign(student_data , this.guardian);
     this.ss.editStudent(edstudents).subscribe(res => console.log(edstudents));
@@ -80,6 +80,8 @@ export class StudentsUpdatePage {
   }
 
   ngOnInit() {
+   
+//Show details recieved from the list in the form..
     this.ss.uStudent.subscribe( updatestudents => {
       let student_name = updatestudents.students_name;
       let name = student_name.split(" ");

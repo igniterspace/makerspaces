@@ -40,12 +40,12 @@ export class StudentsListPage {
     });
   }
 
-
+//Update (edit) student details..
   viewStudent(updatestudents) {
     this.ss.updateStudent(updatestudents);
 }
 
-
+//Get student details from the database and show on the list in the fronend..
   listAllStudents() {
     this.ss.listAllStudents().subscribe(res => {
       this.liststudents  = res.item;
@@ -54,6 +54,7 @@ export class StudentsListPage {
     });
   }
 
+//Delete student from the database when the delete button is clicked..  
   deleteStudent(deleteid : DeleteId){
     console.log('delete id: ',deleteid);
     alert('Do you want to remove this student?');
@@ -74,7 +75,9 @@ export class StudentsListPage {
  
  ngOnInit(): void {
 
+//Show student details in the list..
   this.listAllStudents();
+//Send student details from the list to update.page..  
   this.ss.newitems.subscribe( updatestudents => this.updatestudents = updatestudents)
  
 }
