@@ -60,6 +60,22 @@ function getOrderItemHistory(orderId, cb) {
   );
 }
 
+// get user ID
+function getuserID(user_email, cb) {
+  console.log(user_email);
+  connection.query(
+    'SELECT users.id FROM users WHERE users.email=? ',[ user_email ],
+    (err, results) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+      cb(null, results);
+      console.log(results);
+    }
+  );
+}
+
 // Get products names for dropdown
 function getProducts(cb) {
   connection.query(
@@ -79,10 +95,9 @@ function getProducts(cb) {
 /* Begin transaction */
 function submitOrder(order, cb) {
   connection.beginTransaction(function (err) {
-
     var date = new Date();
     if (err) { throw err; }
-    connection.query('INSERT INTO orders ( location_id, user_id, created_date ) VALUES (1, 1, "' + date + '")', function (err, result) {
+    connection.query('INSERT INTO orders ( location_id, user_id, created_date ) VALUES ('+order.oDetails[0].locationID+', '+order.oDetails[0].userID+', "' + date + '")', function (err, result) {
       if (err) {
         connection.rollback(function () {
           throw err;
@@ -90,12 +105,14 @@ function submitOrder(order, cb) {
       }
 
       var last_insert_order_id = result.insertId;
-      var order_length = order.length;
+      console.log(last_insert_order_id);
+      var order_length = order.items.length;
+      console.log(order_length);
       var order_item;
 
       for (var i = 0; i < order_length; i++) {
 
-        var o = order[i];
+        var o = order.items[i];
          console.log(i); 
         connection.query('INSERT INTO inventory_items ( note, quantity, unit_price, total_price ) VALUES ("' + o.note + '", ' + o.quantity + ', ' + o.unitprice + ', ' + o.quantity + ' * ' + o.unitprice + ')', function (err, result) {
           if (err) {
@@ -107,7 +124,7 @@ function submitOrder(order, cb) {
           var j = i-order_length-1; 
           var last_insert_item_id = result.insertId;
           console.log(j); 
-          connection.query('INSERT INTO product_inventory_items ( i_id, p_id ) VALUES (' + last_insert_item_id + ', ' +order[j].orderitem.product_id+' )', function (err, result) {
+          connection.query('INSERT INTO product_inventory_items ( i_id, p_id ) VALUES (' + last_insert_item_id + ', ' +order.items[j].orderitem.product_id+' )', function (err, result) {
             if (err) {
               connection.rollback(function () {
                 throw err;
@@ -139,7 +156,20 @@ function submitOrder(order, cb) {
 /* End transaction */
 
 
-
+function submitDate(shippingDate,cb) {
+  console.log('shippingDate.obj2', shippingDate.obj2, typeof shippingDate.obj2);
+  console.log('shippingDate.obj1', shippingDate.obj1, typeof shippingDate.obj1);
+  connection.query(
+   'UPDATE orders SET shipped = ("'+shippingDate.obj2+'") WHERE order_id =' + shippingDate.obj1,
+    (err, results) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+      cb(null, results);
+    }
+  );
+}
 
 
 
@@ -253,6 +283,8 @@ module.exports = {
   getOrderHistory     : getOrderHistory,
   getOrderItemHistory : getOrderItemHistory,
   getProducts         : getProducts,
-  submitOrder         : submitOrder
+  submitOrder         : submitOrder,
+  submitDate          : submitDate,
+  getuserID           : getuserID
 
 };

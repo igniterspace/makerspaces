@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OrdersEdit }        from 'app/common/models/orderedit';
-import { OrdersService }     from 'app/common/services/order.service';
-import { OrdersEditService } from 'app/common/services/order.service';
-import { clone}              from 'lodash';
+import { OrdersEdit }               from 'app/common/models/orderedit';
+import { Details }                  from 'app/common/models/orderedit';
+import { OrdersService }            from 'app/common/services/order.service';
+import { OrdersEditService }        from 'app/common/services/order.service';
+import { clone}                     from 'lodash';
 import { FormGroup , FormControl, FormBuilder, AbstractControl, ReactiveFormsModule , Validators, FormsModule } from '@angular/forms';
-
+import { Location }                 from '@angular/common';
+import { ContextService }           from '../../../common/services/context.service';
+import { AuthService }              from '../../../common/services/auth.service';
 
 @Component({
 
@@ -24,25 +27,33 @@ editOrderForm: boolean = false;
 editedOrder  : any = {};
 @Input()neworder : any ;
 
-productNames : any ;
+productNames    : any ;
 
 private orderEditService: OrdersEditService;
-private orders: OrdersEdit[];
-addOrderForm  : FormGroup;
+private orders  : OrdersEdit[];
+addOrderForm    : FormGroup;
 orderitem;
-note          : string; 
-quantity      : number;
-unitprice     : number;
-totalprice    : number;
-
-post: any;
-
+note            : string; 
+quantity        : number;
+unitprice       : number;
+totalprice      : number;
+private profile : any;
+userID          : any;
+user_email      : string;
+post            : any;
+oItems          : any ;
+currentLocationId : number;
+oDetails        : Details[] = [];
 
 selectedValue = null;
+private location = {};
+private locationId : number;
 
 constructor(private _orderService: OrdersEditService,
             private os           : OrdersService,
-            private fb           : FormBuilder) {
+            private fb           : FormBuilder,
+            private context      : ContextService,
+            private auth         : AuthService) {
 
             this.orderEditService = _orderService;
             this.addOrderForm     = new FormGroup({
@@ -64,17 +75,52 @@ constructor(private _orderService: OrdersEditService,
           }
 
           //Submit full order to database
-          submitOrder(oItems) {
-            this._orderService.submitOrder(oItems).subscribe(res => console.log("Success"));
+          submitOrder(oDetails) {
             
+            this.oDetails.push( 
+              new Details(this.currentLocationId, this.userID.item[0].id ));
+             console.log(this.oDetails);
+
+            this._orderService.submitOrder(this.oDetails).subscribe(res =>{
+              console.log("Success")  
+            });
+
+            location.reload();  
           }
+
+
+          // Get usee ID from database equals to user's email
+          getuserID(user_email) {
+            this.os.getuserID(user_email).subscribe(res => {
+              this.userID = res;
+              console.log("user id =", this.userID.item[0].id);
+            });
+          }
+
 
           ngOnInit() {
             this.getnewOrders();
             this.getProducts();
+
+          //Get current location ID
+           this.currentLocationId = this.context.getCurrentLocationId() ;
+           console.log( this.currentLocationId);
+
+          // Get current user e-mail
+           if (this.auth.userProfile) {
+            this.profile = this.auth.userProfile;
+          } else if(this.auth.isAuthenticated()){
+            this.auth.getProfile((err, profile) => {
+              this.profile = profile;
+              this.user_email = this.profile.email;
+              console.log(this.user_email);
+
+
+              this.getuserID(this.user_email);
+            });
           }
 
-
+          }
 
 
           getnewOrders() {

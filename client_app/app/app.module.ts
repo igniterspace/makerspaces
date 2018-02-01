@@ -22,7 +22,7 @@ import { Http, HttpModule,  RequestOptions }                  from '@angular/htt
 import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth }  from 'angular2-jwt';
 import { FormBuilder, FormGroup, Validators }                 from '@angular/forms';
 import { ReactiveFormsModule }                                from '@angular/forms';
-
+import { NgDatepickerModule }       from 'ng2-datepicker';
 
 import { HTTP_INTERCEPTORS }          from '@angular/common/http';
 import { HttpHeaderInterceptor }      from './common/services/http.interceptor';
@@ -57,7 +57,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserAnimationsModule,
     HttpModule,
     ReactiveFormsModule,
-    MyDatePickerModule
+    NgDatepickerModule
     
   ],
   providers: [

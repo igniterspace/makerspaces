@@ -77,7 +77,7 @@
                 <p>
                     <label>Order Item</label>
                     <select onmousedown="if(this.options.length>8){this.size=8;}"  onchange='this.size=0;' onblur="this.size=0;" formControlName ="orderitem" [(ngModel)]="newOrder.orderitem">
-                    <option *ngFor="let oi of productNames" [ngValue]="oi" > {{ oi.name }} ------------------------ {{oi.unit}}</option>
+                    <option *ngFor="let oi of productNames" [ngValue]="oi" > {{ oi.name }} / {{oi.unit}}</option>
                     
                     </select>
                 </p>
@@ -111,13 +111,6 @@
             <form *ngIf="editOrderForm">
                 <header class="panel-heading">Edit Order Details</header>
 
-                <!-- <p>
-                    <label>Order Item</label>
-                    <select name="orderitem" [(ngModel)]="editedOrder.orderitem" required>
-                        <option *ngFor="let oi of productNames" [ngValue]="oi">{{ oi.name }} ------------------------ {{oi.unit}}</option>
-        
-                    </select>
-                </p> -->
 
                 <p>
                     <label>Note</label>

@@ -9,3 +9,9 @@ export interface OrdersEdit {
     
 }
 
+export class Details {
+constructor (
+   public locationID : number,
+   public userID     : number
+){}
+}
