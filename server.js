@@ -78,8 +78,10 @@ app.use(express.static(path.join(__dirname, 'client_dist')));
 
 // Core API Client Routes
 app.use('/api/locations', require('./server_modules/locations/api'));
-app.use('/api/users', require('./server_modules/users/api'));
-app.use('/api/orders', require('./server_modules/orders/api'));
+app.use('/api/users',     require('./server_modules/users/api'));
+app.use('/api/orders',    require('./server_modules/orders/api'));
+app.use('/api/attendance',require('./server_modules/attendance/api'));
+
 
 app.use('/*', require('./server_views/controller'));
 

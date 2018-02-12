@@ -14,6 +14,7 @@ const database     = require('../server_lib/database');
 const makerspaces_model = require('./locations/model');
 const users_model       = require('./users/model');
 const orders_model      = require('./orders/model');
+const attendance_model  = require('./attendance/model');
 
 if (module === require.main) {
   const prompt = require('prompt');
@@ -47,7 +48,9 @@ if (module === require.main) {
         makerspaces_model.createSchema(result, () => {
           users_model.createSchema(result, ()=>{
             orders_model.createSchema(result, ()=>{
+              attendance_model.createSchema(result, ()=>{
               
+              });
             });
           });
         });

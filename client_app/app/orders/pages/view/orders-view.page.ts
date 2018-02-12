@@ -6,6 +6,7 @@ import { FormGroup , FormControl, FormBuilder, AbstractControl, ReactiveFormsMod
 import { DpDatePickerModule }       from 'ng2-date-picker';
 
 
+
 import 'rxjs/add/operator/map'
 import 'rxjs/Rx';
 
@@ -41,8 +42,10 @@ public myForm: FormGroup;
    
     console.log(shipping);
 
-  this.os.submitDate(shipping).subscribe(res => console.log("Success"));
-      shippingDate = '' ;
+  this.os.submitDate(shipping).subscribe(
+    res => console.log("Success"));
+        this.addDate.reset ();
+          // shippingDate = '' ;
     }
 
 

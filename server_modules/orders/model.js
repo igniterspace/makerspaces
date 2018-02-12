@@ -155,7 +155,7 @@ function submitOrder(order, cb) {
 }
 /* End transaction */
 
-
+// submit shipping date to the database
 function submitDate(shippingDate,cb) {
   console.log('shippingDate.obj2', shippingDate.obj2, typeof shippingDate.obj2);
   console.log('shippingDate.obj1', shippingDate.obj1, typeof shippingDate.obj1);

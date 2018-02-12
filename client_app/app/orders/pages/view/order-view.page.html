@@ -58,8 +58,16 @@
                        
                         <tr>
                             <form  [formGroup] = "addDate">
-                            <date-picker [(ngModel)]= "selectedDate" name="date" #picker  formControlName="selectedDate" ></date-picker>
-                            <button type="button" class="btn btn-primary" (click)="setShippingDate(addDate.value)">Submit</button>
+                                <dp-date-picker 
+                                    [(ngModel)]="selectedDate" 
+                                    [config]="datePickerConfig" 
+                                    [theme]="'dp-material'" 
+                                    formControlName="selectedDate" 
+                                    placeholder="Enter shipping date"
+                                    name="selectedDate" required>
+                                </dp-date-picker>
+
+                                <button type="button" class="btn btn-primary" (click)="setShippingDate(addDate.value)">Submit</button>
                             </form>
                         </tr>
                         </table>
@@ -84,3 +92,8 @@
         </section>
     </div>
 </div>
+
+<!-- <form  [formGroup] = "addDate">
+                            <date-picker [(ngModel)]= "selectedDate" name="date" #picker  formControlName="selectedDate" ></date-picker>
+                            <button type="button" class="btn btn-primary" (click)="setShippingDate(addDate.value)">Submit</button>
+                            </form> -->

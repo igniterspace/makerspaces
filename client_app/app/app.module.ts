@@ -1,7 +1,7 @@
 import { BrowserModule }            from '@angular/platform-browser';
 import { NgModule, ErrorHandler }   from '@angular/core';
 
-import { AppRoutingModule }         from './app.routes';
+import { AppRoutingModule  }        from './app.routes';
 import { MiscRoutingModule }        from './misc/misc.routes';
 
 import { AppComponent }             from './app.component';
@@ -15,6 +15,7 @@ import { LogoutPage }               from './misc/logout.page';
 
 import { StudentsModule }           from './students/students.module';
 import { OrdersModule }             from './orders/orders.module';
+import { AttendanceModule }         from './attendance/attendance.module';
 import { ContextService }           from './common/services/context.service';
 import { AuthService }              from './common/services/auth.service';
 
@@ -22,14 +23,16 @@ import { Http, HttpModule,  RequestOptions }                  from '@angular/htt
 import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth }  from 'angular2-jwt';
 import { FormBuilder, FormGroup, Validators }                 from '@angular/forms';
 import { ReactiveFormsModule }                                from '@angular/forms';
-import { NgDatepickerModule }       from 'ng2-datepicker';
+
 
 import { HTTP_INTERCEPTORS }          from '@angular/common/http';
 import { HttpHeaderInterceptor }      from './common/services/http.interceptor';
 import { AuthErrorHandler }           from './common/services/auth.errorHandler';
 import { BrowserAnimationsModule }    from '@angular/platform-browser/animations';
 
-import { MyDatePickerModule } from 'angular4-datepicker/src/my-date-picker/my-date-picker.module';
+//import { NgDatepickerModule }       from 'ng2-datepicker';
+import {NgSelectModule}             from '@ng-select/ng-select';
+
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -52,12 +55,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserModule,
     OrdersModule,
     StudentsModule,
+    AttendanceModule,
     AppRoutingModule,
     MiscRoutingModule,
     BrowserAnimationsModule,
     HttpModule,
     ReactiveFormsModule,
-    NgDatepickerModule
+    NgSelectModule
     
   ],
   providers: [

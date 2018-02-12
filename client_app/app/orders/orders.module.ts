@@ -9,13 +9,11 @@ import { OrdersAddPage }          from './pages/add/add-orders.page';
 import { OrdersEditService }      from '../common/services/order.service';
 import { OrdersService }          from '../common/services/order.service';
 import { ContextService }         from '../common/services/context.service';
-import { DatePickerModule } from "angular-io-datepicker/src/datepicker/index";
-import { OverlayModule } from "angular-io-overlay";
-
+import { DpDatePickerModule } from 'ng2-date-picker';
 
 
 @NgModule({
-  imports       : [ CommonModule, FormsModule, OrdersRoutingModule, ReactiveFormsModule, DatePickerModule, OverlayModule ],
+  imports       : [ CommonModule, FormsModule, OrdersRoutingModule, ReactiveFormsModule, DpDatePickerModule ],
   declarations  : [ OrdersListPage, OrderItemsViewPage, OrdersEditPage, OrdersAddPage],
   providers     : [ OrdersService, OrdersEditService]
 })

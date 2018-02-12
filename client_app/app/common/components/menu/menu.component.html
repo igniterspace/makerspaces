@@ -37,8 +37,8 @@
                         <span>Attendance</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="">Reports</a></li>
-                        <li><a  href="">Mark Attendance</a></li>
+                        <li><a  [routerLink]="['attendance/search']" queryParamshandling="merge">Mark Attendance</a></li>
+                        <li><a  [routerLink]="['attendance/view_lessons']" queryParamshandling="merge">View Attendance</a></li>
                     </ul>
                 </li>
     
