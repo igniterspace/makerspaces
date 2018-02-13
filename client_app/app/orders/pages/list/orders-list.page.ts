@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component }          from '@angular/core';
 // tslint:disable-next-line:import-spacing
 import { OrdersService }      from '../../../common/services/order.service';
 // tslint:disable-next-line:import-spacing
-import { Order }      from '../../../common/models/order';
+import { Order }              from '../../../common/models/order';
 
 @Component({
   templateUrl: './orders-list.page.html',
