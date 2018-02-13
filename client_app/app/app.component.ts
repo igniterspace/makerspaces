@@ -1,9 +1,12 @@
-import { Component }      from '@angular/core';
-import { User }           from './common/models/user';
-import { ContextService } from './common/services/context.service'
-import { AuthService }    from './common/services/auth.service';
-import { OrdersService }  from './common/services/order.service';
 
+import { Component } from '@angular/core';
+
+import { User } from './common/models/user';
+import { ContextService } from './common/services/context.service'
+import { AuthService } from './common/services/auth.service';
+import { FormGroup, FormBuilder } from '@angular/forms'
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { OrdersService }  from './common/services/order.service';
 
 @Component({
   selector    : 'app-root',
@@ -13,11 +16,16 @@ import { OrdersService }  from './common/services/order.service';
 })
 export class AppComponent {
   private user: User;
+  form: FormGroup;
 
-  constructor(private context: ContextService, public auth: AuthService) {
+  constructor(private context: ContextService, public auth: AuthService , private fb: FormBuilder) {
     auth.handleAuthentication();
   }
-
+ngOnInit(){
+  this.form = this.fb.group ({
+    date: ''
+  });
+}
   ngAfterViewInit() {
   }
 }

@@ -1,62 +1,58 @@
-import { Component } from '@angular/core';
-import { StudentsService } from '../../../common/services/student.service';
-import { Student } from '../../../common/models/student';
-import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule , Validators, FormsModule } from '@angular/forms';
-
-
+import { Component, OnInit }    from '@angular/core';
+import { StudentsService }      from '../../../common/services/student.service';
+import { Student }              from '../../../common/models/student';
+import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
+import { DpDatePickerModule }   from 'ng2-date-picker';
+import { StudentsService }      from '../../../common/services/student.service';
+import { ListStudents }         from '../../../common/models/liststudents';
+import { Student }              from 'app/common/models/student';
 
 @Component({
   templateUrl: './students-edit.page.html',
   styleUrls: ['./students-edit.page.css']
 })
 
-export class StudentsEditPage {
+export class StudentsEditPage implements OnInit {
   [x: string]: any;
 
-  private studentsService: StudentsService;
-  private students: Student[];
-  private addStudentForm: FormGroup;
+  private studentsService : StudentsService;
+  private addStudentForm  : FormGroup;
+  private student         : ListStudents[];
+  searchguardian : number;
+  post:any;
+  newStudent: any = {} ;
 
-  post: any;
+  students_first_name    : string;
+  students_last_name     : string;
+  students_date_of_birth : string;
+  students_home_address  : string;
+  students_gender        : string;
 
-  firstname: string;
-  lastname: string;
-  bday: string;
-  bmonth: string;
-  byear: string;
-  address: string;
 
-  constructor(private os: StudentsService,
+  editStudentForm: boolean = false;
+  isNewForm: boolean;
+
+  constructor(private ss: StudentsService,
               private formBuilder: FormBuilder) {
-    this.studentsService = os;
+    this.studentsService = ss;
 
     this.addStudentForm = formBuilder.group({
-      firstname: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      lastname: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      bday: [''],
-      bmonth: [''],
-      byear: [''],
-      address: [null, Validators.compose([Validators.required, Validators.minLength(10)])],
-      // gender:['']
 
+      students_first_name    : [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      students_last_name     : [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      students_date_of_birth : [''],
+      students_home_address  : [null, Validators.compose([Validators.required, Validators.minLength(10)])],
+      students_gender        : [''],
 
     });
   }
+  
 
-  getStudents(post) {
-     // this.studentsService.getStudents().then(students => this.students = students);
-    console.log(post);
-    this.firstname = post.firstname;
-    this.lastname = post.lastname;
-    this.bday = post.bday;
-    this.bmonth = post.bday;
-    this.byear = post.byear;
-    this.address = post.address;
+  ngOnInit() {
 
-  }
 
-  ngOnInit(): void {
-    // this.getStudents();
+//Get guardian id from guardian page (dropdown)..
+    this.ss.currentMessage.subscribe(guardian => this.guardian = guardian)
   }
 
   isValid(field: string) {
@@ -64,16 +60,19 @@ export class StudentsEditPage {
     return formField.valid || formField.pristine;
   }
 
-  saveProduct(product: Student) {
-    if (this.isNewForm) {
-   this.studentsService.addProduct(product);
-    }else {
 
-    }this.productForm = false;
+  //Assign guardian id to new student and send all the details to the database..
+  saveStudent(student : ListStudents) { 
+    var full_detail = Object.assign(student , this.guardian);
+    //console.log(full_detail);
+    this.ss.saveStudent(full_detail).subscribe(res => console.log(full_detail));
+    this.addStudentForm.reset();
   }
-  // nameValidator(control: FormControl): {[s: string]: boolean} {
-  //   if (!control.value.match("^[a-zA-Z '-]+$")) {
-  //     return {invalidName: true};
-  //   }
-  // }
+
+  nameValidator(control: FormControl): {[s: string]: boolean} {
+    if (!control.value.match("^[a-zA-Z '-]+$")) {
+      return {invalidName: true};
+    }
+  }
+
 }

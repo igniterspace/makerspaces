@@ -50,6 +50,7 @@ if (module === require.main) {
       '(3, \'google\', \'00002\', \'Harshana\', \'Wijesinghe\', \'harshanax@oki.lk\', \'\'),'  +
       '(4, \'google\', \'00003\', \'Hasith\', \'Yaggahavita\', \'hasith@gmail.com\', \'\');'  +
 
+
       'INSERT INTO orders(order_id, location_id, user_id, created_date, shipped) VALUES ' +
       '(1, 1, 1, \'2012-02-26 09:31:01\' , \'2013-02-28 08:30:00\' ),'+
       '(2, 3, 2, \'2016-01-14 05:52:02\' , \'2014-05-25 05:30:50\' ),'+
@@ -261,8 +262,65 @@ if (module === require.main) {
       '(8, 3),'+
       '(9, 2),'+                  
       '(10,6);'
+
       
-      ,
+
+      'INSERT INTO guardians(id, name, home_number, mobile_number, email_address) VALUES ' +
+      '(999,\'Kumudu Rathnayake\', \'0332222958\', \'0779158987\' ,  \'kumudu@igniterspace.com\'),'+
+      '(998,\'Hasith Yaggahavita\', \'0332221819\', \'0716624132\' ,  \'hasith@igniterspace.com\'),'+
+      '(997,\'Ananda Wijewickrama\', \'0332222917\', \'0710510274\' ,  \'anandaw@yahoo.com\'),'+
+      '(996,\'Chathura Senarathne\', \'0332228008\', \'0774636898\' ,  \'chathuras@igniterspace.com\');' +
+
+      'INSERT INTO students(id, first_name, last_name, date_of_birth, home_address, gender,g_id) VALUES ' +
+      '(001,\'Hasith\',\'Yaggahavita\', \'28-09-1979\' ,  \'287,Yakkala Rd,Gampaha\', \'male\', 999),'+
+      '(002,\'Jehan\',\'Wijesinghe\',\'05-09-1996\' , \'7, charles place,colombo\', \'male\', 998),'+
+      '(003,\'Achintha\',\'Wijewickrama\',\'06-11-1993\' ,  \'287,Yakkala Rd,Gampaha\', \'male\', 997),'+
+      '(004,\'Asitha\',\'Senarathne\',\'02-04-1992\' ,  \'12/2 Bandaranayake Rd, Katubadde\', \'male\', 996),'  +
+      '(005, \'Subha\',\'Wijesinghe\', \'08-09-1972\', \'No 10, Sri Bodhi Rd, Gampaha\',\'female\',996);' +
+
+      'INSERT INTO courses(id, name, year, from_date, to_date, day ) VALUES ' +
+      '(1,\'Level 1\',\'2017\', \'28-02-2017\' ,  \'28-08-2017\', \'Saturday\'),'+
+      '(2,\'Level 2\',\'2017/2018\',\'05-09-2017\' , \'05-03-2018\', \'Saturday\'),'+
+      '(3,\'Level 3\',\'2018\',\'06-01-2018\' ,  \'06-06-2018\', \'Saturday\'),'+
+      '(4,\'Level 4(Computing)\',\'2017\',\'02-04-2018\' ,\'02-10-2018\', \'Sunday\'),'  +
+      '(5,\'Level 1\',\'2016/2017\', \'08-09-2016\', \'08-03-2017\', \'Sunday\');' +
+
+      'INSERT INTO lessons(id, name, date) VALUES ' +
+      '(1,\'Golfer Bot\', \'28-02-2017\' ),'+
+      '(2,\'Touch Torch\',\'05-09-2017\'),'+
+      '(3,\'Night Light\',\'06-01-2018\'),'+
+      '(4,\'Music Box\',\'02-04-2018\'),'  +
+      '(5,\'Generator\', \'08-09-2016\');'+
+
+      'INSERT INTO lessons_in_course(c_id, l_id) VALUES ' +
+      '(1, 1),'+
+      '(1, 2),'+
+      '(2, 1),'+
+      '(3, 3),'+
+      '(3, 5),'+
+      '(4, 4),'+
+      '(5, 1),'+
+      '(5, 3);'+
+     
+      'INSERT INTO students_in_course(c_id, s_id) VALUES ' +
+      '(1, 1),'+
+      '(1, 2),'+
+      '(2, 1),'+
+      '(3, 3),'+
+      '(3, 5),'+
+      '(4, 4),'+
+      '(5, 1),'+
+      '(5, 3);'+
+
+      'INSERT INTO students_in_lesson(l_id, s_id) VALUES ' +
+      '(1, 1),'+
+      '(1, 2),'+
+      '(2, 1),'+
+      '(3, 3),'+
+      '(3, 5),'+
+      '(4, 4),'+
+      '(5, 1),'+
+      '(5, 3);',
 
       (err) => {
         if (err) {

@@ -8,8 +8,7 @@ import { AddOrder }           from '../../../common/models/addorder';
 })
 
 export class OrdersAddPage {
-
-
+  
   constructor(private os: OrdersService) {}
 
 
