@@ -1,92 +1,148 @@
 <div class="container">
-<header class="panel-heading">
-    Current Order...
-</header>
+    <header class="panel-heading">
+        Current Order...
+    </header>
 
-<div class="panel-body">
-    <div class="adv-table">
-        <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
+    <div class="panel-body">
+        <div class="adv-table">
+            <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
 
-            <table class="display table table-bordered dataTable-striped table-hover" id="hidden-table-info" aria-describedby="hidden-table-info_info">
-                <thead>
-                    <tr role="row">
+                <table class="display table table-bordered dataTable-striped table-hover" id="hidden-table-info" aria-describedby="hidden-table-info_info">
+                    <thead>
+                        <tr role="row">
 
-                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                            rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                            style="width: 187px;"><i class="fa fa-shopping-bag"></i>  Order Items</th>
+                            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                            aria-label="Rendering engine: activate to sort column descending" style="width: 50px;"> # </th>
 
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                            rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;"><i class="fa fa-newspaper-o"></i>  Description</th>
+                            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="Rendering engine: activate to sort column descending" style="width: 187px;">
+                                <i class="fa fa-shopping-bag"></i> Order Items</th>
 
-                        <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                            rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;"><i class="fa fa-cubes"></i>  Quantity</th>
+                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                style="width: 236px;">
+                                <i class="fa fa-newspaper-o"></i> Note</th>
 
-                        <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                            rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;"><i class="fa fa-money" aria-hidden="true"></i>  Unit Price</th>
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                style="width: 187px;">
+                                <i class="fa fa-bars"></i> Unit</th>
 
-                        <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                            rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;"><i class="fa fa-dollar"></i>  Total Price</th>
-                        <th class="hidden-phone sorting" class="text-center" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                            rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;"><i class="fa fa-pencil-square-o"></i>&nbsp;</th>
-                    
-                    </tr>
-                </thead>
-                <tbody> 
-                    <tr *ngFor="let order of neworders">
-                        <td>{{order.orderitem}}</td>
-                        <td>{{order.description}}</td>
-                        <td>{{order.quantity}}</td>
-                        <td>{{order.unitprice}}</td>
-                        <td>{{order.totalprice}}</td>
-                        <td><button class="btn btn-info" (click)="showEditOrderForm(order)"><i class="fa fa-edit"></i></button>
-                            <button class="btn btn-danger" (click)="removeOrder(order)"><i class="fa fa-minus"></i></button></td>
-                    </tr>
-                </tbody> 
-            </table>
-        </div>
+                            <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1"
+                                aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">
+                                <i class="fa fa-cubes"></i> Quantity</th>
 
-        <button class="btn btn-success" (click)="showAddOrderForm()"><i class="fa fa-plus"></i></button>
-        <br><br>
-        
-        <form *ngIf="orderForm">
+                            <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1"
+                                aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">
+                                <i class="fa fa-money" aria-hidden="true"></i> Unit Price</th>
+
+                            <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1"
+                                aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">
+                                <i class="fa fa-dollar"></i> Total Price</th>
+                            <th class="hidden-phone sorting" class="text-center" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1"
+                                colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">
+                                <i class="fa fa-pencil-square-o"></i>&nbsp;</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of neworders ; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{order.orderitem.product_id}} - {{order.orderitem.name}}</td>
+                            <td> {{order.orderitem.description}} / {{order.note}}</td>
+                            <td>{{order.orderitem.unit}}</td>
+                            <td>{{order.quantity}}</td>
+                            <td>{{order.unitprice}}</td>
+                            <td>{{order.quantity * order.unitprice}}</td>
+                            <td>
+                                <button class="btn btn-info" (click)="showEditOrderForm(order)">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger" (click)="removeOrder(order)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="btn btn-success" (click)="showAddOrderForm()">
+                <i class="fa fa-plus"></i>
+            </button>
+            <br>
+            <br>
+
+            <form method="POST" *ngIf="orderForm" [formGroup]="addOrderForm" (ngSubmit)="submitOrder(addOrderForm)" novalidate>
                 <header class="panel-heading">Add Order Details</header>
-           <p> <label>Order Item</label>
-                <input type ="text" name="oname" [(ngModel)]="newOrder.orderitem"/></p>
-            <p><label>Description</label>
-                <input type ="text" name="odes" [(ngModel)]="newOrder.description"/></p>
-            <p><label>Quantity</label>
-                <input type ="text" name="oqua" [(ngModel)]="newOrder.quantity"/></p>
-            <p><label>Unit Price</label>
-                <input type ="text" name="uprice" [(ngModel)]="newOrder.unitprice"/></p>
-            <p><label>Total Price</label>
-                <input type ="text" name="tprice" [(ngModel)]="newOrder.totalprice"/></p>
 
-            <p><button type="button" class="btn btn-primary" (click)="saveOrder(newOrder)">Submit</button>
-                <button type="button" class="btn btn-warning" (click)="cancelNewOrder()">Cancel</button>
+                <p>
+                    <label>Order Item</label>
+                    <select onmousedown="if(this.options.length>8){this.size=8;}"  onchange='this.size=0;' onblur="this.size=0;" formControlName ="orderitem" [(ngModel)]="newOrder.orderitem">
+                    <option *ngFor="let oi of productNames" [ngValue]="oi" > {{ oi.name }} ------------------------ {{oi.unit}}</option>
+                    
+                    </select>
+                </p>
+
+                <p>
+                    <label>Note</label>
+                    <input type="text" formControlName="note" [(ngModel)]="newOrder.note" required/>
+                </p>
+
+                <p>
+                    <label>Quantity</label>
+                    <input type="text" class="form-control" formControlName="quantity" [(ngModel)]="newOrder.quantity" required/>
+                </p>
+                
+
+                <p>
+                    <label>Unit Price</label>
+                    <input type="text" class="form-control" class="ng-dirty ng-touched ng-invalid" formControlName="unitprice" [(ngModel)]="newOrder.unitprice" required/>
+                </p>
+                
+
+                <p>
+                    <button type="button" class="btn btn-primary" (click)="saveOrder(newOrder)" [disabled] ="!addOrderForm.valid" >Add to Order</button>
+                    <button type="button" class="btn btn-warning" (click)="cancelNewOrder()">Cancel</button>
+                    <br>
+                
+
+            </form>
+
+
+            <form *ngIf="editOrderForm">
+                <header class="panel-heading">Edit Order Details</header>
+
+                <!-- <p>
+                    <label>Order Item</label>
+                    <select name="orderitem" [(ngModel)]="editedOrder.orderitem" required>
+                        <option *ngFor="let oi of productNames" [ngValue]="oi">{{ oi.name }} ------------------------ {{oi.unit}}</option>
+        
+                    </select>
+                </p> -->
+
+                <p>
+                    <label>Note</label>
+                    <input type="text" name="note" [(ngModel)]="editedOrder.note" required/>
+                </p>
+                <p>
+                    <label>Quantity</label>
+                    <input type="text" name="quantity" [(ngModel)]="editedOrder.quantity" required/>
+                </p>
+                <p>
+                    <label>Unit Price</label>
+                    <input type="text" name="unitprice" [(ngModel)]="editedOrder.unitprice" required/>
+                </p>
+
+                <p>
+                    <button type="button" class="btn btn-primary" (click)="updateOrder(editedOrder)">Submit</button>
+                    <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+                </p>
+
+            </form>
+
+            <p class="form-submit">
+                <input name="submit" type="submit" id="submit" class="submit btn btn-success" (click)="submitOrder()" value="Submit Order">
             </p>
 
-        </form>
-
-
-        <form *ngIf="editOrderForm">
-            <header class="panel-heading">Edit Order Details</header>
-       <p> <label>Order Item</label>
-            <input type ="text" name="oname" [(ngModel)]="editedOrder.orderitem"/></p>
-        <p> <label>Description</label>
-            <input type ="text" name="odes" [(ngModel)]="editedOrder.description"/></p>
-        <p> <label>Quantity</label>
-            <input type ="text" name="oqua" [(ngModel)]="editedOrder.quantity"/></p>
-        <p> <label>Unit Price</label>
-            <input type ="text" name="uprice" [(ngModel)]="editedOrder.unitprice"/></p>
-        <p> <label>Total Price</label>
-            <input type ="text" name="tprice" [(ngModel)]="editedOrder.totalprice"/></p>
-
-        <p> <button type="button" class="btn btn-primary" (click)="updateOrder(editedOrder)">Submit</button>
-            <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
-        </p>
-
-    </form>
-
+        </div>
     </div>
-</div>
 </div>

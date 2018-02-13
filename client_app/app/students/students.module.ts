@@ -19,8 +19,12 @@ import { StudentsUpdatePage }       from './pages/update/students-update.page';
 import { SearchedGuardianPage }     from './pages/searchguardian/students-searchguardian.page';
 
 @NgModule({
+
   imports:      [ CommonModule, FormsModule, StudentsRoutingModule,ReactiveFormsModule, HttpModule, BrowserModule, DpDatePickerModule,Ng2SearchPipeModule ],
   declarations: [ StudentsListPage, StudentsViewPage, StudentsEditPage, StudentsGuardianPage, StudentsGuardian_addPage, StudentsUpdatePage, SearchedGuardianPage ],
+
   providers:    [ StudentsService ]
 })
-export class StudentsModule { }
+export class StudentsModule {
+
+}

@@ -23,8 +23,7 @@ function listAllByOrganization (organization_id, cb) {
         return;
       }
       cb(null, results);
-    }
-  );
+    });
 }
 
 

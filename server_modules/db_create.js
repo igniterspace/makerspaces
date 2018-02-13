@@ -8,7 +8,7 @@
 'use strict';
 
 const databaseName = require('../server-config').get('DATABASE');
-const database = require('../server_lib/database');
+const database     = require('../server_lib/database');
 
 
 const makerspaces_model = require('./locations/model');
@@ -16,6 +16,7 @@ const users_model = require('./users/model');
 const orders_model = require('./orders/model');
 const students_model = require('./students/model');
 const courses_model = require('./courses/model');
+
 
 if (module === require.main) {
   const prompt = require('prompt');

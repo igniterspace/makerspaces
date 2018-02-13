@@ -1,11 +1,8 @@
-export interface OrdersEdit {
-
-    orderitem   : any;
+export class OrderView {
+    order_id    : number;
+    orderitem   : string;
     note        : string;
     quantity    : number;
-    unit        : string;
     unitprice   : number;
     totalprice  : number;
-    
 }
-

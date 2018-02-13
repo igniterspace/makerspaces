@@ -18,6 +18,7 @@ import { LogoutPage }               from './misc/logout.page';
 
 import { StudentsModule }           from './students/students.module';
 import { OrdersModule }             from './orders/orders.module';
+
 import { CoursesModule }            from './courses/courses.module';
 import { ContextService }           from './common/services/context.service'
 import { AuthService }              from './common/services/auth.service'
@@ -32,6 +33,9 @@ import { HttpHeaderInterceptor }          from './common/services/http.intercept
 import { AuthErrorHandler }               from './common/services/auth.errorHandler';
 import { BrowserAnimationsModule }        from '@angular/platform-browser/animations';
 
+
+
+import { MyDatePickerModule } from 'angular4-datepicker/src/my-date-picker/my-date-picker.module';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -63,6 +67,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ReactiveFormsModule,
     FormsModule,
     DpDatePickerModule,
+     MyDatePickerModule,
     Ng2SearchPipeModule
   ],
   exports: [
