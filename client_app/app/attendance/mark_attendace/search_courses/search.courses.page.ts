@@ -1,22 +1,23 @@
 import { Component , OnInit}  from '@angular/core';
 import { SelectModule }       from 'ng2-select';
 import { ButtonsModule }      from 'ngx-bootstrap';
-import { Selected }           from '../../../common/models/attendance.model'
+import { Selected }           from '../../../common/models/attendance.model';
 
 @Component({
-   templateUrl : './search.student.page.html',
-   styleUrls   : ['./search.student.page.css']
+   templateUrl : './search.courses.page.html',
+   styleUrls   : ['./search.courses.page.css']
 
  
 })
 
-export class StudentSearchPage {
+export class SearchCoursesPage {
 
-    private value:any = ['Athens'];
+    private value :any = ['Athens'];
     private _disabledV:string = '0';
     private disabled:boolean = false;
     private active : Array <Selected[]>;
-    private item : any ; 
+    private item : any ;
+    seachresultForm  : boolean = false; 
     
     private items:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
       'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
@@ -57,7 +58,12 @@ export class StudentSearchPage {
       }).join(',');
     }
 
+    // show results of the search
+    showseachresultForm(){
+      this.seachresultForm = true;
+    }
 
+    //get entered values of the search
     searchLessons(active){
         console.log(active);
 
@@ -65,10 +71,11 @@ export class StudentSearchPage {
     
     }
 
+    // clear search field
     clearModel() {
       this.active = [];
       this.item = [];
-  }
+    }
 
 
     // cities = [

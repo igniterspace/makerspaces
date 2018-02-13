@@ -89,13 +89,13 @@
 
                 <p>
                     <label>Quantity</label>
-                    <input type="text" class="form-control" formControlName="quantity" [(ngModel)]="newOrder.quantity" required/>
+                    <input type="number" class="form-control" formControlName="quantity" [(ngModel)]="newOrder.quantity" required/>
                 </p>
                 
 
                 <p>
                     <label>Unit Price</label>
-                    <input type="text" class="form-control" class="ng-dirty ng-touched ng-invalid" formControlName="unitprice" [(ngModel)]="newOrder.unitprice" required/>
+                    <input type="number" class="form-control" class="ng-dirty ng-touched ng-invalid" formControlName="unitprice" [(ngModel)]="newOrder.unitprice" required/>
                 </p>
                 
 
@@ -118,11 +118,11 @@
                 </p>
                 <p>
                     <label>Quantity</label>
-                    <input type="text" name="quantity" [(ngModel)]="editedOrder.quantity" required/>
+                    <input type="number" name="quantity" [(ngModel)]="editedOrder.quantity" required/>
                 </p>
                 <p>
                     <label>Unit Price</label>
-                    <input type="text" name="unitprice" [(ngModel)]="editedOrder.unitprice" required/>
+                    <input type="number" name="unitprice" [(ngModel)]="editedOrder.unitprice" required/>
                 </p>
 
                 <p>

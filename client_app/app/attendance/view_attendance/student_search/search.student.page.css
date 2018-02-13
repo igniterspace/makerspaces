@@ -272,7 +272,7 @@
 
   .multisearch {
     position: relative;
-    left: 350px;
+    left: 300px;
 
 }
 
@@ -280,4 +280,10 @@
   position: relative;
   left: 680px;
 
+}
+
+.sorting_asc {
+  margin-right: 30px;
+  padding  : 15px;
+  
 }

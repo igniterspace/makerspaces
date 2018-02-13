@@ -25,6 +25,7 @@ export class OrdersEditPage implements OnInit {
   newOrder      : any = {};
   editOrderForm : boolean = false;
   editedOrder   : any = {};
+  
   @Input() neworder: any;
 
   productNames: any;

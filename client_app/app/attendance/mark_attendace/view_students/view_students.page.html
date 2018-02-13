@@ -1,0 +1,47 @@
+<header class="panel-heading">
+    Student Attendance
+</header>
+<div class = "details">
+    Student ID : &nbsp;&nbsp;&nbsp;&nbsp;  Student Name : &nbsp;&nbsp;&nbsp;&nbsp;  Level : &nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<br><br>
+<div class="adv-table">
+    <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+        <table class="display table table-bordered dataTable" id="hidden-table-info" aria-describedby="hidden-table-info_info" style="width: 900px;">
+            <thead>
+                <tr role="row">
+
+                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                        aria-label="Rendering engine: activate to sort column descending" style="width: 75px; font-size: 10px">
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-folder" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Student ID</th>
+
+                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                        aria-label="Rendering engine: activate to sort column descending" style="width: 175px; font-size: 10px">
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-file-image-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; Student Name</th>
+
+                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                        style="width: 100px; font-size: 10px">
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp; Date of Birth</th>
+
+                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                        style="width: 100px; font-size: 10px">
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; Gender</th>
+
+                </tr>
+            </thead>
+
+            <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                <tr *ngFor="let i of orderview" class="odd">
+                    <td class=" "></td>
+                    <td class=" "><a [routerLink]="['attendance/search/students/:student_id']" (click) = "viewOrder(i.order_id)"> {{ i.order_id }} </a></td>
+                    <td class=" "></td>
+                    <td class=" "></td>
+                </tr>
+
+            </tbody>
+        </table>
+        <br><br><br><br><br><br>
+    </div>
+</div>
