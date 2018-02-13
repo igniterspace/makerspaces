@@ -58,7 +58,7 @@ export class StudentsGuardian_addPage {
     const email = this.addGuardianForm.controls['eaddress'].value.toLowerCase();
     this.ss.checkIfUserExists(true, false, email).takeWhile(() => this.alive).subscribe(res => {
 
-      console.log(res);
+     //console.log(res);
       if (res.item[0].isValid === true) {
         this.emailExists = true;
       }

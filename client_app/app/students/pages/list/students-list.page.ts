@@ -49,25 +49,25 @@ export class StudentsListPage {
   listAllStudents() {
     this.ss.listAllStudents().subscribe(res => {
       this.liststudents  = res.item;
-      console.log(this.liststudents[0].id);
-      console.log(res.item);
+      // console.log(this.liststudents[0].id);
+      // console.log(res.item);
     });
   }
 
 //Delete student from the database when the delete button is clicked..  
   deleteStudent(deleteid : DeleteId){
-    console.log('delete id: ',deleteid);
+    //console.log('delete id: ',deleteid);
     alert('Do you want to remove this student?');
     
     this.ss.deleteStudent(deleteid).subscribe(res=>console.log(res))
     var i;
-    console.log(this.liststudents[0].id);
-    console.log(this.liststudents.length);
+    // console.log(this.liststudents[0].id);
+    // console.log(this.liststudents.length);
 
     for ( i=0; i<this.liststudents.length; i++){
-      console.log(this.liststudents[i].id+' '+i+' '+deleteid);
+      //console.log(this.liststudents[i].id+' '+i+' '+deleteid);
       if(this.liststudents[i].id == deleteid){
-        console.log("del index:",i)
+        //console.log("del index:",i)
         this.liststudents.splice(i, 1);
       }
     }

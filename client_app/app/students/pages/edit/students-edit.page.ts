@@ -59,7 +59,7 @@ export class StudentsEditPage implements OnInit {
   //Assign guardian id to new student and send all the details to the database..
   saveStudent(student : ListStudents) { 
     var full_detail = Object.assign(student , this.guardian);
-    console.log(full_detail);
+    //console.log(full_detail);
     this.ss.saveStudent(full_detail).subscribe(res => console.log(full_detail));
     this.addStudentForm.reset();
   }

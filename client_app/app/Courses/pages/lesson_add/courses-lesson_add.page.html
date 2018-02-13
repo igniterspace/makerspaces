@@ -1,0 +1,38 @@
+<h3>CREATE A LESSON</h3>
+<br>
+
+<form [formGroup]="addLessonForm" method="post" *ngIf="addLessonForm">
+    <table align="center" cellpadding="10">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <tr>
+            <td>LESSON NAME :- </td>
+            <td>
+            <input type="text" class="form-control" formControlName="lesson_name" name="Lesson_Name" placeholder="Lesson Name" required/>
+            <!-- <small *ngIf="!isValid('lesson_name')" class="text-muted">Not enough characters</small> -->
+
+            </td>
+        </tr>
+        <br>
+        
+        
+        <tr>
+            <td>DATE:-</td>
+            <td>
+            <dp-date-picker [(ngModel)]="selectedDate" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="day" placeholder="Starting Date"
+            name="Day" required></dp-date-picker>
+                </td>
+        </tr>
+        <br>
+        
+        
+        <tr>
+            <td colspan="2" align="center">
+                <button type="submit" class="btn btn-success" [disabled]="!addLessonForm.valid" (click)="saveLesson(addLessonForm.value)" >Submit</button>
+                <input type="reset" class="btn btn-danger" value="Reset">
+            </td>
+        </tr>
+    </table>
+
+</form>
+

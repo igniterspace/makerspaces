@@ -47,19 +47,19 @@ export class StudentsGuardianPage implements OnInit {
   listAllGuardians() {
     this.ss.listAllGuardians().subscribe(res => {
       this.listguardians  = res.item;
-      console.log(res.item);
+      //console.log(res.item);
     });
   }
 
   assignGuardian(post){
-    console.log(post);
+    //console.log(post);
     this.guardians_name    = post.guardians_name;
   }
 
 //Send selected guardian id from the dropdown to the student form page..  
   saveassGuardian(as_guardian: number) {
     this.guardian = as_guardian ;
-    console.log(this.guardian);
+    //console.log(this.guardian);
     this.ss.changeMessage(this.guardian)
     this.ss.currentMessage.subscribe(guardian => this.guardian = guardian)
   } 
@@ -67,16 +67,16 @@ export class StudentsGuardianPage implements OnInit {
 //Send selected guardian id from the searched guardian list to the student form page..  
   savesearchGuardian(search_guardian: number) {
     this.searchguardian = search_guardian ;
-    console.log(this.searchguardian);
+    //console.log(this.searchguardian);
     this.ss.newMessage(this.searchguardian)
     this.ss.searchguar.subscribe(searchguardian => this.searchguardian = searchguardian)
   } 
 
 //Get searched guardian details to show in the frontend..  
   similarGuardian(search) {
-    console.log(search);
+    //console.log(search);
     this.ss.similarGuardian(search).subscribe(res => {this.search_res = res.item;
-    console.log(this.search_res);
+    //console.log(this.search_res);
   });  
 }
 

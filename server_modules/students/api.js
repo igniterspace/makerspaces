@@ -68,7 +68,7 @@ router.get('/getallstudents', (req, res, next) => {
 //Send student details to the database..
 router.post('/addStudent', (req, res, next) => {
   var student = req.body;
-  console.log(student);
+  //console.log(student);
   model.addStudents(student, (err, results) => {
 
     if (err) {
@@ -83,7 +83,7 @@ router.post('/addStudent', (req, res, next) => {
 //Edit Student information..
 router.post('/updateStudent', (req, res, next) => {
   var edstudent = req.body;
-  console.log('updated details:', edstudent);
+  //console.log('updated details:', edstudent);
   model.getEditStudent(edstudent, (err, results) => {
     if (err) {
       throw err;
@@ -139,7 +139,7 @@ router.get('/deleteStudent/:studentid', (req, res, next) => {
 //Search guardians..
 router.get('/search/:search', (req, res, next) => {
   var detail = req.params.search;
-  console.log(detail);
+  //console.log(detail);
   model.searchGuardian(detail, (err, results) => {
     if (err) {
       throw err;

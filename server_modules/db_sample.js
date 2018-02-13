@@ -90,7 +90,51 @@ if (module === require.main) {
       '(002,\'Jehan\',\'Wijesinghe\',\'05-09-1996\' , \'7, charles place,colombo\', \'male\', 998),'+
       '(003,\'Achintha\',\'Wijewickrama\',\'06-11-1993\' ,  \'287,Yakkala Rd,Gampaha\', \'male\', 997),'+
       '(004,\'Asitha\',\'Senarathne\',\'02-04-1992\' ,  \'12/2 Bandaranayake Rd, Katubadde\', \'male\', 996),'  +
-      '(005, \'Subha\',\'Wijesinghe\', \'08-09-1972\', \'No 10, Sri Bodhi Rd, Gampaha\',\'female\',996);',
+      '(005, \'Subha\',\'Wijesinghe\', \'08-09-1972\', \'No 10, Sri Bodhi Rd, Gampaha\',\'female\',996);' +
+
+      'INSERT INTO courses(id, name, year, from_date, to_date, day ) VALUES ' +
+      '(1,\'Level 1\',\'2017\', \'28-02-2017\' ,  \'28-08-2017\', \'Saturday\'),'+
+      '(2,\'Level 2\',\'2017/2018\',\'05-09-2017\' , \'05-03-2018\', \'Saturday\'),'+
+      '(3,\'Level 3\',\'2018\',\'06-01-2018\' ,  \'06-06-2018\', \'Saturday\'),'+
+      '(4,\'Level 4(Computing)\',\'2017\',\'02-04-2018\' ,\'02-10-2018\', \'Sunday\'),'  +
+      '(5,\'Level 1\',\'2016/2017\', \'08-09-2016\', \'08-03-2017\', \'Sunday\');' +
+
+      'INSERT INTO lessons(id, name, date) VALUES ' +
+      '(1,\'Golfer Bot\', \'28-02-2017\' ),'+
+      '(2,\'Touch Torch\',\'05-09-2017\'),'+
+      '(3,\'Night Light\',\'06-01-2018\'),'+
+      '(4,\'Music Box\',\'02-04-2018\'),'  +
+      '(5,\'Generator\', \'08-09-2016\');'+
+
+      'INSERT INTO lessons_in_course(c_id, l_id) VALUES ' +
+      '(1, 1),'+
+      '(1, 2),'+
+      '(2, 1),'+
+      '(3, 3),'+
+      '(3, 5),'+
+      '(4, 4),'+
+      '(5, 1),'+
+      '(5, 3);'+
+     
+      'INSERT INTO students_in_course(c_id, s_id) VALUES ' +
+      '(1, 1),'+
+      '(1, 2),'+
+      '(2, 1),'+
+      '(3, 3),'+
+      '(3, 5),'+
+      '(4, 4),'+
+      '(5, 1),'+
+      '(5, 3);'+
+
+      'INSERT INTO students_in_lesson(l_id, s_id) VALUES ' +
+      '(1, 1),'+
+      '(1, 2),'+
+      '(2, 1),'+
+      '(3, 3),'+
+      '(3, 5),'+
+      '(4, 4),'+
+      '(5, 1),'+
+      '(5, 3);',
 
       (err) => {
         if (err) {

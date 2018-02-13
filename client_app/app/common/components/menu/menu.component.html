@@ -45,9 +45,11 @@
                 <li class="sub-menu"  [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.classes }" >
                     <a href="javascript:;" >
                         <i class="fa fa-calendar-o"></i>
-                        <span>Classes</span>
+                        <span>Courses</span>
                     </a>
                     <ul class="sub">
+                            <li><a [routerLink]="['courses']" queryParamsHandling="merge">Add Course</a></li>
+                            <li><a [routerLink]="['courses/list']" queryParamsHandling="merge">List Courses</a></li>
                     </ul>
                 </li>
                 <!--multi level menu start-->

@@ -66,7 +66,7 @@ function addStudents(student, res) {
         
 //Query to update student details..        
 function getEditStudent(edstudent, res) {
-    console.log('edstudent : ', edstudent);
+    //console.log('edstudent : ', edstudent);
         connection.query(`UPDATE students SET first_name =  '${edstudent.students_first_name}', last_name = '${edstudent.students_last_name}', date_of_birth = '${edstudent.students_date_of_birth}', home_address = '${edstudent.students_home_address}', gender = '${edstudent.students_gender}' WHERE  id = ${edstudent.students_id}`,
         (err, res) => {
             if (err) {
@@ -95,7 +95,7 @@ function assignGuardians(assguar, res) {
 
 //Query to Delete student from the list and from the database..    
 function deleteStudent(delid, cb) {
-    console.log('delete id in model: ' , delid);
+    //console.log('delete id in model: ' , delid);
     connection.query(
         'DELETE FROM students WHERE id ='+ delid ,
         (err, results) => {
@@ -109,7 +109,7 @@ function deleteStudent(delid, cb) {
 
 //Query to Search Guardians..
 function searchGuardian (detail, cb) {
-    console.log('detail: ', '%' + detail +'%'); 
+    //console.log('detail: ', '%' + detail +'%'); 
     connection.query(`SELECT * FROM guardians WHERE id LIKE '%${detail}%' OR name LIKE '%${detail}%' OR home_number LIKE '%${detail}%' OR mobile_number LIKE '%${detail}%' OR email_address LIKE '%${detail}%'`, function (err, res){
            if (err) {
            throw err;

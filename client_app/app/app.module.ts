@@ -18,6 +18,7 @@ import { LogoutPage }               from './misc/logout.page';
 
 import { StudentsModule }           from './students/students.module';
 import { OrdersModule }             from './orders/orders.module';
+import { CoursesModule }            from './courses/courses.module';
 import { ContextService }           from './common/services/context.service'
 import { AuthService }              from './common/services/auth.service'
 
@@ -54,6 +55,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserModule,
     OrdersModule,
     StudentsModule,
+    CoursesModule,
     AppRoutingModule,
     MiscRoutingModule,
     BrowserAnimationsModule,
