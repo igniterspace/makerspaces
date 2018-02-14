@@ -1,0 +1,57 @@
+<header class="panel-heading">
+    Mark Student Attendance...
+</header>
+<div class = "details">
+    Lesson ID : &nbsp;&nbsp;&nbsp;&nbsp;  Lesson name : &nbsp;&nbsp;&nbsp;&nbsp;  Level :    &nbsp;&nbsp;&nbsp;&nbsp;  Lesson scheduled date : 
+</div>
+<br><br>
+
+<p>Search</p>
+<input type="text" name="search" placeholder="Search.." [(ngModel)]="search">
+<button type="submit" class="btn btn-info" (click)="similarGuardian(search)" (click) ="showTable()">Search</button>
+
+<br><br>
+
+<div class="adv-table">
+    <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+        <table class="display table table-bordered dataTable" id="hidden-table-info" aria-describedby="hidden-table-info_info" style="width: 900px;">
+            <thead>
+                <tr role="row">
+
+                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                        aria-label="Rendering engine: activate to sort column descending" style="width: 100px; font-size: 10px">
+                        <i class="fa fa-address-card" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Student ID</th>
+
+                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                        aria-label="Rendering engine: activate to sort column descending" style="width: 187px; font-size: 10px">
+                        <i class="fa fa-child" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Student Name</th>
+
+                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                        style="width: 100px; font-size: 10px">
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; Mark attendance</th>
+
+
+                </tr>
+            </thead>
+
+            <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                <tr *ngFor="let i of orderview" class="odd">
+                    <td class=" "> </td>
+                    <td class=" ">
+                        <a [routerLink]="['../:student_id']" queryParamsHandling="merge" (click)="studentAttendance(  )"> </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-info" (click)="markStudentAttendance()">
+                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                            Mark attendance
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+</div>

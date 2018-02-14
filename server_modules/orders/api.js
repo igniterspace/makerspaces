@@ -22,7 +22,7 @@ function getModel() {
   return require(`./model`);
 }
 
-const router      = express.Router();
+const router   = express.Router();
 
 // Automatically parse request body as JSON
 router.use(bodyParser.json());
@@ -60,6 +60,7 @@ router.get('/orderitemhistory/:orderID', (req, res, next) => {
   });
 });
 
+
 //get product names of the items
 router.get('/productsnames', (req, res, next) => {
   model.getProducts((err, results) => {
@@ -75,10 +76,26 @@ router.get('/productsnames', (req, res, next) => {
 });
 
 
+//Get userID
+router.get('/userID/:user_email', (req, res, next) => {
+  var userEmail = req.params.user_email;
+  console.log(userEmail);
+  model.getuserID( userEmail , (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
+
 // Insert orders into database
 router.post('/submitorders', (req, res, next) => {
   var order = req.body;
-  console.log(order);
+  //console.log(order);
   model.submitOrder(order, (err, results) => {
     if (err) {
       throw err;
@@ -93,9 +110,22 @@ router.post('/submitorders', (req, res, next) => {
 
 
 
-/**
- * Errors on "/api/<module>/*" routes.
- */
+// Insert shipping date into database
+router.post('/submitdate', (req, res, next) => {
+  var shippingDate = req.body;  
+  console.log(shippingDate);
+  model.submitDate( shippingDate, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+
 router.use((err, req, res, next) => {
   // Format error and forward to generic error handler for logging and
   // responding to the request

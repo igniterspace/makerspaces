@@ -21,18 +21,24 @@ import { findIndex }      from 'lodash';
 
 export class OrdersService {
 
-  orderID : number ;
+  orderID     : number ;
+  shipping    : any;
+  user_email  : string ;
+  useremail   : string;
 
   private orderitems = new BehaviorSubject <any>(null);
           newitems   = this.orderitems.asObservable();
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
+
+
   private ordersUrl;  // URL to web api
 
   constructor(private http: Http, private context: ContextService) {
     const locationId = this.context.getCurrentLocation().id;
     this.ordersUrl = environment.apiUrl + '/api/location/' + locationId + '/orders';
   }
+
 
 // For get order history to order history
 
@@ -48,6 +54,7 @@ export class OrdersService {
 
   changeOrderItems(orderview) {
     this.orderitems.next(orderview)
+    console.log(orderview);
   }
 
   //get product names to orders edit page select option
@@ -55,15 +62,25 @@ export class OrdersService {
     return this.http.get('http://localhost:8080/api/orders/productsnames').map(res =>res.json());
   }
 
-   
+  // submit shipped date to the database
+  submitDate(shipping) {
+    console.log(shipping);
+    return this.http.post('http://localhost:8080/api/orders/submitdate', shipping).map(res =>res.json());
+  }
+
+  // get user id from database
+  getuserID(user_email) {
+    console.log(user_email);
+    return this.http.get('http://localhost:8080/api/orders/userID/'+ user_email ).map(res =>res.json());
+  }
+
+
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 }
-
-
 
 
 
@@ -76,9 +93,16 @@ export class OrdersEditService {
   }
 
 
-  submitOrder(oItems){
-    return this.http.post('http://localhost:8080/api/orders/submitorders',this.oItems).map(res =>res.json());
+  submitOrder(oDetails){
 
+    console.log(oDetails);
+    console.log(this.oItems);
+    var items = this.oItems;
+
+    var full = Object.assign({oDetails} , {items} );
+    console.log(full);
+
+    return this.http.post('http://localhost:8080/api/orders/submitorders',full).map(res =>res.json());
   }
 
   getOrdersFromData(): OrdersEdit[] {
@@ -106,9 +130,7 @@ export class OrdersEditService {
     console.log(this.oItems);
   }
 
-  // deleteRows(oItems : OrdersEdit[]){
-  //   this.oItems = [] ;
-  // }
+  
 }
 
 

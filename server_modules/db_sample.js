@@ -48,7 +48,8 @@ if (module === require.main) {
       '(1, \'google\', \'00001\', \'Hasith\', \'Yaggahavita\', \'hasith@igniterspace.com\', \'\'),' +
       '(2, \'google\', \'00002\', \'Jehan\', \'Wijesinghe\', \'jehan@igniterspace.com\', \'\'),'  +
       '(3, \'google\', \'00002\', \'Harshana\', \'Wijesinghe\', \'harshanax@oki.lk\', \'\'),'  +
-      '(4, \'google\', \'00003\', \'Hasith\', \'Yaggahavita\', \'hasith@gmail.com\', \'\');'  +
+      '(4, \'google\', \'00003\', \'Hasith\', \'Yaggahavita\', \'hasith@gmail.com\', \'\'),'  +
+      '(5, \'google\', \'00004\', \'Asitha\', \'Senarathne\', \'asithas@igniterspace.com\', \'\');'  +
 
 
       'INSERT INTO orders(order_id, location_id, user_id, created_date, shipped) VALUES ' +

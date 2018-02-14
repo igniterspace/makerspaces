@@ -1,11 +1,9 @@
 import { BrowserModule }            from '@angular/platform-browser';
 import { NgModule, ErrorHandler }   from '@angular/core';
-
-
-import { AppRoutingModule }         from './app.routes';
+import { AppRoutingModule  }        from './app.routes';
 import { MiscRoutingModule }        from './misc/misc.routes';
 import { DpDatePickerModule }       from 'ng2-date-picker';
-import { Ng2SearchPipeModule }      from 'ng2-search-filter';
+//import { Ng2SearchPipeModule }      from 'ng2-search-filter';
 
 import { AppComponent }             from './app.component';
 import { MenuComponent }            from './common/components/menu/menu.component';
@@ -15,10 +13,9 @@ import { DashboardPage }            from './dashboard/dashboard.page';
 import { NotFoundPage }             from './misc/notfound.page';
 import { CallbackPage }             from './misc/callback/callback.page';
 import { LogoutPage }               from './misc/logout.page';
-
 import { StudentsModule }           from './students/students.module';
 import { OrdersModule }             from './orders/orders.module';
-
+import { AttendanceModule }         from './attendance/attendance.module';
 import { CoursesModule }            from './courses/courses.module';
 import { ContextService }           from './common/services/context.service'
 import { AuthService }              from './common/services/auth.service'
@@ -35,7 +32,9 @@ import { BrowserAnimationsModule }        from '@angular/platform-browser/animat
 
 
 
-import { MyDatePickerModule } from 'angular4-datepicker/src/my-date-picker/my-date-picker.module';
+//import { NgDatepickerModule }       from 'ng2-datepicker';
+import {NgSelectModule}             from '@ng-select/ng-select';
+
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -59,16 +58,16 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserModule,
     OrdersModule,
     StudentsModule,
+    AttendanceModule,
     CoursesModule,
     AppRoutingModule,
     MiscRoutingModule,
     BrowserAnimationsModule,
     HttpModule,
     ReactiveFormsModule,
+    NgSelectModule,
     FormsModule,
-    DpDatePickerModule,
-     MyDatePickerModule,
-    Ng2SearchPipeModule
+    DpDatePickerModule
   ],
   exports: [
     AppComponent

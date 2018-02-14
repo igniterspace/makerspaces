@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-13">
         <section class="panel">
             <header class="panel-heading">
                 Order Items History
             </header>
-            
+            <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="all">
            
 
             <div class="panel-body" *ngFor="let x of orderview  | slice:0:1; let i=index" class="odd">
@@ -51,22 +51,30 @@
                                 </tr>
 
                             </tbody>
-                        </table>
-
+                        <br><br><br>
                         
-                        <!-- <form [formGroup]="myForm" novalidate>
-                            <my-date-picker name="mydate" 
-                                formControlName="myDate"></my-date-picker>
+                        <label>Add shipping date  :</label>
+                       
+                        <tr>
+                            <form  [formGroup] = "addDate">
+                                <dp-date-picker 
+                                    [(ngModel)]="selectedDate" 
+                                    [config]="datePickerConfig" 
+                                    [theme]="'dp-material'" 
+                                    formControlName="selectedDate" 
+                                    placeholder="Enter shipping date"
+                                    name="selectedDate" required>
+                                </dp-date-picker>
 
-                            <button type="button" class="btn btn-primary" (click)="submitDate(sDate)">Submit Date</button>
-                         
-                        </form>
-                     -->
-
+                                <button type="button" class="btn btn-primary" (click)="setShippingDate(addDate.value)">Submit</button>
+                            </form>
+                        </tr>
+                        </table>
+                        <br><br><br><br><br><br><br><br><br><br><br><br><br>
                     </div>
-
                 </div>
             </div>
         </section>
     </div>
 </div>
+

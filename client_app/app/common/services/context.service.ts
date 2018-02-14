@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { User } from '../models/user';
-import { Browser } from '../models/browser';
+import { Injectable }    from '@angular/core';
+import { User }          from '../models/user';
+import { Browser }       from '../models/browser';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { environment } from '../../../environments/environment';
-import { AuthHttp } from 'angular2-jwt';
+import { environment }   from '../../../environments/environment';
+import { AuthHttp }      from 'angular2-jwt';
 
 @Injectable()
 export class ContextService {

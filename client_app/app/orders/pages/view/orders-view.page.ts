@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,ViewChild } from '@angular/core';
 import { OrdersService }            from '../../../common/services/order.service';
 import { OrderView }                from '../../../common/models/orderview';
 import { promise }                  from 'selenium-webdriver';
-import {IMyDpOptions, IMyDateModel} from 'angular4-datepicker/src/my-date-picker/interfaces';
 import { FormGroup , FormControl, FormBuilder, AbstractControl, ReactiveFormsModule , Validators, FormsModule } from '@angular/forms';
+import { DpDatePickerModule }       from 'ng2-date-picker';
+
+
 
 import 'rxjs/add/operator/map'
 import 'rxjs/Rx';
@@ -19,44 +21,40 @@ export class OrderItemsViewPage {
   
   private orderview     : OrderView[];
   private newitems      : any ;
-
-  public myDatePickerOptions: IMyDpOptions = {
-    dateFormat: 'dd.mm.yyyy',
-};
+  date: Date = new Date();
+  private addDate: FormGroup;
 
 public myForm: FormGroup;
+  constructor(private os: OrdersService, private formBuilder: FormBuilder) {
 
-  constructor(private os: OrdersService, private formBuilder: FormBuilder) {}
+    this.addDate = formBuilder.group({
+     
+      selectedDate :new FormControl()
 
+    });
+  }
 
-  
+   setShippingDate(shippingDate : any) {
+     
+    var obj1 = this.orderview[0].order_id ;
+    var obj2 = shippingDate.selectedDate._d ;
+    var shipping = Object.assign( {obj1}, {obj2} );
+   
+    console.log(shipping);
+
+  this.os.submitDate(shipping).subscribe(
+    res => console.log("Success"));
+        this.addDate.reset ();
+          // shippingDate = '' ;
+    }
 
 
   ngOnInit() {
+    
     this.os.newitems.subscribe(orderview => this.orderview = orderview)
-
-
-  //   this.myForm = this.formBuilder.group({
-
-  //     myDate: [null, Validators.required]
-  // });
+    console.log(this.orderview);
     
   }
 
-//   setDate(): void {
-   
-//     let date = new Date();
-//     this.myForm.patchValue({myDate: {
-//     date: {
-//         year: date.getFullYear(),
-//         month: date.getMonth() + 1,
-//         day: date.getDate()}
-//     }});
-// }
-
-// clearDate(): void {
-    
-//     this.myForm.patchValue({myDate: null});
-// }
 
 }

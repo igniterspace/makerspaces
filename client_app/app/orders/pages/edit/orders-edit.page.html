@@ -77,7 +77,7 @@
                 <p>
                     <label>Order Item</label>
                     <select onmousedown="if(this.options.length>8){this.size=8;}"  onchange='this.size=0;' onblur="this.size=0;" formControlName ="orderitem" [(ngModel)]="newOrder.orderitem">
-                    <option *ngFor="let oi of productNames" [ngValue]="oi" > {{ oi.name }} ------------------------ {{oi.unit}}</option>
+                    <option *ngFor="let oi of productNames" [ngValue]="oi" > {{ oi.name }} / {{oi.unit}}</option>
                     
                     </select>
                 </p>
@@ -89,13 +89,13 @@
 
                 <p>
                     <label>Quantity</label>
-                    <input type="text" class="form-control" formControlName="quantity" [(ngModel)]="newOrder.quantity" required/>
+                    <input type="number" class="form-control" formControlName="quantity" [(ngModel)]="newOrder.quantity" required/>
                 </p>
                 
 
                 <p>
                     <label>Unit Price</label>
-                    <input type="text" class="form-control" class="ng-dirty ng-touched ng-invalid" formControlName="unitprice" [(ngModel)]="newOrder.unitprice" required/>
+                    <input type="number" class="form-control" class="ng-dirty ng-touched ng-invalid" formControlName="unitprice" [(ngModel)]="newOrder.unitprice" required/>
                 </p>
                 
 
@@ -111,13 +111,6 @@
             <form *ngIf="editOrderForm">
                 <header class="panel-heading">Edit Order Details</header>
 
-                <!-- <p>
-                    <label>Order Item</label>
-                    <select name="orderitem" [(ngModel)]="editedOrder.orderitem" required>
-                        <option *ngFor="let oi of productNames" [ngValue]="oi">{{ oi.name }} ------------------------ {{oi.unit}}</option>
-        
-                    </select>
-                </p> -->
 
                 <p>
                     <label>Note</label>
@@ -125,11 +118,11 @@
                 </p>
                 <p>
                     <label>Quantity</label>
-                    <input type="text" name="quantity" [(ngModel)]="editedOrder.quantity" required/>
+                    <input type="number" name="quantity" [(ngModel)]="editedOrder.quantity" required/>
                 </p>
                 <p>
                     <label>Unit Price</label>
-                    <input type="text" name="unitprice" [(ngModel)]="editedOrder.unitprice" required/>
+                    <input type="number" name="unitprice" [(ngModel)]="editedOrder.unitprice" required/>
                 </p>
 
                 <p>

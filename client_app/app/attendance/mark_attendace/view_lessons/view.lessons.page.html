@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-sm-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Lessons
+            </header>
+            <div class="panel-body">
+                <div class="adv-table">
+                    <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+                        <table class="display table table-bordered dataTable" id="hidden-table-info" aria-describedby="hidden-table-info_info">
+                            <thead>
+                                <tr role="row">
+
+                                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                        style="width: 187px; font-size: 10px" >&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<i class="fa fa-shopping-bag"></i>
+                                        &nbsp;&nbsp;&nbsp; 
+                                         Lesson Name
+                                        </th>
+                                        
+                                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                        style="width: 187px; font-size: 10px">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<i class="fa fa-user-circle" aria-hidden="true"></i>
+                                        &nbsp;&nbsp;&nbsp; 
+                                        Scheduled Date
+                                    </th>
+
+                                    <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" 
+                                        style="width: 187px; font-size: 10px">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o" aria-hidden="true"></i> 
+                                        &nbsp;&nbsp;&nbsp; 
+                                        Attendance
+                                    </th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                    
+                                    <tr *ngFor="let i of orderhistory" class="odd">
+                                        <td class=" ">  </td>
+                                        <td class=" ">  </td>
+                                        <td><a [routerLink]="['attendance/search/:lesson_id']" queryParamsHandling="merge" (click)="markAttendance(  )">
+                                            <button class="btn btn-info" >
+                                                <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                                View Lesson Attendance
+                                            </button></a>
+                                        </td>
+
+                                    </tr>
+                                    
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

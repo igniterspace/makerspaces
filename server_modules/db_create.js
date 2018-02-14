@@ -16,6 +16,7 @@ const users_model = require('./users/model');
 const orders_model = require('./orders/model');
 const students_model = require('./students/model');
 const courses_model = require('./courses/model');
+const attendance_model  = require('./attendance/model');
 
 
 if (module === require.main) {
@@ -50,9 +51,11 @@ if (module === require.main) {
         makerspaces_model.createSchema(result, () => {
           users_model.createSchema(result, ()=>{
             orders_model.createSchema(result, ()=>{
-             students_model.createSchema(result, ()=>{
-              courses_model.createSchema(result, ()=>{
-                
+              attendance_model.createSchema(result, ()=>{
+                students_model.createSchema(result, ()=>{
+                  courses_model.createSchema(result, ()=>{
+              
+                });              
                });
              });
             });
