@@ -42,21 +42,22 @@
         
         <tr>
             <td>DAY :-</td>
-            <!-- <td>
-            Saturday : <input type="radio" ng-required="true" value="saturday" formControlName="course_day" required/> 
-            Sunday : <input type="radio" ng-required="true" value="sunday" formControlName="course_day" required/>
-            </td> -->
             <td>
-                <select value="course_day" formControlName="course_day">
+                <div>
+                <select value="course_day" formControlName="course_day" method="post" class="selectpicker show-menu-arrow">
+                <optgroup label="Week Days">
                     <option value="monday">Monday</option>
                     <option value="teusday">Teusday</option>
                     <option value="wednesday">Wednesday</option>
                     <option value="thursday">Thursday</option>
                     <option value="friday">Friday</option>
+                </optgroup>
+                <optgroup label="Weekend Days">
                     <option value="saturday">Saturday</option>
                     <option value="sunday">Sunday</option>
-                    
+                </optgroup>    
                   </select>
+                </div>
             </td>
         </tr>
         <br>

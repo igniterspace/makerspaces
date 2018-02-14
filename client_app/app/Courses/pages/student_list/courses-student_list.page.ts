@@ -17,7 +17,7 @@ export class CourseStudentListPage {
   
 
   private coursesService : CoursesService;
-  private liststudents    = [] ;
+  private liststudents   : ListStudent ;
   private student_data    : any;
   courses_name           : string;
   courses_id             : number;
@@ -26,42 +26,23 @@ export class CourseStudentListPage {
   c_id : any;
   private moreDetails : any ;
   student:any;
+  selectstu: any;
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
   validateDelete: boolean;
 
   ListAllStudents : FormGroup ; 
-  
-
-  selectedStudentForm = new FormGroup({
-    courses_id            :  new FormControl(this.c_id),
-    courses_name          :  new FormControl(this.courses_name),
-    student_id            :  new FormControl(this.student_id),
-    student_name          :  new FormControl(this.student_name),
-  }); 
-
 
   constructor(private cs: CoursesService,private formBuilder: FormBuilder) {
     
   }
-  
-
-  getStudents() {
-    this.cs.getStudents().subscribe(res => {
-      this.liststudents  = res.item;
-      console.log(this.liststudents[0].id);
-      console.log(res.item);
-    });
-  }
-
 
  
 ngOnInit(): void {
-  this.cs.selectstudent.subscribe(student => this.student = student)
-  this.getStudents();
-
-
+ 
+//Shoe student details in the list..
+this.cs.selectstudent.subscribe(selectstu => this.selectstu = selectstu)
 
 }
 

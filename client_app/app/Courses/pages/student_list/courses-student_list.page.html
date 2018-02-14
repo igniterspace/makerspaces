@@ -27,7 +27,7 @@
       
        <tbody role="alert" aria-live="polite" aria-relevant="all">
       
-         <tr class="odd" *ngFor="let s of liststudents">
+         <tr class="odd" *ngFor="let s of selectstu">
                                              
           <td class="">{{ s.s_id }} </td>
           <td class="">{{ s.students_name }}</td>
@@ -52,6 +52,13 @@
       
     </div>
    </div>
+   
   </section>
   </div>
   </div>
+  <!-- <table [formGroup]="ListallStudents" method="post">
+      <select formControlName="students_name">
+        <option value="" disabled selected>Select your student...</option>
+        <option *ngFor="let s of liststudents" [value]="s.s_id"> {{ s.students_name }} </option>
+      </select>
+   </table> -->

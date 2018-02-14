@@ -24,23 +24,11 @@ function listAllCourses(cb) {
       });
 }
 
-//Query to get students from courses from the databes to show in the frontend..
-// function getAllCourseStudents(coId,cb) {
-//     connection.query(
-//       'SELECT students_in_course.c_id AS c_id, students_in_course.s_id AS s_id, CONCAT (students.first_name," ",students.last_name) AS students_name FROM students_in_course LEFT OUTER JOIN students ON (students_in_course.s_id = students.id) WHERE c_id=?', [coId],
-//       (err, results) => {
-//         if (err) {
-//           cb(err);
-//           return;
-//         }
-//         cb(null, results);
-//       }
-//     );
-//   }
 
-function getAllCourseStudents(cb) {
+//Query to get students from courses from the databes to show in the frontend..
+function getAllCourseStudents(c_id,cb) {
   connection.query(
-    'SELECT students_in_course.c_id AS c_id, students_in_course.s_id AS s_id, CONCAT (students.first_name," ",students.last_name) AS students_name FROM students_in_course LEFT OUTER JOIN students ON (students_in_course.s_id = students.id)',
+    'SELECT students_in_course.c_id AS c_id, students_in_course.s_id AS s_id, CONCAT (students.first_name," ",students.last_name) AS students_name FROM students_in_course LEFT OUTER JOIN students ON (students_in_course.s_id = students.id) WHERE c_id=? ', [c_id],
     (err, results) => {
       if (err) {
         cb(err);
@@ -51,10 +39,11 @@ function getAllCourseStudents(cb) {
   );
 }
 
+
 //Query to get lessons from courses from the databes to show in the frontend..  
-function getAllCourseLessons(cb) {
+function getAllCourseLessons(c_id,cb) {
     connection.query(
-        'SELECT lessons_in_course.c_id AS c_id, lessons_in_course.l_id AS l_id, lessons.name AS lesson_name FROM lessons_in_course LEFT OUTER JOIN lessons ON (lessons_in_course.l_id = lessons.id) WHERE c_id=?', 
+        'SELECT lessons_in_course.c_id AS c_id, lessons_in_course.l_id AS l_id, lessons.name AS lesson_name, lessons.date AS lesson_date FROM lessons_in_course LEFT OUTER JOIN lessons ON (lessons_in_course.l_id = lessons.id) WHERE c_id= ?',[c_id],
         (err, results) => {
             if (err) {
                 cb(err);
@@ -65,12 +54,27 @@ function getAllCourseLessons(cb) {
   }
 
 
+//Query to get student names to show on the dropdown..  
+  function listAllStudents(cb) {
+    connection.query(
+        'SELECT DISTINCT students.id AS students_id, CONCAT (students.first_name," ",students.last_name) AS students_name FROM students', 
+        (err, results) => {
+            if (err) {
+                cb(err);
+                return;
+            }
+            cb(null, results);
+        });
+}
+
+
 //Query to Send course details to the database..         
 function addCourse(course, res) {
     connection.query('INSERT INTO `courses` (name, year, from_date, to_date , day  ) VALUES ("'+ course.course_name+'", "'+ course.course_year+'","'+ course.from_day+'", "'+ course.to_day+'" , "'+ course.course_day+'" )' , function (err, resp) {
             if (err) throw err;
               });
         };
+
 
 //Query to Send lesson details to the database..         
 function addLesson(lesson, res) {
@@ -79,6 +83,7 @@ function addLesson(lesson, res) {
               });
         };
 
+        
 //Create the database..
 function createSchema(config, cb) {
   const connection = database.createMultipleStatementConnection(config);
