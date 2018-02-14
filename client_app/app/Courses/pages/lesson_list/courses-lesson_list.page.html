@@ -32,24 +32,21 @@
       
        <tbody role="alert" aria-live="polite" aria-relevant="all">
       
-         <tr class="odd" *ngFor="let l of listlessons">
+         <tr class="odd" *ngFor="let l of selectles">
                                              
-          <td class="">{{ l.lessons_id }} </td>
-          <td class="">{{ l.lessons_name }}</td>
-          <td class="">{{ l.lessons_date }}</td>
+          <td class="">{{ l.l_id }} </td>
+          <td class="">{{ l.lesson_name }}</td>
+          <td class="">{{ l.lesson_date }}</td>
         </tr>
-          
-        <tr>
-        <td class=""> 
-            <a href="" [routerLink]="['./lesson_add']" queryParamshandling="merge">Add a New Lesson</a>
-          </td>
-        
-        </tr> 
-  
-        
        </tbody>
      </table>
   
+     <h4>
+        <div>
+           <a href="" [routerLink]="['./lesson_add']" queryParamshandling="merge">Click here to Add a New Lesson</a>
+         </div>
+       </h4>
+
      <div class="row-fluid">
        <div class="span6">
          <div class="dataTables_info" id="hidden-table-info_info">All Lessons for this Course is shown here!</div>

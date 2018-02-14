@@ -20,11 +20,13 @@ export class CoursesListPage {
   private selectcour     : ListCourses;
   private course         : ListCourses[];
   private ListLesson     : ListCourses;
-  private selectstu      : ListStudent;
+  //private selectstu      : ListStudent;
   c_Id : any;
   private moreDetails : any ;
   private liststudents : any;
   private student : number ;
+  selectles: any;
+  selectstu: any;
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
@@ -37,30 +39,42 @@ export class CoursesListPage {
   }
 
 
+//Get the specific students of a course to this component..  
+viewStudent(courses_id: number) {
+  //console.log(courses_id)
+    this.cs.getStudents(courses_id).subscribe(res => {
+    this.selectstu = res.item;
+    this.cs.selStudent(this.selectstu)
+    this.cs.selectstudent.subscribe( selectstu=> this.selectstu = selectstu)
+  });
+} 
 
-//Get student details from the database and show on the list in the fronend..
+
+//Get Course details from the database and show on the list in the fronend..
 listAllCourses() {
     this.cs.listAllCourses().subscribe(res => {
       this.listcourses  = res.item;
-      console.log(this.listcourses[0].id);
-      console.log(res.item);
+      //console.log(res.item);
     });
   }
 
-  getasStudents(as_student: number) {
-    this.student = as_student ;
-    console.log(this.student);
-    this.cs.selstudent(this.student)
-    this.cs.selectstudent.subscribe(student => this.student = student)
+  
+//Get the specific lessons of a course to this component..  
+  viewLessons(courses_id: number) {
+    //console.log(courses_id)
+      this.cs.getlessons(courses_id).subscribe(res => {
+      this.selectles = res.item;
+      this.cs.sellesson(this.selectles)
+      this.cs.selectlesson.subscribe( selectles=> this.selectles = selectles)
+    });
   } 
+  
   
 ngOnInit(): void {
 
 //Show course details in the list..
   this.listAllCourses();
-  //this.getStudents();
-  this.cs.selectcourse.subscribe( selectcour => this.selectcour = selectcour);
-  //this.cs.selectstudent.subscribe( selectstu => this.selectstu = selectstu);
+ 
 }
 
 }

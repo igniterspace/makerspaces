@@ -14,7 +14,7 @@ import { CourseStudentListPage }            from './pages/student_list/courses-s
       { path: 'courses/list', component: CoursesListPage },
       { path: 'courses/list/lesson_list/:c.courses_id', component: LessonsListPage },
       //{ path: 'courses/list/information/:c.courses_id', component: CoursesInformationPage },
-      { path: 'courses/lesson_add', component: LessonsAddPage },
+      { path: 'courses/list/lesson_list/:c.courses_id/lesson_add', component: LessonsAddPage },
       { path: 'courses/list/student_list/:c.courses_id', component: CourseStudentListPage },
     ])],
     exports: [RouterModule]

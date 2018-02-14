@@ -19,6 +19,8 @@ export class LessonsListPage {
   private listlessons    = [] ;
   //private selectcour     : ListCourses;
   private lesson         : ListLesson[];
+    selectles: any;
+
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
@@ -30,24 +32,12 @@ export class LessonsListPage {
     
   }
 
-
-
-//Get student details from the database and show on the list in the fronend..
-listAllLessons() {
-    this.cs.listAllLessons().subscribe(res => {
-      this.listlessons  = res.item;
-      console.log(this.listlessons[0].id);
-      console.log(res.item);
-    });
-  }
-
-
  
-ngOnInit(): void {
+ngOnInit() {
 
-//Show course details in the list..
-  this.listAllLessons();
-  //this.cs.selectcourse.subscribe( selectcour => this.selectcour = selectcour);
+//Shoe lesson details in the list..
+this.cs.selectlesson.subscribe(selectles => this.selectles = selectles)
+    
 }
 
 }

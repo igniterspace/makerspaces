@@ -44,7 +44,7 @@ export class StudentsService {
 
 
   newMessage(searchguardian: any) {
-    console.log(searchguardian);
+    //console.log(searchguardian);
     this.sGuardian.next(searchguardian)
   }
 
@@ -100,7 +100,7 @@ export class StudentsService {
   }
 
   similarGuardian(search) {
-    console.log(search);
+    //console.log(search);
     return this.http.get('http://localhost:8080/api/students/search/'+ search).map(res => res.json());
   }
 
@@ -118,7 +118,7 @@ private handleError(error: any): Promise<any> {
   
 addProduct(product:ListStudents){
     this.pItems.push(product);
-    console.log(this.pItems);
+    //console.log(this.pItems);
   }
 }
 

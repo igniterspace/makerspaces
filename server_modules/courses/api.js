@@ -25,7 +25,6 @@ function getModel () {
   return require('./model');
 }
 
-//const router = express.Router();
 
 // Automatically parse request body as JSON
 router.use(bodyParser.json());
@@ -43,25 +42,11 @@ router.get('/getallcourses', (req, res, next) => {
 });
 
 
-//Get details of all students of the course to the frontend..
-// router.get('/getallcoursestudents', (req, res, next) => {
-//   //var coId = req.params.c_id;
-//   model.getAllCourseStudents((err, results) => {
-//    console.log(results);
-//     if (err) {
-//       throw err;
-//       console.log(err);
-//     }
-//     res.json({
-//       item: results
-      
-//     });
-//   });
-// });
-
-router.get('/getallcoursestudents', (req, res, next) => {
- // var coId = req.params.c_id;
-  model.getAllCourseStudents((err, results) => {
+//Get list of all students of the course to the frontend..
+router.get('/getallcoursestudents/:courses_id', (req, res, next) => {
+  var c_id = req.params.courses_id;
+  console.log("value_students:",c_id);  
+  model.getAllCourseStudents(c_id,(err, results) => {
     if (err) {
       throw err;
     }
@@ -71,9 +56,10 @@ router.get('/getallcoursestudents', (req, res, next) => {
   });
 });
 
-//Get lesson details to show on the list (frontend)..
-router.get('/getalllessons', (req, res, next) => {
-  model.listAllLessons((err, results) => {
+
+//get all students to show on the dropdown..
+router.get('/listallstudents', (req, res, next) => {
+  model.listAllStudents((err, results) => {
     if (err) {
       throw err;
     }
@@ -82,6 +68,21 @@ router.get('/getalllessons', (req, res, next) => {
     });
   });
 });
+
+//Get lesson list to show on the list (frontend)..
+router.get('/getallcourselessons/:courses_id', (req, res, next) => {
+   var c_id = req.params.courses_id;
+   console.log("value_lessons:",c_id);
+   model.getAllCourseLessons(c_id,(err, results) => {
+     if (err) {
+       throw err;
+     }
+     res.json({
+       item: results
+     });
+   });
+ });
+
 
 //Send Course details to the database..
 router.post('/addcourse', (req, res, next) => {
@@ -97,6 +98,7 @@ router.post('/addcourse', (req, res, next) => {
   });
 });
 
+
 //Insert a lesson to the database..
 router.post('/addlesson', (req, res, next) => {
   var lesson = req.body;
@@ -111,17 +113,5 @@ router.post('/addlesson', (req, res, next) => {
   });
 });
 
-/**
- * Errors on "/api/<module>/*" routes.
- */
-router.use(function (err, req, res, next) {
-  // Format error and forward to generic error handler for logging and
-  // responding to the request
-  err.response = {
-    message: err.message,
-    internalCode: err.code
-  };
-  next(err);
-});
 
 module.exports = router;

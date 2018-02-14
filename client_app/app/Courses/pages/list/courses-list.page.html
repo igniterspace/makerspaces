@@ -50,10 +50,7 @@
               style="width: 120px;">Lessons
               </th>
 
-              <!-- <th class="" role="columnheader" tabindex="0"
-              aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-              style="width: 120px;">
-              </th> -->
+             
       
              </tr>
             </thead>
@@ -70,11 +67,11 @@
               <td class="">{{ c.courses_day }}</td>
               
               <td class=""> 
-                <a href="" [routerLink]="['./student_list',c.courses_id ]" queryParamshandling="merge" (click)= "getasStudents(c.courses_id)">Show Students</a>
+                <a href="" [routerLink]="['./student_list',c.courses_id ]" queryParamshandling="merge" (click)="viewStudent(c.courses_id)">Show Students</a>
               </td>
             
               <td class=""> 
-                <a href="" [routerLink]="['./lesson_list',c.courses_id ]" queryParamshandling="merge">Lessons</a>
+                <a href="" [routerLink]="['./lesson_list',c.courses_id ]"  queryParamshandling="merge" (click)="viewLessons(c.courses_id)">Lessons</a>
               </td>
 
               <!-- <td class=""> 
@@ -102,3 +99,8 @@
       </section>
       </div>
       </div>
+
+       <!-- <th class="" role="columnheader" tabindex="0"
+              aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
+              style="width: 120px;">
+              </th> -->

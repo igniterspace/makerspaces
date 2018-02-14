@@ -37,18 +37,18 @@ selectedCourseForm = new FormGroup({
 ngOnInit() {
   
 //Show details recieved from the list in the form..
-   this.cs.sCourse.subscribe( selectcour => {
+   //this.cs.sCourse.subscribe( selectcour => {
     
     
-     this.course_data = selectcour;
-     let courses_name = selectcour.courses_name;
-console.log(this.courses_name);
-     this.selectedCourseForm.patchValue({
-      courses_id              : selectcour.course_id,
-       course_name      : selectcour.courses_name,
+//      this.course_data = selectcour;
+//      let courses_name = selectcour.courses_name;
+// console.log(this.courses_name);
+//      this.selectedCourseForm.patchValue({
+//       courses_id              : selectcour.course_id,
+//        course_name      : selectcour.courses_name,
       
-     });
-   })   
+//      });
+//    })   
  }
 
 }

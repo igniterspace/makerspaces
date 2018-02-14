@@ -27,36 +27,27 @@ export class CoursesService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private studentsUrl;  // URL to web api
 
-  public sCourse  = new BehaviorSubject<any>(null);
-  selectcourse = this.sCourse.asObservable();
-
   public sLesson  = new BehaviorSubject<any>(null);
   selectlesson = this.sLesson.asObservable();
 
-  public cStudent  = new BehaviorSubject<any>(null);
-  selectstudent = this.cStudent.asObservable();
+  public sStudent  = new BehaviorSubject<any>(null);
+  selectstudent = this.sStudent.asObservable();
 
   constructor(private http: Http, private context: ContextService, private authHttp: AuthHttp) { 
     let locationId = this.context.getCurrentLocation().id;
     this.studentsUrl = environment.apiUrl + '/api/location/' + locationId + '/students' ;
   }
 
-  selstudent(selectstu: any) {
-    console.log(selectstu);
-    this.cStudent.next(selectstu)
-  } 
-
-  newMessage(selectcour: any) {
-    console.log(selectcour);
-    this.sCourse.next(selectcour)
+  selStudent(selectstu:any) {
+    //console.log(selectstu);
+    this.sStudent.next(selectstu)
   }
 
   sellesson(selectles: any) {
-    console.log(selectles);
-    this.sCourse.next(selectles)
+    //console.log(selectles);
+    this.sLesson.next(selectles)
   }
 
-   
 
   getAuthService(params): Observable<any> {
     return this.http.get(`${this.authService}${params}`, this.options)
@@ -77,17 +68,17 @@ export class CoursesService {
     return this.http.get('http://localhost:8080/api/courses/getallcourses').map(res=>res.json());
   }
 
-  listAllLessons(){
-    return this.http.get('http://localhost:8080/api/courses/getalllessons').map(res=>res.json());
+  getStudents(courses_id){
+    return this.http.get('http://localhost:8080/api/courses/getallcoursestudents/'+ courses_id).map(res=>res.json());
   }
 
-  // getStudents(c_Id){
-  //   return this.http.get(`http://localhost:8080/api/courses/getallcoursestudents/${c_Id}`).map(res=>res.json());
+  getlessons(courses_id){
+    return this.http.get('http://localhost:8080/api/courses/getallcourselessons/'+courses_id).map(res=>res.json());
+  }
+
+  // listAllStudents(){
+  //   return this.http.get('http://localhost:8080/api/students/listallstudents').map(res=>res.json());
   // }
-
-  getStudents(){
-    return this.http.get('http://localhost:8080/api/courses/getallcoursestudents').map(res=>res.json());
-  }
 
   saveCourse(course_details) {
     return this.http.post('http://localhost:8080/api/courses/addcourse', course_details).map(res => res.json());
@@ -105,18 +96,6 @@ private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
 }
   
-// addProduct(product:ListStudents){
-//     this.pItems.push(product);
-//     console.log(this.pItems);
-//   }
-// }
 
-
-// export class ContextGuardian {
-//   private location: number;
-
-// constructor(private http: Http, private authHttp: AuthHttp) {
-//   this.location = parseInt(window['guardianId']);
-//   }
  }
 
