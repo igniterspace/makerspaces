@@ -9,6 +9,7 @@ import { Location }                 from '@angular/common';
 import { ContextService }           from '../../../common/services/context.service';
 import { AuthService }              from '../../../common/services/auth.service';
 
+
 @Component({
 
   moduleId: module.id,

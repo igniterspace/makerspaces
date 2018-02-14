@@ -13,11 +13,11 @@ const connection = database.createConnection();
 
 function listAllByOrganization (organization_id, cb) {
   connection.query(
-    'select distinct users.* from organizations ' + 
-    'inner join locations on (organizations.id = locations.organization_id) ' + 
-    'inner join permissions on (permissions.location_id=locations.id) ' + 
+    'select distinct users.* from organizations ' +
+    'inner join locations on (organizations.id = locations.organization_id) ' +
+    'inner join permissions on (permissions.location_id=locations.id) ' +
     'inner join users on (permissions.user_id=users.id) where organizations.id=?', [organization_id],
-    (err, results) => {
+    function (err, results) {
       if (err) {
         cb(err);
         return;
@@ -29,7 +29,7 @@ function listAllByOrganization (organization_id, cb) {
 
 function readByEmail (email, cb) {
   connection.query(
-    'select * from users where email=?', email, (err, results) => {
+    'select * from users where email=?', email, function (err, results){
       if (!err && !results.length) {
         err = {
           code: 404,
@@ -41,7 +41,7 @@ function readByEmail (email, cb) {
         return;
       }
       // create a composite user object
-      let user = {
+      var user = {
         id: results[0].id,
         auth_provider: results[0].auth_provider,
         auth_ref: results[0].auth_ref,
@@ -58,13 +58,13 @@ function readByEmail (email, cb) {
 
 function create (data, cb) {
   if (!data.email) {
-    err = {
+    var err = {
       code: 422,
       message: 'Unprocessable entity'
     };
     cb(err);
   }
-  connection.query('INSERT INTO `users` SET ?', data, (err, res) => {
+  connection.query('INSERT INTO `users` SET ?', data, function(err, res) {
     if (err) {
       cb(err);
       return;
@@ -76,7 +76,7 @@ function create (data, cb) {
 
 function updateByEmail (email, data, cb) {
   connection.query(
-    'UPDATE `users` SET ? WHERE `email` = ?', [data, email], (err) => {
+    'UPDATE `users` SET ? WHERE `email` = ?', [data, email], function (err) {
       if (err) {
         cb(err);
         return;
@@ -91,17 +91,9 @@ function createSchema (config, cb) {
 
   connection.query(
 
-    `CREATE TABLE IF NOT EXISTS \`users\` (
-      \`id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-      \`auth_provider\` VARCHAR(255) NULL,
-      \`auth_ref\` VARCHAR(255) NULL,
-      \`given_name\` VARCHAR(255) NULL,
-      \`family_name\` VARCHAR(255) NULL,
-      \`email\` VARCHAR(255) NULL,
-      \`profile_image\` VARCHAR(255) NULL,
-    PRIMARY KEY (\`id\`)) ENGINE=INNODB;` ,
+    'CREATE TABLE IF NOT EXISTS users ( id INT UNSIGNED NOT NULL AUTO_INCREMENT,auth_provider VARCHAR(255) NULL,auth_ref VARCHAR(255) NULL,given_name VARCHAR(255) NULL,family_name VARCHAR(255) NULL,email VARCHAR(255) NULL,profile_image VARCHAR(255) NULL,PRIMARY KEY (id)) ENGINE=INNODB;' ,
 
-    (err) => {
+    function (err) {
       if (err) {
         throw err;
       }

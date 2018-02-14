@@ -1,0 +1,66 @@
+<h3>UPDATE STUDENT FORM</h3>
+<br>
+
+<form [formGroup]="updateStudentForm" method="post"  action="http://localhost:8080/students/add/s.id" *ngIf="updateStudentForm">
+    <table align="center" cellpadding="10">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <tr>
+            <td>FIRST NAME :- </td>
+            <td>
+            
+                <input type="text" class="form-control" formControlName="students_first_name"  [(ngModel)]="fname" placeholder="First Name" value="fname" required/>
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>LAST NAME :-</td>
+            <td>
+            <input type="text" class="form-control" formControlName="students_last_name" [(ngModel)]="lname" placeholder="Last Name" value="lname" required/>
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>DATE OF BIRTH:-</td>
+            <td>
+            <dp-date-picker [(ngModel)]="student_data.date_of_birth" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="students_date_of_birth" placeholder="Click Here to Enter DOB"
+            name="Birth_Day" value="student_data.date_of_birth" required></dp-date-picker>
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>HOME ADDRESS :-
+            <br />
+            <br />
+            <br />
+            </td>
+            <td>
+            <textarea name="Address" formControlName="students_home_address" [(ngModel)]="student_data.home_address" class="form-control" rows="8" cols="35" placeholder="Enter Student's Home Address Here" value="student_data.students_home_address"></textarea>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>GENDER :-</td>
+            <td>
+            Male : <input type="radio" ng-required="true" value="male" formControlName="students_gender" required/> 
+            Female : <input type="radio" ng-required="true" value="female" formControlName="students_gender" required/>
+            </td>
+        </tr>
+        <br>
+
+
+
+        <tr>
+            <td colspan="2" align="center">
+                <button type="submit" class="btn btn-success" (click)="updateStudent(updateStudentForm.value)">Update</button>
+                <input type="reset" class="btn btn-danger" value="Reset">
+            </td>
+        </tr>
+    </table>
+
+</form>
+

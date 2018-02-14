@@ -1,0 +1,73 @@
+<h3>CREATE A NEW COURSE</h3>
+<br>
+
+<form [formGroup]="addCourseForm" method="post" *ngIf="addCourseForm">
+    <table align="center" cellpadding="10">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <tr>
+            <td>COURSE NAME :- </td>
+            <td>
+            <input type="text" class="form-control" formControlName="course_name" name="Course_Name" placeholder="Course Name" required/>
+            <small *ngIf="!isValid('course_name')" class="text-muted">Not enough characters</small>
+
+            </td>
+        </tr>
+        <br>
+        
+        <tr>
+            <td>YEAR :-</td>
+            <td>
+            <input type="text" class="form-control" formControlName="course_year" name="Year" placeholder="Course Year" required/>
+            <small *ngIf="!isValid('course_year')" class="text-muted">Not enough Characters</small>
+            </td>
+        </tr>
+        <br>
+        
+        <tr>
+            <td>DURATION OF THE COURSE:-</td>
+            <td>From :-
+            
+                <dp-date-picker [(ngModel)]="fromDate" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="from_day" placeholder="Starting Date"
+            name="From_Day" required></dp-date-picker>
+            
+            To :-
+            
+                <dp-date-picker [(ngModel)]="toDate" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="to_day" placeholder="Ending Date"
+                name="To_Day" required></dp-date-picker>
+                </td>
+        </tr>
+        <br>
+        
+        
+        <tr>
+            <td>DAY :-</td>
+            <!-- <td>
+            Saturday : <input type="radio" ng-required="true" value="saturday" formControlName="course_day" required/> 
+            Sunday : <input type="radio" ng-required="true" value="sunday" formControlName="course_day" required/>
+            </td> -->
+            <td>
+                <select value="course_day" formControlName="course_day">
+                    <option value="monday">Monday</option>
+                    <option value="teusday">Teusday</option>
+                    <option value="wednesday">Wednesday</option>
+                    <option value="thursday">Thursday</option>
+                    <option value="friday">Friday</option>
+                    <option value="saturday">Saturday</option>
+                    <option value="sunday">Sunday</option>
+                    
+                  </select>
+            </td>
+        </tr>
+        <br>
+        
+        <tr>
+            <td colspan="2" align="center">
+                <button type="submit" class="btn btn-success" [disabled]="!addCourseForm.valid" (click)="saveCourse(addCourseForm.value)" >Submit</button>
+                <input type="reset" class="btn btn-danger" value="Reset">
+            </td>
+        </tr>
+    </table>
+
+</form>
+
