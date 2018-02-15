@@ -47,6 +47,8 @@ export class CoursesAddPage {
     this.cs.saveCourse(course).subscribe(res => console.log(course));
     //console.log(course);
     this.addCourseForm.reset();
+    alert('This Course has being added to the Database..');
+    
   }
 
 

@@ -1,16 +1,14 @@
-<h3>CREATE A NEW COURSE</h3>
+<h3>UPDATE COURSE FORM</h3>
 <br>
 
-<form [formGroup]="addCourseForm" method="post" *ngIf="addCourseForm">
+<form [formGroup]="updateCourseForm" method="post" *ngIf="updateCourseForm">
     <table align="center" cellpadding="10">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <tr>
             <td>COURSE NAME :- </td>
             <td>
-            <input type="text" class="form-control" formControlName="course_name" name="Course_Name" placeholder="Course Name" required/>
-            <small *ngIf="!isValid('course_name')" class="text-muted">Not enough characters</small>
-
+            <input type="text" class="form-control" value="course_data.courses_name" formControlName="courses_name" [(ngModel)]="course_data.courses_name" name="Course_Name" placeholder="Course Name" required/>
             </td>
         </tr>
         <br>
@@ -18,8 +16,7 @@
         <tr>
             <td>YEAR :-</td>
             <td>
-            <input type="text" class="form-control" formControlName="course_year" name="Year" placeholder="Course Year" required/>
-            <small *ngIf="!isValid('course_year')" class="text-muted">Not enough Characters</small>
+            <input type="text" class="form-control" value="course_data.courses_year" formControlName="courses_year" [(ngModel)]="course_data.courses_year" name="Year" placeholder="Course Year" required/>
             </td>
         </tr>
         <br>
@@ -28,12 +25,12 @@
             <td>DURATION OF THE COURSE:-</td>
             <td>From :-
             
-                <dp-date-picker [(ngModel)]="fromDate" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="from_day" placeholder="Starting Date"
+                <dp-date-picker [(ngModel)]="course_data.courses_from_date" value="course_data.courses_from_date" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="courses_from_date" placeholder="Starting Date"
             name="From_Day" required></dp-date-picker>
             
             To :-
             
-                <dp-date-picker [(ngModel)]="toDate" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="to_day" placeholder="Ending Date"
+                <dp-date-picker [(ngModel)]="course_data.courses_to_date" value="course_data.courses_to_date" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="courses_to_date" placeholder="Ending Date"
                 name="To_Day" required></dp-date-picker>
                 </td>
         </tr>
@@ -44,7 +41,7 @@
             <td>DAY :-</td>
             <td>
                 <div>
-                <select value="course_day" formControlName="course_day" method="post" class="selectpicker">
+                <select  [(ngModel)]="course_data.courses_day" value="courses_day" formControlName="courses_day" method="post" class="selectpicker" required>
                 <optgroup label="Week Days">
                     <option value="Monday">Monday</option>
                     <option value="Tuesday">Tuesday</option>
@@ -64,7 +61,7 @@
         
         <tr>
             <td colspan="2" align="center">
-                <button type="submit" class="btn btn-success" [disabled]="!addCourseForm.valid" (click)="saveCourse(addCourseForm.value)" >Submit</button>
+                <button type="submit" class="btn btn-success" [disabled]="!updateCourseForm.valid" (click)="updateCourse(updateCourseForm.value)" >Update</button>
                 <input type="reset" class="btn btn-danger" value="Reset">
             </td>
         </tr>

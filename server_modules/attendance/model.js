@@ -22,14 +22,15 @@ function createSchema(config, cb)
     const connection = database.createMultipleStatementConnection(config);
     connection.query(
 
-      `CREATE TABLE IF NOT EXISTS \`attendace\` (
+      `CREATE TABLE IF NOT EXISTS \`attendance\` (
         \`attendance_id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
         \`lesson_id\` INT UNSIGNED NOT NULL,
         \`course_id\` INT UNSIGNED NOT NULL,
-        \`student_id\` VARCHAR(255),
+        \`student_id\` INT UNSIGNED NOT NULL,
         \`att_date\` VARCHAR(255),
-      PRIMARY KEY (\`order_id\`))  ENGINE=INNODB;` +
+      PRIMARY KEY (\`attendance_id\`))  ENGINE=INNODB;` +
 
+     
       `ALTER TABLE \`attendance\` 
       ADD FOREIGN KEY (\`course_id\`)   
       REFERENCES \`courses\`(\`id\`) 
@@ -48,8 +49,6 @@ function createSchema(config, cb)
       ON UPDATE CASCADE
       ON DELETE CASCADE;`
     ,
-
-
         (err) => {
             if (err) {
               throw err;

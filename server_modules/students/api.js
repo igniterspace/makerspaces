@@ -83,7 +83,6 @@ router.post('/addStudent', (req, res, next) => {
 //Edit Student information..
 router.post('/updateStudent', (req, res, next) => {
   var edstudent = req.body;
-  //console.log('updated details:', edstudent);
   model.getEditStudent(edstudent, (err, results) => {
     if (err) {
       throw err;

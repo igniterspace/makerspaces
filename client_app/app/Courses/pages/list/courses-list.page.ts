@@ -6,6 +6,8 @@ import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, 
 import { CoursesService }      from '../../../common/services/course.service';
 import { ListCourses }         from 'app/common/models/courses';
 import { ListStudent }         from 'app/common/models/courses';
+import { DeleteId }            from 'app/common/models/courses';
+
 
 @Component({
   templateUrl: './courses-list.page.html',
@@ -25,8 +27,11 @@ export class CoursesListPage {
   private moreDetails : any ;
   private liststudents : any;
   private student : number ;
+  //private listcourse : [];
   selectles: any;
   selectstu: any;
+  updatecourses  : any;
+ 
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
@@ -41,7 +46,6 @@ export class CoursesListPage {
 
 //Get the specific students of a course to this component..  
 viewStudent(courses_id: number) {
-  //console.log(courses_id)
     this.cs.getStudents(courses_id).subscribe(res => {
     this.selectstu = res.item;
     this.cs.selStudent(this.selectstu)
@@ -49,19 +53,21 @@ viewStudent(courses_id: number) {
   });
 } 
 
+//Update (edit) course details..
+viewCourse(updatecourses) {
+  this.cs.updateCourse(updatecourses);
+}
 
 //Get Course details from the database and show on the list in the fronend..
 listAllCourses() {
     this.cs.listAllCourses().subscribe(res => {
       this.listcourses  = res.item;
-      //console.log(res.item);
     });
   }
 
-  
+
 //Get the specific lessons of a course to this component..  
   viewLessons(courses_id: number) {
-    //console.log(courses_id)
       this.cs.getlessons(courses_id).subscribe(res => {
       this.selectles = res.item;
       this.cs.sellesson(this.selectles)
@@ -69,12 +75,33 @@ listAllCourses() {
     });
   } 
   
+//Delete course from the database when the delete button is clicked..  
+deleteCourse(deleteid : DeleteId){
+  console.log('delete id: ',deleteid);
+  alert('Do you want to remove this course?');
   
+  this.cs.deleteCourse(deleteid).subscribe(res=>console.log(res))
+ 
+  console.log(this.listcourses[0].id);
+  console.log(this.listcourses.length);
+
+  for (var i=0; i<this.listcourses.length; i++){
+    console.log(this.listcourses[i].id+' '+i+' '+deleteid);
+    if(this.listcourses[i].id == deleteid){
+      console.log("del index:",i)
+      this.listcourses.splice(i, 1);
+    }
+  }
+}   
+
 ngOnInit(): void {
 
 //Show course details in the list..
   this.listAllCourses();
- 
+  
+//Send course details from the list to course_update.page..  
+  this.cs.selectcourse.subscribe( updatecourses => this.updatecourses = updatecourses)
+  console.log(this.updatecourses);
 }
 
 }

@@ -83,7 +83,34 @@ function addLesson(lesson, res) {
               });
         };
 
-        
+//Query to update course details..        
+function getEditCourse(edcourse, res) {
+    console.log('edcourse : ', edcourse);
+        connection.query(`UPDATE courses SET name =  '${edcourse.courses_name}', year = '${edcourse.courses_year}', from_date = '${edcourse.courses_from_date}', to_date = '${edcourse.courses_to_date}', day = '${edcourse.courses_day}' WHERE id = ${edcourse.courses_id}`,
+        (err, res) => {
+            if (err) {
+                console.log(err); 
+                return;
+            }
+            console.log('Result : ', res);
+            // cb(null, results);
+        });
+}        
+
+//Query to Delete course from the list and from the database..    
+function deleteCourse(delid, cb) {
+    console.log('delete id in model: ' , delid);
+    connection.query(
+        'DELETE FROM courses WHERE id ='+ delid ,
+        (err, results) => {
+            if (err) {
+                cb(err);
+                return;
+            }
+            cb(null, results);
+        });
+}
+
 //Create the database..
 function createSchema(config, cb) {
   const connection = database.createMultipleStatementConnection(config);
@@ -173,6 +200,7 @@ module.exports = {
   getAllCourseLessons  : getAllCourseLessons,
   getAllCourseStudents : getAllCourseStudents,
   addCourse            : addCourse,
-  addLesson            : addLesson
+  addLesson            : addLesson,
+  getEditCourse        : getEditCourse
   
 };

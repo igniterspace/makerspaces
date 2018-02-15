@@ -113,5 +113,32 @@ router.post('/addlesson', (req, res, next) => {
   });
 });
 
+//Edit Course information..
+router.post('/updateCourse', (req, res, next) => {
+  var edcourse = req.body;
+  console.log('updated details:', edcourse);
+  model.getEditCourse(edcourse, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+//Delete course from the list and from the database..
+router.get('/deleteCourse/:coursetid', (req, res, next) => {
+  var course_id = req.params.coursetid;
+  model.deleteCourse(course_id, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
 
 module.exports = router;

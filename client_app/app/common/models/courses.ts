@@ -42,3 +42,7 @@ export class ListStudent {
     students_name             : string;
     courses_name              : string;
 } 
+
+export class DeleteId {
+    courses_id: number;
+}

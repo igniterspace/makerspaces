@@ -24,4 +24,6 @@ table.inner{
   border: 0px
 }
 
-
+.selectpicker{
+  height: 30px;
+}

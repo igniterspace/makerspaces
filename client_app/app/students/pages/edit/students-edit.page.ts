@@ -1,6 +1,4 @@
 import { Component, OnInit }    from '@angular/core';
-import { StudentsService }      from '../../../common/services/student.service';
-import { Student }              from '../../../common/models/student';
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 import { DpDatePickerModule }   from 'ng2-date-picker';
 import { StudentsService }      from '../../../common/services/student.service';
@@ -67,6 +65,7 @@ export class StudentsEditPage implements OnInit {
     //console.log(full_detail);
     this.ss.saveStudent(full_detail).subscribe(res => console.log(full_detail));
     this.addStudentForm.reset();
+    alert('This Student has being added to the Database..');
   }
 
   nameValidator(control: FormControl): {[s: string]: boolean} {

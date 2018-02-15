@@ -3,7 +3,7 @@ import { NgModule, ErrorHandler }   from '@angular/core';
 import { AppRoutingModule  }        from './app.routes';
 import { MiscRoutingModule }        from './misc/misc.routes';
 import { DpDatePickerModule }       from 'ng2-date-picker';
-//import { Ng2SearchPipeModule }      from 'ng2-search-filter';
+import { Ng2SearchPipeModule }      from 'ng2-search-filter';
 
 import { AppComponent }             from './app.component';
 import { MenuComponent }            from './common/components/menu/menu.component';
@@ -33,7 +33,7 @@ import { BrowserAnimationsModule }        from '@angular/platform-browser/animat
 
 
 //import { NgDatepickerModule }       from 'ng2-datepicker';
-import {NgSelectModule}             from '@ng-select/ng-select';
+//import {NgSelectModule}             from '@ng-select/ng-select';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -65,9 +65,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserAnimationsModule,
     HttpModule,
     ReactiveFormsModule,
-    NgSelectModule,
     FormsModule,
-    DpDatePickerModule
+    DpDatePickerModule,
+    Ng2SearchPipeModule
   ],
   exports: [
     AppComponent

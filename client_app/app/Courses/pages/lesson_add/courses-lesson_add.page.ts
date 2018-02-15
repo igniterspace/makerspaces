@@ -44,6 +44,8 @@ export class LessonsAddPage {
     this.cs.saveLesson(lessons).subscribe(res => console.log(lessons));
     console.log(lessons);
     this.addLessonForm.reset();
+    alert('This Lesson has being added to this course..');
+    
   }
 
 

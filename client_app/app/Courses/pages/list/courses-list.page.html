@@ -12,10 +12,10 @@
              <thead>
              <tr role="row">
                                               
-              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              <!-- <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
               rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
               style="width: 100px;">Course ID
-              </th>
+              </th> -->
               
               <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
               rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 150px;">Course Name
@@ -50,7 +50,10 @@
               style="width: 120px;">Lessons
               </th>
 
-             
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+              style="width: 120px;">
+              </th>
       
              </tr>
             </thead>
@@ -59,7 +62,7 @@
           
              <tr class="odd" *ngFor="let c of listcourses">
                                                  
-              <td class="">{{ c.courses_id }} </td>
+              <!-- <td class="">{{ c.courses_id }} </td> -->
               <td class="">{{ c.courses_name }}</td>
               <td class="">{{ c.courses_year }}</td>
               <td class="">{{ c.courses_from_date }}</td>
@@ -73,6 +76,13 @@
               <td class=""> 
                 <a href="" [routerLink]="['./lesson_list',c.courses_id ]"  queryParamshandling="merge" (click)="viewLessons(c.courses_id)">Lessons</a>
               </td>
+
+              <td class="">
+                  
+              <button class="btn btn-primary btn-xs" ><i class="fa fa-pencil" [routerLink]="['./course_update',c.courses_id]" queryParamshandling="merge" (click)="viewCourse(c)"></i></button>
+
+              <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o " (click)= "deleteCourse(c.courses_id)"></i></button>
+              </td> 
 
               <!-- <td class=""> 
                 <a href="" [routerLink]="['./information',c.courses_id ]" queryParamshandling="merge">More Info</a>

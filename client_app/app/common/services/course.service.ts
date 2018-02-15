@@ -33,6 +33,9 @@ export class CoursesService {
   public sStudent  = new BehaviorSubject<any>(null);
   selectstudent = this.sStudent.asObservable();
 
+  public uCourse  = new BehaviorSubject<any>(null);
+  selectcourse = this.uCourse.asObservable();
+
   constructor(private http: Http, private context: ContextService, private authHttp: AuthHttp) { 
     let locationId = this.context.getCurrentLocation().id;
     this.studentsUrl = environment.apiUrl + '/api/location/' + locationId + '/students' ;
@@ -48,6 +51,10 @@ export class CoursesService {
     this.sLesson.next(selectles)
   }
 
+  updateCourse(updatecourses:any) {
+    console.log(updatecourses);
+    this.uCourse.next(updatecourses)
+  }
 
   getAuthService(params): Observable<any> {
     return this.http.get(`${this.authService}${params}`, this.options)
@@ -55,13 +62,13 @@ export class CoursesService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server Error Authentication Service'));
   }
 
-  fetchData() {
-    this.http.get('./components/students/pages/edit/students-guardian_add-page.html').map(
-     (response) => response.json()
-    ).subscribe (
-      (data) => console.log(data)
-    )
-  }
+  // fetchData() {
+  //   this.http.get('./components/students/pages/edit/students-guardian_add-page.html').map(
+  //    (response) => response.json()
+  //   ).subscribe (
+  //     (data) => console.log(data)
+  //   )
+  // }
 
 
   listAllCourses(){
@@ -88,8 +95,13 @@ export class CoursesService {
     return this.http.post('http://localhost:8080/api/courses/addlesson', lesson_details).map(res => res.json());
   }
 
- 
+  editCourse(editcourse) {
+    return this.http.post('http://localhost:8080/api/courses/updateCourse', editcourse).map(res => res.json());
+  } 
 
+  deleteCourse(deleteid){
+    return this.http.get(`http://localhost:8080/api/courses/deleteCourse/${deleteid}`).map(res=>res.json());
+  }  
 
 private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
