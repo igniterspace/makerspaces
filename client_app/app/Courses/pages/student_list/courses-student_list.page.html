@@ -48,6 +48,79 @@
          
          </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <table [formGroup]="ListallStudents" method="post">
+            <select formControlName="students_name">
+              <option value="" disabled selected>Select new Student to add to this Course..</option>
+              <option *ngFor="let s of liststudents" [value]="s.students_id"> {{ s.students_name }} </option>
+            </select>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" class="btn btn-success" value="Submit" (click)="saveassStudent(ListallStudents.value)">
+                  <input type="button" class="btn btn-danger" value="Go Back" onclick="history.go(-1)">
+                </td>
+              </tr>
+            </table>
+<br>
+<br>
+<br>
+            <div>
+              <p>Search Student:</p>
+              <small>by name,gender or date of birth..</small>
+          
+              <input type="text" name="search" placeholder="Search New Student.." [(ngModel)]="search">
+              <button type="submit" class="btn btn-info" (click)="similarStudent(search)" (click) ="showTable()">Search</button>
+          
+            </div>
+            <br><br>
+            <table class="display table table-bordered dataTable" *ngIf = "detailForm" id="hidden-table-info" aria-describedby="hidden-table-info_info">
+                
+                       <thead>
+                       <tr role="row">
+          
+                        <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                        rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;">Name
+                        </th>
+                
+                        <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">Gender
+                        </th>
+                
+                        <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                        rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+                        style="width: 122px;">Date of Birth
+                        </th>
+                        
+                  
+                  
+                        <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                        rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+                        style="width: 122px;">
+                        </th>
+          
+                       </tr>
+                      </thead>
+                    
+                     <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    
+                       <tr class="odd" *ngFor="let a of search_res">
+                                                         
+                        <td class="">{{ a.first_name }} {{a.last_name}} </td>
+                        <td class="">{{ a.gender }}</td>
+                        <td class="">{{ a.date_of_birth }}</td>
+                        <td class="">
+                          <!-- <a [routerLink]="['../searchguardian']" queryParamshandling="merge">   -->
+                          <input class="btn btn-success" type="submit" value="Submit" (click)="savesearchStudent(a.id)">
+                        <!-- </a> -->
+                        </td>                      
+                        
+          
+                
+                       </tr>
+                     </tbody>
+                   </table>
       </div>
       
     </div>
@@ -56,9 +129,4 @@
   </section>
   </div>
   </div>
-  <!-- <table [formGroup]="ListallStudents" method="post">
-      <select formControlName="students_name">
-        <option value="" disabled selected>Select your student...</option>
-        <option *ngFor="let s of liststudents" [value]="s.s_id"> {{ s.students_name }} </option>
-      </select>
-   </table> -->
+  

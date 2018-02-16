@@ -11,11 +11,6 @@
       
              <thead>
              <tr role="row">
-                                              
-              <!-- <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-              rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-              style="width: 100px;">Course ID
-              </th> -->
               
               <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
               rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 150px;">Course Name
@@ -62,7 +57,6 @@
           
              <tr class="odd" *ngFor="let c of listcourses">
                                                  
-              <!-- <td class="">{{ c.courses_id }} </td> -->
               <td class="">{{ c.courses_name }}</td>
               <td class="">{{ c.courses_year }}</td>
               <td class="">{{ c.courses_from_date }}</td>
@@ -84,9 +78,6 @@
               <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o " (click)= "deleteCourse(c.courses_id)"></i></button>
               </td> 
 
-              <!-- <td class=""> 
-                <a href="" [routerLink]="['./information',c.courses_id ]" queryParamshandling="merge">More Info</a>
-              </td>  -->
       </tr>
             
            </tbody>

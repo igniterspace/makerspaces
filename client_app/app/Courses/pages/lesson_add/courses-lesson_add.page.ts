@@ -35,11 +35,12 @@ export class LessonsAddPage {
   
 
   ngOnInit() {
-
+    // this.cs.selectlesson.subscribe(selectles => this.selectles = selectles)
+    // console.log(this.selectles);   
   }
 
   
-  //Send Course details to the database..
+  //Send Lesson details to the database..
   saveLesson(lessons : AddLesson) {
     this.cs.saveLesson(lessons).subscribe(res => console.log(lessons));
     console.log(lessons);

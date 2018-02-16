@@ -17,6 +17,8 @@ import { StudentsModule }           from './students/students.module';
 import { OrdersModule }             from './orders/orders.module';
 import { AttendanceModule }         from './attendance/attendance.module';
 import { CoursesModule }            from './courses/courses.module';
+import { DashboardModule }          from './dashboard/pages/dashboard.module';
+
 import { ContextService }           from './common/services/context.service'
 import { AuthService }              from './common/services/auth.service'
 
@@ -56,6 +58,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   imports: [
     BrowserModule,
+    DashboardModule,
     OrdersModule,
     StudentsModule,
     AttendanceModule,

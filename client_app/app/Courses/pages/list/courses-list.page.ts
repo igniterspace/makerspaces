@@ -23,10 +23,10 @@ export class CoursesListPage {
   private course         : ListCourses[];
   private ListLesson     : ListCourses;
   //private selectstu      : ListStudent;
-  c_Id : any;
+  //c_Id : any;
   private moreDetails : any ;
   private liststudents : any;
-  private student : number ;
+  //private student : number ;
   //private listcourse : [];
   selectles: any;
   selectstu: any;
@@ -37,10 +37,13 @@ export class CoursesListPage {
   deleteUserEvent = new EventEmitter<string>();
   validateDelete: boolean;
 
-  ListAllStudents : FormGroup ; 
+  ListAllCourses : FormGroup ; 
   
   constructor(private cs: CoursesService,private formBuilder: FormBuilder) {
-    
+    this.coursesService = cs;
+    this.ListAllCourses    = new FormGroup({
+         listcourses       : new FormControl()
+      });
   }
 
 
@@ -77,18 +80,18 @@ listAllCourses() {
   
 //Delete course from the database when the delete button is clicked..  
 deleteCourse(deleteid : DeleteId){
-  console.log('delete id: ',deleteid);
+  // console.log('delete id: ',deleteid);
   alert('Do you want to remove this course?');
   
   this.cs.deleteCourse(deleteid).subscribe(res=>console.log(res))
- 
-  console.log(this.listcourses[0].id);
-  console.log(this.listcourses.length);
+  var i;
+  // console.log(this.listcourses[0].courses_id);
+  // console.log(this.listcourses.length);
 
-  for (var i=0; i<this.listcourses.length; i++){
-    console.log(this.listcourses[i].id+' '+i+' '+deleteid);
-    if(this.listcourses[i].id == deleteid){
-      console.log("del index:",i)
+  for (i=0; i<this.listcourses.length; i++){
+      //console.log(this.listcourses[i].courses_id+' '+i+' '+deleteid);
+    if(this.listcourses[i].courses_id == deleteid){
+     // console.log("del index:",i)
       this.listcourses.splice(i, 1);
     }
   }
@@ -101,7 +104,7 @@ ngOnInit(): void {
   
 //Send course details from the list to course_update.page..  
   this.cs.selectcourse.subscribe( updatecourses => this.updatecourses = updatecourses)
-  console.log(this.updatecourses);
+  //console.log(this.updatecourses);
 }
 
 }

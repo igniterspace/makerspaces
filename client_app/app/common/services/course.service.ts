@@ -83,9 +83,9 @@ export class CoursesService {
     return this.http.get('http://localhost:8080/api/courses/getallcourselessons/'+courses_id).map(res=>res.json());
   }
 
-  // listAllStudents(){
-  //   return this.http.get('http://localhost:8080/api/students/listallstudents').map(res=>res.json());
-  // }
+  listAllStudents(){
+    return this.http.get('http://localhost:8080/api/courses/listallstudents').map(res=>res.json());
+  }
 
   saveCourse(course_details) {
     return this.http.post('http://localhost:8080/api/courses/addcourse', course_details).map(res => res.json());
@@ -102,6 +102,11 @@ export class CoursesService {
   deleteCourse(deleteid){
     return this.http.get(`http://localhost:8080/api/courses/deleteCourse/${deleteid}`).map(res=>res.json());
   }  
+
+  similarStudent(search) {
+    console.log(search);
+    return this.http.get('http://localhost:8080/api/courses/search/'+ search).map(res => res.json());
+  }
 
 private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

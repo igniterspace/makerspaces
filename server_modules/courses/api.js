@@ -45,7 +45,7 @@ router.get('/getallcourses', (req, res, next) => {
 //Get list of all students of the course to the frontend..
 router.get('/getallcoursestudents/:courses_id', (req, res, next) => {
   var c_id = req.params.courses_id;
-  console.log("value_students:",c_id);  
+  //console.log("value_students:",c_id);  
   model.getAllCourseStudents(c_id,(err, results) => {
     if (err) {
       throw err;
@@ -72,7 +72,7 @@ router.get('/listallstudents', (req, res, next) => {
 //Get lesson list to show on the list (frontend)..
 router.get('/getallcourselessons/:courses_id', (req, res, next) => {
    var c_id = req.params.courses_id;
-   console.log("value_lessons:",c_id);
+   //console.log("value_lessons:",c_id);
    model.getAllCourseLessons(c_id,(err, results) => {
      if (err) {
        throw err;
@@ -87,7 +87,7 @@ router.get('/getallcourselessons/:courses_id', (req, res, next) => {
 //Send Course details to the database..
 router.post('/addcourse', (req, res, next) => {
   var course = req.body;
-  console.log(course);
+  //console.log(course);
   model.addCourse(course, (err, results) => {
     if (err) {
       throw err;
@@ -102,7 +102,7 @@ router.post('/addcourse', (req, res, next) => {
 //Insert a lesson to the database..
 router.post('/addlesson', (req, res, next) => {
   var lesson = req.body;
-  console.log(lesson);
+  //console.log(lesson);
   model.addLesson(lesson, (lesson, results) => {
     if (err) {
       throw err;
@@ -116,7 +116,7 @@ router.post('/addlesson', (req, res, next) => {
 //Edit Course information..
 router.post('/updateCourse', (req, res, next) => {
   var edcourse = req.body;
-  console.log('updated details:', edcourse);
+  //console.log('updated details:', edcourse);
   model.getEditCourse(edcourse, (err, results) => {
     if (err) {
       throw err;
@@ -131,9 +131,24 @@ router.post('/updateCourse', (req, res, next) => {
 //Delete course from the list and from the database..
 router.get('/deleteCourse/:coursetid', (req, res, next) => {
   var course_id = req.params.coursetid;
+  //console.log('deleted details:', course_id);
   model.deleteCourse(course_id, (err, results) => {
     if (err) {
       throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+//Search students..
+router.get('/search/:search', (req, res, next) => {
+  var detail = req.params.search;
+  model.searchStudent(detail, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
     }
     res.json({
       item: results

@@ -35,9 +35,9 @@ export class LessonsListPage {
  
 ngOnInit() {
 
-//Shoe lesson details in the list..
+//Show lesson details in the list..
 this.cs.selectlesson.subscribe(selectles => this.selectles = selectles)
-    
+ console.log(this.selectles);   
 }
 
 }

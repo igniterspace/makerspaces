@@ -46,3 +46,15 @@ export class ListStudent {
 export class DeleteId {
     courses_id: number;
 }
+
+export class ListAllStudents {
+    
+    students_id             : number;
+    students_name           : string;
+    // students_last_name      : string;
+    // students_date_of_birth  : string;
+    // students_g_name         : string;
+    // students_home_address   : string;
+    // students_gender         : string;
+    // g_id                    : any ;
+    }

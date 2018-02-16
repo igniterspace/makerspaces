@@ -36,7 +36,7 @@ export class StudentsListPage {
   constructor(private ss: StudentsService,private formBuilder: FormBuilder) {
     this.studentsService = ss;
     this.ListAllStudents = new FormGroup({
-      liststudents: new FormControl()
+         liststudents    : new FormControl()
     });
   }
 
@@ -49,25 +49,19 @@ export class StudentsListPage {
   listAllStudents() {
     this.ss.listAllStudents().subscribe(res => {
       this.liststudents  = res.item;
-      // console.log(this.liststudents[0].id);
-      // console.log(res.item);
+      console.log(this.liststudents);
     });
   }
 
 //Delete student from the database when the delete button is clicked..  
   deleteStudent(deleteid : DeleteId){
-    //console.log('delete id: ',deleteid);
     alert('Do you want to remove this student?');
     
     this.ss.deleteStudent(deleteid).subscribe(res=>console.log(res))
     var i;
-    // console.log(this.liststudents[0].id);
-    // console.log(this.liststudents.length);
 
     for ( i=0; i<this.liststudents.length; i++){
-      //console.log(this.liststudents[i].id+' '+i+' '+deleteid);
       if(this.liststudents[i].id == deleteid){
-        //console.log("del index:",i)
         this.liststudents.splice(i, 1);
       }
     }
@@ -77,9 +71,10 @@ export class StudentsListPage {
 
 //Show student details in the list..
   this.listAllStudents();
+
 //Send student details from the list to update.page..  
   this.ss.newitems.subscribe( updatestudents => this.updatestudents = updatestudents)
  
-}
+  }
 
 }

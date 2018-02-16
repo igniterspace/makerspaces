@@ -26,6 +26,10 @@
           style="width: 150px;">Date
           </th>
   
+          <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+          rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+          style="width: 50px;">
+          </th>
   
          </tr>
         </thead>
@@ -37,15 +41,15 @@
           <td class="">{{ l.l_id }} </td>
           <td class="">{{ l.lesson_name }}</td>
           <td class="">{{ l.lesson_date }}</td>
+          <td class="">
+            
+        <button class="btn btn-primary btn-xs" ><i class="fa fa-pencil" queryParamshandling="merge" (click)="viewCourse(c)"></i></button>
+
+        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o " (click)= "deleteCourse(c.courses_id)"></i></button>
+        </td> 
         </tr>
        </tbody>
      </table>
-  
-     <h4>
-        <div>
-           <a href="" [routerLink]="['./lesson_add']" queryParamshandling="merge">Click here to Add a New Lesson</a>
-         </div>
-       </h4>
 
      <div class="row-fluid">
        <div class="span6">
@@ -57,6 +61,11 @@
          
          </div>
         </div>
+        <h4>
+          <div>
+             <a href="" [routerLink]="['./lesson_add']" queryParamshandling="merge">Click here to Add a New Lesson</a>
+           </div>
+         </h4>
       </div>
       
     </div>

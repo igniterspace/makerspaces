@@ -99,7 +99,7 @@ function getEditCourse(edcourse, res) {
 
 //Query to Delete course from the list and from the database..    
 function deleteCourse(delid, cb) {
-    console.log('delete id in model: ' , delid);
+    //console.log('delete id in model: ' , delid);
     connection.query(
         'DELETE FROM courses WHERE id ='+ delid ,
         (err, results) => {
@@ -108,6 +108,20 @@ function deleteCourse(delid, cb) {
                 return;
             }
             cb(null, results);
+        });
+}
+
+//Query to Search Students..
+function searchStudent (detail, cb) {
+    console.log('detail: ', '%' + detail +'%'); 
+    connection.query(`SELECT * FROM students WHERE id LIKE '%${detail}%' OR first_name LIKE '%${detail}%' OR last_name LIKE '%${detail}%' OR date_of_birth LIKE '%${detail}%'  OR gender LIKE '%${detail}%' OR g_id LIKE '%${detail}%'`, function (err, res){
+           if (err) {
+           throw err;
+           console.log('Result : ', res);
+           return;
+           }
+           console.log('Result 1 : ',res);
+           cb(null ,res);
         });
 }
 
@@ -201,6 +215,9 @@ module.exports = {
   getAllCourseStudents : getAllCourseStudents,
   addCourse            : addCourse,
   addLesson            : addLesson,
-  getEditCourse        : getEditCourse
+  getEditCourse        : getEditCourse,
+  deleteCourse         : deleteCourse,
+  listAllStudents      : listAllStudents,
+  searchStudent        : searchStudent
   
 };

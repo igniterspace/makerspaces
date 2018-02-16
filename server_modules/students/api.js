@@ -68,7 +68,6 @@ router.get('/getallstudents', (req, res, next) => {
 //Send student details to the database..
 router.post('/addStudent', (req, res, next) => {
   var student = req.body;
-  //console.log(student);
   model.addStudents(student, (err, results) => {
 
     if (err) {
@@ -138,7 +137,6 @@ router.get('/deleteStudent/:studentid', (req, res, next) => {
 //Search guardians..
 router.get('/search/:search', (req, res, next) => {
   var detail = req.params.search;
-  //console.log(detail);
   model.searchGuardian(detail, (err, results) => {
     if (err) {
       throw err;
@@ -147,7 +145,6 @@ router.get('/search/:search', (req, res, next) => {
     res.json({
       item: results
     });
-    //console.log('vaalue :', res.results);
   });
 });
 
