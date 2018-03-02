@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { User } from '../../models/user';
-import { ContextService } from '../../services/context.service'
+import { ContextService } from '../../services/context.service';
 
 declare var $: any;
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
+  styleUrls  : ['./menu.component.css'],
   providers: [ContextService],
 })
 export class MenuComponent {

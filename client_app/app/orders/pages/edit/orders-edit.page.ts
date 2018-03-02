@@ -112,6 +112,7 @@ export class OrdersEditPage implements OnInit {
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
     }
+    
     else if (this.auth.isAuthenticated()) {
       this.auth.getProfile((err, profile) => {
         this.profile = profile;

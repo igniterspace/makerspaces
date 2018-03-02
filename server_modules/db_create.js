@@ -51,18 +51,16 @@ if (module === require.main) {
         makerspaces_model.createSchema(result, () => {
           users_model.createSchema(result, ()=>{
             orders_model.createSchema(result, ()=>{
-              attendance_model.createSchema(result, ()=>{
                 students_model.createSchema(result, ()=>{
                   courses_model.createSchema(result, ()=>{
+                    attendance_model.createSchema(result, ()=>{
               
                 });              
                });
              });
             });
           });
-        });
-        
-        
+        });  
       }
     );
     

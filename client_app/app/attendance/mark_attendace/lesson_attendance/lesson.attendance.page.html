@@ -40,7 +40,7 @@
                 <tr *ngFor="let i of orderview" class="odd">
                     <td class=" "> </td>
                     <td class=" ">
-                        <a [routerLink]="['../:student_id']" queryParamsHandling="merge" (click)="studentAttendance(  )"> </a>
+                        <a [routerLink]="['../:student_id']" queryParamsHandling="merge" (click)="studentAttendance()"> </a>
                     </td>
                     <td>
                         <button class="btn btn-info" (click)="markStudentAttendance()">

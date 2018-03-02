@@ -3,7 +3,7 @@ import { NgModule, ErrorHandler }   from '@angular/core';
 import { AppRoutingModule  }        from './app.routes';
 import { MiscRoutingModule }        from './misc/misc.routes';
 import { DpDatePickerModule }       from 'ng2-date-picker';
-//import { Ng2SearchPipeModule }      from 'ng2-search-filter';
+import { Ng2SearchPipeModule }      from 'ng2-search-filter';
 
 import { AppComponent }             from './app.component';
 import { MenuComponent }            from './common/components/menu/menu.component';
@@ -17,8 +17,8 @@ import { StudentsModule }           from './students/students.module';
 import { OrdersModule }             from './orders/orders.module';
 import { AttendanceModule }         from './attendance/attendance.module';
 import { CoursesModule }            from './courses/courses.module';
-import { ContextService }           from './common/services/context.service'
-import { AuthService }              from './common/services/auth.service'
+import { ContextService }           from './common/services/context.service';
+import { AuthService }              from './common/services/auth.service';
 
 import { Http, HttpModule,  RequestOptions }                 from '@angular/http';
 import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth } from 'angular2-jwt';

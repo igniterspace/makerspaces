@@ -15,7 +15,7 @@
                             <span>Orders</span>
                         </a>
                         <ul class="sub">
-                            <li><a [routerLink]="['orders']" queryParamsHandling="merge">Order History</a></li>
+                            <li><a class="active" [routerLink]="['orders']" queryParamsHandling="merge">Order History</a></li>
                             <li><a [routerLink]="['orders/edit']" queryParamsHandling="merge">Create Order</a></li>
                         </ul>
                 </li>
@@ -38,7 +38,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  [routerLink]="['attendance/search']" queryParamshandling="merge">Mark Attendance</a></li>
-                        <li><a  [routerLink]="['attendance/view_lessons']" queryParamshandling="merge">View Attendance</a></li>
+                        <li><a  [routerLink]="['attendance/search_students']" queryParamshandling="merge">View Attendance</a></li>
                     </ul>
                 </li>
     

@@ -17,7 +17,7 @@ import { Component }             from '@angular/core/src/metadata/directives';
     imports: [RouterModule.forChild([
         { path: 'attendance/search',                      component : SearchCoursesPage } ,
         { path: 'attendance/search/:lesson_id',           component : LessonAttendancePage },
-        { path: 'attendance/search/students/:student_id', component : StudentAttendancePage },
+        { path: 'attendance/search/student/attendance',  component : StudentAttendancePage },
         { path: 'attendance/search_students',             component : SearchStudentPage },
         { path: 'attendance/search/students/:course_id',  component : ViewStudentsPage },
         { path: 'attendance/search/lessons/:course_id',   component : ViewLessonsPage }

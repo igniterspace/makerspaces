@@ -7,12 +7,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/delay';
 
-//import { Student }         from '../models/student';
 import { ContextService }  from './context.service';
 import { environment }     from '../../../environments/environment';
-// import { Guardian }        from 'app/common/models/guardian';
-// import { ListStudents }    from 'app/common/models/liststudents';
-// import { ListGuardians }   from 'app/common/models/listguardians';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable }      from 'rxjs/Observable';
 

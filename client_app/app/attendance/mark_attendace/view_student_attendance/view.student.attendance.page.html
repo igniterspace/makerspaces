@@ -2,7 +2,8 @@
         Student Attendance
     </header>
     <div class = "details">
-        Student ID : &nbsp;&nbsp;&nbsp;&nbsp;  Student Name : &nbsp;&nbsp;&nbsp;&nbsp;  Level : &nbsp;&nbsp;&nbsp;&nbsp;
+        Student ID : &nbsp;&nbsp;{{ details.student_id }}&nbsp;&nbsp;  Student Name : &nbsp;&nbsp;{{ details.first_name}}&nbsp;{{ details.last_name }}&nbsp;&nbsp;  
+        Level : &nbsp;&nbsp;{{ details.name }}&nbsp;&nbsp;  Year : &nbsp;&nbsp;{{ details.year }}&nbsp;&nbsp;
     </div>
     <br><br>
     <div class="adv-table">
@@ -33,11 +34,16 @@
     
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
     
-                    <tr *ngFor="let i of orderview" class="odd">
-                        <td class=" "></td>
-                        <td class=" "></td>
-                        <td class=" "></td>
-                        <td class=" "></td>
+                    <tr *ngFor="let i of lessons" class="odd">
+                        <td class=" ">{{ i.id }}</td>
+                        <td class=" ">{{ i.name }}</td>
+                        <td class=" ">{{ i.date }}</td>
+                        <td class=" ">
+                                <button class="btn btn-info">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                    Mark as Present
+                                </button>
+                        </td>
                     </tr>
     
                 </tbody>

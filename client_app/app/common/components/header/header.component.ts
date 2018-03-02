@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable, Injector  } from '@angular/core';
 import { User } from '../../models/user';
-import { ContextService } from '../../services/context.service'
-import { AuthService } from '../../services/auth.service'
+import { ContextService } from '../../services/context.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({

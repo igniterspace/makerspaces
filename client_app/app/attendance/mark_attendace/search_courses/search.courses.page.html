@@ -1,22 +1,43 @@
-        <div  class = "multisearch" style="width: 400px; margin-bottom: 20px;">
-            <h6>Select tags for course...</h6>
+        
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+
+<label>Search for a course...</label>
+    <form [formGroup] ="searchCoursesForm">
+        <table>
+           
             <br>
-            <ng-select  [multiple]="true"
-                        [allowClear]="true"
-                        [items]="items"
-                        [active] = "active"
-                        [disabled]="disabled"
-                        [(ngModel)] = "ngvalue"
-                        (data)="refreshValue($event)"
-                        (selected)="selected($event)"
-                        (removed)="removed($event)"
-                        placeholder="No tags selected"></ng-select>
-            
-            <br>     
-        </div>
+            <tbody>
+
+            <td>    <p> Level :</p>
+                    <select formControlName ="level" style = "height: 35px;" >
+                            <option *ngFor="let i of select_level" [value]="i.itemName" > {{ i.itemName }} </option>
+                    </select>
+            </td>
+            <td>    <p>  Year :</p>
+                    <select formControlName ="year" style = "height: 35px;">
+                            <option *ngFor="let i of coursesYears" [value]="i.courses_year" > {{ i.courses_year }} </option>
+                    </select>
+            </td>
+            <td>    <p> Day :</p>
+                    <select formControlName ="day" style = "height: 35px;">
+                            <option *ngFor="let i of select_day" [value]="i.itemName" > {{ i.itemName }} </option>
+                    </select>
+            </td>
+           
+        </tbody>
+        </table>
+
+        
         <div class = "searchbutton">
-            <button type="button" class="btn btn-primary" (click) = "searchLessons(ngvalue)" (click)="showseachresultForm()" >&nbsp;&nbsp;&nbsp;&nbsp;Go&nbsp;&nbsp;&nbsp;</button>             
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" (click)="clearfields()" >&nbsp;&nbsp;&nbsp;&nbsp;clear&nbsp;&nbsp;&nbsp;</button> &nbsp;&nbsp;&nbsp; 
+            <button type="button" class="btn btn-primary" (click) = "searchCourses(searchCoursesForm.value)" (click)="showSeachResultForm()" >&nbsp;&nbsp;&nbsp;&nbsp;search&nbsp;&nbsp;&nbsp;</button>             
         </div>
+    </form>
 
         <br><br> 
 
@@ -29,37 +50,45 @@
 
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
                             aria-label="Rendering engine: activate to sort column descending" style="width: 100px;">
-                            &nbsp;&nbsp;&nbsp;<i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;&nbsp; Course Name </th>
+                            &nbsp;&nbsp;&nbsp;<i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;&nbsp;
+                            Course Name 
+                        </th>
 
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
                             aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">
-                            &nbsp;&nbsp;&nbsp;<i class="fa fa-book" aria-hidden="true"></i> &nbsp;&nbsp;Course Tags</th>
+                            &nbsp;&nbsp;&nbsp;<i class="fa fa-book" aria-hidden="true"></i> &nbsp;&nbsp;
+                            Course Tags
+                        </th>
 
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                            style="width: 150px;">
-                            &nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;&nbsp;Enrolled Students</th>
+                            style="width: 75px;">
+                            &nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;&nbsp;
+                            Enrolled Students
+                        </th>
 
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                            style="width: 150px;">
-                            &nbsp;&nbsp;&nbsp;<i class="fa fa-calendar-check-o" aria-hidden="true"></i> &nbsp;&nbsp;Lessons</th>
+                            style="width: 75px;">
+                            &nbsp;&nbsp;&nbsp;<i class="fa fa-calendar-check-o" aria-hidden="true"></i> &nbsp;&nbsp;
+                            Lessons
+                        </th>
 
 
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let order of neworders ; let i = index">
-                        <td>{{i + 1}}</td>
-                        <td>{{order.orderitem.product_id}} - {{order.orderitem.name}}</td>
-                        <td><a [routerLink]="['../:course_id']" queryParamsHandling="merge" (click)="markAttendance(  )">
+                    <tr *ngFor="let i of courseDetails ">
+                        <td>{{i.name}}</td>
+                        <td>{{i.batch}} , {{i.year}}</td>
+                        <td><a [routerLink]="['./students',i.id ]" queryParamsHandling="merge" (click)="getCourseStudents( i )">
                             <button class="btn btn-info" >
                                 <i class="fa fa-check-square-o" aria-hidden="true"></i>
                                 View Students
                             </button></a>
                         </td>
-                        <td><a [routerLink]="['../:lesson_id']" queryParamsHandling="merge" (click)="markAttendance(  )">
+                        <td><a [routerLink]="['./lessons',i.id ]" queryParamsHandling="merge" (click)="passCourseIDForLessons( i.id )">
                             <button class="btn btn-info" >
                                 <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                Lessons
+                                View Lessons
                             </button></a>
                         </td>
                     </tr>
@@ -69,15 +98,4 @@
 
     </form>
 
-           <!-- <label>City</label>
-        <ng-select [items]="cities"
-                   bindLabel="name"
-                   [multiple]="true"
-                   bindValue="id"
-                   placeholder="Select city"
-                   [(ngModel)]="selectedCityId">
-        </ng-select>
-        <p>
-            Selected city ID: {{selectedCityId}}
-        </p> -->
-        <!-- <pre>{{itemsToString(value)}}</pre> -->
+      

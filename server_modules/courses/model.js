@@ -87,6 +87,7 @@ function createSchema(config, cb) {
 
 `CREATE TABLE IF NOT EXISTS \`courses\` (
 \`id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+\`batch\` VARCHAR(255) NULL,
 \`name\` VARCHAR(255) NULL,
 \`year\` VARCHAR(255) NULL,
 \`from_date\` VARCHAR(255) NULL,

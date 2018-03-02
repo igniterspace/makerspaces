@@ -1,8 +1,11 @@
 <header class="panel-heading">
-    Student Attendance
+    <h4>Enrolled Students... </h4>
 </header>
-<div class = "details">
-    Student ID : &nbsp;&nbsp;&nbsp;&nbsp;  Student Name : &nbsp;&nbsp;&nbsp;&nbsp;  Level : &nbsp;&nbsp;&nbsp;&nbsp;
+<div class = "details" style="font-size: 20px; font-weight: bold">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Level : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ course.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Batch : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ course.batch }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Year : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ course.year }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
 </div>
 <br><br>
 <div class="adv-table">
@@ -14,30 +17,22 @@
 
                     <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
                         aria-label="Rendering engine: activate to sort column descending" style="width: 75px; font-size: 10px">
-                        &nbsp;&nbsp;&nbsp;<i class="fa fa-folder" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Student ID</th>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-folder" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp; Student ID </th>
 
                     <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
                         aria-label="Rendering engine: activate to sort column descending" style="width: 175px; font-size: 10px">
-                        &nbsp;&nbsp;&nbsp;<i class="fa fa-file-image-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; Student Name</th>
-
-                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                        style="width: 100px; font-size: 10px">
-                        &nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp; Date of Birth</th>
-
-                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                        style="width: 100px; font-size: 10px">
-                        &nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; Gender</th>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-file-image-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; Student Name </th>
 
                 </tr>
             </thead>
 
             <tbody role="alert" aria-live="polite" aria-relevant="all">
 
-                <tr *ngFor="let i of orderview" class="odd">
-                    <td class=" "></td>
-                    <td class=" "><a [routerLink]="['attendance/search/students/:student_id']" (click) = "viewOrder(i.order_id)"> {{ i.order_id }} </a></td>
-                    <td class=" "></td>
-                    <td class=" "></td>
+                <tr *ngFor="let i of students" class="odd">
+                    <td>{{ i.student_id }}</td>
+                    <td><a [routerLink]="['../../student/attendance']" queryParamsHandling="merge" (click)="getStudentAttendance( i )"  >
+                            {{ i.first_name }}&nbsp;{{ i.last_name }}</a>
+                    </td>
                 </tr>
 
             </tbody>
@@ -45,3 +40,4 @@
         <br><br><br><br><br><br>
     </div>
 </div>
+

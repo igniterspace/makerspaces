@@ -1,19 +1,21 @@
 import { Injectable }               from '@angular/core';
 import { Headers, Http ,Response }  from '@angular/http';
-
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
+//models
 import { Order }           from '../models/order';
 import { OrdersEdit }      from '../models/orderedit';
 import { OrderHistory }    from '../models/orderHistory';
 import { OrderView }       from '../models/orderview';
+
+// for data passing to other component
 import { Observable }      from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+import { Order_ITEMS }    from '../../orders/pages/edit/orders.data';
 import { ContextService } from './context.service';
 import { environment }    from '../../../environments/environment';
-import { Order_ITEMS }    from '../../orders/pages/edit/orders.data';
 import { findIndex }      from 'lodash';
 
 
@@ -26,6 +28,7 @@ export class OrdersService {
   user_email  : string ;
   useremail   : string;
 
+  // passing data to another component
   private orderitems = new BehaviorSubject <any>(null);
           newitems   = this.orderitems.asObservable();
 
@@ -35,19 +38,17 @@ export class OrdersService {
   private ordersUrl;  // URL to web api
 
   constructor(private http: Http, private context: ContextService) {
-    const locationId = this.context.getCurrentLocation().id;
-    this.ordersUrl = environment.apiUrl + '/api/location/' + locationId + '/orders';
+              const locationId = this.context.getCurrentLocation().id;
+              this.ordersUrl = environment.apiUrl + '/api/location/' + locationId + '/orders';
   }
 
 
 // For get order history to order history
-
   getOrderHistory(){
     return this.http.get('http://localhost:8080/api/orders/orderhistory').map(res =>res.json());
   }
   
 // For view order items in one order
-
   viewOrder(orderID) {
       return this.http.get('http://localhost:8080/api/orders/orderitemhistory/'+ orderID).map(res => res.json());  
   }
