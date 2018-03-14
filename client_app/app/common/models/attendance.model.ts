@@ -18,3 +18,14 @@ export class Details {
     student_id  : number;
 
 }
+
+export class AttStudent {
+
+    id              : number;
+    first_name      : string;
+    last_name       : string;
+    attendance_mark : number;
+    attendance_id   : number;
+    att_date        : string;
+    isDisabled      : boolean;
+}

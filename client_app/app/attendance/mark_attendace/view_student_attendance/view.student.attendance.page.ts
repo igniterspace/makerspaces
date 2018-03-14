@@ -22,18 +22,14 @@ export class StudentAttendancePage implements OnInit {
     // get student lessons belongs to course
     getStudentLessons(){
       this.attService.getStudentLessons(this.details).subscribe( res => {
-            console.log("For lessons =", this.details);
             this.lessons = res.item;
-            console.log("lessons of student fuckkkkkkkkkk =", this.lessons);
         });
       }
 
     // get student attendance records from database
     getStudentAttendance(){
       this.attService.getStudentAttendance(this.details).subscribe( res => {
-        console.log("student attendance = ",this.details);
         this.student_AttendaceRecord = res.item;
-        console.log("Attendance record  yeahhhh=", this.student_AttendaceRecord);
     });
   }
 
@@ -41,8 +37,6 @@ export class StudentAttendancePage implements OnInit {
 
     //get details ( course + student details) from view student page
     this.attService.newFull_studentCourse.subscribe( details => this.details = details);
-    console.log("full details =",this.details);
-
     
     this.getStudentLessons();
     this.getStudentAttendance();

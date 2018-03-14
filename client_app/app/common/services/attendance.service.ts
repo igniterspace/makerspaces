@@ -18,11 +18,14 @@ export class AttendanceService {
   private listStudents      = new BehaviorSubject <any>(null);
           newlistStudents   = this.listStudents.asObservable();
 
-  private full_studentCourse = new BehaviorSubject <any>(null);
-          newFull_studentCourse   = this.full_studentCourse.asObservable();
+  private full_studentCourse    = new BehaviorSubject <any>(null);
+          newFull_studentCourse = this.full_studentCourse.asObservable();
 
-  private CourseID = new BehaviorSubject <any>(null);
-          newCourseId   = this.CourseID.asObservable();
+  private course = new BehaviorSubject <any>(null);
+          newCourseDeatails = this.course.asObservable();
+
+  private details = new BehaviorSubject <any>(null);
+          newFull_lesson_detail = this.details.asObservable();
 
 
      constructor( private http: Http ) { }
@@ -42,9 +45,34 @@ export class AttendanceService {
       return this.http.post('http://localhost:8080/api/attendance/getStudentAttendance', details ).map(res =>res.json());
     }
 
+    //Get course students belongs to peticular lesson from database
+    getCourseLessonAttendance(passfull_lesson_detail){
+      return this.http.post('http://localhost:8080/api/attendance/getLessonAttendance', passfull_lesson_detail ).map(res =>res.json());
+    }
+
+    //get lesson details belongs to selcted specific course
+    getCourseLessonDetails(passfull_lesson_detail){
+      return this.http.post('http://localhost:8080/api/attendance/getCourseLessonDetails', passfull_lesson_detail ).map(res =>res.json());
+    }
+
+    //get students similar to seach keyword
+    searchCourseStudents(search){
+      return this.http.get('http://localhost:8080/api/attendance/searchCourseStudents/'+ search ).map(res =>res.json());
+    }
+
     // Get selected student course lessons from database(used post because we are sending an object)
     getStudentLessons(details){
       return this.http.post('http://localhost:8080/api/attendance/getStudentLessons', details ).map(res =>res.json());
+    }
+
+    //Mark student as present
+    markStudentAttendance(attStudent){
+      return this.http.post('http://localhost:8080/api/attendance/markStudentAttendance', attStudent ).map(res =>res.json());
+    }
+
+    // get student lesson attendance 
+    getLessonAttendanceDetails(student_course){
+      return this.http.post('http://localhost:8080/api/attendance/getLessonAttendanceDetails', student_course ).map(res =>res.json());
     }
 
     // Get lessons belongs to required specific course
@@ -57,11 +85,7 @@ export class AttendanceService {
       return this.http.get('http://localhost:8080/api/attendance/getCourseStudents/'+ course_id ).map(res =>res.json());
     }
 
-    getlessonsForCourse(courseId){
-      return this.http.get('http://localhost:8080/api/attendance/getlessons/'+ courseId ).map(res =>res.json());
-    }
-
-    //pass course from student course page to view student page
+    //pass course from student course page to view student page(via shared service method)
     passCourse(course) {
       this.courses.next(course)
     }
@@ -71,13 +95,19 @@ export class AttendanceService {
       this.listStudents.next(students)
     }
 
-    //pass details( course + student) to view student attendance page
+    //pass details( course + student) to view student attendance page(via shared service method)
     passStudent_course(course_id) {
       this.full_studentCourse.next(course_id)
     }
 
-    passCourseID(courseId) {
-      this.CourseID.next(courseId)
+    //Pass course details to view lessons page(via shared service method)
+    passCourseID(courseForLesson) {
+      this.course.next(courseForLesson)
+    }
+
+    //pass course ID and lesson ID to lesson attendance page
+    passFull_lesson_detail(full_lesson_detail) {
+      this.details.next(full_lesson_detail)
     }
     
   }

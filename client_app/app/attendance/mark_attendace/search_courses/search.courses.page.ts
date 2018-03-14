@@ -35,7 +35,7 @@ export class SearchCoursesPage implements OnInit {
   searchCoursesForm        : FormGroup ;
   private course_id        : number;
   private courseId         : number;
-
+  private courseForLesson  : any;
 
   constructor (private attService: AttendanceService)
   {
@@ -49,8 +49,8 @@ export class SearchCoursesPage implements OnInit {
 
 // get all courses details to the multisearch dropdown
   getcourseyears() {
-    this.attService.getCourseYears().subscribe(res => 
-      {
+    this.attService.getCourseYears().subscribe(res => {
+
         this.coursesYears = res.item;
 
         this.select_level = [
@@ -114,9 +114,11 @@ export class SearchCoursesPage implements OnInit {
       }
 
         //pass clicked course Id to view lesson page
-        passCourseIDForLessons( course_id: number) {
-          this.attService.passCourseID(course_id)
-          this.attService.newCourseId.subscribe( courseId => this.courseId = courseId);
+        passCourseForLessons(courseForLesson : any) {
+          console.log("WTF =", courseForLesson);
+          this.attService.passCourseID(courseForLesson)
+          this.attService.newCourseDeatails.subscribe( cocourseForLessonurse => this.courseForLesson = courseForLesson);
+          
         };
   
 

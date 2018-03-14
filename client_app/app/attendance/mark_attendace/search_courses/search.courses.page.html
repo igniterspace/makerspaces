@@ -12,17 +12,17 @@
             <br>
             <tbody>
 
-            <td>    <p> Level :</p>
+            <td>    <p style="width: 100px; font-size: 10px; font-weight: 900"> Level :</p>
                     <select formControlName ="level" style = "height: 35px;" >
                             <option *ngFor="let i of select_level" [value]="i.itemName" > {{ i.itemName }} </option>
                     </select>
             </td>
-            <td>    <p>  Year :</p>
+            <td>    <p style="width: 100px; font-size: 10px; font-weight: 900">  Year :</p>
                     <select formControlName ="year" style = "height: 35px;">
                             <option *ngFor="let i of coursesYears" [value]="i.courses_year" > {{ i.courses_year }} </option>
                     </select>
             </td>
-            <td>    <p> Day :</p>
+            <td>    <p style="width: 100px; font-size: 10px; font-weight: 900"> Day :</p>
                     <select formControlName ="day" style = "height: 35px;">
                             <option *ngFor="let i of select_day" [value]="i.itemName" > {{ i.itemName }} </option>
                     </select>
@@ -85,7 +85,7 @@
                                 View Students
                             </button></a>
                         </td>
-                        <td><a [routerLink]="['./lessons',i.id ]" queryParamsHandling="merge" (click)="passCourseIDForLessons( i.id )">
+                        <td><a [routerLink]="['./lessons',i.id ]" queryParamsHandling="merge" (click)="passCourseForLessons( i )">
                             <button class="btn btn-info" >
                                 <i class="fa fa-check-square-o" aria-hidden="true"></i>
                                 View Lessons

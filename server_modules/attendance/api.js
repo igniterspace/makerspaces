@@ -87,7 +87,6 @@ router.get('/getCourseLessons/:course_id', (req, res, next) => {
 //get student attendance record
 router.post('/getStudentAttendance', (req, res, next) => {
   var attDetails = req.body;
-  console.log(attDetails);
   model.getStudentAttendance(attDetails, (err, results) => {
     if (err) {
       throw err;
@@ -104,7 +103,6 @@ router.post('/getStudentAttendance', (req, res, next) => {
 //get student course lessons
 router.post('/getStudentLessons', (req, res, next) => {
   var lesson_Details = req.body;
-  console.log("api =", lesson_Details);
   model.getStudentLessons(lesson_Details, (err, results) => {
     if (err) {
       throw err;
@@ -118,10 +116,11 @@ router.post('/getStudentLessons', (req, res, next) => {
 });
 
 
-//get lessons belongs to course
-router.get('/getlessons/:course_id', (req, res, next) => {
-  var course_ID = req.params.courseId;
-  model.getLessons(course_ID, (err, results) => {
+//get lessons attendance register
+router.post('/getLessonAttendance', (req, res, next) => {
+  var passfull_lesson_detail = req.body;
+  console.log(passfull_lesson_detail);
+  model.getLessonsAttendance(passfull_lesson_detail, (err, results) => {
     if (err) {
       throw err;
       console.log(err)
@@ -133,6 +132,72 @@ router.get('/getlessons/:course_id', (req, res, next) => {
   });
 });
 
+
+//get lessons and course details for lesson attendance page( to show details top of the page)
+router.post('/getCourseLessonDetails', (req, res, next) => {
+  var full_detail = req.body;
+  console.log( full_detail );
+  model.getCourseLessonDetails(full_detail, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
+
+//mark student as present and fill attendance table
+router.post('/markStudentAttendance', (req, res, next) => {
+  var att_detail = req.body;
+  console.log( att_detail );
+  model.markStudentAttendance(att_detail, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
+
+
+//search students similar to entered keyword
+router.get('/searchCourseStudents/:search', (req, res, next) => {
+  var searchString = req.params.search;
+  console.log( "api search =",searchString );
+  model.searchCourseStudents(searchString, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log("results hjjhh =",res);
+  });
+});
+
+
+// get student lesson attendance details
+router.post('/getLessonAttendanceDetails', (req, res, next) => {
+  var student_course = req.body;
+  console.log( student_course );
+  model.getLessonAttendanceDetails(student_course, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
 
 
 // Automatically parse request body as JSON

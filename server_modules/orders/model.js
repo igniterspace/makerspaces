@@ -157,8 +157,6 @@ function submitOrder(order, cb) {
 
 // submit shipping date to the database
 function submitDate(shippingDate,cb) {
-  console.log('shippingDate.obj2', shippingDate.obj2, typeof shippingDate.obj2);
-  console.log('shippingDate.obj1', shippingDate.obj1, typeof shippingDate.obj1);
   connection.query(
    'UPDATE orders SET shipped = ("'+shippingDate.obj2+'") WHERE order_id =' + shippingDate.obj1,
     (err, results) => {

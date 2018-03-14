@@ -1,22 +1,11 @@
-<div  class = "multisearch" style="width: 400px; margin-bottom: 20px;">
-        <h6>Search student...</h6>
-        <br>
-        <ng-select  [multiple]  ="false"
-                    [allowClear]="true"
-                    [items]     ="items"
-                    [active]    = "active"
-                    [disabled]  ="disabled"
-                    [(ngModel)] = "ngvalue"
-                    (data)      ="refreshValue($event)"
-                    (selected)  ="selected($event)"
-                    (removed)   ="removed($event)"
-                    placeholder ="Select student"></ng-select>
-        
-        <br>     
-    </div>
-    <div class = "searchbutton">
-        <button type="button" class="btn btn-primary" (click) = "searchStudent(ngvalue)" (click)="showseachresultForm()" >Search</button>             
-    </div>
+
+    <div>
+        <p>Search Student :</p>
+    
+        <input type="text" name="search" placeholder="Search.." [(ngModel)]="search">
+        <button type="submit" class="btn btn-info" (click)="searchCourseStudents(search)">Search</button>
+    
+      </div>
 
     <br><br><br>  
 
@@ -29,29 +18,72 @@
 
                     <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
                         aria-label="Rendering engine: activate to sort column descending" style="width: 75px;">
-                        &nbsp;&nbsp;&nbsp; <i class="fa fa-address-card" aria-hidden="true"></i> &nbsp;&nbsp; Student ID </th>
+                        &nbsp;&nbsp;&nbsp; <i class="fa fa-address-card" aria-hidden="true"></i> &nbsp;&nbsp; Student Name </th>
 
                     <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
                         aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">
-                        &nbsp;&nbsp;&nbsp;<i class="fa fa-child" aria-hidden="true"></i> &nbsp;&nbsp;Student Name</th>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-child" aria-hidden="true"></i> &nbsp;&nbsp;Level</th>
 
                     <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                         style="width: 75px;">
-                        &nbsp;&nbsp;&nbsp;<i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;&nbsp;Level</th>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;&nbsp;Batch</th>
+
+                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                        style="width: 75px;">
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;&nbsp;Year</th>
 
 
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let order of neworders ; let i = index">
-                    <td>{{i + 1}}</td>
-                    <td></td>
-                    <td><a [routerLink]="['../:student_id']" queryParamsHandling="merge" (click)="viewAttendance(  )">
-                        <button class="btn btn-info" >
-                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                            View attendance
-                        </button></a>
+                <tr *ngFor="let i of student_results">
+                    <td><a queryParamsHandling="merge" (click)="getLessonAttendanceDetails( i )"  >
+                    {{ i.first_name }}&nbsp;{{ i.last_name }}</a>
                     </td>
+                    <td>{{ i.level }}</td>
+                    <td>{{ i.batch }}</td>
+                    <td>{{ i.year }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</form>
+
+
+
+<form *ngIf="attendanceResultForm" > 
+    <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+        <table class="display table table-bordered dataTable-striped table-hover" id="hidden-table-info" aria-describedby="hidden-table-info_info">
+            <thead>
+                <tr role="row">
+
+                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                        aria-label="Rendering engine: activate to sort column descending" style="width: 75px;">
+                        &nbsp;&nbsp;&nbsp; <i class="fa fa-address-card" aria-hidden="true"></i> &nbsp;&nbsp; Lesson Name </th>
+
+                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                        aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-child" aria-hidden="true"></i> &nbsp;&nbsp;Scheduled Date</th>
+
+
+                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                        style="width: 75px;">
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;&nbsp;Mark Attendance</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let j of student_attendance">
+                    <td>{{ j.lesson_name}}</td>
+                    <td>{{ j.date }}</td>
+                    <td>
+                        <button class="btn btn-success" >
+                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                            Mark Attendance
+                        </button></td>
                 </tr>
             </tbody>
         </table>

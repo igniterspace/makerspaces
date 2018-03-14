@@ -68,7 +68,6 @@ function getCourseStudents(course_ID, cb) {
         return;
       }
       cb(null, results);
-      console.log("Resultsr = ",results);
     }
   );
 }
@@ -85,7 +84,6 @@ function getCourseLessons(course_ID, cb) {
         return;
       }
       cb(null, results);
-      console.log("Resultsr = ",results);
     }
   );
 }
@@ -102,7 +100,6 @@ function getStudentAttendance(attDetails, cb) {
         return;
       }
       cb(null, results);
-      console.log("Resultsr = ",results);
     }
   );
 }
@@ -110,7 +107,6 @@ function getStudentAttendance(attDetails, cb) {
 
 //get student attendance details from database ( lesson attendance)
 function getStudentLessons(lesson_Details, cb) {
-  console.log("haha ha =", lesson_Details);
   connection.query(
     'SELECT * FROM lessons LEFT OUTER JOIN lessons_in_course  ON ( lessons.id = lessons_in_course.l_id ) WHERE c_id =? ',[ lesson_Details.id ],
     (err, results) => {
@@ -119,28 +115,96 @@ function getStudentLessons(lesson_Details, cb) {
         return;
       }
       cb(null, results);
-      console.log("Resultsr = ",results);
     }
   );
 }
 
 
-//get course lessons from database
-function getLessons(course_ID, cb) {
-  console.log(course_ID);
+//get course students belongs to peticular lesson from database
+function getLessonsAttendance(passfull_lesson_detail, cb) {
   connection.query(
-    'SELECT lessons.id, lessons.name, lessons.date FROM lessons_in_course LEFT OUTER JOIN lessons ON ( lessons_in_course.l_id = lessons.id) WHERE c_id =? ',[ course_ID ],
+    'SELECT students.id, students.first_name, students.last_name, attendance.attendance_id, attendance.attendance_mark, attendance.att_date FROM students LEFT OUTER JOIN attendance ON ( students.id = attendance.student_id) WHERE course_id=? AND lesson_id=? ',[ passfull_lesson_detail.course_ID , passfull_lesson_detail.lesson_ID ],
     (err, results) => {
       if (err) {
         cb(err);
         return;
       }
       cb(null, results);
-      console.log("Resultsr = ",results);
+      console.log("Results = ",results);
     }
   );
 }
 
+
+//get lessons and course details for lesson attendance page( to show details top of the page)
+function getCourseLessonDetails(full_detail, cb) {
+  connection.query(
+    'SELECT courses.name AS level, courses.year, lessons.name, lessons.date FROM courses LEFT OUTER JOIN lessons_in_course ON ( courses.id = lessons_in_course.c_id) LEFT OUTER JOIN lessons ON ( lessons_in_course.l_id = lessons.id ) WHERE courses.id=? AND lessons.id=? ',[ full_detail.course_ID , full_detail.lesson_ID ],
+    (err, results) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+      cb(null, results);
+      console.log("Results = ",results);
+    }
+  );
+}
+
+
+//Mark student attendance as present
+function markStudentAttendance(att_detail, cb) {
+  var date = new Date();
+  connection.query(
+    'INSERT INTO attendance (course_id, student_id, lesson_id, attendance_mark, att_date ) VALUES (' +att_detail.course_ID + ', ' +att_detail.student_id+' , ' +att_detail.lesson_ID+',  ' + 1 +',  "' +date+'"  )',
+    (err, results) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+      cb(null, results);
+      console.log("Results = ",results);
+    }
+  );
+}
+
+
+//seach students similar to entered keyword
+function searchCourseStudents(searchString, cb) {
+  connection.query(
+    `SELECT students.first_name AS first_name, students.last_name AS last_name, courses.name AS level, courses.batch AS batch, courses.year AS year , courses.id AS course_id, students.id AS student_id FROM students LEFT OUTER JOIN students_in_course ON ( students.id = students_in_course.s_id ) LEFT OUTER JOIN courses ON ( students_in_course.c_id = courses.id ) WHERE students.first_name LIKE '%${searchString}%' OR students.last_name LIKE '%${searchString}%' OR concat(students.first_name," ",students.last_name) LIKE '%${searchString}%'`,
+    (err, results) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+      cb(null, results);
+      console.log("Results = ",results);
+    }
+  );
+}
+
+
+//get student lesson attendance details
+function getLessonAttendanceDetails(student_course, cb) {
+  connection.query(
+    ' SELECT students.id AS student_id, students.first_name, students.last_name, students.first_name, '+
+    ' students.last_name, lessons.id AS lesson_id, lessons.name AS lesson_name, lessons.date AS date, attendance.attendance_mark, attendance.attendance_id'+
+    ' FROM students LEFT OUTER JOIN attendance ON ( students.id = attendance.student_id )'+
+    ' LEFT OUTER JOIN lessons ON ( attendance.lesson_id = lessons.id )'+
+    ' WHERE attendance.course_id = ? AND students.id = ?',[student_course.course_id, student_course.student_id],
+    (err, results) => {
+      if (err) {
+        cb(err); 
+        return;
+      }
+      cb(null, results);
+      console.log("Results = ",results);
+    }
+  );
+}
+
+// create attendace table and related tables in the database
 function createSchema(config, cb) 
 {
     const connection = database.createMultipleStatementConnection(config);
@@ -151,7 +215,7 @@ function createSchema(config, cb)
         \`course_id\` INT UNSIGNED NOT NULL,
         \`student_id\` INT UNSIGNED NOT NULL,
         \`lesson_id\` INT UNSIGNED NOT NULL,
-        \`attendance\` INT DEFAULT 0,        
+        \`attendance_mark\` INT ,        
         \`att_date\` VARCHAR(255),
       PRIMARY KEY (\`attendance_id\`))  ENGINE=INNODB;` +
 
@@ -188,12 +252,18 @@ function createSchema(config, cb)
 
 module.exports = {
 
-    createSchema        : createSchema,
-    getAllCoursesYears  : getAllCoursesYears,
-    getCourseDetails    : getCourseDetails,
-    getCourseStudents   : getCourseStudents,
-    getCourseLessons    : getCourseLessons,
-    getStudentAttendance: getStudentAttendance,
-    getStudentLessons   : getStudentLessons
+    createSchema          : createSchema,
+    getAllCoursesYears    : getAllCoursesYears,
+    getCourseDetails      : getCourseDetails,
+    getCourseStudents     : getCourseStudents,
+    getCourseLessons      : getCourseLessons,
+    getStudentAttendance  : getStudentAttendance,
+    getStudentLessons     : getStudentLessons,
+    getLessonsAttendance  : getLessonsAttendance,
+    getCourseLessonDetails: getCourseLessonDetails,
+    markStudentAttendance : markStudentAttendance,
+    searchCourseStudents  : searchCourseStudents,
+    getLessonAttendanceDetails : getLessonAttendanceDetails
   };
   
+
