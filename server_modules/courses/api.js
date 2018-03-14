@@ -1,3 +1,4 @@
+
 // Copyright 2017, IgniterSpace.
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,8 +14,6 @@ const bodyParser = require('body-parser');
 const logging    = require('../../server_lib/logging');
 const model      = require('./model');
 const router     = express.Router();
-const auth       = require('../../server_lib/auth');
-const user       = require('../users/api')
 
 const errNotFound = {
   code: 404,
@@ -45,8 +44,19 @@ router.get('/getallcourses', (req, res, next) => {
 //Get list of all students of the course to the frontend..
 router.get('/getallcoursestudents/:courses_id', (req, res, next) => {
   var c_id = req.params.courses_id;
-  //console.log("value_students:",c_id);  
   model.getAllCourseStudents(c_id,(err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+router.get('/getcourseid/:courses_id', (req, res, next) => {
+  var c_id = req.params.courses_id;
+  model.getCourseDetails(c_id,(err, results) => {
     if (err) {
       throw err;
     }
@@ -69,10 +79,21 @@ router.get('/listallstudents', (req, res, next) => {
   });
 });
 
+//get all lessons to show on the dropdown..
+router.get('/listalllessons', (req, res, next) => {
+  model.listAllLessons((err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
 //Get lesson list to show on the list (frontend)..
 router.get('/getallcourselessons/:courses_id', (req, res, next) => {
    var c_id = req.params.courses_id;
-   //console.log("value_lessons:",c_id);
    model.getAllCourseLessons(c_id,(err, results) => {
      if (err) {
        throw err;
@@ -87,23 +108,36 @@ router.get('/getallcourselessons/:courses_id', (req, res, next) => {
 //Send Course details to the database..
 router.post('/addcourse', (req, res, next) => {
   var course = req.body;
-  //console.log(course);
   model.addCourse(course, (err, results) => {
     if (err) {
       throw err;
     }
     res.json({
-      item: results
+      item: results,
+      
     });
   });
-});
+  res.send({})
+})
 
 
-//Insert a lesson to the database..
+//Insert a lesson to the database and to the course..
+// router.post('/addlesson', (req, res, next) => {
+//   var lesson = req.body;
+//   console.log("salala:",lesson);
+//   model.addLesson(lesson, (lesson, results) => {
+//     if (err) {
+//       throw err;
+//     }
+//     res.json({
+//       item: results
+//     });
+//   });
+// });
+
 router.post('/addlesson', (req, res, next) => {
   var lesson = req.body;
-  //console.log(lesson);
-  model.addLesson(lesson, (lesson, results) => {
+  model.addLesson(lesson, (err, results) => {
     if (err) {
       throw err;
     }
@@ -111,12 +145,40 @@ router.post('/addlesson', (req, res, next) => {
       item: results
     });
   });
+  res.send({})
+});
+
+//Insert a lesson to a course (lessons_in_course table)..
+router.post('/addcourselesson', (req, res, next) => {
+  var courselesson = req.body;
+  model.addCourseLesson(courselesson, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+  res.send({})
+});
+
+//Insert a student to the course..
+router.post('/addstudent', (req, res, next) => {
+  var student = req.body;
+  model.addStudent(student, (student, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+  res.send({})
 });
 
 //Edit Course information..
 router.post('/updateCourse', (req, res, next) => {
   var edcourse = req.body;
-  //console.log('updated details:', edcourse);
   model.getEditCourse(edcourse, (err, results) => {
     if (err) {
       throw err;
@@ -126,13 +188,53 @@ router.post('/updateCourse', (req, res, next) => {
       item: results
     });
   });
+  res.send({})
+});
+
+//Edit Course's Lesson date..
+router.post('/updateCourseLesson', (req, res, next) => {
+  var edlesson = req.body;
+  model.EditLessonDate(edlesson, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+  res.send({})
 });
 
 //Delete course from the list and from the database..
 router.get('/deleteCourse/:coursetid', (req, res, next) => {
   var course_id = req.params.coursetid;
-  //console.log('deleted details:', course_id);
   model.deleteCourse(course_id, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+//Delete lesson from the course and from the database..
+router.post('/deleteLesson', (req, res, next) => {
+  var lesson_id = req.body;
+  model.deleteLesson(lesson_id, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+//Delete student from the course and from the database..
+router.post('/deleteStudent', (req, res, next) => {
+  var student_id = req.body;
+  model.deleteStudent(student_id, (err, results) => {
     if (err) {
       throw err;
     }
@@ -148,11 +250,40 @@ router.get('/search/:search', (req, res, next) => {
   model.searchStudent(detail, (err, results) => {
     if (err) {
       throw err;
-      console.log(err)
     }
     res.json({
       item: results
     });
+  });
+});
+
+//Search lessons..
+router.get('/searchles/:search', (req, res, next) => {
+  var lesdetail = req.params.search;
+  model.searchLessons(lesdetail, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+//Get lesson to the frontend to check the validity..
+router.get('/checkIfLessonExists', (req, res, next) => {
+  //console.log('isLesson',req.query.isLesson, 'value :', req.query.value);
+ // console.log('REQ : ', req.query);
+  model.getLesson(req.query.value, (err, results) => {
+    if (err) {
+      throw err;
+     
+    }
+    //console.log('Result 1 : ', results);
+    res.json({
+      item :results
+    });
+   
   });
 });
 

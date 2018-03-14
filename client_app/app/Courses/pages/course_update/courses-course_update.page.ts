@@ -37,7 +37,8 @@ constructor(private cs: CoursesService,
     
     this.updateCourseForm = formBuilder.group({
     courses_id        : [''],
-    courses_name      : [null, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(30)])],
+    courses_batch     : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])],
+    courses_name      : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])],
     courses_year      : [null, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])],
     courses_from_date : [''],
     courses_to_date   : [''],
@@ -51,7 +52,6 @@ updateCourse(course_data : ListCourses) {
   this.cs.editCourse(edcourse).subscribe(res => console.log(edcourse));
   this.updateCourseForm.reset();
   alert('This Course has being updated..');
-  
   }    
 
 isValid(field : string){
@@ -63,12 +63,17 @@ ngOnInit() {
         
 //Show details recieved from the list in the form..
   this.cs.uCourse.subscribe( updatecourses => {
-          
+    let courses_name = updatecourses.courses_name;
+    let name = courses_name.split(" ");
+    this.bname = name[0];
+    this.lname = name[1];
+    
   this.course_data = updatecourses;
      
   this.updateCourseForm.patchValue({
     courses_id              : updatecourses.courses_id,
-    courses_name            : updatecourses.courses_name,
+    bname                   : name[0],
+    lname                   : name[1],
     courses_year            : updatecourses.courses_year,
     courses_from_date       : updatecourses.courses_from_date,
     courses_to_date         : updatecourses.courses_to_date,

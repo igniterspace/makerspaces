@@ -27,12 +27,13 @@ export class CoursesAddPage {
               private formBuilder: FormBuilder) {
     this.coursesService = cs;
 
-    this.addCourseForm = formBuilder.group({
-      course_name    : [null, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(30)])],
-      course_year    : [null, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])],
-      from_day       : [''],
-      to_day         : [''],
-      course_day     : [''],
+    this.addCourseForm = new FormGroup({
+      course_batch   : new FormControl (null, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(30)])),
+      course_name    : new FormControl (null, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(30)])),
+      course_year    : new FormControl (null, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])),
+      from_day       : new FormControl (''),
+      to_day         : new FormControl (''),
+      course_day     : new FormControl (''),
     });
   }
   
@@ -45,10 +46,8 @@ export class CoursesAddPage {
   //Send Course details to the database..
   saveCourse(course : AddCourses) {
     this.cs.saveCourse(course).subscribe(res => console.log(course));
-    //console.log(course);
     this.addCourseForm.reset();
     alert('This Course has being added to the Database..');
-    
   }
 
 

@@ -8,31 +8,24 @@
         <tr>
             <td>LESSON NAME :- </td>
             <td>
-            <input type="text" class="form-control" formControlName="lesson_name" name="Lesson_Name" placeholder="Lesson Name" required/>
-            <!-- <small *ngIf="!isValid('lesson_name')" class="text-muted">Not enough characters</small> -->
-
+            <input type="text" class="form-control" formControlName="lesson_name" name="Lesson_Name" placeholder="Lesson Name" (blur)="addLessonForm.controls['lesson_name'].valid ? checkLessonExists() : 'Invalid'" required/>
+            
+            <div *ngIf="addLessonForm.get('lesson_name').status === 'VALID'">
+                😊 Great This lesson is available!
+         </div>
+          <div *ngIf="addLessonForm.get('lesson_name').status === '!VALID'">
+                😮 Sorry, this lesson is already in the database!
+              </div>
             </td>
         </tr>
+        
         <br>
-        
-        
-        <tr>
-            <td>DATE:-</td>
-            <td>
-            <dp-date-picker [(ngModel)]="selectedDate" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="day" placeholder="Starting Date"
-            name="Day" required></dp-date-picker>
-                </td>
-        </tr>
-        <br>
-        
-        
         <tr>
             <td colspan="2" align="center">
-                <button type="submit" class="btn btn-success" [disabled]="!addLessonForm.valid" (click)="saveLesson(addLessonForm.value)" >Submit</button>
+                <button type="submit" class="btn btn-success" [routerLink]="['../']" [disabled]="!addLessonForm.valid" (click)="saveLesson(addLessonForm.value)" >Submit</button>
                 <input type="reset" class="btn btn-danger" value="Reset">
             </td>
         </tr>
     </table>
 
 </form>
-

@@ -77,6 +77,7 @@ router.post('/addStudent', (req, res, next) => {
       item: results
     });
   });
+  res.send({})
 });
 
 //Edit Student information..
@@ -91,6 +92,7 @@ router.post('/updateStudent', (req, res, next) => {
       item: results
     });
   });
+  res.send({})
 });
 
 //Send guardian details to the database..
@@ -104,6 +106,7 @@ router.post('/addGuardian', (req, res, next) => {
       item: results
     });
   });
+  res.send({})
 });
 
 
@@ -118,6 +121,7 @@ router.post('/assGuardian', (req, res, next) => {
       item: results
     });
   });
+  res.send({})
 });
 
 

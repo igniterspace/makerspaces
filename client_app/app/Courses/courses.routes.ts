@@ -7,6 +7,7 @@ import { CoursesUpdatePage }                from './pages/course_update/courses-
 import { LessonsAddPage }                   from './pages/lesson_add/courses-lesson_add.page';
 import { LessonsListPage }                  from './pages/lesson_list/courses-lesson_list.page';
 import { CourseStudentListPage }            from './pages/student_list/courses-student_list.page';
+import { LessonsUpdatePage }                from './pages/lesson_update/courses-lesson_update';
 
 @NgModule({
     imports: [RouterModule.forChild([
@@ -14,6 +15,7 @@ import { CourseStudentListPage }            from './pages/student_list/courses-s
       { path: 'courses/list', component: CoursesListPage },
       { path: 'courses/list/lesson_list/:c.courses_id', component: LessonsListPage },
       { path: 'courses/list/course_update/:c.courses_id', component: CoursesUpdatePage },
+      { path: 'courses/list/lesson_list/:c.courses_id/lesson_update/:l.l_id', component: LessonsUpdatePage },
       { path: 'courses/list/lesson_list/:c.courses_id/lesson_add', component: LessonsAddPage },
       { path: 'courses/list/student_list/:c.courses_id', component: CourseStudentListPage },
     ])],

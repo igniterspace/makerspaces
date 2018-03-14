@@ -19,9 +19,9 @@ export class StudentsListPage {
   Student: any;
   
 
-  private studentsService: StudentsService;
-  private students: Student[];
-  private liststudents = [] ;
+  private studentsService : StudentsService;
+  private students        : Student[];
+  private liststudents    = [] ;
   private addStudentForm  : FormGroup;
   private updatestudents  : ListStudents;
   private student         : ListStudents[];
@@ -29,11 +29,11 @@ export class StudentsListPage {
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
-  validateDelete: boolean;
+  validateDelete  : boolean;
 
   ListAllStudents : FormGroup ; 
   
-  constructor(private ss: StudentsService,private formBuilder: FormBuilder) {
+  constructor(private ss : StudentsService,private formBuilder: FormBuilder) {
     this.studentsService = ss;
     this.ListAllStudents = new FormGroup({
          liststudents    : new FormControl()
@@ -49,17 +49,14 @@ export class StudentsListPage {
   listAllStudents() {
     this.ss.listAllStudents().subscribe(res => {
       this.liststudents  = res.item;
-      console.log(this.liststudents);
     });
   }
 
 //Delete student from the database when the delete button is clicked..  
   deleteStudent(deleteid : DeleteId){
     alert('Do you want to remove this student?');
-    
     this.ss.deleteStudent(deleteid).subscribe(res=>console.log(res))
     var i;
-
     for ( i=0; i<this.liststudents.length; i++){
       if(this.liststudents[i].id == deleteid){
         this.liststudents.splice(i, 1);

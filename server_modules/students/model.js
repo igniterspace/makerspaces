@@ -138,7 +138,7 @@ function createSchema(config, cb) {
 \`id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 \`first_name\` VARCHAR(255) NULL,
 \`last_name\` VARCHAR(255) NULL,
-\`date_of_birth\` VARCHAR(20) NULL,
+\`date_of_birth\` VARCHAR(10) NULL,
 \`home_address\` VARCHAR(255) NULL,
 \`gender\` VARCHAR(255) NULL,
 \`g_id\` INT ,

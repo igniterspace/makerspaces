@@ -279,29 +279,29 @@ if (module === require.main) {
       '(004,\'Asitha\',\'Senarathne\',\'02-04-1992\' ,  \'12/2 Bandaranayake Rd, Katubadde\', \'male\', 996),'  +
       '(005, \'Subha\',\'Wijesinghe\', \'08-09-1972\', \'No 10, Sri Bodhi Rd, Gampaha\',\'female\',996);' +
 
-      'INSERT INTO courses(id, name, year, from_date, to_date, day ) VALUES ' +
-      '(1,\'Batch 3 Level 1\',\'2017\', \'28-02-2017\' ,  \'28-08-2017\', \'Saturday\'),'+
-      '(2,\'Batch 3 Level 2\',\'2017/2018\',\'05-09-2017\' , \'05-03-2018\', \'Saturday\'),'+
-      '(3,\'Batch 3 Level 3\',\'2018\',\'06-01-2018\' ,  \'06-06-2018\', \'Saturday\'),'+
-      '(4,\'Batch 4 Level 4(Computing)\',\'2017\',\'02-04-2018\' ,\'02-10-2018\', \'Sunday\'),'  +
-      '(5,\'Batch 5 Level 1\',\'2016/2017\', \'08-09-2016\', \'08-03-2017\', \'Sunday\');' +
+      'INSERT INTO courses(id, batch, name, year, from_date, to_date, day ) VALUES ' +
+      '(1,\'Batch-3\',\'Level-1\',\'2017\', \'28-02-2017\' ,  \'28-08-2017\', \'Saturday\'),'+
+      '(2,\'Batch-3\',\'Level-2\',\'2017/2018\',\'05-09-2017\' , \'05-03-2018\', \'Saturday\'),'+
+      '(3,\'Batch-3\',\'Level-3\',\'2018\',\'06-01-2018\' ,  \'06-06-2018\', \'Saturday\'),'+
+      '(4,\'Batch-4\',\'Level-4(Computing)\',\'2017\',\'02-04-2018\' ,\'02-10-2018\', \'Sunday\'),'  +
+      '(5,\'Batch-5\',\'Level-1\',\'2016/2017\', \'08-09-2016\', \'08-03-2017\', \'Sunday\');' +
 
-      'INSERT INTO lessons(id, name, date) VALUES ' +
-      '(1,\'Golfer Bot\', \'28-02-2017\' ),'+
-      '(2,\'Touch Torch\',\'05-09-2017\'),'+
-      '(3,\'Night Light\',\'06-01-2018\'),'+
-      '(4,\'Music Box\',\'02-04-2018\'),'  +
-      '(5,\'Generator\', \'08-09-2016\');'+
+      'INSERT INTO lessons(id, name) VALUES ' +
+      '(1,\'Golfer Bot\' ),'+
+      '(2,\'Touch Torch\'),'+
+      '(3,\'Night Light\'),'+
+      '(4,\'Music Box\'),'  +
+      '(5,\'Generator\');'+
 
-      'INSERT INTO lessons_in_course(c_id, l_id) VALUES ' +
-      '(1, 1),'+
-      '(1, 2),'+
-      '(2, 1),'+
-      '(3, 3),'+
-      '(3, 5),'+
-      '(4, 4),'+
-      '(5, 1),'+
-      '(5, 3);'+
+      'INSERT INTO lessons_in_course(c_id, l_id, held_date) VALUES ' +
+      '(1, 1, \'28-02-2017\'),'+
+      '(1, 2, \'05-09-2017\'),'+
+      '(2, 1, \'06-01-2018\'),'+
+      '(3, 3, \'02-04-2018\'),'+
+      '(3, 5, \'08-09-2016\'),'+
+      '(4, 4, \'10-09-2016\'),'+
+      '(5, 1, \'11-12-2018\'),'+
+      '(5, 3, \'06-11-2018\');'+
      
       'INSERT INTO students_in_course(c_id, s_id) VALUES ' +
       '(1, 1),'+

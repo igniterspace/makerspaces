@@ -6,9 +6,17 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <tr>
+            <td>COURSE BATCH :- </td>
+            <td>
+            <input type="text" class="form-control" value="bname" [(ngModel)]="bname" formControlName="courses_batch" name="Course_Batch" placeholder="Batch-**" required/>
+
+            </td>
+        </tr>
+        <br>
+        <tr>
             <td>COURSE NAME :- </td>
             <td>
-            <input type="text" class="form-control" value="course_data.courses_name" formControlName="courses_name" [(ngModel)]="course_data.courses_name" name="Course_Name" placeholder="Course Name" required/>
+            <input type="text" class="form-control" value="lname" formControlName="courses_name" [(ngModel)]="lname" name="Course_Name" placeholder="Course Name" required/>
             </td>
         </tr>
         <br>

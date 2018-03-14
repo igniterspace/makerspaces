@@ -9,7 +9,7 @@ import { OrdersAddPage }          from './pages/add/add-orders.page';
 import { OrdersEditService }      from '../common/services/order.service';
 import { OrdersService }          from '../common/services/order.service';
 import { ContextService }         from '../common/services/context.service';
-import { DpDatePickerModule } from 'ng2-date-picker';
+import { DpDatePickerModule }     from 'ng2-date-picker';
 
 
 @NgModule({

@@ -1,21 +1,19 @@
-import { Injectable }      from '@angular/core';
+import { Injectable }                from '@angular/core';
 import { Headers, Http, Response }   from '@angular/http';
-import { AuthHttp }        from 'angular2-jwt';
+import { AuthHttp }                  from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/delay';
 
-//import { Student }         from '../models/student';
 import { ContextService }  from './context.service';
 import { environment }     from '../../../environments/environment';
-// import { Guardian }        from 'app/common/models/guardian';
-// import { ListStudents }    from 'app/common/models/liststudents';
-// import { ListGuardians }   from 'app/common/models/listguardians';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable }      from 'rxjs/Observable';
 
+import { DELETE_LESSON }    from '../../courses/pages/lesson_list/courseslessons.data';
+import { DeleteLId }        from '../models/courses';
 
 @Injectable()
 export class CoursesService {
@@ -24,11 +22,15 @@ export class CoursesService {
   options : any;
   authService : any ;
 
+
   private headers = new Headers({'Content-Type': 'application/json'});
   private studentsUrl;  // URL to web api
 
   public sLesson  = new BehaviorSubject<any>(null);
   selectlesson = this.sLesson.asObservable();
+
+  public uLesson  = new BehaviorSubject<any>(null);
+  updatelesson = this.uLesson.asObservable();
 
   public sStudent  = new BehaviorSubject<any>(null);
   selectstudent = this.sStudent.asObservable();
@@ -41,19 +43,21 @@ export class CoursesService {
     this.studentsUrl = environment.apiUrl + '/api/location/' + locationId + '/students' ;
   }
 
-  selStudent(selectstu:any) {
-    //console.log(selectstu);
-    this.sStudent.next(selectstu)
+  selStudent(courses_id) {
+    this.sStudent.next(courses_id)
   }
 
-  sellesson(selectles: any) {
-    //console.log(selectles);
-    this.sLesson.next(selectles)
+  sellesson(courses_id) {
+    this.sLesson.next(courses_id)
   }
+
 
   updateCourse(updatecourses:any) {
-    console.log(updatecourses);
     this.uCourse.next(updatecourses)
+  }
+
+  editLesson(updatelessons:any) {
+    this.uLesson.next(updatelessons)
   }
 
   getAuthService(params): Observable<any> {
@@ -62,51 +66,88 @@ export class CoursesService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server Error Authentication Service'));
   }
 
-  // fetchData() {
-  //   this.http.get('./components/students/pages/edit/students-guardian_add-page.html').map(
-  //    (response) => response.json()
-  //   ).subscribe (
-  //     (data) => console.log(data)
-  //   )
-  // }
-
 
   listAllCourses(){
     return this.http.get('http://localhost:8080/api/courses/getallcourses').map(res=>res.json());
+  }
+
+  getCourseID(courses_id){
+    return this.http.get('http://localhost:8080/api/courses/getcourseid/'+ courses_id).map(res=>res.json());
   }
 
   getStudents(courses_id){
     return this.http.get('http://localhost:8080/api/courses/getallcoursestudents/'+ courses_id).map(res=>res.json());
   }
 
-  getlessons(courses_id){
-    return this.http.get('http://localhost:8080/api/courses/getallcourselessons/'+courses_id).map(res=>res.json());
+  // getnewStudents(c_id){
+  //   return this.http.get('http://localhost:8080/api/courses/getallcoursestudents/'+ c_id).map(res=>res.json());
+  // }
+
+  getlessons(c_id){
+    return this.http.get('http://localhost:8080/api/courses/getallcourselessons/'+c_id).map(res=>res.json());
   }
 
   listAllStudents(){
     return this.http.get('http://localhost:8080/api/courses/listallstudents').map(res=>res.json());
   }
 
+  listAllLessons(){
+    return this.http.get('http://localhost:8080/api/courses/listalllessons').map(res=>res.json());
+  }
+
   saveCourse(course_details) {
+    console.log(course_details);
     return this.http.post('http://localhost:8080/api/courses/addcourse', course_details).map(res => res.json());
   }
 
-  saveLesson(lesson_details) {
-    return this.http.post('http://localhost:8080/api/courses/addlesson', lesson_details).map(res => res.json());
+  // saveLesson(full_detail) {
+  //   console.log(full_detail);
+  //   return this.http.post('http://localhost:8080/api/courses/addlesson', full_detail).map(res => res.json());
+  // }
+
+  saveLesson(full_detail) {
+       return this.http.post('http://localhost:8080/api/courses/addlesson', full_detail).map(res => res.json());
+  }
+
+  saveCourseLesson(full_detail) {
+  return this.http.post('http://localhost:8080/api/courses/addcourselesson', full_detail).map(res => res.json());
+  }
+
+  saveStudent(full_detail) {
+    return this.http.post('http://localhost:8080/api/courses/addstudent', full_detail).map(res => res.json());
   }
 
   editCourse(editcourse) {
     return this.http.post('http://localhost:8080/api/courses/updateCourse', editcourse).map(res => res.json());
   } 
 
+  updateLesson(uplessons) {
+    return this.http.post('http://localhost:8080/api/courses/updateCourseLesson', uplessons).map(res => res.json());
+  } 
+
   deleteCourse(deleteid){
     return this.http.get(`http://localhost:8080/api/courses/deleteCourse/${deleteid}`).map(res=>res.json());
   }  
 
+  deleteLesson(deleteid){
+    return this.http.post('http://localhost:8080/api/courses/deleteLesson', deleteid).map(res=>res.json());
+  }  
+
+  deleteStudent(deleteid){
+    return this.http.post('http://localhost:8080/api/courses/deleteStudent', deleteid).map(res=>res.json());
+  } 
+
   similarStudent(search) {
-    console.log(search);
     return this.http.get('http://localhost:8080/api/courses/search/'+ search).map(res => res.json());
   }
+
+  similarLessons(search) {
+    return this.http.get('http://localhost:8080/api/courses/searchles/'+ search).map(res => res.json());
+  }
+
+  checkIfLessonExists(isLesson: boolean, isUsername: boolean, value: string) {
+    return this.http.get(`http://localhost:8080/api/courses/checkIfLessonExists?isLesson=${isLesson}&value=${value}`).map(res => res.json());
+  }  
 
 private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

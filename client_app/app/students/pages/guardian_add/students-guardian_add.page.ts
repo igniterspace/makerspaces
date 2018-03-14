@@ -46,9 +46,9 @@ export class StudentsGuardian_addPage {
     this.studentsService = ss;
 
     this.addGuardianForm = formBuilder.group({
-      gname     : [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      mnumber   : [null, Validators.compose([Validators.required, Validators.minLength(10)])],
-      hnumber   : [null, Validators.compose([Validators.required, Validators.minLength(10)])],
+      gname     : [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(70)])],
+      mnumber   : [null, Validators.compose([Validators.required, Validators.minLength(15)])],
+      hnumber   : [null, Validators.compose([Validators.required, Validators.minLength(15)])],
       'eaddress': new FormControl('', [Validators.required, Validators.pattern(this.emailPattern),]),
     });
   }

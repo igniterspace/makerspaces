@@ -5,7 +5,7 @@
 
 <body>
   <table [formGroup]="ListallGuardians" (ngSubmit)="assignGuardian(ListallGuardians.value)" method="post">
-    <select formControlName="guardians_name">
+    <select formControlName="guardians_name" class="selectpicker">
       <option value="" disabled selected>Select your guardian...</option>
       <option *ngFor="let g of listguardians" [value]="g.guardians_id"> {{ g.guardians_name }} </option>
     </select>
