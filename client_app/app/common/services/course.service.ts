@@ -21,7 +21,7 @@ export class CoursesService {
   s : number ;
   options : any;
   authService : any ;
-
+  res : any ;
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private studentsUrl;  // URL to web api
@@ -51,7 +51,6 @@ export class CoursesService {
     this.sLesson.next(courses_id)
   }
 
-
   updateCourse(updatecourses:any) {
     this.uCourse.next(updatecourses)
   }
@@ -79,12 +78,9 @@ export class CoursesService {
     return this.http.get('http://localhost:8080/api/courses/getallcoursestudents/'+ courses_id).map(res=>res.json());
   }
 
-  // getnewStudents(c_id){
-  //   return this.http.get('http://localhost:8080/api/courses/getallcoursestudents/'+ c_id).map(res=>res.json());
-  // }
-
   getlessons(c_id){
-    return this.http.get('http://localhost:8080/api/courses/getallcourselessons/'+c_id).map(res=>res.json());
+    console.log(c_id);
+    return this.http.get('http://localhost:8080/api/courses/getallcourselessons/' +c_id).map(res=>res.json());
   }
 
   listAllStudents(){
@@ -96,14 +92,8 @@ export class CoursesService {
   }
 
   saveCourse(course_details) {
-    console.log(course_details);
     return this.http.post('http://localhost:8080/api/courses/addcourse', course_details).map(res => res.json());
   }
-
-  // saveLesson(full_detail) {
-  //   console.log(full_detail);
-  //   return this.http.post('http://localhost:8080/api/courses/addlesson', full_detail).map(res => res.json());
-  // }
 
   saveLesson(full_detail) {
        return this.http.post('http://localhost:8080/api/courses/addlesson', full_detail).map(res => res.json());
@@ -152,8 +142,8 @@ export class CoursesService {
 private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
-}
+  }
   
 
- }
+}
 

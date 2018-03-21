@@ -54,9 +54,8 @@ function getCourseDetails(c_id,cb) {
 
 //Query to get lessons from courses from the databes to show in the frontend..  
 function getAllCourseLessons(c_id,cb) {
-    connection.query(
-    `SELECT lessons_in_course.c_id AS c_id, lessons_in_course.l_id AS l_id, lessons_in_course.held_date AS date  , lessons.name AS lesson_name FROM lessons_in_course LEFT OUTER JOIN lessons ON (lessons_in_course.l_id = lessons.id) WHERE c_id= ? `,[c_id],
-    // GROUP BY CONVERT(VARCHAR(10), held_date, 103) ORDER BY held_date ASC
+    connection.query(`SELECT lessons_in_course.c_id AS c_id, lessons_in_course.l_id AS l_id, lessons_in_course.held_date AS dateh  , lessons.name AS lesson_name FROM lessons_in_course LEFT OUTER JOIN lessons ON (lessons_in_course.l_id = lessons.id) WHERE c_id= ? ORDER BY held_date ASC`,[c_id],
+    
     (err, results) => {
         if (err) {
           cb(err);
@@ -65,7 +64,45 @@ function getAllCourseLessons(c_id,cb) {
       cb(null, results);
     });
 }
+//Query to add a lesson to a course with a date..         
+// function getAllCourseLessons(c_id, cb) {
+//     connection.beginTransaction(function (err) {
+     
+//       if (err) { throw err; }
+//       connection.query(`SELECT lessons_in_course.c_id AS c_id, lessons_in_course.l_id AS l_id, lessons_in_course.held_date AS dateh  , lessons.name AS lesson_name FROM lessons_in_course LEFT OUTER JOIN lessons ON (lessons_in_course.l_id = lessons.id) WHERE c_id= ?`, [c_id], function (err, result) {
+//         if (err) {
+//           connection.rollback(function () {
+//             throw err;
+//           });
+//         };
+//         console.log('Result : ', result);
+//         var last_selected_course_id = result[0].c_id;
+//         console.log("bla bla", last_selected_course_id);
+//         connection.query( `UPDATE lessons_in_course SET held_date = str_to_date( held_date , '%Y-%m-%d' ) WHERE lessons_in_course.c_id = ?` , [last_selected_course_id ], function (err, result) {
+//             if (err) {
+//               connection.rollback(function () {
+//                 throw err;
+//               });
+//             }   
+//             //cb(null,result);
+//             console.log("final result:" , result);
 
+//             });
+//         })
+       
+//     });
+    
+//        connection.commit(function(err) {
+//         if (err) {
+//           return connection.rollback(function() {
+//             throw err;
+//           });
+         
+//         }
+//         cb(null,this.result);
+//     console.log('success!');
+//     }); 
+// };
 
 //Query to get student names to show on the dropdown..  
   function listAllStudents(cb) {
@@ -106,39 +143,6 @@ function addStudent(student, res) {
             if (err) throw err;
             });
 };
-
-//Query to Send lesson details to the database..         
-// function addLesson(lesson, cb) {
-//     connection.beginTransaction(function (err) {
-     
-//       if (err) { throw err; }
-//       connection.query('INSERT INTO `lessons` (name) VALUES ("'+ lesson.lesson_name+'")', function (err, result) {
-//         if (err) {
-//           connection.rollback(function () {
-//             throw err;
-//           });
-//         };
-//         //console.log('Result : ', result);
-//         var last_insert_lesson_id = result.insertId;
-//         //console.log("bla bla", last_insert_lesson_id);
-//         connection.query('INSERT INTO lessons_in_course ( l_id, c_id, date ) VALUES ("'+ last_insert_lesson_id +'", "'+ lesson.obj1 +'" , "'+lesson.day+'")', function (err, result) {
-//             if (err) {
-//               connection.rollback(function () {
-//                 throw err;
-//               });
-//             }  
-//             connection.commit(function(err) {
-//                 if (err) {
-//                   return connection.rollback(function() {
-//                     throw err;
-//                   });
-//                 }
-//                 //console.log('success!');
-//                 });  
-//             });
-//         })
-//     });
-// };
 
 //Add a Lesson to the database..
 function addLesson(lesson, res) {

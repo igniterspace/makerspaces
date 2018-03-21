@@ -101,7 +101,7 @@ router.get('/getallcourselessons/:courses_id', (req, res, next) => {
      res.json({
        item: results
      });
-   });
+   });  
  });
 
 
@@ -120,21 +120,7 @@ router.post('/addcourse', (req, res, next) => {
   res.send({})
 })
 
-
-//Insert a lesson to the database and to the course..
-// router.post('/addlesson', (req, res, next) => {
-//   var lesson = req.body;
-//   console.log("salala:",lesson);
-//   model.addLesson(lesson, (lesson, results) => {
-//     if (err) {
-//       throw err;
-//     }
-//     res.json({
-//       item: results
-//     });
-//   });
-// });
-
+//Add a new lesson to the database..
 router.post('/addlesson', (req, res, next) => {
   var lesson = req.body;
   model.addLesson(lesson, (err, results) => {

@@ -35,8 +35,8 @@
 
 
                   <td class="">{{ l.lesson_name }}</td>
-                  <td class="">{{ l.date  }}</td>
-                  <!-- | date:"dd/mm/yyyy" -->
+                  <td class="">{{ l.dateh  }}</td>
+                  <!-- | date : 'dd-MM-yyyy' -->
                   <td class="">
 
                     <button class="btn btn-primary btn-xs">
@@ -150,9 +150,10 @@
               {{ l.name }}</td>
           </div>
             <td>
-              <dp-date-picker [(ngModel)]="searchedDate" [config]="datePickerConfig" [theme]="'dp-material'"
-                formControlName="date" placeholder="Held Date" name="Day" required></dp-date-picker>
-            </td>
+              <!-- <dp-date-picker [(ngModel)]="searchedDate" [config]="datePickerConfig" [theme]="'dp-material'"
+                formControlName="date" placeholder="Held Date" name="Day" type="date" required></dp-date-picker>
+            </td> -->
+            <input type="date" formControlName="date" placeholder="Held Date" name="Day">
             <td class="">
               <input class="btn btn-success" type="submit" value="Submit" [disabled]="!ListsearchedLessons.valid" (click)="hideTable()" (click)="savesearchedLesson(ListsearchedLessons.value)">
             </td>

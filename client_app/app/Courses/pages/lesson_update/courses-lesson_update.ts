@@ -27,7 +27,7 @@ export class LessonsUpdatePage {
     c_id          :  new FormControl(this.c_id),
     l_id          :  new FormControl(this.l_id),
     lesson_name   :  new FormControl(this.lesson_name),
-    date          :  new FormControl(this.date),
+    dateh          :  new FormControl(this.dateh),
  }); 
 
 
@@ -60,7 +60,7 @@ updateLesson(lesson_data : UpdateLesson) {
       c_id              : updatelessons.c_id,
       l_id              : updatelessons.l_id,
       lesson_name       : updatelessons.lesson_name,
-      date              : updatelessons.date,
+      dateh             : updatelessons.dateh,
       });
        })  
   

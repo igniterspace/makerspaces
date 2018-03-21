@@ -18,8 +18,9 @@
         <tr>
             <td>DATE:-</td>
             <td>
-            <dp-date-picker [(ngModel)]="lesson_data.date" value="lesson_data.date" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="day" placeholder="Held Date"
-            name="Day" required></dp-date-picker>
+            <!-- <dp-date-picker [(ngModel)]="lesson_data.date" value="lesson_data.date" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="day" placeholder="Held Date"
+            name="Day" required></dp-date-picker> -->
+            <input type="date"[(ngModel)]="lesson_data.dateh" formControlName="day" value="lesson_data.date" placeholder="Held Date" name="Day">
                 </td>
         </tr>
         <br>

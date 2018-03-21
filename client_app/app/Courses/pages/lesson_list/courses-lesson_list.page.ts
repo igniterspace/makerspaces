@@ -1,11 +1,12 @@
-import { Component, Output, EventEmitter, OnInit  } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit,  Pipe, PipeTransform, ChangeDetectorRef  } from '@angular/core';
 import { Input }                                    from '@angular/core/src/metadata/directives';
 
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 
 import { CoursesService }      from '../../../common/services/course.service';
 import { ListLesson, DeleteLId, AddSelectedLesson }          from 'app/common/models/courses';
-
+import { DatePipe } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   templateUrl: './courses-lesson_list.page.html',
@@ -34,6 +35,8 @@ export class LessonsListPage {
   date                   : any;
   deleteid               : any;
   c_Id                   : any;
+  //static readonly date = 'dd/MMM/yyyy';
+  selectlesson           : any;
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
@@ -60,27 +63,12 @@ viewLessons(courses_id: number) {
     });
   } 
 
+  
+  // transform(value: Date | moment.Moment | string | number, ...args: any[]): string {
+  //   if (!value) return '';
+  //   return moment(value).format(args[0]);
+  // }
 
-//Send selected course's lesson to the database..  
-// saveassLesson(sellesson : AddSelectedLesson) {
-//   console.log(this.selectles);
-//   var obj1 =  this.courses_id ;
-//   var full_detail = Object.assign(sellesson , {obj1});
-//   this.cs.saveCourseLesson(full_detail).subscribe(res => console.log(full_detail));
-//     console.log(full_detail);
-//     this.ListallLessons.reset();
-//     alert('This Lesson has being added to this Course..');
-    
-//     this.selectles.push(sellesson);
-//   }
-
-//Show lessons in the dropdown..  
-// listLessons() {
-//   this.cs.listAllLessons().subscribe(res => {
-//   this.listlessons  = res.item;
-//   console.log(res.item);
-//   });
-// }
 
 //Send searched course's lesson to the database..  
 savesearchedLesson(sellesson : AddSelectedLesson) {
@@ -93,10 +81,11 @@ savesearchedLesson(sellesson : AddSelectedLesson) {
 //Pushing the new lesson to the array..    
   var l_id = this.search_res[0].id;  
   var lesson_name = this.search_res[0].name; 
-  var date = sellesson.date; 
+  console.log("sadasd:", sellesson.date);
+  var dateh = sellesson.date; 
   var c_id = this.c_Id[0].c_id ;
 
-  var new_lesson = Object.assign( {c_id} , {l_id} , {lesson_name}, {date});  
+  var new_lesson = Object.assign( {c_id} , {l_id} , {lesson_name}, {dateh});  
     this.selectles.push(new_lesson);
   }
 
