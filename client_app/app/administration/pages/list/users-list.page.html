@@ -1,0 +1,134 @@
+<div class="row">
+    <div class="col-sm-12">
+      <section class="panel">
+         <header class="panel-heading">
+           List of Users
+         </header>
+    <div class="panel-body">
+      <div class="adv-table"> 
+       <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
+        <table class="display table table-bordered dataTable" id="hidden-table-info" aria-describedby="hidden-table-info_info" >
+  
+         <thead>
+         <tr role="row">
+                                          
+          <!-- <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+          rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+          style="width: 187px;">User ID
+          </th> -->
+          
+          <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+          rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;">User Name
+          </th>
+  
+          <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+          rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">Full Name
+          </th>
+  
+          <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+          rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+          style="width: 162px;">E-mail
+          </th>
+
+          <!-- <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+          rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+          style="width: 162px;">Profile Image
+          </th> -->
+
+          <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+          rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+          style="width: 162px;">Branches
+          </th>
+
+          <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+          rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+          style="width: 162px;">Privileges
+          </th>
+  
+          <th class="" role="columnheader" tabindex="0"
+          aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
+          style="width: 133px;">
+          </th>
+  
+         </tr>
+        </thead>
+      
+       <tbody role="alert" aria-live="polite" aria-relevant="all">
+      
+         <tr class="odd" *ngFor="let u of listusers">
+                                             
+          <!-- <td class="">{{ u.id }} </td> -->
+          <td class="">{{ u.given_name }}</td>
+          <td class="">{{ u.family_name }}</td>
+          <td class="">{{ u.email }}</td>
+          <!-- <td class="">{{ u.profile_image }}</td> -->
+          <td class=""></td>
+          <td class=""></td>
+          
+           
+          <td>
+          <button class="btn btn-primary btn-xs" (click)="showEditUserForm(u)" ><i class="fa fa-pencil"  queryParamshandling="merge"></i></button>
+
+
+          <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o " (click)= "deleteUser(u.id)"></i></button>
+          </td> 
+  
+         </tr>
+       </tbody>
+     </table>
+  
+     <div class="row-fluid">
+       <div class="span6">
+         <div class="dataTables_info" id="hidden-table-info_info">All the Users of this system are shown here!</div>
+       </div>
+      <div class="span6">
+     <div class="dataTables_paginate paging_bootstrap pagination">
+          </div>
+         
+         </div>
+        </div>
+      </div>
+
+
+
+<form *ngIf="editUserForm">
+  <header class="panel-heading">Edit User Details</header>
+
+
+  <p>
+      <label>Username</label>
+      <input type="text" name="username" [(ngModel)]="editedUser.uname" required/>
+  </p>
+  <p>
+      <label>Full Name</label>
+      <input type="text" name="fullname" [(ngModel)]="editedUser.fname" required/>
+  </p>
+  <p>
+      <label>E-Mail</label>
+      <input type="text" name="unitprice" [(ngModel)]="editedUser.email" required/>
+  </p>
+  <p>
+    <label>Profile Image</label>
+    <input type="text" name="unitprice" [(ngModel)]="editedUser.image" required/>
+  </p>
+
+  <p>
+      <button type="button" class="btn btn-primary" (click)="updateUser(editedUser)">Submit</button>
+      <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+  </p>
+
+</form>
+
+<!-- <p class="form-submit">
+  <input name="submit" type="submit" id="submit" class="submit btn btn-success" (click)="submitOrder()" value="Submit Order">
+</p> -->
+
+
+
+
+      
+    </div>
+   </div>
+  </section>
+  </div>
+  </div>

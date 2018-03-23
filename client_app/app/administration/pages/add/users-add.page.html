@@ -1,0 +1,64 @@
+<h3>User Registration From</h3>
+<br>
+
+<form [formGroup]="addUserForm" method="post" *ngIf="addUserForm">
+    <h4>Please enter users details</h4>
+    <table align="center" cellpadding="10">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <tr>
+            <td>USERNAME :</td>
+            <td>
+            <input type="text" class="form-control" formControlName="users_first_name" name="First_Name" placeholder="First Name" required/>
+            <small *ngIf="!isValid('users_first_name')" class="text-muted">Not enough characters</small>
+
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>FULL NAME :</td>
+            <td>
+            <input type="text" class="form-control" formControlName="users_last_name" name="Last_Name" placeholder="Last Name" required/>
+            <small *ngIf="!isValid('users_last_name')" class="text-muted">Not enough Characters</small>
+            </td>
+        </tr>
+        <br>
+
+        <tr>
+            <td>E-MAIL :</td>
+            <td>
+            <input type="text" class="form-control" formControlName="users_email" name="Email" placeholder="E-Mail" required/>
+            <small *ngIf="!isValid('users_email')" class="text-muted">Not enough Characters</small>
+            </td>
+        </tr>
+        
+        <br>
+        <tr>
+            <td>PROFILE IMAGE :</td>
+            <td>
+            <input type="text" class="form-control" formControlName="profile_image" name="Profile_Image" placeholder="Profile Image" required/>
+            <small *ngIf="!isValid('profile_image')" class="text-muted">Not enough Characters</small>
+            </td>
+        </tr>
+
+<!-- profile image -->
+
+
+<!--  -->
+
+        <br>
+
+
+         
+        <tr>
+            <td colspan="2" align="center">
+                <button type="submit" class="btn btn-success" [disabled]="!addUserForm.valid" (click)="saveUsers(addUserForm.value)" >Submit</button>
+                <input type="reset" class="btn btn-danger" value="Reset">
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+<!-- (click)="savesearchStudent(addStudentForm.value)" -->
