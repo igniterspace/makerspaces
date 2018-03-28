@@ -61,7 +61,7 @@ export class SearchedGuardianPage implements OnInit {
     
     var guardians_name = this.searchguardian;
     var complete_detail = Object.assign( student, {guardians_name} );
-    this.ss.savesStudent(complete_detail).subscribe(res => console.log(complete_detail));
+    this.ss.savesStudent(complete_detail).subscribe(res => console.log(""));
     this.addStudentForm.reset();
   }
 

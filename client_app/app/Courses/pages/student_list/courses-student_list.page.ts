@@ -65,19 +65,6 @@ export class CourseStudentListPage {
     this.selectstu = res.item;
   });
 } 
-
-
-//Send selected student id from the dropdown and send to the database..  
-  // saveassStudent(student: AddStudent) {
-  //   console.log(this.students_name);
-  //   var obj1 =  this.courses_id;
-  //   //var obj1 =  this.c_id;
-  //   var full_detail = Object.assign(student , {obj1});
-  //   console.log(full_detail);
-  //   this.cs.saveStudent(full_detail).subscribe(res => console.log(full_detail));
-  //  // this.selectstu.push(student);
-  //  alert('This Student has being added to this Course..');
-  // } 
   
 
 //Send searched student id from the dropdown and send to the database..  
@@ -95,7 +82,7 @@ savesearchStudent(search_res: string) {
 
   var c_id = this.c_Id[0].c_id ;
 var new_student   = Object.assign( {c_id}, search_res)
-    this.cs.saveStudent(full_detail).subscribe(res => console.log(full_detail));
+    this.cs.saveStudent(full_detail).subscribe(res => console.log(""));
     alert('This Student has being added to this Course..');   
     this.selectstu.push(new_student);
 } 
@@ -119,7 +106,7 @@ hideTable(){
 deleteStudent(deleteid : DeleteSId){
  alert('Do you want to remove this student?');
  
- this.cs.deleteStudent(deleteid).subscribe(res=>console.log(res))
+ this.cs.deleteStudent(deleteid).subscribe(res=>console.log(""))
  var i;
  for (i=0; i<this.selectstu.length; i++){
    if(this.selectstu[i].id == deleteid.id){

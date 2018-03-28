@@ -69,7 +69,7 @@ export class StudentsUpdatePage {
 //Send updated (edited) student details to the database..
   updateStudent(student_data : ListStudents) { 
     var edstudents = Object.assign(student_data , this.guardian);
-    this.ss.editStudent(edstudents).subscribe(res => console.log(edstudents));
+    this.ss.editStudent(edstudents).subscribe(res => console.log(""));
     this.updateStudentForm.reset();
     alert('This student has being updated..');
   }

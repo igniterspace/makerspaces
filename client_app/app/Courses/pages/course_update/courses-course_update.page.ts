@@ -49,7 +49,7 @@ constructor(private cs: CoursesService,
 //Send updated details to the database..  
 updateCourse(course_data : ListCourses) { 
   var edcourse = course_data;
-  this.cs.editCourse(edcourse).subscribe(res => console.log(edcourse));
+  this.cs.editCourse(edcourse).subscribe(res => console.log(""));
   this.updateCourseForm.reset();
   alert('This Course has being updated..');
   }    

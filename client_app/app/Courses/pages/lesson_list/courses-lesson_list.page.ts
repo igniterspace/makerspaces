@@ -35,7 +35,6 @@ export class LessonsListPage {
   date                   : any;
   deleteid               : any;
   c_Id                   : any;
-  //static readonly date = 'dd/MMM/yyyy';
   selectlesson           : any;
 
   @Output()
@@ -63,25 +62,18 @@ viewLessons(courses_id: number) {
     });
   } 
 
-  
-  // transform(value: Date | moment.Moment | string | number, ...args: any[]): string {
-  //   if (!value) return '';
-  //   return moment(value).format(args[0]);
-  // }
-
 
 //Send searched course's lesson to the database..  
 savesearchedLesson(sellesson : AddSelectedLesson) {
   var obj1 =  this.courses_id ;
   var full_detail = Object.assign(sellesson , {obj1});
-  this.cs.saveCourseLesson(full_detail).subscribe(res => console.log(full_detail));
+  this.cs.saveCourseLesson(full_detail).subscribe(res => console.log(""));
     this.ListallLessons.reset();
     alert('This Lesson has being added to this Course..');
 
 //Pushing the new lesson to the array..    
   var l_id = this.search_res[0].id;  
   var lesson_name = this.search_res[0].name; 
-  console.log("sadasd:", sellesson.date);
   var dateh = sellesson.date; 
   var c_id = this.c_Id[0].c_id ;
 
@@ -128,7 +120,7 @@ hideTable(){
 deleteLesson(deleteid : DeleteLId){
   alert('Do you want to remove this lesson?');
   
-  this.cs.deleteLesson(deleteid).subscribe(res=>console.log(res))
+  this.cs.deleteLesson(deleteid).subscribe(res=>console.log(""))
   var i;
   for (i=0; i<this.selectles.length; i++){
   

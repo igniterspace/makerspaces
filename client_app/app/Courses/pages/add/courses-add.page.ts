@@ -53,7 +53,7 @@ export class CoursesAddPage {
   saveCourse(course) {
     var location = this.currentLocationId;
     var full_detail = Object.assign(course , {location});
-    this.cs.saveCourse(full_detail).subscribe(res => console.log(full_detail));
+    this.cs.saveCourse(full_detail).subscribe(res => console.log(""));
     this.addCourseForm.reset();
     alert('This Course has being added to the Database..');
   }
@@ -61,7 +61,6 @@ export class CoursesAddPage {
   ngOnInit() {
 //Get current location ID
 this.currentLocationId = this.context.getCurrentLocationId();
-console.log(this.currentLocationId);
   }
 
 }

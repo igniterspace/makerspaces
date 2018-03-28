@@ -73,7 +73,7 @@ export class StudentsEditPage implements OnInit {
   saveStudent(student : ListStudents) { 
     var location = this.currentLocationId;
     var full_detail = Object.assign(student , this.guardian , {location});
-    this.ss.saveStudent(full_detail).subscribe(res => console.log(full_detail));
+    this.ss.saveStudent(full_detail).subscribe(res => console.log(""));
     this.addStudentForm.reset();
     alert('This Student has being added to the Database..');
   }
