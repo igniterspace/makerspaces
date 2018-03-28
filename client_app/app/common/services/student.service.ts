@@ -74,8 +74,8 @@ export class StudentsService {
     return this.http.get('http://localhost:8080/api/students/getallguardians').map(res=>res.json());
   }
 
-  listAllStudents(){
-    return this.http.get('http://localhost:8080/api/students/getallstudents').map(res=>res.json());
+  listAllStudents(currentLocationId){
+    return this.http.get('http://localhost:8080/api/students/getallstudents/' + currentLocationId).map(res=>res.json());
   }
 
   deleteStudent(deleteid){

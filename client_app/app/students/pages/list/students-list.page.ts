@@ -4,6 +4,8 @@ import { Input }                           from '@angular/core/src/metadata/dire
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 
 import { StudentsService }                 from '../../../common/services/student.service';
+import { ContextService }           from '../../../common/services/context.service';
+import { AuthService }              from '../../../common/services/auth.service';
 
 import { Student }                         from '../../../common/models/student';
 import { DeleteId }                        from '../../../common/models/deleteid';
@@ -26,6 +28,9 @@ export class StudentsListPage {
   private updatestudents  : ListStudents;
   private student         : ListStudents[];
   private studentID       : number;
+  currentLocationId :number;
+  private location = {};
+  private locationId: number;
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
@@ -33,7 +38,10 @@ export class StudentsListPage {
 
   ListAllStudents : FormGroup ; 
   
-  constructor(private ss : StudentsService,private formBuilder: FormBuilder) {
+  constructor(private ss : StudentsService,
+              private formBuilder: FormBuilder,
+              private context: ContextService,
+              private auth  : AuthService) {
     this.studentsService = ss;
     this.ListAllStudents = new FormGroup({
          liststudents    : new FormControl()
@@ -46,8 +54,8 @@ export class StudentsListPage {
 }
 
 //Get student details from the database and show on the list in the fronend..
-  listAllStudents() {
-    this.ss.listAllStudents().subscribe(res => {
+  listAllStudents(currentLocationId) {
+    this.ss.listAllStudents(currentLocationId).subscribe(res => {
       this.liststudents  = res.item;
     });
   }
@@ -66,8 +74,11 @@ export class StudentsListPage {
  
  ngOnInit(): void {
 
+//Get current location ID
+this.currentLocationId = this.context.getCurrentLocationId();
+
 //Show student details in the list..
-  this.listAllStudents();
+  this.listAllStudents(this.currentLocationId);
 
 //Send student details from the list to update.page..  
   this.ss.newitems.subscribe( updatestudents => this.updatestudents = updatestudents)

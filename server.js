@@ -83,6 +83,8 @@ app.use('/api/orders', require('./server_modules/orders/api'));
 app.use('/api/students', require('./server_modules/students/api'));
 app.use('/api/courses', require('./server_modules/courses/api'));
 app.use('/api/attendance',require('./server_modules/attendance/api'));
+app.use('/api/payments',require('./server_modules/payments/api'));
+
 
 
 app.use('/*', require('./server_views/controller'));

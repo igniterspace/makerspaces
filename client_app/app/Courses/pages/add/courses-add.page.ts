@@ -2,6 +2,8 @@ import { Component, OnInit }    from '@angular/core';
 
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 import { DpDatePickerModule }   from 'ng2-date-picker';
+import { ContextService }           from '../../../common/services/context.service';
+import { AuthService }              from '../../../common/services/auth.service';
 
 import { CoursesService }      from '../../../common/services/course.service';
 import { AddCourses }          from 'app/common/models/courses';
@@ -18,13 +20,17 @@ export class CoursesAddPage {
   private coursesService : CoursesService;
   private addCourseForm  : FormGroup;
   public Courses         : AddCourses[];
-  
-  course : any;
+  course       : any;
+
   post:any;
-  
+  currentLocationId :number;
+  private location = {};
+  private locationId: number;
 
   constructor(private cs: CoursesService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private context: ContextService,
+              private auth  : AuthService    ) {
     this.coursesService = cs;
 
     this.addCourseForm = new FormGroup({
@@ -44,12 +50,18 @@ export class CoursesAddPage {
   }
 
   //Send Course details to the database..
-  saveCourse(course : AddCourses) {
-    this.cs.saveCourse(course).subscribe(res => console.log(course));
+  saveCourse(course) {
+    var location = this.currentLocationId;
+    var full_detail = Object.assign(course , {location});
+    this.cs.saveCourse(full_detail).subscribe(res => console.log(full_detail));
     this.addCourseForm.reset();
     alert('This Course has being added to the Database..');
   }
 
-
+  ngOnInit() {
+//Get current location ID
+this.currentLocationId = this.context.getCurrentLocationId();
+console.log(this.currentLocationId);
+  }
 
 }

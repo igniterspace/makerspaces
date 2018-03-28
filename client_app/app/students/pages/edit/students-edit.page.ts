@@ -1,9 +1,15 @@
 import { Component, OnInit }    from '@angular/core';
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 import { DpDatePickerModule }   from 'ng2-date-picker';
+
 import { StudentsService }      from '../../../common/services/student.service';
+import { ContextService }       from '../../../common/services/context.service';
+import { AuthService }          from '../../../common/services/auth.service';
+
 import { ListStudents }         from '../../../common/models/liststudents';
 import { Student }              from 'app/common/models/student';
+
+
 
 @Component({
   templateUrl: './students-edit.page.html',
@@ -31,7 +37,9 @@ export class StudentsEditPage implements OnInit {
   isNewForm: boolean;
 
   constructor(private ss: StudentsService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private context: ContextService,
+              private auth  : AuthService) {
     this.studentsService = ss;
 
     this.addStudentForm = formBuilder.group({
@@ -48,6 +56,8 @@ export class StudentsEditPage implements OnInit {
 
   ngOnInit() {
 
+//Get current location ID
+  this.currentLocationId = this.context.getCurrentLocationId();
 
 //Get guardian id from guardian page (dropdown)..
     this.ss.currentMessage.subscribe(guardian => this.guardian = guardian)
@@ -61,11 +71,11 @@ export class StudentsEditPage implements OnInit {
 
   //Assign guardian id to new student and send all the details to the database..
   saveStudent(student : ListStudents) { 
-    var full_detail = Object.assign(student , this.guardian);
+    var location = this.currentLocationId;
+    var full_detail = Object.assign(student , this.guardian , {location});
     this.ss.saveStudent(full_detail).subscribe(res => console.log(full_detail));
     this.addStudentForm.reset();
     alert('This Student has being added to the Database..');
-    //console.log(this.full_detail);
   }
 
   nameValidator(control: FormControl): {[s: string]: boolean} {

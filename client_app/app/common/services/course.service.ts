@@ -66,8 +66,8 @@ export class CoursesService {
   }
 
 
-  listAllCourses(){
-    return this.http.get('http://localhost:8080/api/courses/getallcourses').map(res=>res.json());
+  listAllCourses(currentLocationId){
+    return this.http.get('http://localhost:8080/api/courses/getallcourses/' + currentLocationId).map(res=>res.json());
   }
 
   getCourseID(courses_id){
@@ -79,7 +79,6 @@ export class CoursesService {
   }
 
   getlessons(c_id){
-    console.log(c_id);
     return this.http.get('http://localhost:8080/api/courses/getallcourselessons/' +c_id).map(res=>res.json());
   }
 

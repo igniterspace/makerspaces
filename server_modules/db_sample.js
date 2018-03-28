@@ -42,6 +42,8 @@ if (module === require.main) {
       '(1, \'IS Gampaha\', \'2nd makerspace of IgniterSpace\', 1),'+
       '(2, \'IS Narahenpita\', \'1st makerspace of IgniterSpace\', 1),' + 
       '(3, \'IS Negombo\', \'3rd makerspace of IgniterSpace\', 1),' + 
+      '(5, \'IS Moratuwa\', \'4th makerspace of IgniterSpace\', 1),' +
+      '(6, \'IS Kandy\', \'5th makerspace of IgniterSpace\', 1),' +
       '(4, \'AIS Colombo\', \'IgniterSpace franchise at Asian International School\', 2);'  +
 
       'INSERT INTO users(id, auth_provider, auth_ref, given_name, family_name, email, profile_image) VALUES ' +
@@ -49,8 +51,13 @@ if (module === require.main) {
       '(2, \'google\', \'00002\', \'Jehan\', \'Wijesinghe\', \'jehan@igniterspace.com\', \'\'),'  +
       '(3, \'google\', \'00002\', \'Harshana\', \'Wijesinghe\', \'harshanax@oki.lk\', \'\'),'  +
       '(4, \'google\', \'00003\', \'Hasith\', \'Yaggahavita\', \'hasith@gmail.com\', \'\'),'  +
-      '(5, \'google\', \'00004\', \'Asitha\', \'Senarathne\', \'asithas@igniterspace.com\', \'\');'  +
-
+      '(5, \'google\', \'00004\', \'Asitha\', \'Senarathne\', \'asithas@igniterspace.com\', \'\'),'  +
+      '(6, \'google\', \'00005\', \'Achintha\', \'Wijewikrama\', \'achinthaw@igniterspace.com\', \'\'),'  +
+      '(7, \'google\', \'00006\', \'Mufeedha \', \'zamry \', \'mufeedha@igniterspace.com\', \'\'),'  +
+      '(8, \'google\', \'00007\', \'Subhashini \', \'Wijewardane \', \'subhashini@igniterspace.com\', \'\'),'  +
+      '(9, \'google\', \'00008\', \'Shiromi \', \'Peiris \', \'shiromi@igniterspace.com\', \'\'),'  +
+      '(10, \'google\', \'00009\', \'Udeshika \', \'Muthukumara \', \'udeshika@igniterspace.com\', \'\'),'  +
+      '(11, \'google\', \'00010\', \'Heshani \', \'Wijerathna \', \'heshani@igniterspace.com\', \'\');'  +
 
       'INSERT INTO orders(order_id, location_id, user_id, created_date, shipped) VALUES ' +
       '(1, 1, 1, \'2012-02-26 09:31:01\' , \'2013-02-28 08:30:00\' ),'+
@@ -272,19 +279,41 @@ if (module === require.main) {
       '(997,\'Ananda Wijewickrama\', \'0332222917\', \'0710510274\' ,  \'anandaw@yahoo.com\'),'+
       '(996,\'Chathura Senarathne\', \'0332228008\', \'0774636898\' ,  \'chathuras@igniterspace.com\');' +
 
-      'INSERT INTO students(id, first_name, last_name, date_of_birth, home_address, gender,g_id) VALUES ' +
-      '(001,\'Hasith\',\'Yaggahavita\', \'28-09-1979\' ,  \'287,Yakkala Rd,Gampaha\', \'male\', 999),'+
-      '(002,\'Jehan\',\'Wijesinghe\',\'05-09-1996\' , \'7, charles place,colombo\', \'male\', 998),'+
-      '(003,\'Achintha\',\'Wijewickrama\',\'06-11-1993\' ,  \'287,Yakkala Rd,Gampaha\', \'male\', 997),'+
-      '(004,\'Asitha\',\'Senarathne\',\'02-04-1992\' ,  \'12/2 Bandaranayake Rd, Katubadde\', \'male\', 996),'  +
-      '(005, \'Subha\',\'Wijesinghe\', \'08-09-1972\', \'No 10, Sri Bodhi Rd, Gampaha\',\'female\',996);' +
+      'INSERT INTO students(id, location_id, first_name, last_name, date_of_birth, home_address, gender,g_id) VALUES ' +
+      '(001, 1 ,\'Hasith\',\'Yaggahavita\', \'28-09-1979\' ,  \'287,Yakkala Rd,Gampaha\', \'male\', 999),'+
+      '(002, 1 ,\'Jehan\',\'Wijesinghe\',\'05-09-1996\' , \'7, charles place,colombo\', \'male\', 998),'+
+      '(003, 1 ,\'Achintha\',\'Wijewickrama\',\'06-11-1993\' ,  \'287,Yakkala Rd,Gampaha\', \'male\', 997),'+
+      '(004, 1 ,\'Asitha\',\'Senarathne\',\'02-04-1992\' ,  \'12/2 Bandaranayake Rd, Katubadde\', \'male\', 996),'  +
+      '(005, 2 ,\'Subha\',\'Wijesinghe\', \'08-09-1972\', \'No 10, Sri Bodhi Rd, Gampaha\',\'female\',996);' +
 
-      'INSERT INTO courses(id, batch, name, year, from_date, to_date, day ) VALUES ' +
-      '(1,\'Batch-3\',\'Level-1\',\'2017\', \'28-02-2017\' ,  \'28-08-2017\', \'Saturday\'),'+
-      '(2,\'Batch-3\',\'Level-2\',\'2017/2018\',\'05-09-2017\' , \'05-03-2018\', \'Saturday\'),'+
-      '(3,\'Batch-3\',\'Level-3\',\'2018\',\'06-01-2018\' ,  \'06-06-2018\', \'Saturday\'),'+
-      '(4,\'Batch-4\',\'Level-4(Computing)\',\'2017\',\'02-04-2018\' ,\'02-10-2018\', \'Sunday\'),'  +
-      '(5,\'Batch-5\',\'Level-1\',\'2016/2017\', \'08-09-2016\', \'08-03-2017\', \'Sunday\');' +
+      'INSERT INTO courses(id,location_id,  batch, name, year, from_date, to_date, day ) VALUES ' +
+      '(1, 1 ,\'Batch-3\',\'Level-1\',\'2017\', \'28-02-2017\' ,  \'28-08-2017\', \'Saturday\'),'+
+      '(2, 1 ,\'Batch-3\',\'Level-2\',\'2017/2018\',\'05-09-2017\' , \'05-03-2018\', \'Saturday\'),'+
+      '(3, 1 ,\'Batch-3\',\'Level-3\',\'2018\',\'06-01-2018\' ,  \'06-06-2018\', \'Saturday\'),'+
+      '(4, 2 ,\'Batch-4\',\'Level-4(Computing)\',\'2017\',\'02-04-2018\' ,\'02-10-2018\', \'Sunday\'),'  +
+      '(5, 1 ,\'Batch-5\',\'Level-1\',\'2016/2017\', \'08-09-2016\', \'08-03-2017\', \'Sunday\');' +
+
+      'INSERT INTO payments (p_id, c_id, s_id, user_id, date, amount) VALUES' +
+      '(1, 1, 1, 1, \'2017-04-03\' , \'10000\' ),' +
+      '(2, 1, 1, 1, \'2017-05-03\' , \'4000\' ),' +
+      '(3, 1, 1, 2, \'2017-06-12\' , \'4000\' ),' +
+      '(4, 1, 1, 2, \'2018-11-06\' , \'20000\' ),' +
+      '(5, 2, 1, 3, \'2017-11-06\' , \'20000\' ),' +
+      '(6, 2, 1, 4, \'2018-01-01\' , \'20000\' ),' +
+      '(7, 1, 2, 5, \'2017-11-06\' , \'20000\' ),' +
+      '(8, 1, 2, 1, \'2018-02-06\' , \'4000\' ),' +
+      '(9, 3, 3, 2, \'2017-02-06\' , \'20000\' ),' +
+      '(10, 3, 5, 3, \'2018-01-06\' , \'4000\' ),' +
+      '(11, 3, 5, 3, \'2018-02-06\' , \'4000\' ),' +
+      '(12, 4, 4, 3, \'2017-02-06\' , \'3000\' ),' +
+      '(13, 4, 4, 4, \'2018-02-11\' , \'5000\' ),' +
+      '(14, 4, 4, 4, \'2018-05-14\' , \'10000\' ),' +
+      '(15, 5, 1, 5, \'2017-02-06\' , \'10000\' ),' +
+      '(16, 5, 1, 5, \'2018-02-06\' , \'4000\' ),' +
+      '(17, 5, 3, 2, \'2017-11-06\' , \'4000\' ),' +
+      '(18, 5, 3, 3, \'2018-03-15\' , \'10000\' ),' +
+      '(19, 5, 3, 3, \'2018-05-15\' , \'10000\' );' +
+
 
       'INSERT INTO lessons(id, name) VALUES ' +
       '(1,\'Golfer Bot\' ),'+

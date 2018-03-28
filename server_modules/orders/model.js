@@ -71,7 +71,7 @@ function getuserID(user_email, cb) {
         return;
       }
       cb(null, results);
-      console.log(results);
+      console.log("result of the query:",results);
     }
   );
 }

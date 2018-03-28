@@ -14,6 +14,7 @@ import { NotFoundPage }             from './misc/notfound.page';
 import { CallbackPage }             from './misc/callback/callback.page';
 import { LogoutPage }               from './misc/logout.page';
 import { StudentsModule }           from './students/students.module';
+import { PaymentsModule }           from './payments/payments.module';
 import { OrdersModule }             from './orders/orders.module';
 import { AttendanceModule }         from './attendance/attendance.module';
 import { CoursesModule }            from './courses/courses.module';
@@ -61,6 +62,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     DashboardModule,
     OrdersModule,
     StudentsModule,
+    PaymentsModule,
     AttendanceModule,
     CoursesModule,
     AppRoutingModule,

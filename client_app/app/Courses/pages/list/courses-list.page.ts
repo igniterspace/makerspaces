@@ -4,6 +4,9 @@ import { Input }                                    from '@angular/core/src/meta
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 
 import { CoursesService }                           from '../../../common/services/course.service';
+import { ContextService }           from '../../../common/services/context.service';
+import { AuthService }              from '../../../common/services/auth.service';
+
 import { ListCourses, ListStudent, DeleteId }       from 'app/common/models/courses';
 
 
@@ -29,6 +32,9 @@ export class CoursesListPage {
   addles: any;
   courses_id : any;
   c_id     : any;
+  currentLocationId :number;
+  private location = {};
+  private locationId: number;
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
@@ -36,7 +42,10 @@ export class CoursesListPage {
 
   ListAllCourses : FormGroup ; 
   
-  constructor(private cs: CoursesService,private formBuilder: FormBuilder) {
+  constructor(private cs: CoursesService,
+              private formBuilder: FormBuilder,
+              private context: ContextService,
+              private auth  : AuthService ) {
     this.coursesService = cs;
     this.ListAllCourses    = new FormGroup({
          listcourses       : new FormControl()
@@ -55,10 +64,12 @@ viewCourse(updatecourses) {
   this.cs.updateCourse(updatecourses);
 }
 
-//Get Course details from the database and show on the list in the fronend..
-listAllCourses() {
-    this.cs.listAllCourses().subscribe(res => {
+//Get Course details from the database and show on the list in the frontend..
+listAllCourses(currentLocationId) {
+  console.log("function:", currentLocationId);
+    this.cs.listAllCourses(currentLocationId).subscribe(res => {
       this.listcourses  = res.item;
+      console.log("return:",this.listcourses);
     });
   }
 
@@ -85,8 +96,12 @@ deleteCourse(deleteid : DeleteId){
 
 ngOnInit(): void {
 
+//Get current location ID
+this.currentLocationId = this.context.getCurrentLocationId();
+console.log(this.currentLocationId);  
+
 //Show course details in the list..
-  this.listAllCourses();
+  this.listAllCourses(this.currentLocationId);
   
 //Send course details from the list to course_update.page..  
   this.cs.selectcourse.subscribe( updatecourses => this.updatecourses = updatecourses)
@@ -96,6 +111,8 @@ ngOnInit(): void {
   
 //Send courses_id to lesson_list.page..
   this.cs.selectlesson.subscribe( courses_id=> this.courses_id = courses_id)
+
+
 }
 
 }

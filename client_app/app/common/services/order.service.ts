@@ -70,7 +70,7 @@ export class OrdersService {
 
   // get user id from database
   getuserID(user_email) {
-    console.log(user_email);
+    console.log("service call:",user_email);
     return this.http.get('http://localhost:8080/api/orders/userID/'+ user_email ).map(res =>res.json());
   }
 

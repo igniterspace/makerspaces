@@ -79,34 +79,6 @@
       
       <br>
        <h5>-Search a lesson to add to this course-</h5>
-     <!-- <br>
-      <br>
-      <table [formGroup]="ListallLessons" method="post">
-        <select formControlName="id">
-          <option value="" disabled selected>Select new Lesson to add to this Course..</option>
-          <option *ngFor="let l of listlessons" [value]="l.id" value="name">
-            {{ l.name }} </option>
-        </select>
-        <br>
-        <br>
-        <br>
-
-        <tr>
-          <td>DATE:-
-
-            <dp-date-picker [(ngModel)]="selectedDate" [config]="datePickerConfig" [theme]="'dp-material'"
-              formControlName="date" placeholder="Held Date" name="Day" required></dp-date-picker>
-          </td>
-        </tr>
-        <br>
-        <tr>
-          <td colspan="2" align="center">
-            <input type="submit" class="btn btn-success" value="Submit" [disabled]="!ListallLessons.valid" (click)="saveassLesson(ListallLessons.value)">
-            <input type="button" class="btn btn-danger" value="Go Back" onclick="history.go(-1)">
-          </td>
-        </tr>
-      </table> -->
-
      
       <br>
       <div>
@@ -150,9 +122,6 @@
               {{ l.name }}</td>
           </div>
             <td>
-              <!-- <dp-date-picker [(ngModel)]="searchedDate" [config]="datePickerConfig" [theme]="'dp-material'"
-                formControlName="date" placeholder="Held Date" name="Day" type="date" required></dp-date-picker>
-            </td> -->
             <input type="date" formControlName="date" placeholder="Held Date" name="Day">
             <td class="">
               <input class="btn btn-success" type="submit" value="Submit" [disabled]="!ListsearchedLessons.valid" (click)="hideTable()" (click)="savesearchedLesson(ListsearchedLessons.value)">

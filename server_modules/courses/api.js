@@ -29,8 +29,9 @@ function getModel () {
 router.use(bodyParser.json());
 
 //Get courses details to show on the list (frontend)..
-router.get('/getallcourses', (req, res, next) => {
-  model.listAllCourses((err, results) => {
+router.get('/getallcourses/:currentLocationId', (req, res, next) => {
+  var location_id = req.params.currentLocationId;
+  model.listAllCourses(location_id,(err, results) => {
     if (err) {
       throw err;
     }

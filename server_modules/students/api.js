@@ -53,8 +53,9 @@ router.get('/checkIfUserExists', (req, res, next) => {
 
 
 //get students from the database to show in the list in the frontend..
-router.get('/getallstudents', (req, res, next) => {
-  model.listAllStudents((err, results) => {
+router.get('/getallstudents/:currentLocationId', (req, res, next) => {
+  var location_id = req.params.currentLocationId;
+  model.listAllStudents(location_id,(err, results) => {
     if (err) {
       throw err;
     }
@@ -69,7 +70,6 @@ router.get('/getallstudents', (req, res, next) => {
 router.post('/addStudent', (req, res, next) => {
   var student = req.body;
   model.addStudents(student, (err, results) => {
-
     if (err) {
       throw err;
     }

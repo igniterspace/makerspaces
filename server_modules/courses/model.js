@@ -12,9 +12,9 @@ const database = require('../../server_lib/database');
 const connection = database.createConnection();
 
 //Query to get courses from the database to show in the frontend (list)..
-function listAllCourses(cb) {
+function listAllCourses(location_id, cb) {
   connection.query(
-    'SELECT DISTINCT courses.id AS courses_id, CONCAT (courses.batch," ",courses.name) AS courses_name , courses.year AS courses_year , courses.from_date AS courses_from_date , courses.to_date AS courses_to_date , courses.day AS courses_day FROM courses', 
+    'SELECT DISTINCT courses.id AS courses_id, CONCAT (courses.batch," ",courses.name) AS courses_name , courses.year AS courses_year , courses.from_date AS courses_from_date , courses.to_date AS courses_to_date , courses.day AS courses_day FROM courses WHERE location_id = ? ' ,[location_id], 
     (err, results) => {
         if (err) {
             cb(err);
@@ -55,7 +55,6 @@ function getCourseDetails(c_id,cb) {
 //Query to get lessons from courses from the databes to show in the frontend..  
 function getAllCourseLessons(c_id,cb) {
     connection.query(`SELECT lessons_in_course.c_id AS c_id, lessons_in_course.l_id AS l_id, lessons_in_course.held_date AS dateh  , lessons.name AS lesson_name FROM lessons_in_course LEFT OUTER JOIN lessons ON (lessons_in_course.l_id = lessons.id) WHERE c_id= ? ORDER BY held_date ASC`,[c_id],
-    
     (err, results) => {
         if (err) {
           cb(err);
@@ -132,7 +131,7 @@ function listAllLessons(cb) {
 
 //Query to Send course details to the database..         
 function addCourse(course, res) {
-    connection.query('INSERT INTO `courses` (batch, name, year, from_date, to_date , day  ) VALUES ("'+ course.course_batch+'", "'+ course.course_name+'", "'+ course.course_year+'","'+ course.from_day+'", "'+ course.to_day+'" , "'+ course.course_day+'" )' , function (err, resp) {
+    connection.query('INSERT INTO `courses` ( location_id, batch, name, year, from_date, to_date , day  ) VALUES ( "'+ course.location+'" , "'+ course.course_batch+'", "'+ course.course_name+'", "'+ course.course_year+'","'+ course.from_day+'", "'+ course.to_day+'" , "'+ course.course_day+'" )' , function (err, resp) {
             if (err) throw err;
             });
 };
@@ -189,7 +188,6 @@ function getEditCourse(edcourse, res) {
         connection.query(`UPDATE courses SET batch = '${edcourse.courses_batch}' , name =  '${edcourse.courses_name}', year = '${edcourse.courses_year}', from_date = '${edcourse.courses_from_date}', to_date = '${edcourse.courses_to_date}', day = '${edcourse.courses_day}' WHERE id = ${edcourse.courses_id}`,
         (err, res) => {
         if (err) {
-            console.log(err); 
             return;
              }
     });
@@ -200,7 +198,6 @@ function EditLessonDate(edlesson, res) {
         connection.query(`UPDATE lessons_in_course SET held_date = '${edlesson.day}'  WHERE (c_id = ${edlesson.c_id} AND l_id = ${edlesson.l_id})`,
         (err, res) => {
         if (err) {
-            console.log(err); 
             return;
              }
     });
@@ -261,6 +258,7 @@ function createSchema(config, cb) {
 
 `CREATE TABLE IF NOT EXISTS \`courses\` (
 \`id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+\`location_id\` INT UNSIGNED NOT NULL,
 \`batch\` VARCHAR(255) NULL,
 \`name\` VARCHAR(255) NULL,
 \`year\` VARCHAR(255) NULL,
