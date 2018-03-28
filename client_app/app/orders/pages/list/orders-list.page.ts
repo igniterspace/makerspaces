@@ -14,7 +14,7 @@ import 'rxjs/Rx';
 
 export class OrdersListPage implements OnInit {
 
-  private ordersService: OrdersService;
+  private ordersService : OrdersService;
   private orders        : Order[];
   private orderhistory  : OrderHistory[];
   public orderview      : OrderView[];

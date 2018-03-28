@@ -1,16 +1,14 @@
 <header class="panel-heading">
     Mark Student Attendance...
 </header>
-<div class = "details">
-    Lesson ID : &nbsp;&nbsp;&nbsp;&nbsp;  Lesson name : &nbsp;&nbsp;&nbsp;&nbsp;  Level :    &nbsp;&nbsp;&nbsp;&nbsp;  Lesson scheduled date : 
+<div class = "details" *ngFor = "let j of showDetails" style="font-weight: 900">
+    Lesson name           : &nbsp;&nbsp;{{j.name}}&nbsp;&nbsp;&nbsp;&nbsp;   
+    Lesson scheduled date : &nbsp;&nbsp;{{j.date}}&nbsp;&nbsp;&nbsp;&nbsp;   
+    Level                 : &nbsp;&nbsp;{{j.level}}&nbsp;&nbsp;&nbsp;&nbsp;  
+    Year                  : &nbsp;&nbsp;{{j.year}}
 </div>
-<br><br>
 
-<p>Search</p>
-<input type="text" name="search" placeholder="Search.." [(ngModel)]="search">
-<button type="submit" class="btn btn-info" (click)="similarGuardian(search)" (click) ="showTable()">Search</button>
-
-<br><br>
+<br><br><br>
 
 <div class="adv-table">
     <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
@@ -20,16 +18,22 @@
                 <tr role="row">
 
                     <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
-                        aria-label="Rendering engine: activate to sort column descending" style="width: 100px; font-size: 10px">
-                        <i class="fa fa-address-card" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Student ID</th>
+                        aria-label="Rendering engine: activate to sort column descending" style="width: 75px; font-size: 10px; font-weight: 900">
+                        <i class="fa fa-address-card" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;
+                        Student ID
+                    </th>
 
                     <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
-                        aria-label="Rendering engine: activate to sort column descending" style="width: 187px; font-size: 10px">
-                        <i class="fa fa-child" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Student Name</th>
+                        aria-label="Rendering engine: activate to sort column descending" style="width: 187px; font-size: 10px; font-weight: 900">
+                        <i class="fa fa-child" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;
+                        Student Name
+                    </th>
 
                     <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                        style="width: 100px; font-size: 10px">
-                        <i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; Mark attendance</th>
+                    style="width: 150px; font-size: 10px; font-weight: 900">
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; 
+                        Mark attendance
+                    </th>
 
 
                 </tr>
@@ -37,21 +41,22 @@
 
             <tbody role="alert" aria-live="polite" aria-relevant="all">
 
-                <tr *ngFor="let i of orderview" class="odd">
-                    <td class=" "> </td>
-                    <td class=" ">
-                        <a [routerLink]="['../:student_id']" queryParamsHandling="merge" (click)="studentAttendance(  )"> </a>
-                    </td>
+                <tr *ngFor="let i of lessonAttendance" class="odd">
+                    <td class=" "> {{ i.id }} </td>
+                    <td class=" "> {{ i.first_name }}&nbsp;{{ i.last_name }} </td>
                     <td>
-                        <button class="btn btn-info" (click)="markStudentAttendance()">
+                        <button [disabled]="i.attendance_mark === 1" class="btn btn-success" (click)="markStudentAttendance( i )">
                             <i class="fa fa-check-square-o" aria-hidden="true"></i>
                             Mark attendance
+                        </button>
+                        <button class="btn btn-info" [disabled]="i.attendance_mark === 0" (click)="editAttendance( i )">
+                            <i class="fa fa-edit"></i>
                         </button>
                     </td>
                 </tr>
 
             </tbody>
         </table>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
     </div>
 </div>

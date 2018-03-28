@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import { environment }   from '../../../environments/environment';
 import { AuthHttp }      from 'angular2-jwt';
 
+
 @Injectable()
 export class ContextService {
     private location: number;

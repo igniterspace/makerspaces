@@ -15,8 +15,9 @@
                             <span>Orders</span>
                         </a>
                         <ul class="sub">
-                            <li><a [routerLink]="['orders']" queryParamsHandling="merge">Order History</a></li>
+                            <li><a class="active" [routerLink]="['orders']" queryParamsHandling="merge">Order History</a></li>
                             <li><a [routerLink]="['orders/edit']" queryParamsHandling="merge">Create Order</a></li>
+                            <li><a [routerLink]="['orders/packs']" queryParamsHandling="merge">Packs Ordering</a></li>
                         </ul>
                 </li>
                 <li class="sub-menu" [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.students }" >
@@ -38,7 +39,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  [routerLink]="['attendance/search']" queryParamshandling="merge">Mark Attendance</a></li>
-                        <li><a  [routerLink]="['attendance/view_lessons']" queryParamshandling="merge">View Attendance</a></li>
+                        <li><a  [routerLink]="['attendance/search_students']" queryParamshandling="merge">View Attendance</a></li>
                     </ul>
                 </li>
     
@@ -69,24 +70,13 @@
                         <span>Administration</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="javascript:;">Menu Item 1</a></li>
-                        <li class="sub-menu">
-                            <a  href="boxed_page.html">Menu Item 2</a>
-                            <ul class="sub">
-                                <li><a  href="javascript:;">Menu Item 2.1</a></li>
-                                <li class="sub-menu">
-                                    <a  href="javascript:;">Menu Item 3</a>
-                                    <ul class="sub">
-                                        <li><a  href="javascript:;">Menu Item 3.1</a></li>
-                                        <li><a  href="javascript:;">Menu Item 3.2</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                        <!-- add router link below -->
+                        <li><a [routerLink]="['users/add']" queryParamsHandling="merge"  href="javascript:;">Add User</a></li>
+                        <li><a [routerLink]="['users/list']" queryParamsHandling="merge" href="javascript:;">List Users</a></li>
                     </ul>
                 </li>
                 <!--multi level menu end-->
-    
+            
             </ul>
             <!-- sidebar menu end-->
         </div>

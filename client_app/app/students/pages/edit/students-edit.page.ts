@@ -1,4 +1,5 @@
 import { Component, OnInit }    from '@angular/core';
+import { Student }              from '../../../common/models/student';
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 import { DpDatePickerModule }   from 'ng2-date-picker';
 
@@ -7,9 +8,6 @@ import { ContextService }       from '../../../common/services/context.service';
 import { AuthService }          from '../../../common/services/auth.service';
 
 import { ListStudents }         from '../../../common/models/liststudents';
-import { Student }              from 'app/common/models/student';
-
-
 
 @Component({
   templateUrl: './students-edit.page.html',
