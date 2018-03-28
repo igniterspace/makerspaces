@@ -1,0 +1,79 @@
+<h3>UPDATE COURSE FORM</h3>
+<br>
+
+<form [formGroup]="updateCourseForm" method="post" *ngIf="updateCourseForm">
+    <table align="center" cellpadding="10">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <tr>
+            <td>COURSE BATCH :- </td>
+            <td>
+            <input type="text" class="form-control" value="bname" [(ngModel)]="bname" formControlName="courses_batch" name="Course_Batch" placeholder="Batch-**" required/>
+
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>COURSE NAME :- </td>
+            <td>
+            <input type="text" class="form-control" value="lname" formControlName="courses_name" [(ngModel)]="lname" name="Course_Name" placeholder="Course Name" required/>
+            </td>
+        </tr>
+        <br>
+        
+        <tr>
+            <td>YEAR :-</td>
+            <td>
+            <input type="text" class="form-control" value="course_data.courses_year" formControlName="courses_year" [(ngModel)]="course_data.courses_year" name="Year" placeholder="Course Year" required/>
+            </td>
+        </tr>
+        <br>
+        
+        <tr>
+            <td>DURATION OF THE COURSE:-</td>
+            <td>From :-
+            
+                <dp-date-picker [(ngModel)]="course_data.courses_from_date" value="course_data.courses_from_date" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="courses_from_date" placeholder="Starting Date"
+            name="From_Day" required></dp-date-picker>
+            
+            To :-
+            
+                <dp-date-picker [(ngModel)]="course_data.courses_to_date" value="course_data.courses_to_date" [config]="datePickerConfig" [theme]="'dp-material'" formControlName="courses_to_date" placeholder="Ending Date"
+                name="To_Day" required></dp-date-picker>
+                </td>
+        </tr>
+        <br>
+        
+        
+        <tr>
+            <td>DAY :-</td>
+            <td>
+                <div>
+                <select  [(ngModel)]="course_data.courses_day" value="courses_day" formControlName="courses_day" method="post" class="selectpicker" required>
+                <optgroup label="Week Days">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </optgroup>
+                <optgroup label="Weekend Days">
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </optgroup>    
+                  </select>
+                </div>
+            </td>
+        </tr>
+        <br>
+        
+        <tr>
+            <td colspan="2" align="center">
+                <button type="submit" class="btn btn-success" [disabled]="!updateCourseForm.valid" (click)="updateCourse(updateCourseForm.value)" >Update</button>
+                <input type="reset" class="btn btn-danger" value="Reset">
+            </td>
+        </tr>
+    </table>
+
+</form>
+

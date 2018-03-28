@@ -13,6 +13,7 @@ import { PackOrders }             from './pages/pack/pack.orders.page';
 import { OrdersService }          from '../common/services/order.service';
 import { ContextService }         from '../common/services/context.service';
 import { OrdersEditService }      from '../common/services/order.service';
+
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options

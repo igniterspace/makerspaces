@@ -71,6 +71,7 @@ export class StudentsUpdatePage {
     var edstudents = Object.assign(student_data , this.guardian);
     this.ss.editStudent(edstudents).subscribe(res => console.log(edstudents));
     this.updateStudentForm.reset();
+    alert('This student has being updated..');
   }
 
   nameValidator(control: FormControl): {[s: string]: boolean} {

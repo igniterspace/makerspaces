@@ -4,6 +4,8 @@ import { Input }                           from '@angular/core/src/metadata/dire
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 
 import { StudentsService }                 from '../../../common/services/student.service';
+import { ContextService }           from '../../../common/services/context.service';
+import { AuthService }              from '../../../common/services/auth.service';
 
 import { Student }                         from '../../../common/models/student';
 import { DeleteId }                        from '../../../common/models/deleteid';
@@ -19,24 +21,30 @@ export class StudentsListPage {
   Student: any;
   
 
-  private studentsService: StudentsService;
-  private students: Student[];
-  private liststudents = [] ;
+  private studentsService : StudentsService;
+  private students        : Student[];
+  private liststudents    = [] ;
   private addStudentForm  : FormGroup;
   private updatestudents  : ListStudents;
   private student         : ListStudents[];
   private studentID       : number;
+  currentLocationId :number;
+  private location = {};
+  private locationId: number;
 
   @Output()
   deleteUserEvent = new EventEmitter<string>();
-  validateDelete: boolean;
+  validateDelete  : boolean;
 
   ListAllStudents : FormGroup ; 
   
-  constructor(private ss: StudentsService,private formBuilder: FormBuilder) {
+  constructor(private ss : StudentsService,
+              private formBuilder: FormBuilder,
+              private context: ContextService,
+              private auth  : AuthService) {
     this.studentsService = ss;
     this.ListAllStudents = new FormGroup({
-      liststudents: new FormControl()
+         liststudents    : new FormControl()
     });
   }
 
@@ -46,28 +54,19 @@ export class StudentsListPage {
 }
 
 //Get student details from the database and show on the list in the fronend..
-  listAllStudents() {
-    this.ss.listAllStudents().subscribe(res => {
+  listAllStudents(currentLocationId) {
+    this.ss.listAllStudents(currentLocationId).subscribe(res => {
       this.liststudents  = res.item;
-      // console.log(this.liststudents[0].id);
-      // console.log(res.item);
     });
   }
 
 //Delete student from the database when the delete button is clicked..  
   deleteStudent(deleteid : DeleteId){
-    //console.log('delete id: ',deleteid);
     alert('Do you want to remove this student?');
-    
     this.ss.deleteStudent(deleteid).subscribe(res=>console.log(res))
     var i;
-    // console.log(this.liststudents[0].id);
-    // console.log(this.liststudents.length);
-
     for ( i=0; i<this.liststudents.length; i++){
-      //console.log(this.liststudents[i].id+' '+i+' '+deleteid);
       if(this.liststudents[i].id == deleteid){
-        //console.log("del index:",i)
         this.liststudents.splice(i, 1);
       }
     }
@@ -75,11 +74,15 @@ export class StudentsListPage {
  
  ngOnInit(): void {
 
+//Get current location ID
+this.currentLocationId = this.context.getCurrentLocationId();
+
 //Show student details in the list..
-  this.listAllStudents();
+  this.listAllStudents(this.currentLocationId);
+
 //Send student details from the list to update.page..  
   this.ss.newitems.subscribe( updatestudents => this.updatestudents = updatestudents)
  
-}
+  }
 
 }

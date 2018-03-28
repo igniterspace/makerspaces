@@ -53,8 +53,9 @@ router.get('/checkIfUserExists', (req, res, next) => {
 
 
 //get students from the database to show in the list in the frontend..
-router.get('/getallstudents', (req, res, next) => {
-  model.listAllStudents((err, results) => {
+router.get('/getallstudents/:currentLocationId', (req, res, next) => {
+  var location_id = req.params.currentLocationId;
+  model.listAllStudents(location_id,(err, results) => {
     if (err) {
       throw err;
     }
@@ -68,9 +69,7 @@ router.get('/getallstudents', (req, res, next) => {
 //Send student details to the database..
 router.post('/addStudent', (req, res, next) => {
   var student = req.body;
-  //console.log(student);
   model.addStudents(student, (err, results) => {
-
     if (err) {
       throw err;
     }
@@ -78,12 +77,12 @@ router.post('/addStudent', (req, res, next) => {
       item: results
     });
   });
+  res.send({})
 });
 
 //Edit Student information..
 router.post('/updateStudent', (req, res, next) => {
   var edstudent = req.body;
-  //console.log('updated details:', edstudent);
   model.getEditStudent(edstudent, (err, results) => {
     if (err) {
       throw err;
@@ -93,6 +92,7 @@ router.post('/updateStudent', (req, res, next) => {
       item: results
     });
   });
+  res.send({})
 });
 
 //Send guardian details to the database..
@@ -106,6 +106,7 @@ router.post('/addGuardian', (req, res, next) => {
       item: results
     });
   });
+  res.send({})
 });
 
 
@@ -120,6 +121,7 @@ router.post('/assGuardian', (req, res, next) => {
       item: results
     });
   });
+  res.send({})
 });
 
 
@@ -139,7 +141,6 @@ router.get('/deleteStudent/:studentid', (req, res, next) => {
 //Search guardians..
 router.get('/search/:search', (req, res, next) => {
   var detail = req.params.search;
-  //console.log(detail);
   model.searchGuardian(detail, (err, results) => {
     if (err) {
       throw err;
@@ -148,7 +149,6 @@ router.get('/search/:search', (req, res, next) => {
     res.json({
       item: results
     });
-    //console.log('vaalue :', res.results);
   });
 });
 
