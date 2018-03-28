@@ -7,7 +7,6 @@ import { ContextService }       from '../../../common/services/context.service';
 import { AuthService }          from '../../../common/services/auth.service';
 
 import { ListStudents }         from '../../../common/models/liststudents';
-import { Student }              from 'app/common/models/student';
 
 
 

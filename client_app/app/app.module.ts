@@ -17,6 +17,7 @@ import { StudentsModule }           from './students/students.module';
 import { PaymentsModule }           from './payments/payments.module';
 import { OrdersModule }             from './orders/orders.module';
 import { AttendanceModule }         from './attendance/attendance.module';
+import { AdministrationModule }     from './administration/administration.module';
 import { CoursesModule }            from './courses/courses.module';
 import { DashboardModule }          from './dashboard/pages/dashboard.module';
 
@@ -65,6 +66,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PaymentsModule,
     AttendanceModule,
     CoursesModule,
+    AdministrationModule,
     AppRoutingModule,
     MiscRoutingModule,
     BrowserAnimationsModule,
