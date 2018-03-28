@@ -11,8 +11,7 @@ import { ViewStudentsPage }       from './mark_attendace/view_students/view_stud
 import { ViewLessonsPage}         from './mark_attendace/view_lessons/view.lessons.page';
 
 import { AttendanceService }      from '../common/services/attendance.service';
-import {SelectModule}             from 'ng2-select';
-
+import { SelectModule }           from 'ng2-select';
 
 @NgModule({
   imports       : [ CommonModule, FormsModule, AttendanceRoutingModule, ReactiveFormsModule, SelectModule ],

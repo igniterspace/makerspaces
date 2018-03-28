@@ -7,7 +7,6 @@ import { StudentsService }          from '../common/services/student.service';
 import { ContextService }           from '../common/services/context.service';
 import { BrowserModule }            from '@angular/platform-browser';
 import { DpDatePickerModule }       from 'ng2-date-picker';
-// import { Ng2SearchPipeModule }      from 'ng2-search-filter';
 
 import { StudentsRoutingModule}     from './students.routes';
 import { StudentsListPage }         from './pages/list/students-list.page';

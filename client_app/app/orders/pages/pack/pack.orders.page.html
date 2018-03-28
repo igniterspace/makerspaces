@@ -1,0 +1,90 @@
+
+<h6 class ="main-topic">Pack Ordering...</h6>
+
+<header class="panel-heading" >Add Pack Order Details</header>
+<div>
+<form *ngIf = "pack_order_table">
+<table class="display table table-bordered dataTable-striped table-hover" id = "display_table" aria-describedby="hidden-table-info_info" style="width: 600px" >
+  <thead>
+      <tr role="row">
+
+          <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+          aria-label="Rendering engine: activate to sort column descending" style="width: 50px;"> # </th>
+
+          <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+              aria-label="Rendering engine: activate to sort column descending" style="width: 200px;">
+              <i class="fa fa-shopping-bag"></i> Lesson</th>
+
+          <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+              style="width: 150px;">
+              <i class="fa fa-cubes"></i> Pack Quantity</th>
+
+          <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+            style="width: 150px;">
+            <i class="fa fa-cubes"></i> Due Date</th>
+
+          <th class="hidden-phone sorting" class="text-center" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1"
+              colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 50px;">
+              <i class="fa fa-pencil-square-o"></i>&nbsp;</th>
+
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let pack of packOrders ; let i = index">
+          <td>&nbsp;&nbsp;&nbsp;{{i + 1}}</td>
+          <td>&nbsp;&nbsp;&nbsp;{{pack.lessonName}}</td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ pack.packQuantity }}</td>
+          <td>&nbsp;&nbsp;&nbsp;{{pack.dueDate}}</td>
+
+          <td>
+              <button class="btn btn-danger" (click)="deleteOrder(pack)">
+                  <i class="fa fa-minus"></i>
+              </button>
+            </td>
+          </tr>
+      </tbody>
+  </table>
+</form>
+
+<br>
+
+<button class="btn btn-success" id = "add_button" *ngIf = "addbutton" (click)="showPackOrderForm()">
+    <i class="fa fa-plus"></i> 
+</button>
+
+<form method="POST" *ngIf="pack_OrderForm"  class = "packorder" [formGroup]="packOrderForm" (ngSubmit)="submitOrder(packOrderForm)" style="width: 500px" novalidate>
+
+  <br>
+
+        <label>Search Lessons..</label>
+        <div>
+          <ngx-select [items]="items" 
+            [(ngModel)]="itemId"
+            [allowClear]="true"
+            placeholder="No Lesson selected"
+            formControlName = "lessonId"
+            noResultsFound= "No results found" >
+            </ngx-select>
+        </div>
+
+        <br>
+        <label>Pack Quantity : </label>
+        <input type="number" formControlName="packQuantity" placeholder="enter quantity" [(ngModel)]="packquantity" required/>
+
+        
+        <label>Due Date : </label>
+        <input type="date" class="form-control"  class="ng-dirty ng-touched ng-invalid" formControlName="dueDate" [(ngModel)]="dueDate" style="width: 175px;" required/>
+    
+        <br>
+        <button type="button" class="btn btn-primary" (click)="sendPackOrder(packOrderForm.value)" [disabled] ="!packOrderForm.valid" >Add to Order</button>
+        <button type="button" class="btn btn-warning" (click)="cancelNewOrder()">Cancel</button>
+        <br>
+
+</form>
+
+
+
+<p class="form-submit">
+  <input name="submit" type="submit" id="submit" class="submit btn btn-success" (click)="savePackOrder()" value="Submit Order">
+</p>
+</div>

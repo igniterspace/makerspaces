@@ -1,0 +1,32 @@
+.packorder {
+    position: relative;
+    left: 300px;
+}
+
+.panel-heading {
+    position: relative;
+    left: 430px;
+    font-weight: bold ;
+    font-size : 20px;
+}
+
+.main-topic {
+    font-weight: bolder;
+    font-style: initial;
+}
+
+#display_table {
+    position: relative;
+    left: 240px;
+    
+}
+
+.form-submit{
+    position: relative;
+    left : 690px;
+}
+
+#add_button{
+    position: relative;
+    left: 245px;
+}

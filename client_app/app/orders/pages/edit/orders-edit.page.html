@@ -71,7 +71,7 @@
             <br>
             <br>
 
-            <form method="POST" *ngIf="orderForm" [formGroup]="addOrderForm" (ngSubmit)="submitOrder(addOrderForm)" novalidate>
+            <form method="POST" class = "addOrderForm" *ngIf="orderForm" [formGroup]="addOrderForm" (ngSubmit)="submitOrder(addOrderForm)" style="width: 500px" novalidate>
                 <header class="panel-heading">Add Order Details</header>
 
                 <p>
@@ -108,7 +108,7 @@
             </form>
 
 
-            <form *ngIf="editOrderForm">
+            <form *ngIf="editOrderForm" class ="editOrderForm" style="width: 500px" >
                 <header class="panel-heading">Edit Order Details</header>
 
 

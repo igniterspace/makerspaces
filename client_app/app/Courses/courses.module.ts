@@ -6,8 +6,7 @@ import { HttpModule }               from '@angular/http';
 import { CoursesService }           from '../common/services/course.service';
 import { BrowserModule }            from '@angular/platform-browser';
 import { DpDatePickerModule }       from 'ng2-date-picker';
-// import { Ng2SearchPipeModule }      from 'ng2-search-filter';
-
+//import { Ng2SearchPipeModule }      from 'ng2-search-filter';
 import { CoursesRoutingModule }     from './courses.routes';
 import { CoursesAddPage }           from './pages/add/courses-add.page';
 import { CoursesListPage }          from './pages/list/courses-list.page';
@@ -18,8 +17,10 @@ import { CourseStudentListPage }    from './pages/student_list/courses-student_l
 import { LessonsUpdatePage }        from './pages/lesson_update/courses-lesson_update';
 
 @NgModule({
-  imports     : [ CommonModule, FormsModule,ReactiveFormsModule, HttpModule, BrowserModule, DpDatePickerModule,Ng2SearchPipeModule, CoursesRoutingModule ],
+
+  imports     : [ CommonModule, FormsModule,ReactiveFormsModule, HttpModule, BrowserModule, DpDatePickerModule, CoursesRoutingModule ],
   declarations: [ CoursesAddPage, CoursesListPage, CoursesUpdatePage, LessonsAddPage, LessonsListPage, CourseStudentListPage, LessonsUpdatePage ],
   providers   : [ CoursesService ]
 })
+
 export class CoursesModule { }

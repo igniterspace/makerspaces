@@ -1,9 +1,9 @@
 import { Component, OnInit }  from '@angular/core';
-import { SelectModule }       from 'ng2-select';
-import { ButtonsModule }      from 'ngx-bootstrap';
-import { Selected }           from '../../../common/models/attendance.model';
-import { AttendanceService }  from '../../../common/services/attendance.service';
+import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 
+//Service
+import { AttendanceService }  from '../../../common/services/attendance.service';
+import { ContextService }     from '../../../common/services/context.service';
 
 @Component({
     templateUrl     : './search.student.page.html',
@@ -12,75 +12,57 @@ import { AttendanceService }  from '../../../common/services/attendance.service'
 })
 
 export class SearchStudentPage implements OnInit {
-
     
-    constructor( private attService : AttendanceService){}
+  private student_results    : any[];
+  private student_attendance : any[];
+  private seachresultForm    : boolean;
+  private attendanceResultForm: boolean;
+  private course_id          : number;
 
-    private value :any = ['Athens'];
-    private _disabledV:string = '0';
-    private disabled:boolean = false;
-    private active : Array <Selected[]>;
-    private item : any ;
-    seachresultForm  : boolean = false; 
+    constructor( private attService : AttendanceService,
+                 private context    : ContextService   ){}
+
+    // send search string and get all students relate to search string
+    searchCourseStudents(search) {
+      this.attService.searchCourseStudents(search).subscribe(res => {
+        this.student_results = res.item;
+        // show result table
+        this.seachresultForm = true ;
+        this.attendanceResultForm = false ;
+    });
+  }
+
+  //get student lesson attendance details
+  getLessonAttendanceDetails(student_course){
+    this.attService.getLessonAttendanceDetails(student_course).subscribe(res => {
+      this.student_attendance = res.item;
+
+      this.course_id  = student_course.course_id;
+      // show attendance result table
+      this.seachresultForm = false ;
+      this.attendanceResultForm = true ;
+  });
+  }
+
+  //mark student as present
+  markStudentAttendance(lesson){
+    this.attService.markStudentLessonAttendance(lesson).subscribe(res => {
+
+      lesson.attendance_mark = 1 ;
+    });
     
-    private items:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
-      'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
-      'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin', 'Düsseldorf',
-      'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hannover',
-      'Helsinki', 'Leeds', 'Leipzig', 'Lisbon', 'Łódź', 'London', 'Kraków', 'Madrid',
-      'Málaga', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Naples', 'Palermo',
-      'Paris', 'Poznań', 'Prague', 'Riga', 'Rome', 'Rotterdam', 'Seville', 'Sheffield',
-      'Sofia', 'Stockholm', 'Stuttgart', 'The Hague', 'Turin', 'Valencia', 'Vienna',
-      'Vilnius', 'Warsaw', 'Wrocław', 'Zagreb', 'Zaragoza'];
-  
-    private get disabledV():string {
-      return this._disabledV;
-    }
-  
-    private set disabledV(value:string) {
-      this._disabledV = value;
-      this.disabled = this._disabledV === '1';
-    }
-  
-    private selected(value:any) {
-      console.log('Selected value is: ', value);
-    }
-  
-    private removed(value:any) {
-      console.log('Removed value is: ', value);
-    }
-  
-    private refreshValue(value:any) {
-      this.value = value;
-    }
-  
-    private itemsToString(value:Array<any> = []) {
-      return value
-        .map(item => {
-        return item.text;
-        
-      }).join(',');
-    }
+  }
 
-    // show results of the search
-    showseachresultForm(){
-      this.seachresultForm = true;
-    }
+  //edit student attendance by lesson
+  editlessonAttendance(lesson){ 
+    this.attService.editlessonAttendance(lesson).subscribe( res => {
+      console.log("Success");
 
-    //get entered values of the search
-    searchStudent(active){
-        console.log(active);
-        this.clearModel();
-    
-    }
+      lesson.attendance_mark = 0 ;
+ })
+}
 
-    // clear search field
-    clearModel() {
-      this.active = [];
-      this.item = [];
-    }
-
-    ngOnInit() {  
+    ngOnInit(){
       
     }
 

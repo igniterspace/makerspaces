@@ -4,7 +4,7 @@ import { AppRoutingModule  }        from './app.routes';
 import { MiscRoutingModule }        from './misc/misc.routes';
 import { DpDatePickerModule }       from 'ng2-date-picker';
 import { Ng2SearchPipeModule }      from 'ng2-search-filter';
-
+import { SelectModule }             from  'ng2-select';
 import { AppComponent }             from './app.component';
 import { MenuComponent }            from './common/components/menu/menu.component';
 import { HeaderComponent }          from './common/components/header/header.component';
@@ -20,10 +20,8 @@ import { AttendanceModule }         from './attendance/attendance.module';
 import { AdministrationModule }     from './administration/administration.module';
 import { CoursesModule }            from './courses/courses.module';
 import { DashboardModule }          from './dashboard/pages/dashboard.module';
-
 import { ContextService }           from './common/services/context.service'
 import { AuthService }              from './common/services/auth.service'
-
 import { Http, HttpModule,  RequestOptions }                 from '@angular/http';
 import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth } from 'angular2-jwt';
 import { FormBuilder, FormGroup, Validators }                from '@angular/forms';
@@ -74,8 +72,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ReactiveFormsModule,
     FormsModule,
     DpDatePickerModule,
-    Ng2SearchPipeModule
-  ],
+    SelectModule
+    ],
+
   exports: [
     AppComponent
   ],
