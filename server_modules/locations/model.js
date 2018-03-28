@@ -24,15 +24,14 @@ function getLocation(locationId, cb) {
 
 function listAllLocations(cb) {
   connection.query(
-    // 'select distinct organizations.id as organization_id, organizations.name as organization_name, ' +
-    // 'locations.id as location_id, locations.name as location_name ' +
-    // 'from locations ' +
-    // 'left outer join organizations on (locations.organization_id=organizations.id)', [], (err, results) => {
-    //   if (err) {
-    //     cb(err);
-    //     return;
-    //   }
-  'SELECT * FROM students', [], (err, results) => {
+    'select distinct organizations.id as organization_id, organizations.name as organization_name, ' +
+    'locations.id as location_id, locations.name as location_name ' +
+    'from locations ' +
+    'left outer join organizations on (locations.organization_id=organizations.id)', [], (err, results) => {
+      if (err) {
+        cb(err);
+        return;
+      }
       if (err) {
         cb(err);
         return;
