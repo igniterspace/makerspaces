@@ -5,7 +5,7 @@
 
 <body>
   <table [formGroup]="ListallGuardians" (ngSubmit)="assignGuardian(ListallGuardians.value)" method="post">
-    <select formControlName="guardians_name">
+    <select formControlName="guardians_name" class="selectpicker">
       <option value="" disabled selected>Select your guardian...</option>
       <option *ngFor="let g of listguardians" [value]="g.guardians_id"> {{ g.guardians_name }} </option>
     </select>
@@ -45,14 +45,19 @@
       
               <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
               rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-              style="width: 162px;">Mobile Number
+              style="width: 122px;">Mobile Number
               </th>
               
               <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
               rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-              style="width: 162px;">E- mail
+              style="width: 180px;">E- mail
               </th>
         
+              <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+              rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+              style="width: 122px;">
+              </th>
+
              </tr>
             </thead>
           

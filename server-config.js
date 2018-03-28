@@ -54,7 +54,6 @@ nconf
     DATABASE: 'makerspaces',
     MYSQL_USER: 'Asitha',
     MYSQL_PASSWORD: '[4735196Asitha]',
-
     OAUTH2_CLIENT_ID: '1066178941676-5vmds16v7est58pstn2gdfna56542eve.apps.googleusercontent.com',
     OAUTH2_CLIENT_SECRET: 'Gbc33FRodnhcBSZU8glFC8I8',
     OAUTH2_CALLBACK: 'http://localhost:8080/auth/google/callback', //for local development

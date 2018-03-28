@@ -1,0 +1,71 @@
+<div class="row">
+        <div class="col-sm-12">
+          <section class="panel">
+            <header class="panel-heading">
+              SEARCH STUDENTS FOR PAYMENTS
+            </header>
+            <div class="panel-body">
+              <div class="adv-table">
+                <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                  <table class="display table table-bordered dataTable" id="hidden-table-info" aria-describedby="hidden-table-info_info" >
+      
+                  
+<div>
+        <p>Search Your Student:</p>
+        <small>by name..</small>
+
+        <input type="text" name="search" placeholder="Search Student.." [(ngModel)]="search">
+        <button type="submit" class="btn btn-info" (click)="similarStudents(search)" (click)="showTable()">Search</button>
+
+      </div>
+      <br>
+      <br>
+      <table class="display table table-bordered dataTable" *ngIf="detailForm" id="hidden-table-info"
+        aria-describedby="hidden-table-info_info" method="post">
+
+        <thead >
+          <tr role="row">
+
+            <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1"
+              colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 250px;">Course Name
+            </th>
+
+            <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1"
+              colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 350px;">Student Name
+            </th>
+
+            <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1"
+              colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 180px;">
+            </th>
+
+            <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1"
+            colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 180px;">
+          </th>
+
+          </tr>
+        </thead>
+
+        <tbody role="alert" aria-live="polite" aria-relevant="all" >
+
+          <tr class="odd" *ngFor="let s of search_res">
+            <td class="" >
+              {{ s.courses_name }}</td>
+              <td class="" >
+                {{ s.students_name }}</td>
+                <td class=""> 
+                  <a href="" [routerLink]="['./add',s.student_id ]" queryParamshandling="merge" (click)="addPayment(s)" >Add Payment</a>
+                  
+                </td>
+                <td class=""> 
+                  <a href="" [routerLink]="['./list',s.student_id ]"  queryParamshandling="merge" (click)="addPayment(s)">Show Payments</a>
+                </td>
+          </tr>
+        </tbody>
+      </table>
+    </table>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>

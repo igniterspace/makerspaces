@@ -53,6 +53,16 @@
                             <li><a [routerLink]="['courses/list']" queryParamsHandling="merge">List Courses</a></li>
                     </ul>
                 </li>
+
+                <li class="sub-menu"  [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.classes }" >
+                    <a href="javascript:;" >
+                        <i class="fa fa-dollar"></i>
+                        <span>Payments</span>
+                    </a>
+                    <ul class="sub">
+                            <li><a [routerLink]="['payments']" queryParamsHandling="merge">Go to Payments</a></li>
+                    </ul>
+                </li>
                 <!--multi level menu start-->
                 <li class="sub-menu"  [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.administration }" >
                     <a href="javascript:;" >
@@ -60,24 +70,13 @@
                         <span>Administration</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="javascript:;">Menu Item 1</a></li>
-                        <li class="sub-menu">
-                            <a  href="boxed_page.html">Menu Item 2</a>
-                            <ul class="sub">
-                                <li><a  href="javascript:;">Menu Item 2.1</a></li>
-                                <li class="sub-menu">
-                                    <a  href="javascript:;">Menu Item 3</a>
-                                    <ul class="sub">
-                                        <li><a  href="javascript:;">Menu Item 3.1</a></li>
-                                        <li><a  href="javascript:;">Menu Item 3.2</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                        <!-- add router link below -->
+                        <li><a [routerLink]="['users/add']" queryParamsHandling="merge"  href="javascript:;">Add User</a></li>
+                        <li><a [routerLink]="['users/list']" queryParamsHandling="merge" href="javascript:;">List Users</a></li>
                     </ul>
                 </li>
                 <!--multi level menu end-->
-    
+            
             </ul>
             <!-- sidebar menu end-->
         </div>

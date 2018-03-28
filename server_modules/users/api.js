@@ -11,6 +11,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const logging = require('../../server_lib/logging');
+const model      = require('./model');
+const router     = express.Router();
+const auth       = require('../../server_lib/auth');
+const user       = require('../users/api');
+
+
 
 const errNotFound = {
   code: 404,
@@ -21,7 +27,6 @@ function getModel () {
   return require('./model');
 }
 
-const router = express.Router();
 
 // Automatically parse request body as JSON
 router.use(bodyParser.json());
@@ -41,4 +46,53 @@ router.use(function (err, req, res, next) {
   next(err);
 });
 
+
+
+//get users from the database to show in the list in the frontend..
+router.get('/getallusers', (req, res, next) => {
+  model.listAllUsers((err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+
+
+// function to add user to the database
+router.post('/addusers', (req, res, next) => {
+  var user = req.body;
+  console.log("user =",user);
+  model.addUsers(user, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+
+//Edit user details in the database
+router.post('/editusers', (req, res, next) => {
+  var eduser = req.body;
+  console.log('edited details:', eduser);
+  model.getEditUser(eduser, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
 module.exports = router;
+                                                                                                                                                                                                                                                 
+
+// ------------------------

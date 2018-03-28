@@ -5,7 +5,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License this code is made available to you.
 
-
 'use strict';
 
 const database = require('../../server_lib/database');
@@ -55,7 +54,7 @@ function readByEmail (email, cb) {
     });
 }
 
-
+//save details of user into databaser
 function create (data, cb) {
   if (!data.email) {
     var err = {
@@ -104,10 +103,60 @@ function createSchema (config, cb) {
   );
 }
 
+
+//--add the user into the database
+function addUsers(user, res) {
+  connection.query('INSERT INTO `users` (given_name, family_name, email, profile_image) VALUES ("'+ user.users_first_name+'", "'+ user.users_last_name+'","'+ user.users_email+'", "'+ user.profile_image+'" )' , function (err, resp) {
+          if (err) throw err; 
+              if(err){
+                console.log(err);
+                  }
+         });
+       };
+//--
+
+//--------------------
+//Query to get students from the database to show in the list in the frontend..
+function listAllUsers(cb) {
+  console.log("IT COMES TO MODEL.JS")
+  connection.query(
+      'SELECT DISTINCT users.id, users.given_name, users.family_name, users.email, users.profile_image FROM users',
+      (err, results) => {
+          if (err) {
+              cb(err);
+              return;
+          }
+          console.log(results);
+
+          cb(null, results);
+      });
+};
+
+
+
+//Query to update student details..        
+function getEditUser(eduser, res) {
+  //console.log('edstudent : ', edstudent);
+      connection.query(`UPDATE users SET given_name =  '${eduser.users_username}', family_name = '${eduser.users_fullname}', email = '${eduser.users_email}', profile_image = '${eduser.users_image}' WHERE  id = ${eduser.users_id}`,
+      (err, res) => {
+          if (err) {
+              console.log(err); 
+              return;
+          }
+          console.log('Result : ', res);
+          // cb(null, results);
+      });
+}      
+
+
+
+
 module.exports = {
   createSchema: createSchema,
   listAllByOrganization: listAllByOrganization,
   readByEmail: readByEmail,
   create: create,
-  updateByEmail: updateByEmail
+  updateByEmail: updateByEmail,
+  addUsers: addUsers,
+  listAllUsers: listAllUsers
 };
