@@ -7,21 +7,20 @@
     <div class="panel-body">
       <div class="adv-table"> 
        <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
-        <table class="display table table-bordered dataTable" id="hidden-table-info" aria-describedby="hidden-table-info_info" >
+        <table class="display table table-bordered dataTable" id="hidden-table-info" *ngIf="selectstu" aria-describedby="hidden-table-info_info" >
   
          <thead>
          <tr role="row">
-                                          
-          <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-          rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-          style="width: 100px;">Student ID
-          </th>
           
           <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
           rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 150px;">Student Name
           </th>
   
-  
+          <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+          rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+          style="width: 5px;">
+          </th>
+
          </tr>
         </thead>
       
@@ -29,10 +28,13 @@
       
          <tr class="odd" *ngFor="let s of selectstu">
                                              
-          <td class="">{{ s.s_id }} </td>
-          <td class="">{{ s.students_name }}</td>
+          <td class="">{{ s.first_name }} {{ s.last_name }}</td>
           
-          
+          <td class="">
+            
+
+        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o " (click)= "deleteStudent(s)"></i></button>
+        </td> 
   </tr>
         
        </tbody>
@@ -48,6 +50,67 @@
          
          </div>
         </div>
+        <br>
+
+            <div>
+              <p>Search Student:</p>
+              <small>by name,gender or date of birth..</small>
+          
+              <input type="text" name="search" placeholder="Search New Student.." [(ngModel)]="search">
+              <button type="submit" class="btn btn-info" (click)="similarStudent(search)" (click) ="showTable()">Search</button>
+          
+            </div>
+            <br><br>
+            <table class="display table table-bordered dataTable" *ngIf = "detailForm" id="hidden-table-info" aria-describedby="hidden-table-info_info">
+                
+                       <thead>
+                       <tr role="row">
+          
+                        <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                        rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;">Name
+                        </th>
+                
+                        <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 122px;">Gender
+                        </th>
+                
+                        <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                        rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+                        style="width: 122px;">Date of Birth
+                        </th>
+                        
+                        <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                        rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+                        style="width: 122px;">Home Address
+                        </th>
+                  
+                        <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
+                        rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+                        style="width: 122px;">
+                        </th>
+          
+                       </tr>
+                      </thead>
+                    
+                     <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    
+                       <tr class="odd" *ngFor="let a of search_res">
+                                                         
+                        <td class="">{{ a.first_name }} {{a.last_name}} </td>
+                        <td class="">{{ a.gender }}</td>
+                        <td class="">{{ a.date_of_birth }}</td>
+                        <td class="">{{ a.home_address }}</td>
+                        <td class="">
+                          <input class="btn btn-success" type="submit" value="Submit" (click)="hideTable()" (click)="savesearchStudent(a)">
+                        </td>                      
+                        
+          
+                
+                       </tr>
+                     </tbody>
+                   </table>
+
+                   <p>New student! Click <a href="" [routerLink]="['../../../../students/guardian']" queryParamshandling="merge"> HERE</a></p>
       </div>
       
     </div>
@@ -56,9 +119,4 @@
   </section>
   </div>
   </div>
-  <!-- <table [formGroup]="ListallStudents" method="post">
-      <select formControlName="students_name">
-        <option value="" disabled selected>Select your student...</option>
-        <option *ngFor="let s of liststudents" [value]="s.s_id"> {{ s.students_name }} </option>
-      </select>
-   </table> -->
+  

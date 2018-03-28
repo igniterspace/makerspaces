@@ -1,14 +1,24 @@
 <h3>CREATE A NEW COURSE</h3>
 <br>
 
-<form [formGroup]="addCourseForm" method="post" *ngIf="addCourseForm">
+<form [formGroup]="addCourseForm" method="post" (ngSubmit)="saveCourse(addCourseForm.value)" novalidate>
     <table align="center" cellpadding="10">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <tr>
+            <td>COURSE BATCH :- </td>
+            <td>
+            <input type="text" class="form-control" formControlName="course_batch" name="Course_Batch" placeholder="Batch-**" value="Batch-" required/>
+            <small *ngIf="!isValid('course_batch')" class="text-muted">Not enough characters</small>
+
+            </td>
+        </tr>
+        <br>
+
+        <tr>
             <td>COURSE NAME :- </td>
             <td>
-            <input type="text" class="form-control" formControlName="course_name" name="Course_Name" placeholder="Course Name" required/>
+            <input type="text" class="form-control" formControlName="course_name" name="Course_Name" placeholder="Level-**" value="Level-" required/>
             <small *ngIf="!isValid('course_name')" class="text-muted">Not enough characters</small>
 
             </td>
@@ -44,17 +54,17 @@
             <td>DAY :-</td>
             <td>
                 <div>
-                <select value="course_day" formControlName="course_day" method="post" class="selectpicker show-menu-arrow">
+                <select value="course_day" formControlName="course_day" method="post" class="selectpicker">
                 <optgroup label="Week Days">
-                    <option value="monday">Monday</option>
-                    <option value="teusday">Teusday</option>
-                    <option value="wednesday">Wednesday</option>
-                    <option value="thursday">Thursday</option>
-                    <option value="friday">Friday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
                 </optgroup>
                 <optgroup label="Weekend Days">
-                    <option value="saturday">Saturday</option>
-                    <option value="sunday">Sunday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
                 </optgroup>    
                   </select>
                 </div>
@@ -64,7 +74,7 @@
         
         <tr>
             <td colspan="2" align="center">
-                <button type="submit" class="btn btn-success" [disabled]="!addCourseForm.valid" (click)="saveCourse(addCourseForm.value)" >Submit</button>
+                <button type="submit" class="btn btn-success" [disabled]="!addCourseForm.valid"  >Submit</button>
                 <input type="reset" class="btn btn-danger" value="Reset">
             </td>
         </tr>

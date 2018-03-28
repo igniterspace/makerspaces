@@ -219,6 +219,7 @@ function createSchema(config, cb)
         \`att_date\` VARCHAR(255),
       PRIMARY KEY (\`attendance_id\`))  ENGINE=INNODB;` +
 
+     
       `ALTER TABLE \`attendance\` 
       ADD FOREIGN KEY (\`course_id\`)   
       REFERENCES \`courses\`(\`id\`) 
@@ -237,8 +238,6 @@ function createSchema(config, cb)
       ON UPDATE CASCADE
       ON DELETE CASCADE;`
     ,
-
-
         (err) => {
             if (err) {
               throw err;

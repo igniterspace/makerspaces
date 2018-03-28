@@ -8,7 +8,7 @@ import { FormGroup, FormControl, FormBuilder, AbstractControl, ReactiveFormsModu
 import { Location }                 from '@angular/common';
 import { ContextService }           from '../../../common/services/context.service';
 import { AuthService }              from '../../../common/services/auth.service';
-
+import { Ng2SearchPipeModule }      from 'ng2-search-filter';
 
 @Component({
 

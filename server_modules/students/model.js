@@ -38,9 +38,9 @@ function getEmail(email, cb) {
  }
 
 //Query to get students from the database to show in the list in the frontend..
-function listAllStudents(cb) {
+function listAllStudents(location_id ,cb) {
     connection.query(
-        'SELECT DISTINCT students.id, CONCAT (students.first_name," ",students.last_name) AS students_name, students.date_of_birth AS date_of_birth, guardians.name AS g_name, students.home_address AS home_address, students.gender AS gender, students.g_id AS g_id FROM students LEFT OUTER JOIN guardians ON (students.g_id = guardians.id ) GROUP BY id ASC',
+        'SELECT DISTINCT students.id, students.location_id , CONCAT (students.first_name," ",students.last_name) AS students_name, students.date_of_birth AS date_of_birth, guardians.name AS g_name, students.home_address AS home_address, students.gender AS gender, students.g_id AS g_id FROM students LEFT OUTER JOIN guardians ON (students.g_id = guardians.id ) WHERE location_id = ?',[location_id],
         (err, results) => {
             if (err) {
                 cb(err);
@@ -54,7 +54,7 @@ function listAllStudents(cb) {
 
 //Query to Send student details to the database..
 function addStudents(student, res) {
-    connection.query('INSERT INTO `students` (first_name, last_name, date_of_birth, home_address, gender, g_id ) VALUES ("'+ student.students_first_name+'", "'+ student.students_last_name+'","'+ student.students_date_of_birth+'", "'+ student.students_home_address+'", "'+ student.students_gender+'", "'+ student.guardians_name+'" )' , function (err, resp) {
+    connection.query('INSERT INTO `students` (location_id, first_name, last_name, date_of_birth, home_address, gender, g_id ) VALUES ("'+ student.location+'" , "'+ student.students_first_name+'", "'+ student.students_last_name+'","'+ student.students_date_of_birth+'", "'+ student.students_home_address+'", "'+ student.students_gender+'", "'+ student.guardians_name+'" )' , function (err, resp) {
             if (err) throw err; 
                 if(err){
                   console.log(err);
@@ -65,15 +65,11 @@ function addStudents(student, res) {
         
 //Query to update student details..        
 function getEditStudent(edstudent, res) {
-    //console.log('edstudent : ', edstudent);
         connection.query(`UPDATE students SET first_name =  '${edstudent.students_first_name}', last_name = '${edstudent.students_last_name}', date_of_birth = '${edstudent.students_date_of_birth}', home_address = '${edstudent.students_home_address}', gender = '${edstudent.students_gender}' WHERE  id = ${edstudent.students_id}`,
         (err, res) => {
             if (err) {
-                console.log(err); 
                 return;
             }
-            console.log('Result : ', res);
-            // cb(null, results);
         });
 }       
 
@@ -94,7 +90,6 @@ function assignGuardians(assguar, res) {
 
 //Query to Delete student from the list and from the database..    
 function deleteStudent(delid, cb) {
-    //console.log('delete id in model: ' , delid);
     connection.query(
         'DELETE FROM students WHERE id ='+ delid ,
         (err, results) => {
@@ -108,14 +103,11 @@ function deleteStudent(delid, cb) {
 
 //Query to Search Guardians..
 function searchGuardian (detail, cb) {
-    //console.log('detail: ', '%' + detail +'%'); 
     connection.query(`SELECT * FROM guardians WHERE id LIKE '%${detail}%' OR name LIKE '%${detail}%' OR home_number LIKE '%${detail}%' OR mobile_number LIKE '%${detail}%' OR email_address LIKE '%${detail}%'`, function (err, res){
            if (err) {
            throw err;
-           console.log('Result : ', res);
            return;
            }
-           console.log('Result 1 : ',res);
            cb(null ,res);
         });
 }
@@ -135,9 +127,10 @@ function createSchema(config, cb) {
 
 `CREATE TABLE IF NOT EXISTS \`students\` (
 \`id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+\`location_id\` INT UNSIGNED NOT NULL,
 \`first_name\` VARCHAR(255) NULL,
 \`last_name\` VARCHAR(255) NULL,
-\`date_of_birth\` VARCHAR(20) NULL,
+\`date_of_birth\` VARCHAR(10) NULL,
 \`home_address\` VARCHAR(255) NULL,
 \`gender\` VARCHAR(255) NULL,
 \`g_id\` INT ,

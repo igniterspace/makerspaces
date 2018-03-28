@@ -1,0 +1,64 @@
+<h3>ADD PAYMENT FORM</h3>
+
+<br>
+
+<form [formGroup]="addPaymentForm" >
+    <table align="center" cellpadding="10">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <tr>
+            <td>
+                <input type="hidden" readonly="readonly" class="form-control" [(ngModel)]="pay_data.course_id" formControlName="course_id" name="City" maxlength="50"
+                    required />
+            </td>
+            <td>
+                <input type="hidden" readonly="readonly" class="form-control" [(ngModel)]="pay_data.student_id" formControlName="student_id" name="City" maxlength="50"
+                    required />
+            </td>
+        </tr>
+        <br>
+        <tr>
+                <td>COURSE'S NAME :-</td>
+                <td>
+                    <input type="text" readonly="readonly" class="form-control" [(ngModel)]="pay_data.courses_name" formControlName="course_name" name="City" maxlength="50"
+                        required />
+                </td>
+            </tr>
+        <br>
+
+        <tr>
+            <td>STUDENT'S NAME :-</td>
+            <td>
+                <input type="text" readonly="readonly" class="form-control" [(ngModel)]="pay_data.students_name" formControlName="students_name" name="City" maxlength="50"
+                    required />
+            </td>
+        </tr>
+    <br>
+
+        <tr>
+            <td>DATE :-</td>
+            <td>
+                    <input class="date" type="date" formControlName="today" placeholder="Held Date" name="Day">
+            </td>
+        </tr>
+    <br>
+        <tr>
+        <td>AMOUNT PAID :-</td>
+        <td>
+        <input type="number" class="form-control" formControlName="amount_paid" name="City" maxlength="50" placeholder="Rs.XXXXX"
+            required />
+            <small *ngIf="!isValid('amount_paid')" class="text-muted">Not enough characters!</small>
+        </td>
+        </tr>
+    <br>
+        <tr>
+            <td colspan="2" align="center">
+                <a queryParamshandling="merge">
+                <input type="submit" class="btn btn-success" [routerLink]="['../../../payments']" value="Submit" [disabled]="!addPaymentForm.valid" (click)="savePayment(addPaymentForm.value)">
+                </a>
+                <input type="reset" class="btn btn-danger" value="Reset">
+            </td>
+        </tr>
+    </table>
+
+</form>

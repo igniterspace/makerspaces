@@ -1,0 +1,36 @@
+<h3>UPDATE LESSON'S DATE</h3>
+<br>
+
+<form [formGroup]="updateLessonForm" method="post" *ngIf="updateLessonForm">
+    <table align="center" cellpadding="10">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <tr>
+            <td>LESSON NAME :- </td>
+            <td>
+            <input type="text" readonly="readonly" class="form-control" [(ngModel)]="lesson_data.lesson_name" formControlName="lesson_name" name="Lesson_Name" placeholder="Lesson Name" value="lesson_data.lesson_name" required/>
+
+            </td>
+        </tr>
+        <br>
+        
+        
+        <tr>
+            <td>DATE:-</td>
+            <td>
+            <input type="date"[(ngModel)]="lesson_data.dateh" formControlName="day" value="lesson_data.date" placeholder="Held Date" name="Day">
+                </td>
+        </tr>
+        <br>
+        
+        
+        <tr>
+            <td colspan="2" align="center">
+                <button type="submit" class="btn btn-success" [routerLink]="['../../']" [disabled]="!updateLessonForm.valid" (click)="updateLesson(updateLessonForm.value)" >Update</button>
+                <input type="reset" class="btn btn-danger" value="Reset">
+            </td>
+        </tr>
+    </table>
+
+</form>
+
