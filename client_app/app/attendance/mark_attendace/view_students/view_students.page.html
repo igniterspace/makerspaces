@@ -33,7 +33,7 @@
                 <tr *ngFor="let i of students" class="odd">
                     <td>{{ i.student_id }}</td>
                     <td><a [routerLink]="['../../student/attendance']" queryParamsHandling="merge" (click)="getStudentAttendance( i )"  >
-                            {{ i.first_name }}&nbsp;{{ i.last_name }}</a>
+                        {{ i.first_name }}&nbsp;{{ i.last_name }}</a>
                     </td>
                 </tr>
 

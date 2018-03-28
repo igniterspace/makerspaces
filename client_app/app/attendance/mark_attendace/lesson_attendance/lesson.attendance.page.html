@@ -49,6 +49,9 @@
                             <i class="fa fa-check-square-o" aria-hidden="true"></i>
                             Mark attendance
                         </button>
+                        <button class="btn btn-info" [disabled]="i.attendance_mark === 0" (click)="editAttendance( i )">
+                            <i class="fa fa-edit"></i>
+                        </button>
                     </td>
                 </tr>
 

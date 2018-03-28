@@ -47,7 +47,7 @@
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
                                     
                                     <tr *ngFor="let i of lesson" class="odd">
-                                        <td class=" "> {{i.id}}   </td>
+                                        <td class=" "> {{i.id}} </td>
                                         <td><a [routerLink]="['../../lesson_attendance']" queryParamsHandling="merge" (click)="passLessonDetails( i )"  >
                                             {{i.name}}</a>
                                         </td>

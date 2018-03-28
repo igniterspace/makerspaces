@@ -35,14 +35,14 @@ export class AttendanceService {
       return this.http.get('http://localhost:8080/api/attendance/getCoursesYears').map(res =>res.json());
     }
 
+    //Get all course names for select in front end
+    getCourseNames(){
+      return this.http.get('http://localhost:8080/api/attendance/getCourseNames').map(res =>res.json());
+    }
+
     // Get all search values from the front end and get result data back to front end from the search(used post because we are sending an object,not a single value)
     searchCourses(searchvalues){
       return this.http.post('http://localhost:8080/api/attendance/getCourses',searchvalues ).map(res =>res.json());
-    }
-
-    // Get selected student lesson attendance from database(used post because we are sending an object,not a single value)
-    getStudentAttendance(details){
-      return this.http.post('http://localhost:8080/api/attendance/getStudentAttendance', details ).map(res =>res.json());
     }
 
     //Get course students belongs to peticular lesson from database
@@ -60,7 +60,7 @@ export class AttendanceService {
       return this.http.get('http://localhost:8080/api/attendance/searchCourseStudents/'+ search ).map(res =>res.json());
     }
 
-    // Get selected student course lessons from database(used post because we are sending an object)
+    // Get selected student course lessons and attendance from database(used post because we are sending an object)
     getStudentLessons(details){
       return this.http.post('http://localhost:8080/api/attendance/getStudentLessons', details ).map(res =>res.json());
     }
@@ -68,6 +68,21 @@ export class AttendanceService {
     //Mark student as present
     markStudentAttendance(attStudent){
       return this.http.post('http://localhost:8080/api/attendance/markStudentAttendance', attStudent ).map(res =>res.json());
+    }
+
+     //edit student as not present
+     editAttendance(attStudent){
+      return this.http.post('http://localhost:8080/api/attendance/editAttendance', attStudent ).map(res =>res.json());
+    }
+
+    //Mark student as present
+    markStudentLessonAttendance(attStudent){
+      return this.http.post('http://localhost:8080/api/attendance/markStudentLessonAttendance', attStudent ).map(res =>res.json());
+    }
+
+    //edit student as not present
+    editlessonAttendance(attStudent){
+      return this.http.post('http://localhost:8080/api/attendance/editlessonAttendance', attStudent ).map(res =>res.json());
     }
 
     // get student lesson attendance 

@@ -126,6 +126,53 @@ router.post('/submitdate', (req, res, next) => {
 });
 
 
+//get lesson names from the database for packing system
+router.get('/getLessonNames', (req, res, next) => {
+  model.getLessonNames((err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
+
+
+// Insert pack order data into database
+router.post('/sendPackOrder', (req, res, next) => {
+  var packorder = req.body;  
+  console.log(packorder);
+  model.sendPackOrder( packorder, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+
+// find lesson name
+router.post('/findLessonName', (req, res, next) => {
+  var packorder = req.body;  
+  console.log(packorder);
+  model.findLessonName( packorder, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
+
 router.use((err, req, res, next) => {
   // Format error and forward to generic error handler for logging and
   // responding to the request
@@ -135,5 +182,8 @@ router.use((err, req, res, next) => {
   };
   next(err);
 });
+
+
+
 
 module.exports = router;

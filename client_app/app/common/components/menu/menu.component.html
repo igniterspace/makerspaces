@@ -17,7 +17,7 @@
                         <ul class="sub">
                             <li><a class="active" [routerLink]="['orders']" queryParamsHandling="merge">Order History</a></li>
                             <li><a [routerLink]="['orders/edit']" queryParamsHandling="merge">Create Order</a></li>
-                            <li><a [routerLink]="['orders/edit']" queryParamsHandling="merge">Packs Ordering</a></li>
+                            <li><a [routerLink]="['orders/packs']" queryParamsHandling="merge">Packs Ordering</a></li>
                         </ul>
                 </li>
                 <li class="sub-menu" [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.students }" >

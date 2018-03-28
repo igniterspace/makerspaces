@@ -9,7 +9,7 @@ export class ListCourses {
     
     }
 
-    export class Course {
+export class Course {
     
         id                   : number;
         batch                : string;
@@ -21,7 +21,7 @@ export class ListCourses {
         
         }
 
-    export class CourseDetails {
+export class CourseDetails {
     
     id       : number;
     itemName : string;
@@ -29,11 +29,18 @@ export class ListCourses {
     }
 
 
-    export class Year {
+export class Year {
     
          year   : string;
            
     }
+
+
+export class CourseName {
+
+        name   : string;
+          
+   }
 
 export class AddCourses {
 

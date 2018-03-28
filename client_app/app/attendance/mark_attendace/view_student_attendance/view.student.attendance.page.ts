@@ -19,19 +19,35 @@ export class StudentAttendancePage implements OnInit {
 
     constructor (private attService: AttendanceService){}
 
-    // get student lessons belongs to course
+    // get student lessons and attendance belongs to course
     getStudentLessons(){
+
       this.attService.getStudentLessons(this.details).subscribe( res => {
             this.lessons = res.item;
         });
       }
 
-    // get student attendance records from database
-    getStudentAttendance(){
-      this.attService.getStudentAttendance(this.details).subscribe( res => {
-        this.student_AttendaceRecord = res.item;
-    });
-  }
+
+//Mark student attendance by lesson (attstudent is collection of course id, lesson id and student id)
+markStudentLessonAttendance(lesson){ 
+  this.attService.markStudentLessonAttendance(lesson).subscribe( res => {
+      console.log("Success");
+
+      lesson.attendance_mark = 1 ;
+ })
+}
+
+
+//edit student attendance by lesson
+editlessonAttendance(lesson){ 
+  this.attService.editlessonAttendance(lesson).subscribe( res => {
+      console.log("Success");
+
+      lesson.attendance_mark = 0 ;
+ })
+}
+
+
 
   ngOnInit(){
 
@@ -39,6 +55,5 @@ export class StudentAttendancePage implements OnInit {
     this.attService.newFull_studentCourse.subscribe( details => this.details = details);
     
     this.getStudentLessons();
-    this.getStudentAttendance();
   }  
 }

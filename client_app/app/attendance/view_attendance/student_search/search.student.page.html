@@ -6,7 +6,6 @@
         <button type="submit" class="btn btn-info" (click)="searchCourseStudents(search)">Search</button>
     
       </div>
-
     <br><br><br>  
 
 <form *ngIf="seachresultForm" > 
@@ -55,6 +54,10 @@
 <form *ngIf="attendanceResultForm" > 
     <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
 
+            <div class="panel-body" *ngFor="let a of student_attendance  | slice:0:1; let i=index" class="odd">
+                    <p>Name : {{a.first_name}} &nbsp;{{a.last_name}}</p>
+            </div>
+
         <table class="display table table-bordered dataTable-striped table-hover" id="hidden-table-info" aria-describedby="hidden-table-info_info">
             <thead>
                 <tr role="row">
@@ -80,10 +83,14 @@
                     <td>{{ j.lesson_name}}</td>
                     <td>{{ j.date }}</td>
                     <td>
-                        <button class="btn btn-success" >
+                        <button [disabled]="j.attendance_mark === 1" class="btn btn-success" (click)="markStudentAttendance( j )">
                             <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                            Mark Attendance
-                        </button></td>
+                            Mark attendance
+                        </button>
+                        <button class="btn btn-info" [disabled]="j.attendance_mark === 0" (click)="editlessonAttendance( j )">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>

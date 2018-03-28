@@ -55,7 +55,6 @@ export class OrdersService {
 
   changeOrderItems(orderview) {
     this.orderitems.next(orderview)
-    console.log(orderview);
   }
 
   //get product names to orders edit page select option
@@ -65,17 +64,28 @@ export class OrdersService {
 
   // submit shipped date to the database
   submitDate(shipping) {
-    console.log(shipping);
     return this.http.post('http://localhost:8080/api/orders/submitdate', shipping).map(res =>res.json());
   }
 
   // get user id from database
   getuserID(user_email) {
-    console.log(user_email);
     return this.http.get('http://localhost:8080/api/orders/userID/'+ user_email ).map(res =>res.json());
   }
 
+  // get lesson names from the database
+  getLessonNames() {
+    return this.http.get('http://localhost:8080/api/orders/getLessonNames' ).map(res =>res.json());
+  }
 
+  // send pack data to the database
+  sendPackOrder(packOrderDetails) {
+    return this.http.post('http://localhost:8080/api/orders/sendPackOrder', packOrderDetails).map(res =>res.json());
+  }
+
+  //find the lesson name of the selected lesson(npm library only provide id, for more search ngx-select-ex)
+  findLessonName(packOrder) {
+    return this.http.post('http://localhost:8080/api/orders/findLessonName', packOrder).map(res =>res.json());
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
@@ -90,35 +100,26 @@ export class OrdersEditService {
 
   private oItems = Order_ITEMS;
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: Http) {}
 
 
   submitOrder(oDetails){
 
-    console.log(oDetails);
-    console.log(this.oItems);
     var items = this.oItems;
-
     var full = Object.assign({oDetails} , {items} );
-    console.log(full);
 
     return this.http.post('http://localhost:8080/api/orders/submitorders',full).map(res =>res.json());
   }
 
   getOrdersFromData(): OrdersEdit[] {
-    console.log(this.oItems);
     return this.oItems
   }
 
   addOrder(neworders: OrdersEdit) {
-    console.log('new order', neworders);
     this.oItems.push(neworders);
-    console.log(this.oItems);
   }
   
   updateOrder(order: any) {
-    console.log(order);
     let index = findIndex(this.oItems, (p: OrdersEdit) => {
       return p.orderitem === order.orderitem;
     });
@@ -128,10 +129,8 @@ export class OrdersEditService {
 
   deleteOrder(order: OrdersEdit) {
     this.oItems.splice(this.oItems.indexOf(order), 1);
-    console.log(this.oItems);
   }
-
-  
+ 
 }
 
 

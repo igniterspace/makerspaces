@@ -6,3 +6,9 @@ export class Order {
     createdDate: Date;
 }
 
+export class PackOrder {
+    lessonId     : number;
+    packQuantity : number;
+    dueDate      : any;
+    lessonName   : string;
+}

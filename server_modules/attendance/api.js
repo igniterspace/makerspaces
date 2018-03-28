@@ -36,6 +36,19 @@ router.get('/getCoursesYears', (req, res, next) => {
   });
 });
 
+
+//get all course names
+router.get('/getCourseNames', (req, res, next) => {
+  model.getCourseNames((err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.json({
+      item: results
+    });
+  });
+});
+
 //get all course details
 router.post('/getCourses', (req, res, next) => {
   var details = req.body;
@@ -84,23 +97,7 @@ router.get('/getCourseLessons/:course_id', (req, res, next) => {
 });
 
 
-//get student attendance record
-router.post('/getStudentAttendance', (req, res, next) => {
-  var attDetails = req.body;
-  model.getStudentAttendance(attDetails, (err, results) => {
-    if (err) {
-      throw err;
-      console.log(err)
-    }
-    res.json({
-      item: results
-    });
-    console.log(res);
-  });
-});
-
-
-//get student course lessons
+//get student course lessons and attendance
 router.post('/getStudentLessons', (req, res, next) => {
   var lesson_Details = req.body;
   model.getStudentLessons(lesson_Details, (err, results) => {
@@ -165,6 +162,56 @@ router.post('/markStudentAttendance', (req, res, next) => {
   });
 });
 
+//edit student as not present
+router.post('/editAttendance', (req, res, next) => {
+  var att_detail = req.body;
+  console.log( att_detail );
+  model.editAttendance(att_detail, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
+
+
+//mark student as present and fill attendance table
+router.post('/markStudentLessonAttendance', (req, res, next) => {
+  var att_detail = req.body;
+  console.log( att_detail );
+  model.markStudentLessonAttendance(att_detail, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
+
+
+
+//edit student as not present 
+router.post('/editlessonAttendance', (req, res, next) => {
+  var att_detail = req.body;
+  console.log( att_detail );
+  model.editlessonAttendance(att_detail, (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
+  });
+});
 
 //search students similar to entered keyword
 router.get('/searchCourseStudents/:search', (req, res, next) => {
@@ -178,7 +225,7 @@ router.get('/searchCourseStudents/:search', (req, res, next) => {
     res.json({
       item: results
     });
-    console.log("results hjjhh =",res);
+    console.log("results =",res);
   });
 });
 

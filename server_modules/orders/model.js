@@ -170,8 +170,58 @@ function submitDate(shippingDate,cb) {
 }
 
 
+//Get lesson names
+function getLessonNames(cb) {
+  connection.query(
+    'SELECT lessons.name AS text, lessons.id AS id FROM lessons',
+    (err, results) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+      cb(null, results);
+    }
+  );
+}
 
 
+// insert pack order data into database
+function sendPackOrder(packorder, cb) {
+  
+  var date = new Date();
+
+  var packorder_length = packorder.pack_orders.length;
+  console.log("length =", packorder_length);
+
+  for (var i = 0; i < packorder_length; i++) {
+  var post = {location_id : packorder.insert_details.nowLocation, ordered_user_id : packorder.insert_details.userID, pack_quantity : packorder.pack_orders[i].packQuantity,pack_lesson_id :packorder.pack_orders[i].lessonId, lesson_name :packorder.pack_orders[i].lessonName, due_date : packorder.pack_orders[i].dueDate, ordered_date : date};
+  connection.query(
+    'INSERT INTO pack_orders SET ?',post,
+    function (err, result)  {
+      if (err) {
+        connection.rollback(function () {
+          throw err;
+        });
+      }
+    }
+  );
+}
+}
+
+// find lesson name of the selected
+function findLessonName(packorder, cb) {
+  connection.query(
+    'SELECT lessons.name FROM lessons WHERE  lessons.id = ?',[packorder.lessonId],
+    (err, results) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+      cb(null, results);
+      console.log("Results = ",results);
+    }
+  );
+}
 
 
 function createSchema(config, cb) {
@@ -179,7 +229,6 @@ function createSchema(config, cb) {
   connection.query(
 
     //Order Table
-
     `CREATE TABLE IF NOT EXISTS \`orders\` (
       \`order_id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
       \`location_id\` INT UNSIGNED NOT NULL,
@@ -189,7 +238,6 @@ function createSchema(config, cb) {
     PRIMARY KEY (\`order_id\`))  ENGINE=INNODB;` +
 
     //Inventory Items table //total price not needed
-
     `CREATE TABLE IF NOT EXISTS \`inventory_items\` (
       \`item_id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
       \`note\` VARCHAR(255) NOT NULL,
@@ -199,7 +247,6 @@ function createSchema(config, cb) {
     PRIMARY KEY (\`item_id\`))  ENGINE=INNODB;`  +
 
     //Products Table
-
     `CREATE TABLE IF NOT EXISTS \`products\` (
       \`product_id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
       \`code\` VARCHAR(255) NOT NULL,
@@ -209,15 +256,25 @@ function createSchema(config, cb) {
       \`has_quantity\` INT DEFAULT 0,
     PRIMARY KEY (\`product_id\`))  ENGINE=INNODB;` +
 
-    //Order Inventory Items table
+    // Pack orders table
+    `CREATE TABLE IF NOT EXISTS \`pack_orders\` (
+      \`pack_order_id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      \`location_id\` INT UNSIGNED NOT NULL,
+      \`ordered_user_id\` INT UNSIGNED NOT NULL,
+      \`pack_quantity\` INT ,
+      \`pack_lesson_id\` INT UNSIGNED NOT NULL,
+      \`lesson_name\` VARCHAR(255) ,
+      \`due_date\` DATE ,
+      \`ordered_date\` DATETIME ,
+    PRIMARY KEY (\`pack_order_id\`))  ENGINE=INNODB;` +
 
+  //Order Inventory Items table
     `CREATE TABLE IF NOT EXISTS \`orders_inventory_items\` (
       \`o_id\` INT UNSIGNED NOT NULL,
       \`i_id\` INT UNSIGNED NOT NULL,
     PRIMARY KEY (\`o_id\`, \`i_id\`))  ENGINE=INNODB;`  +
 
-    //Prduct Inventory Items table
-
+    //Product Inventory Items table
     `CREATE TABLE IF NOT EXISTS \`product_inventory_items\` (
       \`i_id\` INT UNSIGNED NOT NULL,
       \`p_id\` INT UNSIGNED NOT NULL,
@@ -258,6 +315,25 @@ function createSchema(config, cb) {
       ADD FOREIGN KEY (\`i_id\`)   
       REFERENCES \`inventory_items\`(\`item_id\`) 
       ON UPDATE CASCADE
+      ON DELETE CASCADE;` +
+
+    `ALTER TABLE \`pack_orders\` 
+      ADD FOREIGN KEY (\`location_id\`)   
+      REFERENCES \`locations\`(\`id\`) 
+      ON UPDATE CASCADE
+      ON DELETE CASCADE;` +
+
+    
+    `ALTER TABLE \`pack_orders\` 
+      ADD FOREIGN KEY (\`ordered_user_id\`)   
+      REFERENCES \`users\`(\`id\`) 
+      ON UPDATE CASCADE
+      ON DELETE CASCADE;` +
+
+    `ALTER TABLE \`pack_orders\` 
+      ADD FOREIGN KEY (\`pack_lesson_id\`)   
+      REFERENCES \`lessons\`(\`id\`) 
+      ON UPDATE CASCADE
       ON DELETE CASCADE;`
     ,
 
@@ -266,7 +342,7 @@ function createSchema(config, cb) {
       if (err) {
         throw err;
       }
-      console.log('Successfully created schemas: orders, inventory items, products, order inventory items, product inventory items tables');
+      console.log('Successfully created schemas: orders, inventory items, products, pack order table, order inventory items, product inventory items tables');
       connection.end();
       cb(null);
     }
@@ -283,6 +359,9 @@ module.exports = {
   getProducts         : getProducts,
   submitOrder         : submitOrder,
   submitDate          : submitDate,
-  getuserID           : getuserID
+  getuserID           : getuserID,
+  getLessonNames      : getLessonNames,
+  sendPackOrder       : sendPackOrder,
+  findLessonName      : findLessonName
 
 };

@@ -4,6 +4,7 @@ import { AppRoutingModule  }        from './app.routes';
 import { MiscRoutingModule }        from './misc/misc.routes';
 import { DpDatePickerModule }       from 'ng2-date-picker';
 import { Ng2SearchPipeModule }      from 'ng2-search-filter';
+import { SelectModule }             from  'ng2-select';
 
 import { AppComponent }             from './app.component';
 import { MenuComponent }            from './common/components/menu/menu.component';
@@ -67,8 +68,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    DpDatePickerModule
-  ],
+    DpDatePickerModule,
+    SelectModule
+    ],
   exports: [
     AppComponent
   ],

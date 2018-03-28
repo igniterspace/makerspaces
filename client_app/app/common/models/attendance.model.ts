@@ -29,3 +29,4 @@ export class AttStudent {
     att_date        : string;
     isDisabled      : boolean;
 }
+
