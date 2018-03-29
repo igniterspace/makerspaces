@@ -49,8 +49,7 @@ export class SearchStudentPage implements OnInit {
     this.attService.markStudentLessonAttendance(lesson).subscribe(res => {
 
       lesson.attendance_mark = 1 ;
-    });
-    
+    });  
   }
 
   //edit student attendance by lesson

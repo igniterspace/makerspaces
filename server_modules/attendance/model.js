@@ -130,7 +130,9 @@ function getCourseDetails (details, cb) {
 function getCourseStudents(course_ID, cb) {
   console.log(course_ID);
   connection.query(
-    'SELECT students.id AS student_id, students.first_name, students.last_name FROM students_in_course LEFT OUTER JOIN students ON ( students_in_course.s_id = students.id) WHERE c_id =? ',[ course_ID ],
+    ' SELECT students.id AS student_id, students.first_name, students.last_name'+
+    ' FROM students_in_course LEFT OUTER JOIN students ON ( students_in_course.s_id = students.id) '+
+    ' WHERE c_id =? ',[ course_ID ],
     (err, results) => {
       if (err) {
         cb(err);
@@ -146,7 +148,8 @@ function getCourseStudents(course_ID, cb) {
 function getCourseLessons(course_ID, cb) {
   console.log(course_ID);
   connection.query(
-    'SELECT lessons.id, lessons.name, lessons.date FROM lessons_in_course LEFT OUTER JOIN lessons ON ( lessons_in_course.l_id = lessons.id) WHERE c_id =? ',[ course_ID ],
+    ' SELECT lessons.id, lessons.name, lessons.date FROM lessons_in_course LEFT OUTER JOIN lessons ON ( lessons_in_course.l_id = lessons.id)'+
+    ' WHERE c_id =? ',[ course_ID ],
     (err, results) => {
       if (err) {
         cb(err);
