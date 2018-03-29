@@ -44,8 +44,9 @@ export class OrdersService {
 
 
 // For get order history to order history
-  getOrderHistory(){
-    return this.http.get('http://localhost:8080/api/orders/orderhistory').map(res =>res.json());
+  getOrderHistory(order_location){
+    console.log("service =",order_location);
+    return this.http.get('http://localhost:8080/api/orders/orderhistory/' + order_location).map(res =>res.json());
   }
   
 // For view order items in one order

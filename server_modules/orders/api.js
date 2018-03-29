@@ -29,8 +29,10 @@ router.use(bodyParser.json());
 
 
 //Get all orders history
-router.get('/orderhistory', (req, res, next) => {
-  model.getOrderHistory((err, results) => {
+router.get('/orderhistory/:order_location', (req, res, next) => {
+  var orderLocation = req.params.order_location;
+ console.log("api order =",orderLocation);
+  model.getOrderHistory(orderLocation,(err, results) => {
     if (err) {
       throw err;
       console.log(err)
@@ -95,7 +97,6 @@ router.get('/userID/:user_email', (req, res, next) => {
 // Insert orders into database
 router.post('/submitorders', (req, res, next) => {
   var order = req.body;
-  //console.log(order);
   model.submitOrder(order, (err, results) => {
     if (err) {
       throw err;
@@ -113,7 +114,6 @@ router.post('/submitorders', (req, res, next) => {
 // Insert shipping date into database
 router.post('/submitdate', (req, res, next) => {
   var shippingDate = req.body;  
-  console.log(shippingDate);
   model.submitDate( shippingDate, (err, results) => {
     if (err) {
       throw err;
