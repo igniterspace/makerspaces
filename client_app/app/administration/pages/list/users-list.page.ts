@@ -1,14 +1,13 @@
 import { Component, Output, EventEmitter, OnInit  } from '@angular/core';
-import { Input }                           from '@angular/core/src/metadata/directives';
+import { Input }                                    from '@angular/core/src/metadata/directives';
 
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 
 import { AdministrationService } from '../../../common/services/administration.service';
 
-import { Users, UsersEdit }                           from 'app/common/models/users';
-// import { DeleteId }                        from '../../../common/models/deleteid';
-// import { ListStudents }                    from 'app/common/models/liststudents';
-import { clone }                    from 'lodash'; //for edit
+import { Users, UsersEdit }      from 'app/common/models/users';
+
+import { clone }                 from 'lodash'; //for edit
 
 
 

@@ -11,7 +11,6 @@ import { clone }                    from 'lodash';
 import { FormGroup, FormControl, FormBuilder, AbstractControl, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
 import { Location }                 from '@angular/common';
 
-
 @Component({
 
   moduleId: module.id,

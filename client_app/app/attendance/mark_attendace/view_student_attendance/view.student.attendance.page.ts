@@ -19,11 +19,12 @@ export class StudentAttendancePage implements OnInit {
 
     constructor (private attService: AttendanceService){}
 
-    // get student lessons and attendance belongs to course
-    getStudentLessons(){
-
-      this.attService.getStudentLessons(this.details).subscribe( res => {
-            this.lessons = res.item;
+// get student lessons and attendance belongs to course
+getStudentLessons(){
+  console.log("details =", this.details);
+  this.attService.getStudentLessons(this.details).subscribe( res => {
+    this.lessons = res.item;
+    console.log("lesson is this =", this.lessons);
         });
       }
 

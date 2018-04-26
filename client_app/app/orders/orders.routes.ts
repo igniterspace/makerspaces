@@ -5,6 +5,8 @@ import { OrdersEditPage }       from './pages/edit/orders-edit.page';
 import { OrderItemsViewPage }   from './pages/view/orders-view.page';
 import { OrdersAddPage }        from './pages/add/add-orders.page';
 import { PackOrders }           from './pages/pack/pack.orders.page';
+import { PackOrderHistory }     from './pages/pack_history/pack.history.page';
+
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { PackOrders }           from './pages/pack/pack.orders.page';
       { path: 'orders/create',        component: OrdersAddPage },
       { path: 'orders/edit',          component: OrdersEditPage },
       { path: 'orders/view/:order_id',component: OrderItemsViewPage },
-      { path: 'orders/packs',         component: PackOrders }
+      { path: 'orders/packs',         component: PackOrders },
+      { path: 'orders/packorder_history', component: PackOrderHistory }
+
 
     ])],
     exports: [RouterModule]

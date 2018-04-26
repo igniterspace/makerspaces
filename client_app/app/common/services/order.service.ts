@@ -88,6 +88,11 @@ export class OrdersService {
     return this.http.post('http://localhost:8080/api/orders/findLessonName', packOrder).map(res =>res.json());
   }
 
+  // get pack order history from database according to it's location
+  getPackOrderHistory(locationID) {
+    return this.http.get('http://localhost:8080/api/orders/getPackOrderHistory/'+locationID ).map(res =>res.json());
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

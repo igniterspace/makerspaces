@@ -93,7 +93,6 @@ else if (this.auth.isAuthenticated()) {
 }  
 
 
-  //this.ps.selectpayment.subscribe(paymentdet => this.paymentdet = paymentdet);
   this.ps.selectpayment.subscribe(paymentdet => {
   this.pay_data = paymentdet;
 

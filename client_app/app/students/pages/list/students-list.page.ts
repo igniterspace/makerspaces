@@ -63,7 +63,7 @@ export class StudentsListPage {
 //Delete student from the database when the delete button is clicked..  
   deleteStudent(deleteid : DeleteId){
     alert('Do you want to remove this student?');
-    this.ss.deleteStudent(deleteid).subscribe(res=>console.log(res))
+    this.ss.deleteStudent(deleteid).subscribe(res=>console.log(""))
     var i;
     for ( i=0; i<this.liststudents.length; i++){
       if(this.liststudents[i].id == deleteid){

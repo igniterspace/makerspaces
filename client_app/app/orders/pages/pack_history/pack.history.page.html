@@ -1,0 +1,42 @@
+<table class="display table table-bordered dataTable-striped table-hover" id = "display_table" aria-describedby="hidden-table-info_info" style="width: 1150px" >
+    <thead>
+        <tr role="row">
+  
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+            aria-label="Rendering engine: activate to sort column descending" style="width: 50px;"> # </th>
+  
+            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                aria-label="Rendering engine: activate to sort column descending" style="width: 300px;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-book"></i> Lesson Name</th>
+  
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                style="width: 250px;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-cubes"></i> Pack Quantity</th>
+
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                style="width: 250px;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user-circle-o"></i> Orderd By</th>
+  
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+              style="width: 150px;">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar"></i> Ordered Date</th>
+            
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+              style="width: 150px;">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> Due Date</th>
+  
+  
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pack of packOrder_history ; let i = index">
+            <td>&nbsp;&nbsp;&nbsp;{{i + 1}}</td>
+            <td>&nbsp;&nbsp;&nbsp;{{pack.lesson_name}}</td>
+            <td>&nbsp;&nbsp;&nbsp;{{pack.pack_quantity}}&nbsp;&nbsp; Packs</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;{{pack.given_name}}&nbsp;{{pack.family_name}}</td>
+            <td>&nbsp;&nbsp;&nbsp;{{pack.ordered_date | date: 'dd/MM/yyyy'}}</td>
+            <td>&nbsp;&nbsp;&nbsp;{{pack.due_date | date: 'dd/MM/yyyy'}}</td>
+  
+        </tr>
+        </tbody>
+    </table>

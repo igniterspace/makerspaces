@@ -81,7 +81,6 @@ router.get('/productsnames', (req, res, next) => {
 //Get userID
 router.get('/userID/:user_email', (req, res, next) => {
   var userEmail = req.params.user_email;
-  console.log(userEmail);
   model.getuserID( userEmail , (err, results) => {
     if (err) {
       throw err;
@@ -90,7 +89,6 @@ router.get('/userID/:user_email', (req, res, next) => {
     res.json({
       item: results
     });
-    console.log(res);
   });
 });
 
@@ -105,7 +103,6 @@ router.post('/submitorders', (req, res, next) => {
     res.json({
       item: results
     });
-    console.log(res);
   });
 });
 
@@ -136,7 +133,6 @@ router.get('/getLessonNames', (req, res, next) => {
     res.json({
       item: results
     });
-    console.log(res);
   });
 });
 
@@ -144,7 +140,6 @@ router.get('/getLessonNames', (req, res, next) => {
 // Insert pack order data into database
 router.post('/sendPackOrder', (req, res, next) => {
   var packorder = req.body;  
-  console.log(packorder);
   model.sendPackOrder( packorder, (err, results) => {
     if (err) {
       throw err;
@@ -169,6 +164,22 @@ router.post('/findLessonName', (req, res, next) => {
     res.json({
       item: results
     });
+  });
+});
+
+//Get pack order history from database
+router.get('/getPackOrderHistory/:locationID', (req, res, next) => {
+  var location_ID = req.params.locationID;
+  console.log("qwertyuiodfghjk=",location_ID);
+  model.getPackOrderHistory( location_ID , (err, results) => {
+    if (err) {
+      throw err;
+      console.log(err)
+    }
+    res.json({
+      item: results
+    });
+    console.log(res);
   });
 });
 

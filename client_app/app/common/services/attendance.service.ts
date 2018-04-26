@@ -91,6 +91,7 @@ export class AttendanceService {
     }
 
     // Get lessons belongs to required specific course
+    
     getCourseLessons(course_id){
       return this.http.get('http://localhost:8080/api/attendance/getCourseLessons/'+ course_id ).map(res =>res.json());
     }

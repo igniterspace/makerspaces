@@ -34,7 +34,10 @@ function list(locationId, limit, token, cb) {
 function getOrderHistory(orderLocation, cb) {
   console.log("sdfghjk = ",orderLocation);
   connection.query(
-    'SELECT order_id, orders.location_id, users.given_name AS user_name, created_date, shipped, SUM(inventory_items.quantity * inventory_items.unit_price) AS total_price FROM orders LEFT OUTER JOIN orders_inventory_items ON (orders.order_id = orders_inventory_items.o_id) LEFT OUTER JOIN inventory_items ON (orders_inventory_items.i_id = inventory_items.item_id) LEFT OUTER JOIN users ON ( orders.user_id = users.id) WHERE orders.location_id =?',[orderLocation],
+    `SELECT order_id,users.given_name as user_name, created_date,  shipped, SUM(inventory_items.quantity * inventory_items.unit_price) AS total_price 
+    FROM orders LEFT OUTER JOIN orders_inventory_items ON (orders.order_id = orders_inventory_items.o_id) 
+    LEFT OUTER JOIN inventory_items ON (orders_inventory_items.i_id = inventory_items.item_id) 
+    LEFT OUTER JOIN users ON (users.id = orders.user_id) GROUP BY order_id DESC `,
     (err, results) => {
       if (err) {
         cb(err);
@@ -223,6 +226,21 @@ function findLessonName(packorder, cb) {
   );
 }
 
+// find lesson name of the selected
+function getPackOrderHistory(location_ID, cb) {
+  connection.query(
+    'SELECT * FROM pack_orders LEFT OUTER JOIN users ON ( pack_orders.ordered_user_id = users.id) WHERE  pack_orders.location_id = ? ORDER BY ordered_date ASC',[location_ID],
+    (err, results) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+      cb(null, results);
+      console.log("Results = ",results);
+    }
+  );
+}
+
 
 function createSchema(config, cb) {
   const connection = database.createMultipleStatementConnection(config);
@@ -362,6 +380,7 @@ module.exports = {
   getuserID           : getuserID,
   getLessonNames      : getLessonNames,
   sendPackOrder       : sendPackOrder,
-  findLessonName      : findLessonName
+  findLessonName      : findLessonName,
+  getPackOrderHistory : getPackOrderHistory
 
 };

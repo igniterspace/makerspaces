@@ -133,7 +133,6 @@ export class SearchCoursesPage implements OnInit {
         //Get current location ID
       this.currentLocationId = this.context.getCurrentLocationId();
         var nowLocation = this.currentLocationId;
-         console.log( "nowlocation =", nowLocation ); 
     } 
 
 }

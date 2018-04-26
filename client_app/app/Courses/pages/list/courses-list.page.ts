@@ -66,10 +66,8 @@ viewCourse(updatecourses) {
 
 //Get Course details from the database and show on the list in the frontend..
 listAllCourses(currentLocationId) {
-  console.log("function:", currentLocationId);
     this.cs.listAllCourses(currentLocationId).subscribe(res => {
       this.listcourses  = res.item;
-      console.log("return:",this.listcourses);
     });
   }
 
@@ -84,7 +82,7 @@ listAllCourses(currentLocationId) {
 deleteCourse(deleteid : DeleteId){
   alert('Do you want to remove this course?');
   
-  this.cs.deleteCourse(deleteid).subscribe(res=>console.log(res))
+  this.cs.deleteCourse(deleteid).subscribe(res=>console.log(""))
   var i;
 
   for (i=0; i<this.listcourses.length; i++){
@@ -98,7 +96,6 @@ ngOnInit(): void {
 
 //Get current location ID
 this.currentLocationId = this.context.getCurrentLocationId();
-console.log(this.currentLocationId);  
 
 //Show course details in the list..
   this.listAllCourses(this.currentLocationId);

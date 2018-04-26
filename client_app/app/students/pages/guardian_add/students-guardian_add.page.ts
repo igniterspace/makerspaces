@@ -78,7 +78,7 @@ export class StudentsGuardian_addPage {
   
 //Send guardian details to the database..
   saveGuardian(guardian: Guardian) {
-    this.ss.saveGuardian(guardian).subscribe(res => console.log(guardian));
+    this.ss.saveGuardian(guardian).subscribe(res => console.log(""));
     this.addGuardianForm.reset();
     alert('This Guardian has being to the Database..');
   }

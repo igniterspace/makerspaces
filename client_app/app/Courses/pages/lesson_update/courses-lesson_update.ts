@@ -45,7 +45,7 @@ export class LessonsUpdatePage {
 //Send updated details to the database..  
 updateLesson(lesson_data : UpdateLesson) { 
   var edlesson = lesson_data;
-  this.cs.updateLesson(edlesson).subscribe(res => console.log(edlesson));
+  this.cs.updateLesson(edlesson).subscribe(res => console.log(""));
   this.updateLessonForm.reset();
   alert("This Lesson's date has being updated..");
   } 
