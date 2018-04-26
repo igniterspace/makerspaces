@@ -29,8 +29,10 @@ router.use(bodyParser.json());
 
 
 //Get all orders history
-router.get('/orderhistory', (req, res, next) => {
-  model.getOrderHistory((err, results) => {
+router.get('/orderhistory/:order_location', (req, res, next) => {
+  var orderLocation = req.params.order_location;
+ console.log("api order =",orderLocation);
+  model.getOrderHistory(orderLocation,(err, results) => {
     if (err) {
       throw err;
       console.log(err)

@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+//services
 import { OrdersService }            from '../../../common/services/order.service';
+import { ContextService }    from '../../../common/services/context.service';
+//models
 import { Order }                    from '../../../common/models/order';
 import { OrderView }                from '../../../common/models/orderview';
 import { promise }                  from 'selenium-webdriver';
@@ -18,17 +21,20 @@ export class OrdersListPage implements OnInit {
   private orders        : Order[];
   private orderhistory  : OrderHistory[];
   public orderview      : OrderView[];
-          order_id      : number;
+         order_id       : number;
+        currentLocationId : any;
 
-  constructor(private os: OrdersService) {
-    this.ordersService = os;
+  constructor(private os: OrdersService,
+              private context : ContextService) {
+              this.ordersService = os;
   }
 
   getOrders(): void {}
 
 // Display all orders
   getOrderHistory() {
-    this.os.getOrderHistory().subscribe(res => {
+    var order_location = this.currentLocationId;
+    this.os.getOrderHistory(order_location).subscribe(res => {
       this.orderhistory = res.item;
       console.log(res.item);
     });
@@ -46,9 +52,11 @@ export class OrdersListPage implements OnInit {
 
 
   ngOnInit(){
+    //Get current location ID
+    this.currentLocationId = this.context.getCurrentLocationId();
+    console.log(this.currentLocationId);
+
     this.getOrderHistory();
     this.getOrders();
-   
-
   }
 }
