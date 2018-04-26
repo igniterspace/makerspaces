@@ -2,7 +2,7 @@
     <div>
         <p>Search Student :</p>
     
-        <input type="text" name="search" placeholder="Search.." [(ngModel)]="search">
+        <input type="text" name="search" placeholder="Enter name here.." [(ngModel)]="search">
         <button type="submit" class="btn btn-info" (click)="searchCourseStudents(search)">Search</button>
     
       </div>
@@ -55,7 +55,7 @@
     <div id="hidden-table-info_wrapper" class="dataTables_wrapper form-inline" role="grid">
 
             <div class="panel-body" *ngFor="let a of student_attendance  | slice:0:1; let i=index" class="odd">
-                    <p>Name : {{a.first_name}} &nbsp;{{a.last_name}}</p>
+                    <p>Name : {{a.first_name}}&nbsp;{{a.last_name}}</p>
             </div>
 
         <table class="display table table-bordered dataTable-striped table-hover" id="hidden-table-info" aria-describedby="hidden-table-info_info">

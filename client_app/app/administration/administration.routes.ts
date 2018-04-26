@@ -9,7 +9,7 @@ import { UsersListPage }         from './pages/list/users-list.page';
 @NgModule({
     imports: [RouterModule.forChild([
       { path: 'users/add',                        component: UsersAddPage },
-      { path: 'users',                            component: UsersListPage }
+      { path: 'users/list',                            component: UsersListPage }
      // { path: 'users/update/:u.id' ,              component: UsersEditPage }
 
     ])],

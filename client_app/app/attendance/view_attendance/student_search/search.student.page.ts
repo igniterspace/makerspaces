@@ -36,6 +36,7 @@ export class SearchStudentPage implements OnInit {
   getLessonAttendanceDetails(student_course){
     this.attService.getLessonAttendanceDetails(student_course).subscribe(res => {
       this.student_attendance = res.item;
+      console.log("details =", this.student_attendance);
 
       this.course_id  = student_course.course_id;
       // show attendance result table
@@ -46,9 +47,11 @@ export class SearchStudentPage implements OnInit {
 
   //mark student as present
   markStudentAttendance(lesson){
+    console.log("lesson =", lesson);
     this.attService.markStudentLessonAttendance(lesson).subscribe(res => {
 
       lesson.attendance_mark = 1 ;
+      console.log("success");
     });
     
   }

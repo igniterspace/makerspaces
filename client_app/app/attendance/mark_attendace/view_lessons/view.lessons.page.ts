@@ -24,6 +24,7 @@ export class ViewLessonsPage implements OnInit {
         this.courseId = this.courseForLesson.id;
         this.attService.getCourseLessons( this.courseId ).subscribe( res =>{
         this.lesson = res.item;
+        console.log("this.lesson = ",this.lesson );
         })
     }
     //merging and passing selected course ID and lesson ID to lesson attendance page

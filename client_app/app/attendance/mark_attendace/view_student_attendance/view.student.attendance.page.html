@@ -47,7 +47,7 @@
                     <tr *ngFor="let i of lessons" class="odd">
                         <td class=" ">{{ i.id }}</td>
                         <td class=" ">{{ i.name }}</td>
-                        <td class=" ">{{ i.date }}</td>
+                        <td class=" ">{{ i.held_date }}</td>
                         <td class=" ">
                                 <button class="btn btn-success" [disabled]="i.attendance_mark === 1" (click)="markStudentLessonAttendance( i )">
                                     <i class="fa fa-check-square-o" aria-hidden="true"></i>

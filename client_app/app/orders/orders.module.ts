@@ -9,6 +9,7 @@ import { OrderItemsViewPage }     from './pages/view/orders-view.page';
 import { OrdersEditPage }         from './pages/edit/orders-edit.page';
 import { OrdersAddPage }          from './pages/add/add-orders.page';
 import { PackOrders }             from './pages/pack/pack.orders.page';
+import { PackOrderHistory }       from './pages/pack_history/pack.history.page';
 //Services
 import { OrdersService }          from '../common/services/order.service';
 import { ContextService }         from '../common/services/context.service';
@@ -23,7 +24,7 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
 
 @NgModule({
   imports       : [ CommonModule, FormsModule, OrdersRoutingModule, ReactiveFormsModule, DpDatePickerModule, NgxSelectModule.forRoot(CustomSelectOptions) ],
-  declarations  : [ OrdersListPage, OrderItemsViewPage, OrdersEditPage, OrdersAddPage, PackOrders],
+  declarations  : [ OrdersListPage, OrderItemsViewPage, OrdersEditPage, OrdersAddPage, PackOrders, PackOrderHistory ],
   providers     : [ OrdersService, OrdersEditService]
 })
 export class OrdersModule { }
