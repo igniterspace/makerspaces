@@ -99,7 +99,6 @@ export class CoursesService {
   }
 
   saveCourseLesson(full_detail) {
-    console.log("from api" + full_detail);
   return this.http.post('http://localhost:8080/api/courses/addcourselesson', full_detail).map(res => res.json());
   }
 

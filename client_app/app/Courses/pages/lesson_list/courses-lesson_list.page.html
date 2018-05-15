@@ -117,15 +117,12 @@
           </div>
             
             <td class="">
-              <input class="btn btn-success" type="submit" value="Submit" [disabled]="!ListsearchedLessons.valid" (click)="hideTable()" (click)="savesearchedLesson(l,i)"> <!--get l.id from angularjs-->
+              <input class="btn btn-success" type="submit" value="Submit" [disabled]="!ListsearchedLessons.valid" (click)="hideTable()" (click)="savesearchedLesson(l,i,selectles)"> <!--get l.id from angularjs / selectles is all the lessons, which will be used to compare and see no similar lessons are there-->
             </td>
-
-
 
           </tr>
         </tbody>
       </table>
-
     </section>
   </div>
 </div>
