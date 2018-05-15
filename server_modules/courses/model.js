@@ -54,7 +54,7 @@ function getCourseDetails(c_id,cb) {
 
 //Query to get lessons from courses from the databes to show in the frontend..  
 function getAllCourseLessons(c_id,cb) {
-    connection.query(`SELECT lessons_in_course.c_id AS c_id, lessons_in_course.l_id AS l_id, lessons_in_course.held_date AS dateh  , lessons.name AS lesson_name FROM lessons_in_course LEFT OUTER JOIN lessons ON (lessons_in_course.l_id = lessons.id) WHERE c_id= ? ORDER BY held_date ASC`,[c_id],
+    connection.query(`SELECT lessons_in_course.c_id AS c_id, lessons_in_course.l_id AS l_id, lessons.name AS lesson_name FROM lessons_in_course LEFT OUTER JOIN lessons ON (lessons_in_course.l_id = lessons.id) WHERE c_id= ?`,[c_id],
     (err, results) => {
         if (err) {
           cb(err);
@@ -152,9 +152,16 @@ function addLesson(lesson, res) {
 
 //Assign a Lesson to a course..
 function addCourseLesson(courselesson, res) {
-    connection.query('INSERT INTO `lessons_in_course` (c_id, l_id, held_date) VALUES ("'+ courselesson.obj1+'" , "'+ courselesson.id+'" , "'+ courselesson.date+'")' , function (err, resp) {
-            if (err) throw err;
-            });
+    connection.query('INSERT INTO `lessons_in_course` (c_id, l_id) VALUES ("'+ courselesson.obj1+'" , "'+ courselesson.id+'")' , function (err, resp) {
+        if(err.errno == 1062){ 
+            //console.log("Duplicate data");
+            throw err;
+            //return false;
+        }
+        else{
+            throw err;
+        }
+    });
 };
 
 //Query to Delete lesson from the course..    
@@ -275,7 +282,6 @@ PRIMARY KEY (\`id\`))  ENGINE=INNODB;`  +
 `CREATE TABLE IF NOT EXISTS \`lessons_in_course\` (
 \`c_id\` INT UNSIGNED NOT NULL,
 \`l_id\` INT UNSIGNED NOT NULL,
-\`held_date\` VARCHAR(10) NULL,
 PRIMARY KEY (\`c_id\`, \`l_id\`))  ENGINE=INNODB;` +
 
 `CREATE TABLE IF NOT EXISTS \`students_in_course\` (

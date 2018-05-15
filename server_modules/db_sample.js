@@ -39,11 +39,11 @@ if (module === require.main) {
       '(2, \'AIS\', \'Asian International School\');' + 
       
       'INSERT INTO locations(id, name, description, organization_id) VALUES ' +
-      '(1, \'IS Gampaha\', \'2nd makerspace of IgniterSpace\', 1),'+
-      '(2, \'IS Narahenpita\', \'1st makerspace of IgniterSpace\', 1),' + 
-      '(3, \'IS Negombo\', \'3rd makerspace of IgniterSpace\', 1),' + 
-      '(5, \'IS Moratuwa\', \'4th makerspace of IgniterSpace\', 1),' +
-      '(6, \'IS Kandy\', \'5th makerspace of IgniterSpace\', 1),' +
+      '(1, \'Narahenpita\', \'1st makerspace of IgniterSpace\', 1),'+
+      '(2, \'Gampaha\', \'2nd makerspace of IgniterSpace\', 1),' + 
+      '(3, \'Negombo\', \'3rd makerspace of IgniterSpace\', 1),' + 
+      '(5, \'Moratuwa\', \'4th makerspace of IgniterSpace\', 1),' +
+      '(6, \'Kandy\', \'5th makerspace of IgniterSpace\', 1),' +
       '(4, \'AIS Colombo\', \'IgniterSpace franchise at Asian International School\', 2);'  +
 
       'INSERT INTO users(id, auth_provider, auth_ref, given_name, family_name, email, profile_image) VALUES ' +
@@ -321,7 +321,7 @@ if (module === require.main) {
       '(4,\'Music Box\'),'  +
       '(5,\'Generator\');'+
 
-      'INSERT INTO lessons_in_course(c_id, l_id, held_date) VALUES ' +
+      'INSERT INTO lessons_in_course(c_id, l_id) VALUES ' +
       '(1, 1, \'2017-02-28\'),'+
       '(1, 2, \'2017-05-09\'),'+
       '(2, 1, \'2018-06-01\'),'+

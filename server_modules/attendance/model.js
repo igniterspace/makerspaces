@@ -148,7 +148,7 @@ function getCourseStudents(course_ID, cb) {
 function getCourseLessons(course_ID, cb) {
   console.log(course_ID);
   connection.query(
-    'SELECT lessons.id, lessons.name, lessons_in_course.held_date FROM lessons LEFT OUTER JOIN lessons_in_course ON ( lessons.id = lessons_in_course.l_id) WHERE c_id =? ',[ course_ID ],
+    'SELECT lessons.id, lessons.name FROM lessons LEFT OUTER JOIN lessons_in_course ON ( lessons.id = lessons_in_course.l_id) WHERE c_id =? ',[ course_ID ],
     (err, results) => {
       if (err) {
         cb(err);
@@ -198,7 +198,7 @@ function getLessonsAttendance(passfull_lesson_detail, cb) {
 //get lessons and course details for lesson attendance page( to show details top of the page)
 function getCourseLessonDetails(full_detail, cb) {
   connection.query(
-    `SELECT courses.name AS level, courses.year, lessons.name, lessons_in_course.held_date 
+    `SELECT courses.name AS level, courses.year, lessons.name 
     FROM courses LEFT OUTER JOIN lessons_in_course ON ( courses.id = lessons_in_course.c_id) 
     LEFT OUTER JOIN lessons ON ( lessons_in_course.l_id = lessons.id ) 
     WHERE courses.id=? AND lessons.id=? `,[ full_detail.course_ID , full_detail.lesson_ID ],

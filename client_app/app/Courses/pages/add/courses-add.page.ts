@@ -34,7 +34,7 @@ export class CoursesAddPage {
     this.coursesService = cs;
 
     this.addCourseForm = new FormGroup({
-      course_batch   : new FormControl (null, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(30)])),
+      course_batch   : new FormControl (''),
       course_name    : new FormControl (null, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(30)])),
       course_year    : new FormControl (null, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(10)])),
       from_day       : new FormControl (''),

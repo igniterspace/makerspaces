@@ -74,7 +74,6 @@ export class AddSelectedLesson {
     
     c_id                     : number;
     l_id                     : number;
-    date                     : string;
     lesson_name              : string;    
 } 
 
@@ -97,9 +96,8 @@ export class ListLesson {
     
     lessons_id                : number;
     lessons_name              : string;
-    lessons_date              : string;
         
-    } 
+} 
 
 export class ListStudent {
     
@@ -126,7 +124,7 @@ export class ListAllStudents {
     
     students_id             : number;
     students_name           : string;
-    }
+}
 
 export class studentArray {
     c_id : number;

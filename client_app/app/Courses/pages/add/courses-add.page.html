@@ -8,7 +8,7 @@
         <tr>
             <td>COURSE BATCH :- </td>
             <td>
-            <input type="text" class="form-control" formControlName="course_batch" name="Course_Batch" placeholder="Batch-**" value="Batch-" required/>
+            <input type="text" class="form-control" formControlName="course_batch" name="Course_Batch" placeholder="Enter the batch letter (X)" value="Batch-" required/>
             <small *ngIf="!isValid('course_batch')" class="text-muted">Not enough characters</small>
 
             </td>
@@ -16,9 +16,9 @@
         <br>
 
         <tr>
-            <td>COURSE NAME :- </td>
+            <td>COURSE LEVEL :- </td> <!--Level and Name are the same thing-->
             <td>
-            <input type="text" class="form-control" formControlName="course_name" name="Course_Name" placeholder="Level-**" value="Level-" required/>
+            <input type="text" class="form-control" formControlName="course_name" name="Course_Name" placeholder="Enter the type of course (Level 2)" value="Level-" required/>
             <small *ngIf="!isValid('course_name')" class="text-muted">Not enough characters</small>
 
             </td>
@@ -28,7 +28,7 @@
         <tr>
             <td>YEAR :-</td>
             <td>
-            <input type="text" class="form-control" formControlName="course_year" name="Year" placeholder="Course Year" required/>
+            <input type="text" class="form-control" formControlName="course_year" name="Year" placeholder="Course Year (2017)" required/>
             <small *ngIf="!isValid('course_year')" class="text-muted">Not enough Characters</small>
             </td>
         </tr>
