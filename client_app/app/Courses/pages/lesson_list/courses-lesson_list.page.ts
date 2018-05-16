@@ -61,49 +61,31 @@ viewLessons(courses_id: number) {
   } 
 
 
-//Send searched course's lesson to the database..  
-savesearchedLesson(sellesson : AddSelectedLesson,index, s : AddSelectedLesson) {
-
-
-  console.log (" ddd data is  " +  s[0]['l_id']); //gets all the data
-  //got the data, now you need to compare them and make sure the ids aren't the same
-  //attributes c_id, l_id, lesson_name 
-
-  console.log (" first data fafis  " + sellesson['id'] );
-  
-  console.log (" stringify " + JSON.stringify(sellesson)  );
-  //attributes id, name
-  
-  //need to get the correct id and send it
-  var obj1 =  this.courses_id ; //assigning the course id and putting it into the object
-  var full_detail = Object.assign(sellesson , {obj1}); 
-
-  
-  let x = this.cs.saveCourseLesson(full_detail).subscribe(res => console.log("saved"));
-
-   //checking if lesson exists
-  //for( )
-  //let x = this.cs.saveCourseLesson(full_detail);
-  //this.ListallLessons.reset();
-  //alert('This Lesson has been added to this Course..');
-//alert ("X IS " + exists + " and l is "+ l.id + "and lesson_(id) is "+ lesson_id);
-//Pushing the new lesson to the array..    
-if(x){
-  
-  var l_id = this.search_res[index].id;  
-  var lesson_name = this.search_res[index].name; 
-  var c_id = obj1; //previously this.search_res[0].c_id
-
-  var new_lesson = Object.assign( {c_id} , {l_id} , {lesson_name});  
-  this.selectles.push(new_lesson);
-  this.ListallLessons.reset();
-  alert('This Lesson has been added to this Course..');
-}else{
-  alert('This lesson already exists in the following course. Please select another lesson. ');
-}
-  //-----------------------------------
-
-
+  //Send searched course's lesson to the database..  
+  savesearchedLesson(sellesson : AddSelectedLesson,index, s : AddSelectedLesson) {
+    let duplicates = false;
+  //checking if lesson exists
+    for (var c in s){
+      if(s[c]['l_id'] == sellesson['id']){
+        duplicates = true;
+      }
+    }
+  //Pushing the new lesson to the array..    
+    if(!duplicates){
+      //need to get the correct id and send it
+      var obj1 =  this.courses_id ; //assigning the course id and putting it into the object
+      var full_detail = Object.assign(sellesson , {obj1}); 
+      this.cs.saveCourseLesson(full_detail).subscribe(res => console.log("data saved"));
+      var l_id = this.search_res[index].id;  
+      var lesson_name = this.search_res[index].name; 
+      var c_id = obj1; //previously this.search_res[0].c_id
+      var new_lesson = Object.assign( {c_id} , {l_id} , {lesson_name});  
+      this.selectles.push(new_lesson);
+      this.ListallLessons.reset();
+      alert('This Lesson has been added to this Course..');
+    }else{
+      alert('This lesson already exists in the following course. Please select another lesson. ');
+    }
   }
 
 

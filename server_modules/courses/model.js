@@ -153,14 +153,7 @@ function addLesson(lesson, res) {
 //Assign a Lesson to a course..
 function addCourseLesson(courselesson, res) {
     connection.query('INSERT INTO `lessons_in_course` (c_id, l_id) VALUES ("'+ courselesson.obj1+'" , "'+ courselesson.id+'")' , function (err, resp) {
-        if(err.errno == 1062){ 
-            //console.log("Duplicate data");
-            throw err;
-            //return false;
-        }
-        else{
-            throw err;
-        }
+        if(err) throw err;
     });
 };
 
