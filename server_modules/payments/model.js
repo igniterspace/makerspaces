@@ -72,6 +72,10 @@ function getSumPayments(details,cb) {
 };
 
 //Create the database..
+//p_id = parent id
+//c_id = course id
+//s_id = student id
+//user_id = user of the program
 function createSchema(config, cb) {
     const connection = database.createMultipleStatementConnection(config);
     connection.query(

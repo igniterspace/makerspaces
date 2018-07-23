@@ -64,12 +64,16 @@ export class Payment_add_Page {
 getuserID(user_email) {
   this.os.getuserID(user_email).subscribe(res => {
     this.userID = res;
+    alert(this.userID);
+    //alert(this.userID.string);
+    alert(this.userID.item[0].id)
   });
 }
 
+
 //Send payment details to the database..
 savePayment(payment) {
-  var userid = this.userID.item[0].id;
+  var userid = this.userID.item[0].id;//ERROR : Here it's not getting userID
   var full_detail = Object.assign(payment , {userid});
     this.ps.savePayment(full_detail).subscribe(res => console.log("payment added success.."));
     this.addPaymentForm.reset();
@@ -80,32 +84,29 @@ savePayment(payment) {
 
 ngOnInit(): void {
 
-// Get current user e-mail
-if (this.auth.userProfile) {
-  this.profile = this.auth.userProfile;
-}
-else if (this.auth.isAuthenticated()) {
-  this.auth.getProfile((err, profile) => {
-    this.profile = profile;
-    this.user_email = this.profile.email;
-    this.getuserID(this.user_email);
-  });
-}  
-
-
-  this.ps.selectpayment.subscribe(paymentdet => {
-  this.pay_data = paymentdet;
-
-  this.addPaymentForm.patchValue({
-    course_id               : paymentdet.course_id,
-    student_id              : paymentdet.student_id,
-    courses_name            : paymentdet.courses_name,
-    students_name           : paymentdet.students_name,
+  // Get current user e-mail
+  if (this.auth.userProfile) {
+    this.profile = this.auth.userProfile;
+  }
+  else if (this.auth.isAuthenticated()) {
+    this.auth.getProfile((err, profile) => {
+      this.profile = profile;
+      this.user_email = this.profile.email;
+      this.getuserID(this.user_email);
     });
-  })
- 
-  
+  }
 
+
+    this.ps.selectpayment.subscribe(paymentdet => {
+    this.pay_data = paymentdet;
+
+    this.addPaymentForm.patchValue({
+      course_id               : paymentdet.course_id,
+      student_id              : paymentdet.student_id,
+      courses_name            : paymentdet.courses_name,
+      students_name           : paymentdet.students_name,
+      });
+    })
 }
 
 ngOnDestroy(): void {

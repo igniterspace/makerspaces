@@ -22,6 +22,7 @@ export class AuthService {
 
   public login(): void {
     this.auth0.authorize();
+    alert("Insert login check here, before going into auth000000");
   }
 
   public handleAuthentication(): void {
@@ -45,7 +46,6 @@ export class AuthService {
       err['rejection'] = { status: 401 };
       throw err;
     }
-
     const self = this;
     this.auth0.client.userInfo(accessToken, (err, profile) => {
       if (profile) {
