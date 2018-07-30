@@ -22,7 +22,6 @@ export class AuthService {
 
   public login(): void {
     this.auth0.authorize();
-    alert("Insert login check here, before going into auth000000");
   }
 
   public handleAuthentication(): void {

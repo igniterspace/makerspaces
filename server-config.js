@@ -50,10 +50,10 @@ nconf
 
     INSTANCE_CONNECTION_NAME: 'makerspace-management-system:us-central1:ig-dev', //production setting
     
-    HOST: '127.0.0.1', //local development setting
+    HOST: 'erp.cqkf5ifydij0.ap-south-1.rds.amazonaws.com', //aws development setting
     DATABASE: 'makerspaces',
-    MYSQL_USER: 'root',
-    MYSQL_PASSWORD: 'root',
+    MYSQL_USER: 'igniterspace',
+    MYSQL_PASSWORD: 'ecapsretingi',
     OAUTH2_CLIENT_ID: '1066178941676-5vmds16v7est58pstn2gdfna56542eve.apps.googleusercontent.com',
     OAUTH2_CLIENT_SECRET: 'Gbc33FRodnhcBSZU8glFC8I8',
     OAUTH2_CALLBACK: 'http://localhost:8080/auth/google/callback', //for local development
