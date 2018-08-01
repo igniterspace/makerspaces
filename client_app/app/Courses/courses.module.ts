@@ -6,7 +6,6 @@ import { HttpModule }               from '@angular/http';
 import { CoursesService }           from '../common/services/course.service';
 import { BrowserModule }            from '@angular/platform-browser';
 import { DpDatePickerModule }       from 'ng2-date-picker';
-//import { Ng2SearchPipeModule }      from 'ng2-search-filter';
 import { CoursesRoutingModule }     from './courses.routes';
 import { CoursesAddPage }           from './pages/add/courses-add.page';
 import { CoursesListPage }          from './pages/list/courses-list.page';

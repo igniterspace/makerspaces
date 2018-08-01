@@ -18,7 +18,7 @@ import { PaymentsModule }           from './payments/payments.module';
 import { OrdersModule }             from './orders/orders.module';
 import { AttendanceModule }         from './attendance/attendance.module';
 import { AdministrationModule }     from './administration/administration.module';
-import { CoursesModule }            from './courses/courses.module';
+import { CoursesModule }            from './courses/courses.module'; //change courses here
 import { DashboardModule }          from './dashboard/pages/dashboard.module';
 import { ContextService }           from './common/services/context.service'
 import { AuthService }              from './common/services/auth.service'
