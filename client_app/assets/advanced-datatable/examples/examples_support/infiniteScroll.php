@@ -18,7 +18,7 @@
 	$gaSql['user']       = "";
 	$gaSql['password']   = "";
 	$gaSql['db']         = "";
-	$gaSql['server']     = "localhost";
+	$gaSql['server']     = "ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com";
 	
 	/* REMOVE THIS LINE (it just includes my SQL connection user/pass) */
 	include( $_SERVER['DOCUMENT_ROOT']."/datatables/mysql.php" );

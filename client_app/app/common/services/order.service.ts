@@ -46,12 +46,12 @@ export class OrdersService {
 // For get order history to order history
   getOrderHistory(order_location){
     console.log("service =",order_location);
-    return this.http.get('http://localhost:8080/api/orders/orderhistory/' + order_location).map(res =>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/orders/orderhistory/' + order_location).map(res =>res.json());
   }
   
 // For view order items in one order
   viewOrder(orderID) {
-      return this.http.get('http://localhost:8080/api/orders/orderitemhistory/'+ orderID).map(res => res.json());  
+      return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/orders/orderitemhistory/'+ orderID).map(res => res.json());  
   }
 
   changeOrderItems(orderview) {
@@ -60,37 +60,37 @@ export class OrdersService {
 
   //get product names to orders edit page select option
   getProducts(){
-    return this.http.get('http://localhost:8080/api/orders/productsnames').map(res =>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/orders/productsnames').map(res =>res.json());
   }
 
   // submit shipped date to the database
   submitDate(shipping) {
-    return this.http.post('http://localhost:8080/api/orders/submitdate', shipping).map(res =>res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/orders/submitdate', shipping).map(res =>res.json());
   }
 
   // get user id from database
   getuserID(user_email) {
-    return this.http.get('http://localhost:8080/api/orders/userID/'+ user_email ).map(res =>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/orders/userID/'+ user_email ).map(res =>res.json());
   }
 
   // get lesson names from the database
   getLessonNames() {
-    return this.http.get('http://localhost:8080/api/orders/getLessonNames' ).map(res =>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/orders/getLessonNames' ).map(res =>res.json());
   }
 
   // send pack data to the database
   sendPackOrder(packOrderDetails) {
-    return this.http.post('http://localhost:8080/api/orders/sendPackOrder', packOrderDetails).map(res =>res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/orders/sendPackOrder', packOrderDetails).map(res =>res.json());
   }
 
   //find the lesson name of the selected lesson(npm library only provide id, for more search ngx-select-ex)
   findLessonName(packOrder) {
-    return this.http.post('http://localhost:8080/api/orders/findLessonName', packOrder).map(res =>res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/orders/findLessonName', packOrder).map(res =>res.json());
   }
 
   // get pack order history from database according to it's location
   getPackOrderHistory(locationID) {
-    return this.http.get('http://localhost:8080/api/orders/getPackOrderHistory/'+locationID ).map(res =>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/orders/getPackOrderHistory/'+locationID ).map(res =>res.json());
   }
 
   private handleError(error: any): Promise<any> {
@@ -114,7 +114,7 @@ export class OrdersEditService {
     var items = this.oItems;
     var full = Object.assign({oDetails} , {items} );
 
-    return this.http.post('http://localhost:8080/api/orders/submitorders',full).map(res =>res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/orders/submitorders',full).map(res =>res.json());
   }
 
   getOrdersFromData(): OrdersEdit[] {
