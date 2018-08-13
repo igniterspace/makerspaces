@@ -29,9 +29,9 @@ export class AuthService {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['/home'], { queryParamsHandling: 'merge' });
+        this.router.navigate(['/home?location=1'], { queryParamsHandling: 'merge' }); 
       } else if (err) {
-        this.router.navigate(['/home'], { queryParamsHandling: 'merge' });
+        this.router.navigate(['/home?location=1'], { queryParamsHandling: 'merge' });
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
     });

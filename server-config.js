@@ -50,7 +50,7 @@ nconf
 
     INSTANCE_CONNECTION_NAME: 'makerspace-management-system:us-central1:ig-dev', //production setting
     
-    HOST: 'erp.cqkf5ifydij0.ap-south-1.rds.amazonaws.com', //aws development setting
+    HOST: 'mymakerspace.ccghnsvavsgu.ap-southeast-1.rds.amazonaws.com', //aws development setting
     DATABASE: 'makerspaces',
     MYSQL_USER: 'igniterspace',
     MYSQL_PASSWORD: 'ecapsretingi',

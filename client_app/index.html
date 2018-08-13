@@ -68,7 +68,7 @@
         }  else if (localStorage.getItem("IG_LAST_LOCATION")){
             window.locationId = parseInt(localStorage.getItem("IG_LAST_LOCATION"));
         }
-        
+        //This is where the error occurs
         if (window.locationId) {
             localStorage.setItem("IG_LAST_LOCATION", window.locationId);
         }

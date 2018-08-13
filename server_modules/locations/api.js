@@ -112,7 +112,7 @@ router.get('/current', auth.jwtCheck, (req, res, next) => {
         }
       });
     } else {
-      res.status(404).send('Not Found');
+      res.status(404).send('Not Found location not found ');
     }
   });
 });
