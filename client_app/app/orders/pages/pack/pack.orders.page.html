@@ -55,7 +55,7 @@
 <form method="POST" *ngIf="pack_OrderForm"  class = "packorder" [formGroup]="packOrderForm" (ngSubmit)="submitOrder(packOrderForm)" style="width: 500px" novalidate>
 
   <br>
-
+        <!--Lesson Search bar-->
         <label>Search Lessons..</label>
         <div>
           <ngx-select [items]="items" 
@@ -69,9 +69,13 @@
 
         <br>
         <label>Pack Quantity : </label>
-        <input type="number" formControlName="packQuantity" placeholder="enter quantity" [(ngModel)]="packquantity" required/>
+        <!--input type="number" formControlName="packQuantity" placeholder="enter quantity" [(ngModel)]="packquantity" minlength=1 maxlength=1000 required/-->
+        <input type="number" formControlName="packQuantity" placeholder="enter quantity" [(ngModel)]="packquantity" minlength=1 maxlength=1000 required/>
+        <!--testing with angular-->
 
-        
+  
+        <!---->
+    
         <label>Due Date : </label>
         <input type="date" class="form-control"  class="ng-dirty ng-touched ng-invalid" formControlName="dueDate" [(ngModel)]="dueDate" style="width: 175px;" required/>
     
@@ -81,6 +85,7 @@
         <br>
 
 </form>
+
 
 
 

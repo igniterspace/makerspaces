@@ -67,12 +67,13 @@ sendPackOrder(packOrder : any) {
   this.pack_OrderForm   = false ;
   this.addbutton        = true;
 
+
 })
 }
 
 
 
-//send pack order details to the database( pack order table)
+//save pack order details to the database( pack order table)
 savePackOrder(){
 
   var userID = this.userID.item[0].id;
@@ -85,8 +86,8 @@ savePackOrder(){
   this.os.sendPackOrder(full_pack_details).subscribe( res => {
     console.log("success");
   })
- 
-  location.reload();
+  alert('Pack order sent successfully!')
+  //location.reload();
 }
 
 // Get usee ID from database equals to user's email
