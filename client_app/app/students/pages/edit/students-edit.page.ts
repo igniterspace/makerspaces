@@ -2,6 +2,7 @@ import { Component, OnInit }    from '@angular/core';
 import { Student }              from '../../../common/models/student';
 import { FormGroup , FormControl, FormBuilder, ReactiveFormsModule ,Validators, FormsModule } from '@angular/forms';
 import { DpDatePickerModule }   from 'ng2-date-picker';
+import { Router } from '@angular/router';
 
 import { StudentsService }      from '../../../common/services/student.service';
 import { ContextService }       from '../../../common/services/context.service';
@@ -37,7 +38,8 @@ export class StudentsEditPage implements OnInit {
   constructor(private ss: StudentsService,
               private formBuilder: FormBuilder,
               private context: ContextService,
-              private auth  : AuthService) {
+              private auth  : AuthService,
+              public router: Router) {
     this.studentsService = ss;
 
     this.addStudentForm = formBuilder.group({
@@ -73,7 +75,10 @@ export class StudentsEditPage implements OnInit {
     var full_detail = Object.assign(student , this.guardian , {location});
     this.ss.saveStudent(full_detail).subscribe(res => console.log(""));
     this.addStudentForm.reset();
-    alert('This Student has being added to the Database..');
+    alert('Student added to database successfully!');
+    
+    //REDIRECT TO Courses List
+    this.router.navigate(['/courses/list']);
   }
 
   nameValidator(control: FormControl): {[s: string]: boolean} {

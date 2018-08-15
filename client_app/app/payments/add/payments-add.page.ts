@@ -64,9 +64,9 @@ export class Payment_add_Page {
 getuserID(user_email) {
   this.os.getuserID(user_email).subscribe(res => {
     this.userID = res;
-    alert(this.userID);
+    //alert(this.userID);
     //alert(this.userID.string);
-    alert(this.userID.item[0].id)
+    //alert(this.userID.item[0].id)
   });
 }
 

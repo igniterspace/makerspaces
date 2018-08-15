@@ -2,7 +2,7 @@
     <div class="col-sm-12">
       <section class="panel">
          <header class="panel-heading">
-           Students attending the Courses
+           Students attending this Courses
          </header>
     <div class="panel-body">
       <div class="adv-table"> 
@@ -56,7 +56,7 @@
               <p>Search Student:</p>
               <small>by name,gender or date of birth..</small>
           
-              <input type="text" name="search" placeholder="Search New Student.." [(ngModel)]="search">
+              <input type="text" name="search" placeholder="Search New Student.." [(ngModel)]="search" autocomplete="off">
               <button type="submit" class="btn btn-info" (click)="similarStudent(search)" (click) ="showTable()">Search</button>
           
             </div>

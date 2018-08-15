@@ -71,41 +71,41 @@ export class StudentsService {
 
 
   listAllGuardians(){
-    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/students/getallguardians').map(res=>res.json());
+    return this.http.get('http://localhost:8080/api/students/getallguardians').map(res=>res.json());
   }
 
   listAllStudents(currentLocationId){
-    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/students/getallstudents/' + currentLocationId).map(res=>res.json());
+    return this.http.get('http://localhost:8080/api/students/getallstudents/' + currentLocationId).map(res=>res.json());
   }
 
   deleteStudent(deleteid){
-    return this.http.get(`http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/students/deleteStudent/${deleteid}`).map(res=>res.json());
+    return this.http.get(`http://localhost:8080/api/students/deleteStudent/${deleteid}`).map(res=>res.json());
   }
 
   saveStudent(full_detail) {
-    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/students/addStudent', full_detail).map(res => res.json());
+    return this.http.post('http://localhost:8080/api/students/addStudent', full_detail).map(res => res.json());
   }
 
   savesStudent(complete_detail) {
-    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/students/addStudent', complete_detail).map(res => res.json());
+    return this.http.post('http://localhost:8080/api/students/addStudent', complete_detail).map(res => res.json());
   }
 
   saveGuardian(guardian) {
-    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/students/addGuardian', guardian).map(res => res.json());
+    return this.http.post('http://localhost:8080/api/students/addGuardian', guardian).map(res => res.json());
   }
 
   editStudent(edstudents) {
-    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/students/updateStudent', edstudents).map(res => res.json());
+    return this.http.post('http://localhost:8080/api/students/updateStudent', edstudents).map(res => res.json());
   }
 
   similarGuardian(search) {
-    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/students/search/'+ search).map(res => res.json());
+    return this.http.get('http://localhost:8080/api/students/search/'+ search).map(res => res.json());
   }
 
 
 
 checkIfUserExists(isEmail: boolean, isUsername: boolean, value: string) {
-  return this.http.get(`http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/students/checkIfUserExists?isEmail=${isEmail}&value=${value}`).map(res => res.json());
+  return this.http.get(`http://localhost:8080/api/students/checkIfUserExists?isEmail=${isEmail}&value=${value}`).map(res => res.json());
 }  
 
 

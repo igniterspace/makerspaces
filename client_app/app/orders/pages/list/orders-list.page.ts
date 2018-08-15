@@ -23,6 +23,7 @@ export class OrdersListPage implements OnInit {
   public orderview      : OrderView[];
          order_id       : number;
         currentLocationId : any;
+        userID         : any;
 
   constructor(private os: OrdersService,
               private context : ContextService) {
@@ -34,12 +35,21 @@ export class OrdersListPage implements OnInit {
 // Display all orders
   getOrderHistory() {
     var order_location = this.currentLocationId;
+    //var userOrderID = this.userID.item[0].id;
+    //alert(userOrderID + " is ");
+
     this.os.getOrderHistory(order_location).subscribe(res => {
       this.orderhistory = res.item;
       console.log(res.item);
     });
   }
- 
+ //--------------
+
+
+//---------------------------
+
+
+
   // view items of a order
   viewOrder(orderID: number) {
     console.log(orderID)

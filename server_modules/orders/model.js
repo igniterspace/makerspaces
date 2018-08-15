@@ -32,12 +32,14 @@ function list(locationId, limit, token, cb) {
 //Written new
 //Get order history
 function getOrderHistory(orderLocation, cb) {
-  console.log("sdfghjk = ",orderLocation);
+  console.log("sdfghjk = ",orderLocation); //change given_namej to take name from auth 0
+  //console.log('dfdfd   ',given_name);
+  //console.log('dfd   ',params.order_location);
   connection.query(
     `SELECT order_id,users.given_name as user_name, created_date,  shipped, SUM(inventory_items.quantity * inventory_items.unit_price) AS total_price 
     FROM orders LEFT OUTER JOIN orders_inventory_items ON (orders.order_id = orders_inventory_items.o_id) 
     LEFT OUTER JOIN inventory_items ON (orders_inventory_items.i_id = inventory_items.item_id) 
-    LEFT OUTER JOIN users ON (users.id = orders.user_id) GROUP BY order_id DESC `,
+    LEFT OUTER JOIN users ON (users.id = orders.user_id) WHERE users.given_name="Hasith" GROUP BY order_id ORDER BY created_date DESC`,
     (err, results) => {
       if (err) {
         cb(err);

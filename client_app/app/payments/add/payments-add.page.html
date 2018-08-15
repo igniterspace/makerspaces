@@ -38,14 +38,14 @@
         <tr>
             <td>DATE :-</td>
             <td>
-                    <input class="date" type="date" formControlName="today" placeholder="Held Date" name="Day">
+                    <input  type="date" formControlName="today" placeholder="Held Date" name="Day">
             </td>
         </tr>
     <br>
         <tr>
         <td>AMOUNT PAID :-</td>
         <td>
-        <input type="number" class="form-control" formControlName="amount_paid" name="City" maxlength="50" placeholder="Rs.XXXXX"
+        <input type="number" class="form-control" formControlName="amount_paid" name="City" maxlength="50" placeholder="Rs.XXXXX" autocomplete="off"
             required />
             <small *ngIf="!isValid('amount_paid')" class="text-muted">Not enough characters!</small>
         </td>

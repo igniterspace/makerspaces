@@ -9,7 +9,7 @@
         <tr>
             <td>GUARDIAN'S NAME :-</td>
             <td>
-                <input type="text" class="form-control" formControlName="gname" name="City" maxlength="50" placeholder="Enter the Full Name of the Guardian"
+                <input type="text" class="form-control" formControlName="gname" name="City" maxlength="50" placeholder="Enter the Full Name of the Guardian" autocomplete="off"
                     required />
                 <small *ngIf="!isValid('gname')" class="text-muted">Not enough characters!</small>
 
@@ -36,7 +36,7 @@
             <td>EMAIL ADDRESS :-</td>
             <td>
                 <input type="email" class="form-control cus-form-control" formControlName="eaddress" name="Email_Id"
-                    maxlength="100"  placeholder="example@gmail.com" (blur)="addGuardianForm.controls['eaddress'].valid ? checkEmailExists() : 'Invalid'" />
+                    maxlength="100"  placeholder="example@example.com" (blur)="addGuardianForm.controls['eaddress'].valid ? checkEmailExists() : 'Invalid'" autocomplete="off" />
 
                     <div *ngIf="addGuardianForm.get('eaddress').status === 'VALID'">
                             😊 Great This email is available!

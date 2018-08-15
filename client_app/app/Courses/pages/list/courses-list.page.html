@@ -57,14 +57,14 @@
           
              <tr class="odd" *ngFor="let c of listcourses">
                                                  
-              <td class="">{{ c.courses_name }}</td>
+              <td class="">Batch {{ c.courses_name }}</td>
               <td class="">{{ c.courses_year }}</td>
               <td class="">{{ c.courses_from_date }}</td>
               <td class="">{{ c.courses_to_date }}</td>
               <td class="">{{ c.courses_day }}</td>
               
               <td class=""> 
-                <a href="" [routerLink]="['./student_list',c.courses_id ]" queryParamshandling="merge" (click)="viewStudent(c.courses_id)">Show Students</a>
+                <a href="" [routerLink]="['./student_list',c.courses_id ]" queryParamshandling="merge" (click)="viewStudent(c.courses_id)">Assign Students</a>
               </td>
             
               <td class=""> 

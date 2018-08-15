@@ -32,73 +32,73 @@ export class AttendanceService {
 
     //Get all course years for select in front end
     getCourseYears(){
-      return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/getCoursesYears').map(res =>res.json());
+      return this.http.get('http://localhost:8080/api/attendance/getCoursesYears').map(res =>res.json());
     }
 
     //Get all course names for select in front end
     getCourseNames(){
-      return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/getCourseNames').map(res =>res.json());
+      return this.http.get('http://localhost:8080/api/attendance/getCourseNames').map(res =>res.json());
     }
 
     // Get all search values from the front end and get result data back to front end from the search(used post because we are sending an object,not a single value)
     searchCourses(searchvalues){
-      return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/getCourses',searchvalues ).map(res =>res.json());
+      return this.http.post('http://localhost:8080/api/attendance/getCourses',searchvalues ).map(res =>res.json());
     }
 
     //Get course students belongs to peticular lesson from database
     getCourseLessonAttendance(passfull_lesson_detail){
-      return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/getLessonAttendance', passfull_lesson_detail ).map(res =>res.json());
+      return this.http.post('http://localhost:8080/api/attendance/getLessonAttendance', passfull_lesson_detail ).map(res =>res.json());
     }
 
     //get lesson details belongs to selcted specific course
     getCourseLessonDetails(passfull_lesson_detail){
-      return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/getCourseLessonDetails', passfull_lesson_detail ).map(res =>res.json());
+      return this.http.post('http://localhost:8080/api/attendance/getCourseLessonDetails', passfull_lesson_detail ).map(res =>res.json());
     }
 
     //get students similar to seach keyword
     searchCourseStudents(search){
-      return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/searchCourseStudents/'+ search ).map(res =>res.json());
+      return this.http.get('http://localhost:8080/api/attendance/searchCourseStudents/'+ search ).map(res =>res.json());
     }
 
     // Get selected student course lessons and attendance from database(used post because we are sending an object)
     getStudentLessons(details){
-      return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/getStudentLessons', details ).map(res =>res.json());
+      return this.http.post('http://localhost:8080/api/attendance/getStudentLessons', details ).map(res =>res.json());
     }
 
     //Mark student as present
     markStudentAttendance(attStudent){
-      return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/markStudentAttendance', attStudent ).map(res =>res.json());
+      return this.http.post('http://localhost:8080/api/attendance/markStudentAttendance', attStudent ).map(res =>res.json());
     }
 
      //edit student as not present
      editAttendance(attStudent){
-      return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/editAttendance', attStudent ).map(res =>res.json());
+      return this.http.post('http://localhost:8080/api/attendance/editAttendance', attStudent ).map(res =>res.json());
     }
 
     //Mark student as present
     markStudentLessonAttendance(attStudent){
-      return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/markStudentLessonAttendance', attStudent ).map(res =>res.json());
+      return this.http.post('http://localhost:8080/api/attendance/markStudentLessonAttendance', attStudent ).map(res =>res.json());
     }
 
     //edit student as not present
     editlessonAttendance(attStudent){
-      return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/editlessonAttendance', attStudent ).map(res =>res.json());
+      return this.http.post('http://localhost:8080/api/attendance/editlessonAttendance', attStudent ).map(res =>res.json());
     }
 
     // get student lesson attendance 
     getLessonAttendanceDetails(student_course){
-      return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/getLessonAttendanceDetails', student_course ).map(res =>res.json());
+      return this.http.post('http://localhost:8080/api/attendance/getLessonAttendanceDetails', student_course ).map(res =>res.json());
     }
 
     // Get lessons belongs to required specific course
     
     getCourseLessons(course_id){
-      return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/getCourseLessons/'+ course_id ).map(res =>res.json());
+      return this.http.get('http://localhost:8080/api/attendance/getCourseLessons/'+ course_id ).map(res =>res.json());
     }
 
     //Get all students details in specific course
     getCourseStudents(course_id){
-      return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/attendance/getCourseStudents/'+ course_id ).map(res =>res.json());
+      return this.http.get('http://localhost:8080/api/attendance/getCourseStudents/'+ course_id ).map(res =>res.json());
     }
 
     //pass course from student course page to view student page(via shared service method)

@@ -80,7 +80,7 @@ export class StudentsGuardian_addPage {
   saveGuardian(guardian: Guardian) {
     this.ss.saveGuardian(guardian).subscribe(res => console.log(""));
     this.addGuardianForm.reset();
-    alert('This Guardian has being to the Database..');
+    alert('Guardian added to the database successfully!');
   }
   
   ngOnInit(): void {
