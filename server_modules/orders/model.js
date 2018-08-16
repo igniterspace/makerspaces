@@ -84,7 +84,7 @@ function getuserID(user_email, cb) {
 // Get products names for dropdown
 function getProducts(cb) {
   connection.query(
-    'SELECT * FROM products GROUP BY product_id ASC',
+    'SELECT * FROM products GROUP BY name ASC',
     (err, results) => {
       if (err) {
         cb(err);
@@ -119,7 +119,7 @@ function submitOrder(order, cb) {
 
         var o = order.items[i];
          console.log(i); 
-        connection.query('INSERT INTO inventory_items ( note, quantity, unit_price, total_price ) VALUES ("' + o.note + '", ' + o.quantity + ', ' + o.unitprice + ', ' + o.quantity + ' * ' + o.unitprice + ')', function (err, result) {
+        connection.query('INSERT INTO inventory_items ( note, quantity ) VALUES ("' + o.note + '", ' + o.quantity + ')', function (err, result) {
           if (err) {
             connection.rollback(function () {
               throw err;

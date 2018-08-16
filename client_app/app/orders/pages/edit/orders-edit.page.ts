@@ -73,7 +73,6 @@ export class OrdersEditPage implements OnInit {
   getProducts() {
     this.os.getProducts().subscribe(res => {
       this.productNames = res.item;
-      console.log(res.item);
     });
   }
 
@@ -178,7 +177,5 @@ export class OrdersEditPage implements OnInit {
     this.newOrder = {};
     this.orderForm = false;
   }
-
-
 }
 

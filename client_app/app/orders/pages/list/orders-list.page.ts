@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 //services
 import { OrdersService }            from '../../../common/services/order.service';
 import { ContextService }    from '../../../common/services/context.service';
+import { AuthService }       from '../../../common/services/auth.service';
 //models
 import { Order }                    from '../../../common/models/order';
 import { OrderView }                from '../../../common/models/orderview';
@@ -17,6 +18,7 @@ import 'rxjs/Rx';
 
 export class OrdersListPage implements OnInit {
 
+  private profile       : any;
   private ordersService : OrdersService;
   private orders        : Order[];
   private orderhistory  : OrderHistory[];
@@ -26,7 +28,8 @@ export class OrdersListPage implements OnInit {
         userID         : any;
 
   constructor(private os: OrdersService,
-              private context : ContextService) {
+              private context : ContextService,
+              private auth :  AuthService) {
               this.ordersService = os;
   }
 
@@ -40,7 +43,9 @@ export class OrdersListPage implements OnInit {
 
     this.os.getOrderHistory(order_location).subscribe(res => {
       this.orderhistory = res.item;
-      console.log(res.item);
+      //console.log("Resc",res.item);
+      //----
+
     });
   }
  //--------------
@@ -65,6 +70,20 @@ export class OrdersListPage implements OnInit {
     //Get current location ID
     this.currentLocationId = this.context.getCurrentLocationId();
     console.log(this.currentLocationId);
+
+       // Get current user e-mail
+       if (this.auth.userProfile) {
+        this.profile = this.auth.userProfile;
+      } else if (this.auth.isAuthenticated()) {
+        this.auth.getProfile((err, profile) => {
+          this.profile = profile;
+          console.log(this.profile.email +"is email"); //NOW SEND THIS EMAIL OR ID TO FILTER DISPLAYED ORDERS
+        });
+      }
+       
+        //----
+
+
 
     this.getOrderHistory();
     this.getOrders();
