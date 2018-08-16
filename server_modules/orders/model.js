@@ -231,7 +231,7 @@ function findLessonName(packorder, cb) {
 // find lesson name of the selected
 function getPackOrderHistory(location_ID, cb) {
   connection.query(
-    'SELECT * FROM pack_orders LEFT OUTER JOIN users ON ( pack_orders.ordered_user_id = users.id) WHERE  pack_orders.location_id = ? ORDER BY ordered_date ASC',[location_ID],
+    'SELECT * FROM pack_orders LEFT OUTER JOIN users ON ( pack_orders.ordered_user_id = users.id) WHERE  pack_orders.location_id = ? ORDER BY ordered_date DESC',[location_ID],
     (err, results) => {
       if (err) {
         cb(err);

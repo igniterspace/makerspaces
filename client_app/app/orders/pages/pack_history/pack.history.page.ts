@@ -26,12 +26,12 @@ import { PackOrder}          from '../../../common/models/order';
                 private context: ContextService,
                 private auth   : AuthService) {}
 
-//get pack order history from the database according to the location
-getPackOrderHistory(){
-    this.os.getPackOrderHistory(this.currentLocationId).subscribe( res =>{
-        this.packOrder_history = res.item;
-    })
-}
+    //get pack order history from the database according to the location
+    getPackOrderHistory(){
+        this.os.getPackOrderHistory(this.currentLocationId).subscribe( res =>{
+            this.packOrder_history = res.item;
+        })
+    }
 
     ngOnInit(){
     //Get current location ID

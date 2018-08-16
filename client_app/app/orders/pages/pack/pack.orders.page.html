@@ -52,7 +52,7 @@
     <i class="fa fa-plus"></i> 
 </button>
 
-<form method="POST" *ngIf="pack_OrderForm"  class = "packorder" [formGroup]="packOrderForm" (ngSubmit)="submitOrder(packOrderForm)" style="width: 500px" novalidate>
+<form name="packorder" method="POST" *ngIf="pack_OrderForm"  class = "packorder" [formGroup]="packOrderForm" (ngSubmit)="submitOrder(packOrderForm)" style="width: 500px">
 
   <br>
         <!--Lesson Search bar-->
@@ -69,15 +69,25 @@
 
         <br>
         <label>Pack Quantity : </label>
-        <!--input type="number" formControlName="packQuantity" placeholder="enter quantity" [(ngModel)]="packquantity" minlength=1 maxlength=1000 required/-->
-        <input type="number" formControlName="packQuantity" placeholder="enter quantity" [(ngModel)]="packquantity" minlength=1 maxlength=1000 required/>
+        <input type="number" formControlName="packQuantity" placeholder="enter quantity"  minlength=1 min=1 step=1 maxlength=1000 required oninput="validity.valid||(value='');"/>
+        <!--input type="number" id="packquantity" name="packquantity" formControlName="packQuantity" placeholder="enter quantity" [(ngModel)]="packquantity" minlength=1 maxlength=1000 required/-->
         <!--testing with angular-->
 
-  
+        <div *ngIf="packOrderForm.controls.packQuantity.invalid && (packOrderForm.controls.packQuantity.dirty || packOrderForm.controls.packQuantity.touched)" class="alert alert-danger">
+            <div *ngIf="packOrderForm.controls.packQuantity.errors.required">Quantity of packs you want to order cannot be empty.</div>
+            <div *ngIf="packOrderForm.controls.packQuantity.errors.minlength">Minimum of 1 pack must be ordered.</div>
+            <div *ngIf="packOrderForm.controls.packQuantity.errors.maxlength">Maximum of 1000 packs can be placed in a single order.</div>
+        </div>
+
+
         <!---->
     
         <label>Due Date : </label>
-        <input type="date" class="form-control"  class="ng-dirty ng-touched ng-invalid" formControlName="dueDate" [(ngModel)]="dueDate" style="width: 175px;" required/>
+        <input type="date" class="form-control"  class="ng-dirty ng-touched ng-invalid" formControlName="dueDate"  style="width: 175px;" required/>
+
+        <!--validation with angular-->
+
+        <!---->
     
         <br>
         <button type="button" class="btn btn-primary" (click)="sendPackOrder(packOrderForm.value)" [disabled] ="!packOrderForm.valid" >Add to Order</button>

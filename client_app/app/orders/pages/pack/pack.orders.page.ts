@@ -46,6 +46,7 @@ import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
       });
     }
 
+
 // Get lesson names from database for dropdown
 getLessonNames(){
     this.os.getLessonNames().subscribe( res => {
@@ -122,6 +123,8 @@ deleteOrder(packOrder: PackOrder) {
       this.addbutton      = false;
 
       this.getLessonNames();
+
+      console.log(this.packOrderForm);
 
     //Get current location ID
     this.currentLocationId = this.context.getCurrentLocationId();
