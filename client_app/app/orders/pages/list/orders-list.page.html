@@ -26,12 +26,6 @@
                                         Ordered By
                                     </th>
 
-                                    <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
-                                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" 
-                                        style="width: 187px; font-size: 10px"><i class="fa fa-money" aria-hidden="true"></i> 
-
-                                        Total Price For Order
-                                    </th>
 
                                     <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
                                         rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" 
@@ -56,7 +50,6 @@
                                     <tr *ngFor="let i of orderhistory" class="odd">
                                         <td class="sorting_1" ><a [routerLink]="['./view', i.order_id]" (click) = "viewOrder(i.order_id)"> {{ i.order_id }} </a></td>
                                         <td class=" ">      {{ i.user_name                                  }} </td>
-                                        <td class=" ">  Rs. {{ i.total_price                                }} </td>
                                         <td class=" ">      {{ i.created_date | date: 'dd/MM/yyyy' }} </td>
                                         <td class=" ">      {{ i.shipped  | date: 'dd/MM/yyyy'     }} </td>
                                     </tr>

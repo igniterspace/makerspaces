@@ -132,13 +132,11 @@ deleteOrder(packOrder: PackOrder) {
     // Get current user e-mail
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
-      //console.log(this.profile.email +"is email1");
     } else if (this.auth.isAuthenticated()) {
       this.auth.getProfile((err, profile) => {
         this.profile = profile;
         this.user_email = this.profile.email;
         this.getuserID(this.user_email);
-        //console.log(this.profile.email +"is email");
       });
     } 
     }

@@ -18,14 +18,15 @@ import 'rxjs/Rx';
 
 export class OrdersListPage implements OnInit {
 
-  private profile       : any;
+  //public profile       : any;
   private ordersService : OrdersService;
   private orders        : Order[];
   private orderhistory  : OrderHistory[];
   public orderview      : OrderView[];
          order_id       : number;
         currentLocationId : any;
-        userID         : any;
+        userID          : any;
+        profile         : any;
 
   constructor(private os: OrdersService,
               private context : ContextService,
@@ -36,23 +37,17 @@ export class OrdersListPage implements OnInit {
   getOrders(): void {}
 
 // Display all orders
-  getOrderHistory() {
+  getOrderHistory(email) {
     var order_location = this.currentLocationId;
-    //var userOrderID = this.userID.item[0].id;
-    //alert(userOrderID + " is ");
 
-    this.os.getOrderHistory(order_location).subscribe(res => {
+    
+    this.os.getOrderHistory(email).subscribe(res => {
       this.orderhistory = res.item;
       //console.log("Resc",res.item);
       //----
 
     });
   }
- //--------------
-
-
-//---------------------------
-
 
 
   // view items of a order
@@ -74,18 +69,17 @@ export class OrdersListPage implements OnInit {
        // Get current user e-mail
        if (this.auth.userProfile) {
         this.profile = this.auth.userProfile;
+        this.getOrderHistory(this.profile.email);
+
       } else if (this.auth.isAuthenticated()) {
         this.auth.getProfile((err, profile) => {
           this.profile = profile;
-          console.log(this.profile.email +"is email"); //NOW SEND THIS EMAIL OR ID TO FILTER DISPLAYED ORDERS
+this.getOrderHistory(this.profile.email);
         });
       }
-       
-        //----
 
-
-
-    this.getOrderHistory();
+      //console.log("your profile is ", this.profile.email);
+    //this.getOrderHistory();
     this.getOrders();
   }
 }
