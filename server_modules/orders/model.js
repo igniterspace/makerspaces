@@ -54,8 +54,14 @@ function getOrderHistory(email, cb) {
 
 // get orderitem history
 function getOrderItemHistory(orderId, cb) {
+  console.log("getting orderitemhistory");
   connection.query(
-    'SELECT order_id, products.name AS order_item, CONCAT(products.description, inventory_items.note) AS description, quantity, unit_price, (inventory_items.quantity * inventory_items.unit_price) AS total_price FROM orders LEFT OUTER JOIN orders_inventory_items ON (orders.order_id = orders_inventory_items.o_id) LEFT OUTER JOIN inventory_items ON (orders_inventory_items.i_id = inventory_items.item_id) LEFT OUTER JOIN product_inventory_items ON(orders_inventory_items.i_id = product_inventory_items.i_id) LEFT OUTER JOIN products ON (product_inventory_items.p_id = products.product_id) LEFT OUTER JOIN users ON (users.id = orders.user_id) WHERE order_id=?', [orderId],
+    'SELECT order_id, products.name AS order_item, CONCAT(products.description, inventory_items.note) AS description, quantity FROM orders '+ 
+    'LEFT OUTER JOIN orders_inventory_items ON (orders.order_id = orders_inventory_items.o_id) ' +
+    'LEFT OUTER JOIN inventory_items ON (orders_inventory_items.i_id = inventory_items.item_id) ' +
+    'LEFT OUTER JOIN product_inventory_items ON(orders_inventory_items.i_id = product_inventory_items.i_id) ' +
+    'LEFT OUTER JOIN products ON (product_inventory_items.p_id = products.product_id) ' +
+    'LEFT OUTER JOIN users ON (users.id = orders.user_id) WHERE order_id=?', [orderId],
     (err, results) => {
       if (err) {
         cb(err);

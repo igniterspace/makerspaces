@@ -21,8 +21,8 @@ export class OrderItemsViewPage {
   
   private orderview     : OrderView[];
   private newitems      : any ;
-  date: Date = new Date();
-  private addDate: FormGroup;
+  date                  : Date = new Date();
+  private addDate       : FormGroup;
 
 public myForm: FormGroup;
   constructor(private os: OrdersService, private formBuilder: FormBuilder) {
