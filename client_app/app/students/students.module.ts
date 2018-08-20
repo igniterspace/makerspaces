@@ -11,7 +11,7 @@ import { DpDatePickerModule }       from 'ng2-date-picker';
 import { StudentsRoutingModule}     from './students.routes';
 import { StudentsListPage }         from './pages/list/students-list.page';
 import { StudentsViewPage }         from './pages/view/students-view.page';
-import { StudentsEditPage }         from './pages/edit/students-edit.page';
+
 import { StudentsGuardianPage }     from './pages/guardian/students-guardian.page';
 import { StudentsGuardian_addPage } from './pages/guardian_add/students-guardian_add.page';
 import { StudentsUpdatePage }       from './pages/update/students-update.page';
@@ -20,7 +20,7 @@ import { SearchedGuardianPage }     from './pages/searchguardian/students-search
 @NgModule({
 
   imports:      [ CommonModule, FormsModule, StudentsRoutingModule,ReactiveFormsModule, HttpModule, BrowserModule, DpDatePickerModule ],
-  declarations: [ StudentsListPage, StudentsViewPage, StudentsEditPage, StudentsGuardianPage, StudentsGuardian_addPage, StudentsUpdatePage, SearchedGuardianPage ],
+  declarations: [ StudentsListPage, StudentsViewPage, StudentsGuardianPage, StudentsGuardian_addPage, StudentsUpdatePage, SearchedGuardianPage ],
 
   providers:    [ StudentsService ]
 })

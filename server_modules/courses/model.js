@@ -138,7 +138,7 @@ function addCourse(course, res) {
 
 //Query to Send student of the course details to the database..         
 function addStudent(student, res) {
-    connection.query('INSERT INTO `students_in_course` (c_id, s_id ) VALUES ("'+ student.obj1+'", "'+ student.students_id+'" )' , function (err, resp) {
+    connection.query('INSERT INTO `students_in_course` (c_id, s_id ) VALUES ("'+ student.courseId+'", "'+ student.students_id+'" )' , function (err, resp) {
             if (err) throw err;
             });
 };

@@ -71,7 +71,8 @@ export class StudentsUpdatePage {
     var edstudents = Object.assign(student_data , this.guardian);
     this.ss.editStudent(edstudents).subscribe(res => console.log(""));
     this.updateStudentForm.reset();
-    alert('This student has being updated..');
+    alert('Student record updated successfully...');
+    //redirect to student list page
   }
 
   nameValidator(control: FormControl): {[s: string]: boolean} {
@@ -88,7 +89,7 @@ export class StudentsUpdatePage {
       let name = student_name.split(" ");
       this.lname = name[1];
       this.fname = name[0];
-     
+
       this.student_data = updatestudents;
 
       this.updateStudentForm.patchValue({

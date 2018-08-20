@@ -60,6 +60,9 @@ export class StudentsListPage {
     });
   }
 
+//Assign student to a particular course
+//
+
 //Delete student from the database when the delete button is clicked..  
   deleteStudent(deleteid : DeleteId){
     alert('Do you want to remove this student?');

@@ -57,7 +57,7 @@
               <small>by name,gender or date of birth..</small>
           
               <input type="text" name="search" placeholder="Search New Student.." [(ngModel)]="search" autocomplete="off">
-              <button type="submit" class="btn btn-info" (click)="similarStudent(search)" (click) ="showTable()">Search</button>
+              <button type="submit" class="btn btn-info" (click)="similarStudent(search); showTable()">Search</button>
           
             </div>
             <br><br>
@@ -94,7 +94,7 @@
                     
                      <tbody role="alert" aria-live="polite" aria-relevant="all">
                     
-                       <tr class="odd" *ngFor="let a of search_res">
+                       <tr class="odd" *ngFor="let a of search_res; let i=index">
                                                          
                         <td class="">{{ a.first_name }} {{a.last_name}} </td>
                         <td class="">{{ a.gender }}</td>
@@ -103,10 +103,8 @@
                         <td class="">
                           <input class="btn btn-success" type="submit" value="Submit" (click)="hideTable()" (click)="savesearchStudent(a)">
                         </td>                      
-                        
-          
-                
                        </tr>
+
                      </tbody>
                    </table>
 

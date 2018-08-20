@@ -4,28 +4,12 @@
 <br>
 
 <body>
-  <table [formGroup]="ListallGuardians" (ngSubmit)="assignGuardian(ListallGuardians.value)" method="post">
-    <select formControlName="guardians_name" class="selectpicker">
-      <option value="" disabled selected>Select your guardian...</option>
-      <option *ngFor="let g of listguardians" [value]="g.guardians_id"> {{ g.guardians_name }} </option>
-    </select>
-    <tr>
-      <td colspan="2" align="center">
-        <a [routerLink]="['../add']" queryParamshandling="merge">
-          <input type="submit" class="btn btn-success" value="Submit" (click)="saveassGuardian(ListallGuardians.value)">
-        </a>
-        <input type="button" class="btn btn-danger" value="Go Back" onclick="history.go(-1)">
-      </td>
-    </tr>
-    <br>
-    <br>
-    <br>
-  </table>
+
   <div>
     <p>Search Guardian:</p>
     <small>by name,phone number or email..</small>
 
-    <input type="text" name="search" placeholder="Search.." [(ngModel)]="search">
+    <input type="text" name="search" placeholder="Search.." [(ngModel)]="search" autocomplete="off">
     <button type="submit" class="btn btn-info" (click)="similarGuardian(search)" (click) ="showTable()">Search</button>
 
   </div>
@@ -74,9 +58,6 @@
                 <input class="btn btn-success" type="submit" value="Submit" (click)="savesearchGuardian(a.id)">
               </a>
               </td>                      
-              
-
-      
              </tr>
            </tbody>
          </table>
@@ -84,4 +65,23 @@
          <br>
          <br>
          <br>
+
+
+         <table [formGroup]="ListallGuardians" (ngSubmit)="assignGuardian(ListallGuardians.value)" method="post">
+          <select formControlName="guardians_name" class="selectpicker">
+            <option value="" disabled selected>Select your guardian...</option>
+            <option *ngFor="let g of listguardians" [value]="g.guardians_id"> {{ g.guardians_name }} </option>
+          </select>
+          <tr>
+            <td colspan="2" align="center">
+              <a [routerLink]="['../add']" queryParamshandling="merge">
+                <input type="submit" class="btn btn-success" value="Submit" (click)="saveassGuardian(ListallGuardians.value)">
+              </a>
+              <input type="button" class="btn btn-danger" value="Go Back" onclick="history.go(-1)">
+            </td>
+          </tr>
+          <br>
+          <br>
+          <br>
+        </table>
 </body>

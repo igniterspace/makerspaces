@@ -6,10 +6,10 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <tr>
-            <td>FIRST NAME :- </td>
+            <td>FIRST NAMEs :- </td>
             <td>
             
-                <input type="text" class="form-control" formControlName="students_first_name"  [(ngModel)]="fname" placeholder="First Name" value="fname" required/>
+                <input type="text" class="form-control" formControlName="students_first_name"  [(ngModel)]="fname" placeholder="First Name" value="fname" autocomplete="off" required/>
             </td>
         </tr>
         <br>
@@ -17,7 +17,7 @@
         <tr>
             <td>LAST NAME :-</td>
             <td>
-            <input type="text" class="form-control" formControlName="students_last_name" [(ngModel)]="lname" placeholder="Last Name" value="lname" required/>
+            <input type="text" class="form-control" formControlName="students_last_name" [(ngModel)]="lname" placeholder="Last Name" value="lname" autocomplete="off" required/>
             </td>
         </tr>
         <br>
@@ -37,7 +37,7 @@
             <br />
             </td>
             <td>
-            <textarea name="Address" formControlName="students_home_address" [(ngModel)]="student_data.home_address" class="form-control" rows="8" cols="35" placeholder="Enter Student's Home Address Here" value="student_data.students_home_address"></textarea>
+            <textarea name="Address" formControlName="students_home_address" [(ngModel)]="student_data.home_address" class="form-control" rows="8" cols="35" placeholder="Enter Student's Home Address Here" value="student_data.students_home_address" autocomplete="off"></textarea>
             </td>
             <td>
             </td>

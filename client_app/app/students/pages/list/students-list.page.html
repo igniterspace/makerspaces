@@ -11,6 +11,7 @@
 
        <thead>
        <tr role="row">
+
         
         <th class="" role="columnheader" tabindex="0" aria-controls="hidden-table-info"
         rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 236px;">Student Name
@@ -40,16 +41,15 @@
      <tbody role="alert" aria-live="polite" aria-relevant="all">
     
        <tr class="odd" *ngFor="let s of liststudents">
-                                           
+                   
         <td class="">{{ s.students_name }}</td>
         <td class="">{{ s.date_of_birth }}</td>
         <td class="">{{ s.gender }}</td>
         <td class="">{{ s.g_name }}</td>
-        <td class="">
-                              
-        <button class="btn btn-primary btn-xs" ><i class="fa fa-pencil" [routerLink]="['./update',s.id]" queryParamshandling="merge" (click)="viewStudent(s)"></i></button>
-    
-        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o " (click)= "deleteStudent(s.id)"></i></button>
+        <td class="">  
+          <button class="btn btn-success btn-xs" >Assign to Course</button>
+          <button class="btn btn-primary btn-xs" ><i class="fa fa-pencil" [routerLink]="['./update',s.id]" queryParamshandling="merge" (click)="viewStudent(s)"></i></button>
+          <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o" (click)= "deleteStudent(s.id)"></i></button>
         </td> 
 
        </tr>

@@ -68,23 +68,27 @@ export class CourseStudentListPage {
   
 
 //Send searched student id from the dropdown and send to the database..  
-savesearchStudent(search_res: string) {
-  var first_name = this.search_res[0].first_name;
-  var last_name = this.search_res[0].last_name;
+savesearchStudent(search_res) {
+  
+  var first_name = search_res.first_name;
+  var last_name = search_res.last_name;
   var full_name = Object.assign({first_name} , {last_name});
-
+  var students_id = search_res.id;
   var students_name = Object.assign({full_detail} , {full_name});
-
 //Pushing the new student to the array..  
-  var obj1 =  this.courses_id;
-  var students_id = this.search_res[0].id;
-  var full_detail = Object.assign({students_id} , {obj1});
-
+  var courseId =  this.courses_id;  //courseId
+  
+  var full_detail = Object.assign({students_id} , {courseId});
   var c_id = this.c_Id[0].c_id ;
-var new_student   = Object.assign( {c_id}, search_res)
-    this.cs.saveStudent(full_detail).subscribe(res => console.log(""));
-    alert('This Student has being added to this Course..');   
-    this.selectstu.push(new_student);
+
+  //Check if student id and course id already exists in database here before adding to db from the below lines
+  //if(students_id == ) && (courseId ==)
+  var new_student   = Object.assign( {c_id}, search_res);
+  this.cs.saveStudent(full_detail).subscribe(res => console.log(""));
+  
+  alert('This Student has been added to this Course..');   
+  this.selectstu.push(new_student); 
+
 } 
 
 //Get searched student details to show in the frontend..  

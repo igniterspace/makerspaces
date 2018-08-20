@@ -4,11 +4,11 @@
 <form [formGroup]="addStudentForm" method="post" *ngIf="addStudentForm">
     <table align="center" cellpadding="10">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<!--After search guardian, user will be redirected to this page-->
         <tr>
             <td>FIRST NAME :- </td>
             <td>
-            <input type="text" class="form-control" formControlName="students_first_name" name="First_Name" placeholder="First Name" required/>
+            <input type="text" class="form-control" formControlName="students_first_name" name="First_Name" placeholder="First Name" autocomplete="off" required/>
             <small *ngIf="!isValid('students_first_name')" class="text-muted">Not enough characters</small>
 
             </td>
