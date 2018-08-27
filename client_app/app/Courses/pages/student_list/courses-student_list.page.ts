@@ -69,7 +69,7 @@ export class CourseStudentListPage {
 
 //Send searched student id from the dropdown and send to the database..  
 savesearchStudent(search_res) {
-  
+
   var first_name = search_res.first_name;
   var last_name = search_res.last_name;
   var full_name = Object.assign({first_name} , {last_name});
@@ -81,15 +81,38 @@ savesearchStudent(search_res) {
   var full_detail = Object.assign({students_id} , {courseId});
   var c_id = this.c_Id[0].c_id ;
 
-  //Check if student id and course id already exists in database here before adding to db from the below lines
-  //if(students_id == ) && (courseId ==)
-  var new_student   = Object.assign( {c_id}, search_res);
-  this.cs.saveStudent(full_detail).subscribe(res => console.log(""));
-  
-  alert('This Student has been added to this Course..');   
-  this.selectstu.push(new_student); 
 
-} 
+
+  //-----------------------
+  //Check if student id and course id already exists in database here before adding to db from the below lines
+  var x =[]; 
+ 
+  this.cs.getStudents(courseId).subscribe(res => {
+    x = res.item;
+    var studentExistFlag = false;
+    for (var i=0; i<x.length; i++){
+      if(x[i].id === students_id ){
+        studentExistFlag = true;
+        break;
+      }else{
+        studentExistFlag = false;
+      }
+    }
+    if(!studentExistFlag){
+      var new_student   = Object.assign( {c_id}, search_res);
+      this.cs.saveStudent(full_detail).subscribe(res => console.log(""));
+      
+      alert('This Student has been added to this Course..');   
+      this.selectstu.push(new_student); 
+    }else{
+      alert('STUDENT ALREADY BELONGS TO A COURSE');
+    }
+  });
+
+}
+
+
+
 
 //Get searched student details to show in the frontend..  
   similarStudent(search) {
@@ -104,7 +127,7 @@ showTable(){
 
 hideTable(){
   this.detailForm = false ;
-  }
+}
 
 //Delete student from the course when the delete button is clicked..  
 deleteStudent(deleteid : DeleteSId){

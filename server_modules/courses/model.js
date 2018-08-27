@@ -63,45 +63,7 @@ function getAllCourseLessons(c_id,cb) {
       cb(null, results);
     });
 }
-//Query to add a lesson to a course with a date..         
-// function getAllCourseLessons(c_id, cb) {
-//     connection.beginTransaction(function (err) {
-     
-//       if (err) { throw err; }
-//       connection.query(`SELECT lessons_in_course.c_id AS c_id, lessons_in_course.l_id AS l_id, lessons_in_course.held_date AS dateh  , lessons.name AS lesson_name FROM lessons_in_course LEFT OUTER JOIN lessons ON (lessons_in_course.l_id = lessons.id) WHERE c_id= ?`, [c_id], function (err, result) {
-//         if (err) {
-//           connection.rollback(function () {
-//             throw err;
-//           });
-//         };
-//         console.log('Result : ', result);
-//         var last_selected_course_id = result[0].c_id;
-//         console.log("bla bla", last_selected_course_id);
-//         connection.query( `UPDATE lessons_in_course SET held_date = str_to_date( held_date , '%Y-%m-%d' ) WHERE lessons_in_course.c_id = ?` , [last_selected_course_id ], function (err, result) {
-//             if (err) {
-//               connection.rollback(function () {
-//                 throw err;
-//               });
-//             }   
-//             //cb(null,result);
-//             console.log("final result:" , result);
 
-//             });
-//         })
-       
-//     });
-    
-//        connection.commit(function(err) {
-//         if (err) {
-//           return connection.rollback(function() {
-//             throw err;
-//           });
-         
-//         }
-//         cb(null,this.result);
-//     console.log('success!');
-//     }); 
-// };
 
 //Query to get student names to show on the dropdown..  
   function listAllStudents(cb) {
