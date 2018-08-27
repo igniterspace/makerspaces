@@ -237,6 +237,7 @@ PRIMARY KEY (\`id\`))  ENGINE=INNODB;`  +
 `CREATE TABLE IF NOT EXISTS \`lessons_in_course\` (
 \`c_id\` INT UNSIGNED NOT NULL,
 \`l_id\` INT UNSIGNED NOT NULL,
+\`held_date\` VARCHAR(10) NULL,
 PRIMARY KEY (\`c_id\`, \`l_id\`))  ENGINE=INNODB;` +
 
 `CREATE TABLE IF NOT EXISTS \`students_in_course\` (

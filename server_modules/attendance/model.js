@@ -315,28 +315,6 @@ function searchCourseStudents(searchString, cb) {
 }
 
 
-// //get student lesson attendance details
-// function getLessonAttendanceDetails(student_course, cb) {
-//   connection.query(
-//     `SELECT students.id AS student_id, students.first_name, students.last_name,
-//      lessons.id AS lesson_id, lessons.name AS lesson_name, lessons_in_course.held_date AS date, attendance.attendance_mark, attendance.attendance_id
-//      FROM students LEFT OUTER JOIN attendance ON ( students.id = attendance.student_id ) 
-//      LEFT OUTER JOIN students_in_course ON ( students.id = students_in_course.s_id )
-//      LEFT OUTER JOIN lessons_in_course ON ( attendance.lesson_id = lessons_in_course.l_id )
-//      LEFT OUTER JOIN lessons ON ( lessons_in_course.l_id = lessons.id ) 
-//      WHERE attendance.course_id = ? AND attendance.student_id = ?`,[student_course.course_id, student_course.student_id],
-//     (err, results) => {
-//       if (err) {
-//         cb(err); 
-//         return;
-//       }
-//       cb(null, results);
-//       console.log("Results = ",results);
-//     }
-//   );
-// }
-
-
 function getLessonAttendanceDetails(student_course, cb) {
   connection.query(
     `SELECT students.id AS student_id, students.first_name, students.last_name,
