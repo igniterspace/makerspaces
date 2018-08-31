@@ -216,9 +216,9 @@ function getCourseLessonDetails(full_detail, cb) {
 
 //Mark student attendance as present
 function markStudentAttendance(att_detail, cb) {
-  var date = new Date();
+  //var date = new Date();
   connection.query(
-    'UPDATE attendance SET attendance_mark = ('+ 1 +'), att_date = ("'+ date +'") WHERE attendance.course_id =' +att_detail.course_ID + ' AND attendance.student_id =' +att_detail.student_id + ' AND attendance.lesson_id =' +att_detail.lesson_ID+' ',
+    'INSERT INTO attendance(course_name, student_id, att_date) VALUES("'+att_detail.course_id+'", '+att_detail.student_id+', "'+att_detail.att_date+'")',
     (err, results) => {
       if (err) {
         cb(err);

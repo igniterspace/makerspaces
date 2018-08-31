@@ -30,3 +30,9 @@ export class AttStudent {
     isDisabled      : boolean;
 }
 
+export class AttDetails {
+    public course_id       : string;
+    public student_id      : string;
+    public att_date        : string;
+}
+

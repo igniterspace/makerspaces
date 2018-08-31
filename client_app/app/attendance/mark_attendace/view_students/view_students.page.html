@@ -25,6 +25,11 @@
                         &nbsp;&nbsp;&nbsp;<i class="fa fa-file-image-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; 
                         Student Name </th>
 
+                    <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="hidden-table-info" rowspan="1" colspan="1" aria-sort="ascending"
+                        aria-label="Rendering engine: activate to sort column descending" style="width: 175px; font-size: 10px; font-weight: 900">
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; 
+                        Mark Attendance </th>
+
                 </tr>
             </thead>
 
@@ -34,6 +39,12 @@
                     <td>{{ i.student_id }}</td>
                     <td><a [routerLink]="['../../student/attendance']" queryParamsHandling="merge" (click)="getStudentAttendance( i )"  >
                         {{ i.first_name }}&nbsp;{{ i.last_name }}</a>
+                    </td>
+                    <td>
+                        <button *ngIf="!attendanceMarked()" class="btn btn-primary btn-xs" queryParamshandling="merge" (click)="markStudentAttendance(course.id, i.student_id)" >Today</button>
+                        <i *ngIf="attendanceMarked()" class="fa fa-check">Today &nbsp;</i>
+                        <button class="btn btn-danger btn-xs" (click)= "deleteCourse(c.courses_id)">Mark past attendance</button>
+
                     </td>
                 </tr>
 
