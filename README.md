@@ -89,7 +89,7 @@
 
 1. Open the application in browser. Location query parameter is the location (makerspace) database id 
 
-        (http://localhost:8080/home?location=1)
+        (http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/home?location=1)
         Login to the application using Login button at right-top corner
         You will not be able to access any data because your user may not been granted rights. You can see the access denied messages to your API calls on the chrome console
 

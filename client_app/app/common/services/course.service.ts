@@ -67,75 +67,75 @@ export class CoursesService {
 
 
   listAllCourses(currentLocationId){
-    return this.http.get('http://localhost:8080/api/courses/getallcourses/' + currentLocationId).map(res=>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/getallcourses/' + currentLocationId).map(res=>res.json());
   }
 
   getCourseID(courses_id){
-    return this.http.get('http://localhost:8080/api/courses/getcourseid/'+ courses_id).map(res=>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/getcourseid/'+ courses_id).map(res=>res.json());
   }
 
   getStudents(courses_id){
-    return this.http.get('http://localhost:8080/api/courses/getallcoursestudents/'+ courses_id).map(res=>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/getallcoursestudents/'+ courses_id).map(res=>res.json());
   }
 
   getlessons(c_id){
-    return this.http.get('http://localhost:8080/api/courses/getallcourselessons/' +c_id).map(res=>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/getallcourselessons/' +c_id).map(res=>res.json());
   }
 
   listAllStudents(){
-    return this.http.get('http://localhost:8080/api/courses/listallstudents').map(res=>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/listallstudents').map(res=>res.json());
   }
 
   listAllLessons(){
-    return this.http.get('http://localhost:8080/api/courses/listalllessons').map(res=>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/listalllessons').map(res=>res.json());
   }
 
   saveCourse(course_details) {
-    return this.http.post('http://localhost:8080/api/courses/addcourse', course_details).map(res => res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/addcourse', course_details).map(res => res.json());
   }
 
   saveLesson(full_detail) {
-       return this.http.post('http://localhost:8080/api/courses/addlesson', full_detail).map(res => res.json());
+       return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/addlesson', full_detail).map(res => res.json());
   }
 
   saveCourseLesson(full_detail) {
-  return this.http.post('http://localhost:8080/api/courses/addcourselesson', full_detail).map(res => res.json());
+  return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/addcourselesson', full_detail).map(res => res.json());
   }
 
   saveStudent(full_detail) {
-    return this.http.post('http://localhost:8080/api/courses/addstudent', full_detail).map(res => res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/addstudent', full_detail).map(res => res.json());
   }
 
   editCourse(editcourse) {
-    return this.http.post('http://localhost:8080/api/courses/updateCourse', editcourse).map(res => res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/updateCourse', editcourse).map(res => res.json());
   } 
 
   updateLesson(uplessons) {
-    return this.http.post('http://localhost:8080/api/courses/updateCourseLesson', uplessons).map(res => res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/updateCourseLesson', uplessons).map(res => res.json());
   } 
 
   deleteCourse(deleteid){
-    return this.http.get(`http://localhost:8080/api/courses/deleteCourse/${deleteid}`).map(res=>res.json());
+    return this.http.get(`http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/deleteCourse/${deleteid}`).map(res=>res.json());
   }  
 
   deleteLesson(deleteid){
-    return this.http.post('http://localhost:8080/api/courses/deleteLesson', deleteid).map(res=>res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/deleteLesson', deleteid).map(res=>res.json());
   }  
 
   deleteStudent(deleteid){
-    return this.http.post('http://localhost:8080/api/courses/deleteStudent', deleteid).map(res=>res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/deleteStudent', deleteid).map(res=>res.json());
   } 
 
   similarStudent(search) {
-    return this.http.get('http://localhost:8080/api/courses/search/'+ search).map(res => res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/search/'+ search).map(res => res.json());
   }
 
   similarLessons(search) {
-    return this.http.get('http://localhost:8080/api/courses/searchles/'+ search).map(res => res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/searchles/'+ search).map(res => res.json());
   }
 
   checkIfLessonExists(isLesson: boolean, isUsername: boolean, value: string) {
-    return this.http.get(`http://localhost:8080/api/courses/checkIfLessonExists?isLesson=${isLesson}&value=${value}`).map(res => res.json());
+    return this.http.get(`http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/courses/checkIfLessonExists?isLesson=${isLesson}&value=${value}`).map(res => res.json());
   }  
 
 private handleError(error: any): Promise<any> {

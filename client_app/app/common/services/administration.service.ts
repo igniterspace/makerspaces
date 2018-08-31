@@ -71,24 +71,24 @@ export class AdministrationService {
 
 
   listAllUsers(){
-    return this.http.get('http://localhost:8080/api/users/getallusers').map(res=>res.json());
+    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/users/getallusers').map(res=>res.json());
   }
   
 
   saveUsers(users) {
-    return this.http.post('http://localhost:8080/api/users/addusers', users).map(res => res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/users/addusers', users).map(res => res.json());
   }
 
 
   editUsers(edusers) {
     console.log("edit function in service")
-    return this.http.post('http://localhost:8080/api/users/editusers', edusers).map(res => res.json());
+    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/users/editusers', edusers).map(res => res.json());
   }
 
 
 
 checkIfUserExists(isEmail: boolean, isUsername: boolean, value: string) {
-  return this.http.get(`http://localhost:8080/api/students/checkIfUserExists?isEmail=${isEmail}&value=${value}`).map(res => res.json());
+  return this.http.get(`http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/students/checkIfUserExists?isEmail=${isEmail}&value=${value}`).map(res => res.json());
 }  
 
 
