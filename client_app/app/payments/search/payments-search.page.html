@@ -14,7 +14,7 @@
         <p>Search Your Student:</p>
         <small>by name..</small>
 
-        <input type="text" name="search" placeholder="Search Student.." [(ngModel)]="search">
+        <input type="text" name="search" placeholder="Search Student.." [(ngModel)]="search" autocomplete="off">
         <button type="submit" class="btn btn-info" (click)="similarStudents(search)" (click)="showTable()">Search</button>
 
       </div>

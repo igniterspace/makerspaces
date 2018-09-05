@@ -7,9 +7,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <tr>
-            <td>USERNAME :</td>
+            <td>User Name :</td>
             <td>
-            <input type="text" class="form-control" formControlName="users_first_name" name="First_Name" placeholder="First Name" required/>
+            <input type="text" class="form-control" formControlName="users_first_name" name="First_Name" placeholder="User Name" autocomplete="off" required/>
             <small *ngIf="!isValid('users_first_name')" class="text-muted">Not enough characters</small>
 
             </td>
@@ -19,7 +19,7 @@
         <tr>
             <td>FULL NAME :</td>
             <td>
-            <input type="text" class="form-control" formControlName="users_last_name" name="Last_Name" placeholder="Last Name" required/>
+            <input type="text" class="form-control" formControlName="users_last_name" name="Full Name" placeholder="Last Name" required/>
             <small *ngIf="!isValid('users_last_name')" class="text-muted">Not enough Characters</small>
             </td>
         </tr>
