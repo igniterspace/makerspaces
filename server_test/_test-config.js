@@ -25,6 +25,6 @@ module.exports = {
   env: {
     PORT: PORT
   },
-  url: `http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:${PORT}`,
+  url: `http://localhost:${PORT}`,
   msg: `Bookshelf`
 };

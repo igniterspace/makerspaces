@@ -43,9 +43,11 @@
                     <td>
                         <button *ngIf="!attendanceMarked()" class="btn btn-primary btn-xs" queryParamshandling="merge" (click)="markStudentAttendance(course.id, i.student_id)" >Today</button>
                         <i *ngIf="attendanceMarked()" class="fa fa-check">Today &nbsp;</i>
-                        <button class="btn btn-danger btn-xs" (click)= "deleteCourse(c.courses_id)">Mark past attendance</button>
+                        <button class="btn btn-danger btn-xs" (click)= "markPastAttendance(course.id, i.student_id)">Mark past attendance</button>
 
                     </td>
+
+
                 </tr>
 
             </tbody>

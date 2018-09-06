@@ -42,19 +42,19 @@ export class PaymentsService {
   }
 
   savePayment(full_detail) {
-    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/payments/addPayment', full_detail).map(res => res.json());
+    return this.http.post('http://localhost:8080/api/payments/addPayment', full_detail).map(res => res.json());
   }
 
   similarPayStudents(search) {
-    return this.http.get('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/payments/search/'+ search).map(res => res.json());
+    return this.http.get('http://localhost:8080/api/payments/search/'+ search).map(res => res.json());
   }
 
   getpayments(ids){
-    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/payments/getallpayments' , ids).map(res=>res.json());
+    return this.http.post('http://localhost:8080/api/payments/getallpayments' , ids).map(res=>res.json());
   }
 
   gettotalpayment(ids){
-    return this.http.post('http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/api/payments/gettotalpayments' , ids).map(res=>res.json());
+    return this.http.post('http://localhost:8080/api/payments/gettotalpayments' , ids).map(res=>res.json());
   }
 
 private handleError(error: any): Promise<any> {

@@ -56,7 +56,7 @@ nconf
     MYSQL_PASSWORD: 'ecapsretingi',
     OAUTH2_CLIENT_ID: '1066178941676-5vmds16v7est58pstn2gdfna56542eve.apps.googleusercontent.com',
     OAUTH2_CLIENT_SECRET: 'Gbc33FRodnhcBSZU8glFC8I8',
-    OAUTH2_CALLBACK: 'http://ec2-13-229-206-58.ap-southeast-1.compute.amazonaws.com:8080/auth/google/callback', //for local development
+    OAUTH2_CALLBACK: 'http://localhost:8080/auth/google/callback', //for local development
 
     // Set this a secret string of your choosing to used for memcache store
     SECRET: 'keyboardcat',

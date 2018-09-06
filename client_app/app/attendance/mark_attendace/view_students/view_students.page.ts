@@ -42,12 +42,7 @@ export class ViewStudentsPage implements OnInit {
         this.attService.newFull_studentCourse.subscribe( details => details = details);
       }
 
-      //this is to check if attendance for a student of a particular course on a particular day is marked or not
-    attendanceMarked(){
-        //put script to check in databse with date and see if attendance is marked or not
-        //put an if statement and check with date , course, student in database and show true for those students who are in database by using true
-       // return true;
-    }
+    
 
     //this is to mark the student attendance when the button is pressed
     markStudentAttendance(courseId, studentId){
@@ -62,6 +57,7 @@ export class ViewStudentsPage implements OnInit {
         this.attService.markStudentAttendance(this.att).subscribe( res => {
             console.log("Success");
             alert("Attendance for today's class marked!");
+            //once attendance is marked show it as checked!
             //this.attendanceMarked();
         });
         //this.attendanceMarked();
@@ -92,12 +88,26 @@ export class ViewStudentsPage implements OnInit {
         return (m + '-' + d + '-' + yyyy);
     }
 
+      //this is to check if attendance for a student of a particular course on a particular day is marked or not
+      attendanceMarked(){
+        //put an if statement and check with date , course, student in database and show true for those students who are in database by using true
+       //if( == this.getCurrentDate()){
+
+        this.attService.getCourseLessonAttendance(this.course).subscribe( res =>{
+            //this.lessonAttendance = res.item;
+            console.log("result is " + res.item);
+            console.log("res is  " + JSON.stringify(res.item));
+        })
+
+
+    }
 
     ngOnInit() {
 
     // get course from search course page
     this.attService.newCourse.subscribe( course=> this.course = course)
 
+    //this.attendanceMarked();
     // get student details from search course page
     this.attService.newlistStudents.subscribe( students => this.students = students)        
     }

@@ -180,7 +180,7 @@ function getStudentLessons(lesson_Details, cb) {
 //get course students belongs to peticular lesson from database
 function getLessonsAttendance(passfull_lesson_detail, cb) {
   connection.query(
-    `SELECT students.id, students.first_name, students.last_name, attendance.attendance_id, attendance.attendance_mark, attendance.att_date 
+    `SELECT students.id, students.first_name, students.last_name, attendance.att_date 
     FROM students LEFT OUTER JOIN attendance ON ( students.id = attendance.student_id) 
     WHERE course_id=? AND lesson_id=? `,[ passfull_lesson_detail.course_ID , passfull_lesson_detail.lesson_ID ],
     (err, results) => {
