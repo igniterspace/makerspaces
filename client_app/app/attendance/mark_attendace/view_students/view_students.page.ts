@@ -58,7 +58,7 @@ export class ViewStudentsPage implements OnInit {
             console.log("Success");
             alert("Attendance for today's class marked!");
             //once attendance is marked show it as checked!
-            this.attendanceMarked();
+            //this.attendanceMarked();
         });
         //this.attendanceMarked();
         
@@ -93,14 +93,10 @@ export class ViewStudentsPage implements OnInit {
         //put an if statement and check with date , course, student in database and show true for those students who are in database by using true
        //if( == this.getCurrentDate()){
 
-       //}
-        // return true;
-       //alert("COURSE IS "+ JSON.stringify(this.course.id));
         this.attService.getCourseLessonAttendance(this.course).subscribe( res =>{
             //this.lessonAttendance = res.item;
             console.log("result is " + res.item);
             console.log("res is  " + JSON.stringify(res.item));
-
         })
 
 
