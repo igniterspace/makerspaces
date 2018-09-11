@@ -30,6 +30,8 @@ export class AuthService {
         window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/home?location=1'], { queryParamsHandling: 'merge' }); 
+        //this.router.navigate(['/home', { ff: { 'list-outlet': ['location', '1']} }]);
+
       } else if (err) {
         this.router.navigate(['/home?location=1'], { queryParamsHandling: 'merge' });
         alert(`Error: ${err.error}. Check the console for further details.`);
