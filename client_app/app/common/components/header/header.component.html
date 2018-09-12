@@ -30,9 +30,6 @@
         </ul>
         <!--search & user info start-->
         <ul class="nav pull-right top-menu">
-            <li>
-                <input type="text" class="form-control search" placeholder="Search">
-            </li>
             <li *ngIf="!isAuthenticated()">
                 <a class="form-control login pointer" (click)="login()">
                     <span>login</span>
