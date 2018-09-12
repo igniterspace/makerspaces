@@ -58,10 +58,13 @@ export class SearchedGuardianPage implements OnInit {
 
 //Assign guardian id from searched list
   savesearchStudent(student : ListStudents) { 
-    
-    var guardians_name = this.searchguardian;
-    var complete_detail = Object.assign( student, {guardians_name} );
+    var location_Id = parseInt(localStorage.IG_LAST_LOCATION);
+    var guardians_id = this.searchguardian;
+
+    Object.assign(student, {location_Id});
+    var complete_detail = Object.assign( student, {guardians_id} );
     this.ss.savesStudent(complete_detail).subscribe(res => console.log(""));
+    alert("Student has been added to the database!");
     this.addStudentForm.reset();
   }
 
@@ -70,5 +73,4 @@ export class SearchedGuardianPage implements OnInit {
       return {invalidName: true};
     }
   }
-
 }

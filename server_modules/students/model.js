@@ -54,7 +54,7 @@ function listAllStudents(location_id ,cb) {
 
 //Query to Send student details to the database..
 function addStudents(student, res) {
-    connection.query('INSERT INTO `students` (location_id, first_name, last_name, date_of_birth, home_address, gender, g_id ) VALUES ("'+ student.location+'" , "'+ student.students_first_name+'", "'+ student.students_last_name+'","'+ student.students_date_of_birth+'", "'+ student.students_home_address+'", "'+ student.students_gender+'", "'+ student.guardians_name+'" )' , function (err, resp) {
+    connection.query('INSERT INTO `students` (location_id, first_name, last_name, date_of_birth, home_address, gender, g_id ) VALUES ("'+ student.location_Id+'" , "'+ student.students_first_name+'", "'+ student.students_last_name+'","'+ student.students_date_of_birth+'", "'+ student.students_home_address+'", "'+ student.students_gender+'", "'+ student.guardians_id+'" )' , function (err, resp) {
             if (err) throw err; 
                 if(err){
                   console.log(err);

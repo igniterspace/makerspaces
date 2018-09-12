@@ -21,19 +21,22 @@ export class AuthService {
   constructor(public router: Router) {}
 
   public login(): void {
+    console.log("at login");
     this.auth0.authorize();
   }
 
   public handleAuthentication(): void {
+
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
+        console.log("hndling loging");
+        //window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['/home?location=1'], { queryParamsHandling: 'merge' }); 
-        //this.router.navigate(['/home', { ff: { 'list-outlet': ['location', '1']} }]);
+        this.router.navigate(['/home'], { queryParamsHandling: 'merge' }); 
 
       } else if (err) {
-        this.router.navigate(['/home?location=1'], { queryParamsHandling: 'merge' });
+        console.log("eerr handling");
+        this.router.navigate(['/home'], { queryParamsHandling: 'merge' });
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
     });
@@ -66,12 +69,14 @@ export class AuthService {
 
   public logout(): void {
     // Remove tokens and expiry time from localStorage
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
+    localStorage.clear();
     // Go back to the home route
-    this.router.navigate(['/']);
-  }
+        /* this.auth0.logout({
+            returnTo: 'http://localhost:4200/home',
+            clientID: AUTH_CONFIG.clientID
+          }); */
+    this.router.navigate(['/logout']);
+  } 
 
   public isAuthenticated(): boolean {
     // Check whether the current time is past the
@@ -79,6 +84,4 @@ export class AuthService {
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
   }
-
 }
-

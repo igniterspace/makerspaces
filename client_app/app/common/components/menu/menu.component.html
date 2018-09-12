@@ -67,6 +67,9 @@
                     </ul>
                 </li>
 
+
+                <div class="menu-section">
+                    <h5>ADMIN</h5>
                 <!--multi level menu start-->
                 <li class="sub-menu"  [ngClass]="{ 'disabled-menu': !location.permissions['*'] && !location.permissions.administration }" >
                     <a href="javascript:;" >
@@ -80,7 +83,9 @@
                     </ul>
                 </li>
                 <!--multi level menu end-->
-            
+            </div>
+
+
             </ul>
             <!-- sidebar menu end-->
         </div>

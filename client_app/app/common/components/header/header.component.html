@@ -10,7 +10,8 @@
         <ul class="nav pull-left top-menu">
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle location-select" href="#">
-                        <span>{{location.name}}</span>
+                        <span *ngIf="!location.name">Please select the location</span>
+                        <span *ngIf="location.name">{{location.name}}</span>
                         <b class="caret"></b>
                     </a>
                 <ul class="dropdown-menu dropdown-menu-right extended locations">
