@@ -40,7 +40,7 @@ function getEmail(email, cb) {
 //Query to get students from the database to show in the list in the frontend..
 function listAllStudents(location_id ,cb) {
     connection.query(
-        'SELECT DISTINCT students.id, students.location_id , CONCAT (students.first_name," ",students.last_name) AS students_name, students.date_of_birth AS date_of_birth, guardians.name AS g_name, students.home_address AS home_address, students.gender AS gender, students.g_id AS g_id FROM students LEFT OUTER JOIN guardians ON (students.g_id = guardians.id ) WHERE location_id = ?',[location_id],
+        'SELECT students.id, students.location_id , CONCAT (students.first_name," ",students.last_name) AS students_name, students.date_of_birth AS date_of_birth, guardians.name AS g_name, students.home_address AS home_address, students.gender AS gender, students.g_id AS g_id FROM students LEFT OUTER JOIN guardians ON (students.g_id = guardians.id ) WHERE location_id = ? ORDER BY students.id DESC',[location_id],
         (err, results) => {
             if (err) {
                 cb(err);

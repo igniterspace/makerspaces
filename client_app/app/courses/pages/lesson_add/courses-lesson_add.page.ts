@@ -60,7 +60,7 @@ public checkLessonExists() {
   saveLesson(Alesson : AddALesson) {
     this.cs.saveLesson(Alesson).subscribe(res => console.log(Alesson));
     this.addLessonForm.reset();
-    alert('This Course has being added to the Database..');
+    alert('This lesson has been assigned to this course');
     
   }
   
